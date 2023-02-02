@@ -1,0 +1,19 @@
+This is a pairs trading code assessment that came from a trading prop. shop.
+You can find the flow of the questions and the answers in the jupyter notebook file in this folder.
+------------------------------------
+We have supplied you with a small dataset of 1 day price data of two stocks i.e. Instrument A and Instrument B.
+
+The goal of this assignment is to work towards a trading model. Explain your findings, thoughts or hypothesis in a clear fashion.
+
+This assignment comprises several steps:
+
+1 - Data Preprocessing
+
+2 - Analysis
+
+3 - Trading model
+
+Some steps can be solved/approached differently. Therefore, whenever suited, explain the reasoning behind your approach.
+
+You can use any external library you want, but we expect to be able to just run your notebook top to bottom on Anaconda.
+
