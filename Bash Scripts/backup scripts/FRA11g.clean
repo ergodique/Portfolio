@@ -1,0 +1,18 @@
+#!/bin/bash
+
+cd /home/users/grid
+. ./.profile > /dev/null
+
+vdbname=$1
+today=`date "+%Y"'_'"%m"'_'"%d"`
+
+cd /usr/tmp
+
+sh asmcmd11g.del $vdbname > asmcmd.del.tmp1
+
+cat asmcmd.del.tmp1 | grep -v $today > asmcmd.del.tmp2
+cat asmcmd.del.tmp2 | sed 's/+FRA/rm +FRA/' > asmcmd.del.final
+asmcmd -p < asmcmd.del.final > /dev/null
+#rm asmcmd.del*
+
+exit 0

@@ -1,0 +1,1 @@
+select * from v$segment_statistics where owner='CUST' and object_name like 'KYP%'

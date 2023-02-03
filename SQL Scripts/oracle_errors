@@ -1,0 +1,22 @@
+ORA-04021: timeout occurred while waiting to lock object 
+ORA-00030: User session ID does not exist.
+ORA-00060: deadlock detected while waiting for resource
+ORA-01031: insufficient privileges
+ORA-00028: your session has been killed
+ORA-00257: archiver error. Connect internal only, until freed.
+ORA-01996: GRANT failed: password file '/oracle/product/10.1.0/dbs/orapwRACTS2' is full
+ORA-00029: session is not a user session  (session kill ederken alýnabilen hata)
+ORA-01119: error in creating database file '/ocfs/db001/RACTS/sil.dbf' ORA-27044: unable to write the header block of file Linux Error: 28: No space left on device
+
+---------------------------------------------------------
+ORA-01186: file 66 failed verification tests
+ORA-01157: cannot identify/lock data file 66 - see DBWR trace file
+ORA-01110: data file 66: '/ocfs/db004/RAC/TSCPOLS200401.dbf'
+---------------------------------------------------------
+
+Additional information: 3
+ORA-01157: cannot identify/lock data file 96 - see DBWR trace file
+ORA-01110: data file 96: '/ocfs/db004/RAC/tstkstp_01.dbf'
+ORA-27037: unable to obtain file status
+Linux Error: 2: No such file or directory
+---------------------------------------------------------

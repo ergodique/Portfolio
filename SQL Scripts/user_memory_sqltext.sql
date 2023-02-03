@@ -1,0 +1,1 @@
+select a.USERNAME ,a.sid, a.serial#, a.status, b.SHARABLE_MEM, b.RUNTIME_MEM,(b.CPU_TIME/1000) "cpu_time(ms)", (b.ELAPSED_TIME/1000) "elapsed_time(ms)", b.SQL_TEXT from v$session a, v$sqlarea b where a.sql_id=b.sql_id and a.USERNAME like 'OW%' 

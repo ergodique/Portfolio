@@ -1,0 +1,10 @@
+#!/bin/bash
+
+cd /home/users/grid 
+. ./.profile > /dev/null
+
+vdbname=$1
+
+asmcmd -p find --type BACKUPSET +FRA/$vdbname/BACKUPSET *LVL* 
+
+exit 0

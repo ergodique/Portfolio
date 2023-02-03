@@ -1,0 +1,75 @@
+REM See overall memory usage for MTS / Shared 
+REM Servers connections:
+
+select s.sid, sn.name, st.value
+from v$session s, v$sesstat st, v$statname sn
+where s.server <> 'DEDICATED'
+and s.sid=st.sid
+and st.statistic# = sn.statistic#
+and sn.name = 'session uga memory max'
+order by st.value;
+
+REM Find per-session memory usage for
+REM MTS sessions
+REM 
+REM Generally want to set this query up
+REM to run throughout a typical business day
+REM (perhaps every half hour)
+REM 
+REM You want to find the spikes so you 
+REM know the memory usage needs
+
+select count(1) num_sessions, avg(st.value)
+avg_uga_mem, max(st.value) max_uga_mem
+from v$session s, v$sesstat st, v$statname sn
+where s.server <> 'DEDICATED'
+and s.sid = st.sid
+and st.statistic# = sn.statistic#
+and sn.name = 'session uga memory max';
+
+
+REM Find memory needs for open cursors
+REM associated with a MTS / Shared Server
+REM session
+
+select count(1) open_cursors, 
+sum(persistent_mem) "Persistent Memory",
+sum(runtime_mem) "Mutable Memory"
+from v$sql s, v$open_cursor o
+where o.hash_value = s.hash_value
+and o.sid = &session_id;
+
+
+
+
+
+Formula needed to find right large pool size
+
+LARGE_POOL_SIZE = (Highest num_sesssions * 
+(largest AVG_UGA_MEM + any other memory needs for RMAN / PX functionality )
+
+
+REM In some cases, individual memory consumers are needed
+REM
+REM This code should show by session the maximum UGA
+REM allocated over time
+
+select s.sid, pid, st.value "MAX UGA MEMORY"
+from v$session s, v$sesstat st, v$statname sn, v$process p
+where s.server <> 'DEDICATED'
+and s.sid = st.sid
+and p.addr=s.paddr
+and st.statistic# = sn.statistic#
+and sn.name = 'session uga memory max';
+
+REM Same kind of query but focuses on current UGA 
+REM allocations
+
+select s.sid, pid, st.value "UGA MEMORY"
+from v$session s, v$sesstat st, v$statname sn, v$process p
+where s.server <> 'DEDICATED'
+and s.sid = st.sid
+and p.addr=s.paddr
+and st.statistic# = sn.statistic#
+and sn.name = 'session uga memory';
+

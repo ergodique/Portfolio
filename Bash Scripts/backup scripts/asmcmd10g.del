@@ -1,0 +1,12 @@
+#!/bin/bash
+
+cd /home/users/oracle 
+. ./.profile > /dev/null
+
+vdbname=$1
+
+export ORACLE_SID=+ASM
+
+asmcmd -p find -t BACKUPSET +FRA/$vdbname/BACKUPSET *TAG*
+
+exit 0

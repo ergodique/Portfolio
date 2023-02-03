@@ -1,0 +1,40 @@
+#!/bin/bash
+
+. /home/users/oracle/.profile >> /dev/null
+. /oracle/BACKUP/ORACLE/METADATA/environments.env >> /dev/null
+
+vhostname=$1
+vversion=$2
+vdbname=$3
+
+if [ "$vversion" = "A11G" ]
+then
+	scp $BACKUP_SCRIPT_HOME/asmcmd11g.del grid@$vhostname:/usr/tmp/. > /dev/null
+	scp $BACKUP_SCRIPT_HOME/FRA11g.clean grid@$vhostname:/usr/tmp/. > /dev/null
+
+	ssh grid@$vhostname "chmod 777 /usr/tmp/asmcmd11g.del"
+	ssh grid@$vhostname "chmod 777 /usr/tmp/FRA11g.clean"
+
+	ssh grid@$vhostname "sh /usr/tmp/FRA11g.clean $vdbname"
+
+#	ssh grid@$vhostname "rm /usr/tmp/FRA11g.clean"
+#	ssh grid@$vhostname "rm /usr/tmp/asmcmd11g.del"
+
+elif [ "$vversion" = "A10G" ]
+then
+	scp $BACKUP_SCRIPT_HOME/asmcmd10g.del oracle@$vhostname:/usr/tmp/. > /dev/null
+	scp $BACKUP_SCRIPT_HOME/FRA10g.clean oracle@$vhostname:/usr/tmp/. > /dev/null
+
+	ssh oracle@$vhostname "chmod 777 /usr/tmp/asmcmd10g.del"
+	ssh oracle@$vhostname "chmod 777 /usr/tmp/FRA10g.clean"
+
+	ssh oracle@$vhostname "sh /usr/tmp/FRA10g.clean $vdbname"
+
+	ssh oracle@$vhostname "rm /usr/tmp/FRA10g.clean"
+	ssh oracle@$vhostname "rm /usr/tmp/asmcmd10g.del"
+
+else
+	echo "Lutfen Oracle versiyonunu 10g ya da 11g olarak belirtin!"
+fi
+
+exit 0

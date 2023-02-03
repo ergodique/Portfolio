@@ -1,0 +1,1 @@
+select s.username,s.SID from v$process p,v$session s where p.ADDR=s.PADDR and spid='4722884'

@@ -1,0 +1,2 @@
+--select a.* from v$instance a
+select a.owner, a.index_name, a.index_type, a.status, a.tablespace_name, a.table_owner, a.table_name from dba_indexes a, dba_tables b where a.table_name = b.table_name and b.tablespace_name = 'TSUYE00'  

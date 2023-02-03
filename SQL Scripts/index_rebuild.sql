@@ -1,0 +1,1 @@
+select owner, index_name, table_name, blevel from dba_indexes where BLEVEL>3

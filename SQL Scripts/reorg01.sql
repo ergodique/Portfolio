@@ -1,0 +1,4 @@
+--select 'ALTER TABLE '||owner||'.'||table_name||' MOVE  TABLESPACE TSMAITP;' from dba_tables a where a.owner = 'SMODEL' and a.TABLE_NAME like 'MUS%MAITP'
+--select 'ALTER TABLE '||table_owner||'.'||table_name||' MOVE PARTITION '||partition_name||' TABLESPACE TSMAITP;' from dba_tab_partitions a where a.table_owner = 'SMODEL' and a.TABLE_NAME like 'MUS%MAITP'
+--select 'ALTER INDEX '||owner||'.'||index_name||' REBUILD  TABLESPACE TSMAITP ONLINE;' from dba_indexes a where a.table_owner = 'SMODEL' and a.TABLE_NAME like 'MUS%MAITP'
+select 'ALTER INDEX '||index_owner||'.'||a.index_name||' REBUILD PARTITION '||partition_name||' TABLESPACE TSMAITP;' from dba_ind_partitions a, dba_indexes b where a.INDEX_OWNER = b.OWNER and a.index_name = b.INDEX_NAME and b.table_owner = 'SMODEL' and b.TABLE_NAME like 'MUS%MAITP'
