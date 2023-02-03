@@ -1,0 +1,285 @@
+/* Formatted on 23.06.2017 17:38:32 (QP5 v5.256.13226.35538) */
+--Fragmantasyon v04
+
+DECLARE
+BEGIN
+   FOR x
+      IN (  SELECT t.partitioned,
+                   t.owner AS table_owner,
+                   t.table_name,
+                   T.LAST_ANALYZED,
+                   ROUND ( (t.blocks * 8), 2) / 1024 / 1024 "size (Gb)",
+                     ROUND ( (t.num_rows * t.avg_row_len / 1024), 2)
+                   / 1024
+                   / 1024
+                      "actual_data (Gb)",
+                   (  ROUND ( (t.blocks * 8), 2) / 1024 / 1024
+                    -   ROUND ( (t.num_rows * t.avg_row_len / 1024), 2)
+                      / 1024
+                      / 1024)
+                      "wasted_space (Gb)"
+              FROM dba_tables t
+             WHERE     (ROUND ( (t.blocks * 8), 2) / 1024 / 1024 >
+                             ROUND ( (t.num_rows * t.avg_row_len / 1024), 2)
+                           / 1024
+                           / 1024)
+                   AND (  ROUND ( (t.blocks * 8), 2) / 1024 / 1024
+                        -   ROUND ( (t.num_rows * t.avg_row_len / 1024), 2)
+                          / 1024
+                          / 1024) > 1
+                   AND owner NOT LIKE 'SYS%'
+          ORDER BY 5 DESC)
+   LOOP
+      --dbms_output.put_line(x.partitioned||x.table_name);
+
+      IF x.partitioned = 'YES'
+      THEN
+         --dbms_output.put_line('Partititoned');
+
+         -- TABLE
+         FOR subcheck
+            IN (SELECT DISTINCT table_owner, table_name, subpartition_count
+                  FROM dba_tab_partitions
+                 WHERE     table_owner NOT LIKE 'SYS%'
+                       AND table_name = x.table_name)
+         LOOP
+            IF subcheck.subpartition_count = 0
+            THEN
+               --Table: partitioned
+               FOR tab
+                  IN (SELECT partition_name,
+                             table_owner,
+                             table_name,
+                             ROUND ( (blocks * 8), 2) / 1024 / 1024 "size"
+                        FROM dba_tab_partitions
+                       WHERE     table_owner = subcheck.table_owner
+                             AND table_name = subcheck.table_name)
+               LOOP
+                  DBMS_OUTPUT.put_line (
+                        'alter table '
+                     || tab.table_owner
+                     || '.'
+                     || tab.table_name
+                     || ' move partition '
+                     || tab.partition_name
+                     || ' parallel 4; -- Size: '
+                     || tab."size"
+                     || ' GB');
+               END LOOP;
+
+               -- INDEX
+               -- Index: Partitioned
+               FOR ind
+                  IN (SELECT p.index_owner, p.index_name, p.partition_name
+                        FROM dba_ind_partitions p
+                       WHERE     p.index_owner NOT LIKE 'SYS%'
+                             AND p.index_name IN (SELECT index_name
+                                                    FROM dba_indexes
+                                                   WHERE     table_name =
+                                                                subcheck.table_name
+                                                         AND index_type !=
+                                                                'LOB'))
+               LOOP
+                  DBMS_OUTPUT.put_line (
+                        'alter index '
+                     || ind.index_owner
+                     || '.'
+                     || ind.index_name
+                     || ' rebuild partition '
+                     || ind.partition_name
+                     || ' parallel 4;');
+               END LOOP;
+
+               --Index: not partitioned
+               FOR ind
+                  IN (SELECT i.owner AS index_owner, i.index_name
+                        FROM dba_indexes i
+                       WHERE     i.table_name = subcheck.table_name
+                             AND i.owner NOT LIKE 'SYS%'
+                             AND i.index_type != 'LOB'
+                             AND i.partitioned = 'NO')
+               LOOP
+                  DBMS_OUTPUT.put_line (
+                        'alter index '
+                     || ind.index_owner
+                     || '.'
+                     || ind.index_name
+                     || ' rebuild nologging parallel 4;');
+               END LOOP;
+
+
+               -- ANALYZE
+               FOR tab
+                  IN (SELECT partition_name, table_owner, table_name
+                        FROM dba_tab_partitions
+                       WHERE     table_owner = subcheck.table_owner
+                             AND table_name = subcheck.table_name)
+               LOOP
+                  DBMS_OUTPUT.put_line (
+                        'exec dbms_stats.gather_table_stats('''
+                     || x.table_owner
+                     || ''', '''
+                     || x.table_name
+                     || ''',  granularity => ''PARTITION'', partname => '''
+                     || tab.partition_name
+                     || ''');');
+               END LOOP;
+
+               NULL;
+            ELSE
+               --SUBPARTITION
+               --Table: Subpartitioned
+               FOR tab
+                  IN (SELECT subpartition_name,
+                             table_owner,
+                             table_name,
+                             ROUND ( (blocks * 8), 2) / 1024 / 1024 "size"
+                        FROM dba_tab_subpartitions
+                       WHERE     table_owner = subcheck.table_owner
+                             AND table_name = subcheck.table_name)
+               LOOP
+                  DBMS_OUTPUT.put_line (
+                        'alter table '
+                     || tab.table_owner
+                     || '.'
+                     || tab.table_name
+                     || ' move subpartition '
+                     || tab.subpartition_name
+                     || ' parallel 4; -- Size: '
+                     || tab."size"
+                     || ' GB');
+               END LOOP;
+
+               -- INDEX
+               -- Index: Supartitioned
+               FOR ind
+                  IN (SELECT p.index_owner, p.index_name, p.subpartition_name
+                        FROM dba_ind_subpartitions p
+                       WHERE     p.index_owner NOT LIKE 'SYS%'
+                             AND p.index_name IN (SELECT index_name
+                                                    FROM dba_indexes
+                                                   WHERE     table_name =
+                                                                subcheck.table_name
+                                                         AND index_type !=
+                                                                'LOB'))
+               LOOP
+                  DBMS_OUTPUT.put_line (
+                        'alter index '
+                     || ind.index_owner
+                     || '.'
+                     || ind.index_name
+                     || ' rebuild subpartition '
+                     || ind.subpartition_name
+                     || ' parallel 4;');
+               END LOOP;
+
+               --Index: not partitioned
+               FOR ind
+                  IN (SELECT i.owner AS index_owner, i.index_name
+                        FROM dba_indexes i
+                       WHERE     i.table_name = subcheck.table_name
+                             AND i.owner NOT LIKE 'SYS%'
+                             AND i.index_type != 'LOB'
+                             AND i.partitioned = 'NO')
+               LOOP
+                  DBMS_OUTPUT.put_line (
+                        'alter index '
+                     || ind.index_owner
+                     || '.'
+                     || ind.index_name
+                     || ' rebuild nologging parallel 4;');
+               END LOOP;
+
+
+               -- Subpartitioned: ANALYZE
+               FOR tab
+                  IN (SELECT subpartition_name, table_owner, table_name
+                        FROM dba_tab_subpartitions
+                       WHERE     table_owner = subcheck.table_owner
+                             AND table_name = subcheck.table_name)
+               LOOP
+                  DBMS_OUTPUT.put_line (
+                        'exec dbms_stats.gather_table_stats('''
+                     || x.table_owner
+                     || ''', '''
+                     || x.table_name
+                     || ''',  granularity => ''SUBPARTITION'', partname => '''
+                     || tab.subpartition_name
+                     || ''');');
+               END LOOP;
+
+               NULL;
+            END IF;
+
+            DBMS_OUTPUT.put_line (
+                  'BEGIN dbms_stats.set_table_prefs('''
+               || x.table_owner
+               || ''','''
+               || x.table_name
+               || ''', ''INCREMENTAL'',''TRUE'');END;/ ');
+         END LOOP;
+      ELSE
+         --dbms_output.put_line('Not Partititoned');
+
+         -- TABLE
+         DBMS_OUTPUT.put_line (
+               'alter table '
+            || x.table_owner
+            || '.'
+            || x.table_name
+            || ' move parallel 4; -- Size: '
+            || x."size (Gb)"
+            || ' GB');
+
+         -- INDEX
+
+         --Index: partitioned
+         FOR ind
+            IN (SELECT p.index_owner, p.index_name, p.partition_name
+                  FROM dba_ind_partitions p
+                 WHERE     p.index_owner NOT LIKE 'SYS%'
+                       AND p.index_name IN (SELECT index_name
+                                              FROM dba_indexes
+                                             WHERE     table_name =
+                                                          x.table_name
+                                                   AND index_type != 'LOB'))
+         LOOP
+            DBMS_OUTPUT.put_line (
+                  'alter index '
+               || ind.index_owner
+               || '.'
+               || ind.index_name
+               || ' rebuild partition '
+               || ind.partition_name
+               || ' parallel 4;');
+         END LOOP;
+
+         -- Index: not partitioned
+         FOR ind
+            IN (SELECT i.owner AS index_owner, i.index_name
+                  FROM dba_indexes i
+                 WHERE     i.table_name = x.table_name
+                       AND i.owner NOT LIKE 'SYS%'
+                       AND i.index_type != 'LOB'
+                       AND i.partitioned = 'NO')
+         LOOP
+            DBMS_OUTPUT.put_line (
+                  'alter index '
+               || ind.index_owner
+               || '.'
+               || ind.index_name
+               || ' rebuild nologging parallel 4;');
+         END LOOP;
+      END IF;
+
+      -- ANALYZE
+
+      DBMS_OUTPUT.put_line (
+            'EXEC DBMS_STATS.GATHER_TABLE_STATS('''
+         || x.table_owner
+         || ''','''
+         || x.table_name
+         || ''');');
+   END LOOP;
+END;
+/

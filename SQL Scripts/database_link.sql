@@ -1,0 +1,34 @@
+CREATE USER usrkypt
+  IDENTIFIED BY kyp1234
+  DEFAULT TABLESPACE USERS
+  TEMPORARY TABLESPACE TEMP
+  PROFILE DEFAULT
+  ACCOUNT UNLOCK;
+  -- 1 Role for AC57018 
+  GRANT CONNECT TO usrkypt;
+  ALTER USER usrkypt DEFAULT ROLE ALL;
+  -- 24 Object Privileges for AC57018 
+    
+    GRANT SELECT ON SMODEL.CMN_ORGANIZATIONUNIT_ORUTK TO usrkypt;
+    
+    
+    select * from SMODEL.CMN_ORGANIZATIONUNIT_ORUTK@KYP_COMPARE
+    
+    select * from SMODEL.CITIZEN_UPDATE@RACPR
+    
+  
+    
+      select * from SMODEL.CMN_ORGANIZATIONUNIT_ORUTK
+      
+CREATE public DATABASE LINK "KYP_COMPARE" CONNECT TO "USRKYPT" IDENTIFIED BY "KYP1234" USING '(DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = klracorav01.isbank)(PORT = 1521))
+    (ADDRESS = (PROTOCOL = TCP)(HOST = klracorav02.isbank)(PORT = 1521))
+    (LOAD_BALANCE = yes)
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = RACPR)
+    )
+  )';
+
+
+drop database link "kyp_compare"

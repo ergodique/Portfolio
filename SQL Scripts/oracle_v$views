@@ -1,0 +1,22 @@
+-- v$access : kim nereye ulaþýyor
+/* 	SID		NUMBER
+	OWNER	VARCHAR2(64)
+	OBJECT	VARCHAR2(1000)
+	TYPE	VARCHAR2(24)*/
+	
+	
+select a.*, b.username,b.osuser,b.MACHINE,b.LOGON_TIME,b.STATUS,b.state, b.lockwait from v$access a, v$session b where a.sid=b.sid and a.object like 'UYE%'
+
+
+-- DBA_HIST_SNAPSHOT & DBA_HIST_LIBRARYCACHE
+
+SELECT a.instance_number, a.startup_time, a.BEGIN_INTERVAL_TIME, a.END_INTERVAL_TIME, b.*  
+FROM DBA_HIST_SNAPSHOT a, DBA_HIST_LIBRARYCACHE b WHERE a.snap_id=b.snap_id AND a.INSTANCE_NUMBER=b.INSTANCE_NUMBER 
+AND a.INSTANCE_NUMBER=1
+ORDER BY a.startup_time 
+	
+	
+SELECT username,machine,FAILOVER_TYPE,FAILOVER_METHOD ,FAILED_OVER,COUNT(*)   FROM v$session 
+--WHERE failed_over='YES'
+GROUP BY username,machine,FAILOVER_TYPE,FAILOVER_METHOD ,FAILED_OVER
+	

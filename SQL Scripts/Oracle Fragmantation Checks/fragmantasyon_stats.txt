@@ -1,0 +1,107 @@
+/* Formatted on 23.06.2017 17:53:21 (QP5 v5.256.13226.35538) */
+--Fragmantasyon v04
+
+DECLARE
+BEGIN
+   FOR x
+      IN (  SELECT t.partitioned,
+                   t.owner AS table_owner,
+                   t.table_name,
+                   T.LAST_ANALYZED,
+                   ROUND ( (t.blocks * 8), 2) / 1024 / 1024 "size (Gb)",
+                     ROUND ( (t.num_rows * t.avg_row_len / 1024), 2)
+                   / 1024
+                   / 1024
+                      "actual_data (Gb)",
+                   (  ROUND ( (t.blocks * 8), 2) / 1024 / 1024
+                    -   ROUND ( (t.num_rows * t.avg_row_len / 1024), 2)
+                      / 1024
+                      / 1024)
+                      "wasted_space (Gb)"
+              FROM dba_tables t
+             WHERE     (ROUND ( (t.blocks * 8), 2) / 1024 / 1024 >
+                             ROUND ( (t.num_rows * t.avg_row_len / 1024), 2)
+                           / 1024
+                           / 1024)
+                   AND (  ROUND ( (t.blocks * 8), 2) / 1024 / 1024
+                        -   ROUND ( (t.num_rows * t.avg_row_len / 1024), 2)
+                          / 1024
+                          / 1024) > 1
+                   AND owner NOT LIKE 'SYS%'
+          ORDER BY 5 DESC)
+   LOOP
+      --dbms_output.put_line(x.partitioned||x.table_name);
+
+      IF x.partitioned = 'YES'
+      THEN
+         --dbms_output.put_line('Partititoned');
+         DBMS_OUTPUT.put_line (
+               'BEGIN dbms_stats.set_table_prefs('''
+            || x.table_owner
+            || ''','''
+            || x.table_name
+            || ''', ''INCREMENTAL'',''TRUE'');END;/ ');
+
+         -- TABLE
+         FOR subcheck
+            IN (SELECT DISTINCT table_owner, table_name, subpartition_count
+                  FROM dba_tab_partitions
+                 WHERE     table_owner NOT LIKE 'SYS%'
+                       AND table_name = x.table_name)
+         LOOP
+            IF subcheck.subpartition_count = 0
+            THEN
+               -- ANALYZE
+               FOR tab
+                  IN (SELECT partition_name, table_owner, table_name
+                        FROM dba_tab_partitions
+                       WHERE     table_owner = subcheck.table_owner
+                             AND table_name = subcheck.table_name)
+               LOOP
+                  DBMS_OUTPUT.put_line (
+                        'exec dbms_stats.gather_table_stats('''
+                     || x.table_owner
+                     || ''', '''
+                     || x.table_name
+                     || ''',  granularity => ''PARTITION'', partname => '''
+                     || tab.partition_name
+                     || ''');');
+               END LOOP;
+
+               NULL;
+            ELSE
+               --SUBPARTITION
+               --Table: Subpartitioned
+               -- Subpartitioned: ANALYZE
+               FOR tab
+                  IN (SELECT subpartition_name, table_owner, table_name
+                        FROM dba_tab_subpartitions
+                       WHERE     table_owner = subcheck.table_owner
+                             AND table_name = subcheck.table_name)
+               LOOP
+                  DBMS_OUTPUT.put_line (
+                        'exec dbms_stats.gather_table_stats('''
+                     || x.table_owner
+                     || ''', '''
+                     || x.table_name
+                     || ''',  granularity => ''SUBPARTITION'', partname => '''
+                     || tab.subpartition_name
+                     || ''');');
+               END LOOP;
+
+               NULL;
+            END IF;
+         END LOOP;
+      ELSE
+         NULL;
+      END IF;
+
+      DBMS_OUTPUT.put_line (
+            'EXEC DBMS_STATS.GATHER_TABLE_STATS('''
+         || x.table_owner
+         || ''','''
+         || x.table_name
+         || ''');');
+   END LOOP;
+END;
+/

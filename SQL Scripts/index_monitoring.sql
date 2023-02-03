@@ -1,0 +1,1 @@
+select * from dba_object_usage where used = 'NO' and TO_date(start_monitoring,'MM/DD/YYYY HH24:MI:SS') < sysdate - 30 order by start_monitoring
