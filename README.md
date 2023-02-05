@@ -1,5 +1,4 @@
 # Portfolio
-Various projects
 
 This portfolio contains some of the assessments I got from the job applications (Mainly Quant Trader/Trader, and Analyst positions).
 
