@@ -54,6 +54,7 @@ def monte_carlo_simulation(win_rate, reward_to_risk, risk_per_trade, num_simulat
     mean_drawdown = np.mean(max_drawdowns)
     drawdown_99_percentile = np.percentile(max_drawdowns, 99)
     
+
     print(f'Starting Balance: {start_balance:.2f}')
     print(f'Mean Final Balance: {np.mean(final_balances):.2f}')
     print(f'Standard Deviation: {np.std(final_balances):.2f}')
@@ -64,10 +65,16 @@ def monte_carlo_simulation(win_rate, reward_to_risk, risk_per_trade, num_simulat
     print(f'99th Percentile Drawdown: {drawdown_99_percentile:.2f}')
 
 # Example usage
-win_rate = 0.58  # put win rate here
-reward_to_risk = 2  # Reward to risk ratio 
-risk_per_trade = 0.01  # Risking % of the trade
+win_rate = 0.9  # put win rate here
+reward_to_risk = 0.3  # Reward to risk ratio 
+risk_per_trade = 0.02  # Risking % of the trade
 num_simulations = 10000  # Run X number of simulations
-num_trades = 500  # Each simulation runs for X trades
+num_trades = 252  # Each simulation runs for X trades
+
+print(f'Win Rate: {win_rate:.2f}')
+print(f'R-Ratio: {reward_to_risk:.2f}')
+print(f'% Risk per Trade: {risk_per_trade:.2f}')
+print(f'# of Simulations: {num_simulations:.2f}')
+print(f'# of Trades: {num_trades:.2f}')
 
 monte_carlo_simulation(win_rate, reward_to_risk, risk_per_trade, num_simulations, num_trades)
