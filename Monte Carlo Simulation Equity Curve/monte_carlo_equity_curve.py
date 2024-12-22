@@ -65,7 +65,7 @@ def monte_carlo_simulation(win_rate, reward_to_risk, risk_per_trade, num_simulat
     print(f'99th Percentile Drawdown: {drawdown_99_percentile:.2f}')
 
 # Example usage
-win_rate = 0.76  # put win rate here
+win_rate = 0.7686  # put win rate here
 reward_to_risk = 0.46  # Reward to risk ratio 
 risk_per_trade = 0.02  # Risking % of the trade
 num_simulations = 10000  # Run X number of simulations
