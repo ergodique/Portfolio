@@ -1,6 +1,7 @@
 """
 TEFAS (Türkiye Elektronik Fon Alım Satım Platformu) provider for Turkish mutual funds.
 Provides comprehensive fund data, performance metrics, and screening capabilities.
+Orjinalinin üzerine bazı değişiklikler yapıldı. -Erdogan
 """
 
 import requests
