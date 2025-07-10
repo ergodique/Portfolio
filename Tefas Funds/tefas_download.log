@@ -1,0 +1,1202 @@
+2025-07-09 15:44:24,694 - INFO - ============================================================
+2025-07-09 15:44:24,695 - INFO - TEFAS Fon Verisi �ndirme Script'i
+2025-07-09 15:44:24,695 - INFO - ============================================================
+2025-07-09 15:44:24,695 - INFO - Mod: Test (5 fon)
+2025-07-09 15:44:24,695 - INFO - Tarih aral���: Son 1 y�l
+2025-07-09 15:44:24,695 - INFO - ============================================================
+2025-07-09 15:44:24,695 - INFO - TefasProvider yap�land�r�l�yor...
+2025-07-09 15:44:25,086 - INFO - Session ba�ar�yla ba�lat�ld�
+2025-07-09 15:44:25,087 - INFO - Fon listesi al�n�yor...
+2025-07-09 15:44:25,087 - INFO - Fetching fresh fund list from Takasbank
+2025-07-09 15:44:26,013 - ERROR - Error fetching Takasbank fund list: [Errno 2] No such file or directory: '/tmp/takasbank_funds.xlsx'
+2025-07-09 15:44:26,013 - ERROR - Fon listesi alma hatas�: Fon listesi al�namad�
+2025-07-09 15:44:26,013 - ERROR - Genel hata: Fon listesi al�namad�
+2025-07-09 15:57:16,316 - INFO - ============================================================
+2025-07-09 15:57:16,317 - INFO - TEFAS Fon Verisi �ndirme Script'i
+2025-07-09 15:57:16,317 - INFO - ============================================================
+2025-07-09 15:57:16,317 - INFO - Mod: Test (5 fon)
+2025-07-09 15:57:16,317 - INFO - Tarih aral���: Son 1 y�l
+2025-07-09 15:57:16,317 - INFO - ============================================================
+2025-07-09 15:57:16,317 - INFO - TefasProvider yap�land�r�l�yor...
+2025-07-09 15:57:16,715 - INFO - Session ba�ar�yla ba�lat�ld�
+2025-07-09 15:57:16,716 - INFO - Fon listesi al�n�yor...
+2025-07-09 15:57:16,716 - INFO - Fetching fresh fund list from Takasbank
+2025-07-09 15:57:17,622 - ERROR - Error fetching Takasbank fund list: Missing optional dependency 'openpyxl'.  Use pip or conda to install openpyxl.
+2025-07-09 15:57:17,622 - ERROR - Fon listesi alma hatas�: Fon listesi al�namad�
+2025-07-09 15:57:17,622 - ERROR - Genel hata: Fon listesi al�namad�
+2025-07-09 16:00:19,146 - INFO - ============================================================
+2025-07-09 16:00:19,146 - INFO - TEFAS Fon Verisi �ndirme Script'i
+2025-07-09 16:00:19,146 - INFO - ============================================================
+2025-07-09 16:00:19,146 - INFO - Mod: Test (5 fon)
+2025-07-09 16:00:19,147 - INFO - Tarih aral���: Son 1 y�l
+2025-07-09 16:00:19,147 - INFO - ============================================================
+2025-07-09 16:00:19,147 - INFO - TefasProvider yap�land�r�l�yor...
+2025-07-09 16:00:19,578 - INFO - Session ba�ar�yla ba�lat�ld�
+2025-07-09 16:00:19,578 - INFO - Fon listesi al�n�yor...
+2025-07-09 16:00:19,578 - INFO - Fetching fresh fund list from Takasbank
+2025-07-09 16:00:20,474 - ERROR - Error fetching Takasbank fund list: [Errno 13] Permission denied: 'C:\\Users\\PC\\Documents\\GitHub\\Portfolio\\Tefas Funds\\takasbank_funds.xlsx'
+2025-07-09 16:00:20,474 - ERROR - Fon listesi alma hatas�: Fon listesi al�namad�
+2025-07-09 16:00:20,474 - ERROR - Genel hata: Fon listesi al�namad�
+2025-07-09 16:00:20,474 - ERROR - [ERROR] Beklenmedik hata: Fon listesi al�namad�
+2025-07-09 16:01:28,240 - INFO - ============================================================
+2025-07-09 16:01:28,240 - INFO - TEFAS Fon Verisi �ndirme Script'i
+2025-07-09 16:01:28,240 - INFO - ============================================================
+2025-07-09 16:01:28,240 - INFO - Mod: Test (5 fon)
+2025-07-09 16:01:28,240 - INFO - Tarih aral���: Son 1 y�l
+2025-07-09 16:01:28,240 - INFO - ============================================================
+2025-07-09 16:01:28,240 - INFO - TefasProvider yap�land�r�l�yor...
+2025-07-09 16:01:28,703 - INFO - Session ba�ar�yla ba�lat�ld�
+2025-07-09 16:01:28,704 - INFO - Fon listesi al�n�yor...
+2025-07-09 16:01:28,704 - INFO - Fetching fresh fund list from Takasbank
+2025-07-09 16:01:29,231 - ERROR - Error fetching Takasbank fund list: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 16:01:29,232 - ERROR - Fon listesi alma hatas�: Fon listesi al�namad�
+2025-07-09 16:01:29,232 - ERROR - Genel hata: Fon listesi al�namad�
+2025-07-09 16:01:29,232 - ERROR - [ERROR] Beklenmedik hata: Fon listesi al�namad�
+2025-07-09 16:01:37,666 - INFO - ============================================================
+2025-07-09 16:01:37,666 - INFO - TEFAS Fon Verisi �ndirme Script'i
+2025-07-09 16:01:37,666 - INFO - ============================================================
+2025-07-09 16:01:37,666 - INFO - Mod: Test (5 fon)
+2025-07-09 16:01:37,666 - INFO - Tarih aral���: Son 1 y�l
+2025-07-09 16:01:37,666 - INFO - ============================================================
+2025-07-09 16:01:37,667 - INFO - TefasProvider yap�land�r�l�yor...
+2025-07-09 16:01:38,106 - INFO - Session ba�ar�yla ba�lat�ld�
+2025-07-09 16:01:38,106 - INFO - Fon listesi al�n�yor...
+2025-07-09 16:01:38,106 - INFO - Fetching fresh fund list from Takasbank
+2025-07-09 16:01:38,731 - ERROR - Error fetching Takasbank fund list: [Errno 13] Permission denied: 'C:\\Users\\PC\\Documents\\GitHub\\Portfolio\\Tefas Funds\\takasbank_funds.xlsx'
+2025-07-09 16:01:38,731 - ERROR - Fon listesi alma hatas�: Fon listesi al�namad�
+2025-07-09 16:01:38,731 - ERROR - Genel hata: Fon listesi al�namad�
+2025-07-09 16:01:38,731 - ERROR - [ERROR] Beklenmedik hata: Fon listesi al�namad�
+2025-07-09 16:02:06,393 - INFO - ============================================================
+2025-07-09 16:02:06,394 - INFO - TEFAS Fon Verisi �ndirme Script'i
+2025-07-09 16:02:06,394 - INFO - ============================================================
+2025-07-09 16:02:06,394 - INFO - Mod: Test (5 fon)
+2025-07-09 16:02:06,394 - INFO - Tarih aral���: Son 1 y�l
+2025-07-09 16:02:06,394 - INFO - ============================================================
+2025-07-09 16:02:06,394 - INFO - TefasProvider yap�land�r�l�yor...
+2025-07-09 16:02:06,821 - INFO - Session ba�ar�yla ba�lat�ld�
+2025-07-09 16:02:06,821 - INFO - Fon listesi al�n�yor...
+2025-07-09 16:02:06,821 - INFO - Fetching fresh fund list from Takasbank
+2025-07-09 16:02:07,876 - INFO - Successfully loaded 849 funds from Takasbank
+2025-07-09 16:02:07,876 - INFO - Toplam 849 fon bulundu
+2025-07-09 16:02:07,876 - INFO - Test modu: �lk 5 fon se�ildi
+2025-07-09 16:02:07,876 - INFO - [START] 5 fon i�in veri indirme ba�l�yor...
+2025-07-09 16:02:07,877 - INFO - Hedef dosya: data\tefas_test_data.parquet
+2025-07-09 16:02:07,877 - INFO - [1/5] ��leniyor: AAK
+2025-07-09 16:02:18,160 - INFO - [OK] AAK: 251 toplam kay�t al�nd�
+2025-07-09 16:02:18,160 - INFO - [OK] AAK ba�ar�l�
+2025-07-09 16:02:18,160 - INFO - [2/5] ��leniyor: AAL
+2025-07-09 16:02:28,451 - INFO - [OK] AAL: 251 toplam kay�t al�nd�
+2025-07-09 16:02:28,452 - INFO - [OK] AAL ba�ar�l�
+2025-07-09 16:02:28,452 - INFO - [3/5] ��leniyor: AAS
+2025-07-09 16:02:38,796 - INFO - [OK] AAS: 251 toplam kay�t al�nd�
+2025-07-09 16:02:38,796 - INFO - [OK] AAS ba�ar�l�
+2025-07-09 16:02:38,796 - INFO - [4/5] ��leniyor: AAV
+2025-07-09 16:02:49,252 - INFO - [OK] AAV: 251 toplam kay�t al�nd�
+2025-07-09 16:02:49,252 - INFO - [OK] AAV ba�ar�l�
+2025-07-09 16:02:49,253 - INFO - [5/5] ��leniyor: AC1
+2025-07-09 16:02:59,540 - INFO - [OK] AC1: 251 toplam kay�t al�nd�
+2025-07-09 16:02:59,540 - INFO - [OK] AC1 ba�ar�l�
+2025-07-09 16:02:59,540 - INFO - Durum: 5/5 ba�ar�l�, 1255 toplam kay�t
+2025-07-09 16:02:59,540 - INFO - [SAVE] 1255 kay�t parquet dosyas�na yaz�l�yor...
+2025-07-09 16:02:59,574 - INFO - [SUCCESS] �ND�RME TAMAMLANDI!
+2025-07-09 16:02:59,574 - INFO - [FILE] Dosya: data\tefas_test_data.parquet
+2025-07-09 16:02:59,574 - INFO - [STATS] Kay�t say�s�: 1,255
+2025-07-09 16:02:59,574 - INFO - [FUNDS] Fon say�s�: 5
+2025-07-09 16:02:59,575 - INFO - [OK] Ba�ar�l� fonlar: 5
+2025-07-09 16:02:59,576 - INFO - [FAIL] Ba�ar�s�z fonlar: 0
+2025-07-09 16:37:51,908 - INFO - ============================================================
+2025-07-09 16:37:51,908 - INFO - TEFAS Fon Verisi �ndirme Script'i
+2025-07-09 16:37:51,908 - INFO - ============================================================
+2025-07-09 16:37:51,908 - INFO - Mod: Test (5 fon)
+2025-07-09 16:37:51,908 - INFO - Tarih aral���: Son 1 y�l
+2025-07-09 16:37:51,909 - INFO - ============================================================
+2025-07-09 16:37:51,909 - INFO - TefasProvider yap�land�r�l�yor...
+2025-07-09 16:37:52,653 - ERROR - Session ba�latma hatas�: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 16:37:52,653 - INFO - Fon listesi al�n�yor...
+2025-07-09 16:37:52,653 - INFO - Fetching fresh fund list from Takasbank
+2025-07-09 16:37:53,623 - INFO - Successfully loaded 849 funds from Takasbank
+2025-07-09 16:37:53,623 - INFO - Toplam 849 fon bulundu
+2025-07-09 16:37:53,624 - INFO - Test modu: �lk 5 fon se�ildi
+2025-07-09 16:37:53,624 - INFO - [START] 5 fon i�in veri indirme ba�l�yor...
+2025-07-09 16:37:53,624 - INFO - Hedef dosya: data\tefas_test_data.parquet
+2025-07-09 16:37:53,624 - INFO - [1/5] ��leniyor: AAK
+2025-07-09 16:38:04,113 - INFO - [OK] AAK: 251 toplam kay�t al�nd�
+2025-07-09 16:38:04,113 - INFO - [OK] AAK ba�ar�l�
+2025-07-09 16:38:04,113 - INFO - [2/5] ��leniyor: AAL
+2025-07-09 16:38:14,345 - INFO - [OK] AAL: 251 toplam kay�t al�nd�
+2025-07-09 16:38:14,346 - INFO - [OK] AAL ba�ar�l�
+2025-07-09 16:38:14,346 - INFO - [3/5] ��leniyor: AAS
+2025-07-09 16:38:24,580 - INFO - [OK] AAS: 251 toplam kay�t al�nd�
+2025-07-09 16:38:24,580 - INFO - [OK] AAS ba�ar�l�
+2025-07-09 16:38:24,581 - INFO - [4/5] ��leniyor: AAV
+2025-07-09 16:38:34,787 - INFO - [OK] AAV: 251 toplam kay�t al�nd�
+2025-07-09 16:38:34,787 - INFO - [OK] AAV ba�ar�l�
+2025-07-09 16:38:34,787 - INFO - [5/5] ��leniyor: AC1
+2025-07-09 16:38:45,078 - INFO - [OK] AC1: 251 toplam kay�t al�nd�
+2025-07-09 16:38:45,078 - INFO - [OK] AC1 ba�ar�l�
+2025-07-09 16:38:45,078 - INFO - Durum: 5/5 ba�ar�l�, 1255 toplam kay�t
+2025-07-09 16:38:45,078 - INFO - [SAVE] 1255 kay�t parquet dosyas�na yaz�l�yor...
+2025-07-09 16:38:45,082 - INFO - borsa_bulten_fiyat s�tunu kald�r�ld�
+2025-07-09 16:38:45,102 - INFO - [SUCCESS] �ND�RME TAMAMLANDI!
+2025-07-09 16:38:45,102 - INFO - [FILE] Dosya: data\tefas_test_data.parquet
+2025-07-09 16:38:45,102 - INFO - [STATS] Kay�t say�s�: 1,255
+2025-07-09 16:38:45,102 - INFO - [FUNDS] Fon say�s�: 5
+2025-07-09 16:38:45,104 - INFO - [OK] Ba�ar�l� fonlar: 5
+2025-07-09 16:38:45,104 - INFO - [FAIL] Ba�ar�s�z fonlar: 0
+2025-07-09 16:44:20,900 - INFO - ============================================================
+2025-07-09 16:44:20,901 - INFO - TEFAS Fon Verisi �ndirme Script'i
+2025-07-09 16:44:20,901 - INFO - ============================================================
+2025-07-09 16:44:20,901 - INFO - Mod: Test (5 fon)
+2025-07-09 16:44:20,901 - INFO - Tarih aral���: Son 1 y�l
+2025-07-09 16:44:20,901 - INFO - ============================================================
+2025-07-09 16:44:20,901 - INFO - TefasProvider yap�land�r�l�yor...
+2025-07-09 16:44:21,332 - INFO - Session ba�ar�yla ba�lat�ld�
+2025-07-09 16:44:21,332 - INFO - Fon listesi al�n�yor...
+2025-07-09 16:44:21,332 - INFO - Fetching fresh fund list from Takasbank
+2025-07-09 16:44:22,381 - INFO - Takasbank Excel columns: ['Fon Ad�', 'Fon Kodu']
+2025-07-09 16:44:22,409 - INFO - Successfully loaded 849 funds from Takasbank
+2025-07-09 16:44:22,410 - INFO - Toplam 849 fon bulundu
+2025-07-09 16:44:22,410 - INFO - Test modu: �lk 5 fon se�ildi
+2025-07-09 16:44:22,410 - INFO - [START] 5 fon i�in veri indirme ba�l�yor...
+2025-07-09 16:44:22,410 - INFO - Hedef dosya: data\tefas_test_data.parquet
+2025-07-09 16:44:22,410 - INFO - [1/5] ��leniyor: AAK
+2025-07-09 16:44:32,668 - INFO - [OK] AAK: 251 toplam kay�t al�nd�
+2025-07-09 16:44:32,668 - INFO - [OK] AAK ba�ar�l�
+2025-07-09 16:44:32,668 - INFO - [2/5] ��leniyor: AAL
+2025-07-09 16:44:42,875 - INFO - [OK] AAL: 251 toplam kay�t al�nd�
+2025-07-09 16:44:42,875 - INFO - [OK] AAL ba�ar�l�
+2025-07-09 16:44:42,875 - INFO - [3/5] ��leniyor: AAS
+2025-07-09 16:44:53,072 - INFO - [OK] AAS: 251 toplam kay�t al�nd�
+2025-07-09 16:44:53,072 - INFO - [OK] AAS ba�ar�l�
+2025-07-09 16:44:53,073 - INFO - [4/5] ��leniyor: AAV
+2025-07-09 16:45:03,409 - INFO - [OK] AAV: 251 toplam kay�t al�nd�
+2025-07-09 16:45:03,410 - INFO - [OK] AAV ba�ar�l�
+2025-07-09 16:45:03,410 - INFO - [5/5] ��leniyor: AC1
+2025-07-09 16:45:13,690 - INFO - [OK] AC1: 251 toplam kay�t al�nd�
+2025-07-09 16:45:13,690 - INFO - [OK] AC1 ba�ar�l�
+2025-07-09 16:45:13,691 - INFO - Durum: 5/5 ba�ar�l�, 1255 toplam kay�t
+2025-07-09 16:45:13,691 - INFO - [SAVE] 1255 kay�t parquet dosyas�na yaz�l�yor...
+2025-07-09 16:45:13,693 - INFO - borsa_bulten_fiyat s�tunu kald�r�ld�
+2025-07-09 16:45:13,712 - INFO - [SUCCESS] �ND�RME TAMAMLANDI!
+2025-07-09 16:45:13,712 - INFO - [FILE] Dosya: data\tefas_test_data.parquet
+2025-07-09 16:45:13,712 - INFO - [STATS] Kay�t say�s�: 1,255
+2025-07-09 16:45:13,713 - INFO - [FUNDS] Fon say�s�: 5
+2025-07-09 16:45:13,714 - INFO - [OK] Ba�ar�l� fonlar: 5
+2025-07-09 16:45:13,714 - INFO - [FAIL] Ba�ar�s�z fonlar: 0
+2025-07-09 16:45:13,714 - INFO - [CATEGORIES] Fon kategorileri:
+2025-07-09 16:50:08,397 - INFO - ============================================================
+2025-07-09 16:50:08,397 - INFO - TEFAS Fon Verisi �ndirme Script'i
+2025-07-09 16:50:08,397 - INFO - ============================================================
+2025-07-09 16:50:08,398 - INFO - Mod: Test (5 fon)
+2025-07-09 16:50:08,398 - INFO - Tarih aral���: Son 1 y�l
+2025-07-09 16:50:08,398 - INFO - ============================================================
+2025-07-09 16:50:08,398 - INFO - TefasProvider yap�land�r�l�yor...
+2025-07-09 16:50:08,811 - INFO - Session ba�ar�yla ba�lat�ld�
+2025-07-09 16:50:08,812 - INFO - Fon listesi al�n�yor...
+2025-07-09 16:50:08,812 - INFO - Fetching fresh fund list from Takasbank
+2025-07-09 16:50:10,171 - INFO - Takasbank Excel columns: ['Fon Ad�', 'Fon Kodu']
+2025-07-09 16:50:10,201 - INFO - Successfully loaded 849 funds from Takasbank
+2025-07-09 16:50:10,201 - INFO - Toplam 849 fon bulundu
+2025-07-09 16:50:10,201 - INFO - Test modu: �lk 3 fon se�ildi
+2025-07-09 16:50:10,201 - INFO - [START] 3 fon i�in veri indirme ba�l�yor...
+2025-07-09 16:50:10,201 - INFO - Hedef dosya: data\tefas_test_data.parquet
+2025-07-09 16:50:10,202 - INFO - [1/3] ��leniyor: AAK
+2025-07-09 16:50:20,400 - INFO - [OK] AAK: 251 toplam kay�t al�nd�
+2025-07-09 16:50:20,400 - INFO - [INFO] AAK kategori bilgisi al�n�yor...
+2025-07-09 16:50:20,422 - ERROR - Error getting fund detail (alternative) for AAK: Expecting value: line 1 column 1 (char 0)
+2025-07-09 16:50:20,422 - INFO - [OK] AAK ba�ar�l�
+2025-07-09 16:50:20,422 - INFO - [2/3] ��leniyor: AAL
+2025-07-09 16:50:20,749 - ERROR - Error getting performance for AAL: Expecting value: line 1 column 1 (char 0)
+2025-07-09 16:50:23,052 - ERROR - Error getting performance for AAL: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 16:50:24,942 - INFO - [STOP] Kullan�c� taraf�ndan durduruldu
+2025-07-09 16:51:42,330 - INFO - ============================================================
+2025-07-09 16:51:42,331 - INFO - TEFAS Fon Verisi �ndirme Script'i
+2025-07-09 16:51:42,331 - INFO - ============================================================
+2025-07-09 16:51:42,331 - INFO - Mod: Test (5 fon)
+2025-07-09 16:51:42,331 - INFO - Tarih aral���: Son 1 y�l
+2025-07-09 16:51:42,331 - INFO - ============================================================
+2025-07-09 16:51:42,331 - INFO - TefasProvider yap�land�r�l�yor...
+2025-07-09 16:51:42,711 - INFO - Session ba�ar�yla ba�lat�ld�
+2025-07-09 16:51:42,712 - INFO - Fon listesi al�n�yor...
+2025-07-09 16:51:42,712 - INFO - Fetching fresh fund list from Takasbank
+2025-07-09 16:51:43,772 - INFO - Takasbank Excel columns: ['Fon Ad�', 'Fon Kodu']
+2025-07-09 16:51:43,800 - INFO - Successfully loaded 849 funds from Takasbank
+2025-07-09 16:51:43,801 - INFO - Toplam 849 fon bulundu
+2025-07-09 16:51:43,801 - INFO - Test modu: Rastgele 3 fon se�ildi: GPT, RKH, RPS
+2025-07-09 16:51:43,801 - INFO - [START] 3 fon i�in veri indirme ba�l�yor...
+2025-07-09 16:51:43,801 - INFO - Hedef dosya: data\tefas_test_data.parquet
+2025-07-09 16:51:43,801 - INFO - [1/3] ��leniyor: GPT
+2025-07-09 16:51:53,999 - INFO - [OK] GPT: 251 toplam kay�t al�nd�
+2025-07-09 16:51:53,999 - INFO - [INFO] GPT kategori bilgisi al�n�yor...
+2025-07-09 16:51:54,021 - ERROR - Error getting fund detail (alternative) for GPT: Expecting value: line 1 column 1 (char 0)
+2025-07-09 16:51:54,021 - INFO - [OK] GPT ba�ar�l�
+2025-07-09 16:51:54,021 - INFO - [2/3] ��leniyor: RKH
+2025-07-09 16:51:54,331 - ERROR - Error getting performance for RKH: Expecting value: line 1 column 1 (char 0)
+2025-07-09 16:51:56,631 - ERROR - Error getting performance for RKH: Expecting value: line 1 column 1 (char 0)
+2025-07-09 16:51:58,940 - ERROR - Error getting performance for RKH: Expecting value: line 1 column 1 (char 0)
+2025-07-09 16:52:01,248 - ERROR - Error getting performance for RKH: Expecting value: line 1 column 1 (char 0)
+2025-07-09 16:52:03,555 - ERROR - Error getting performance for RKH: Expecting value: line 1 column 1 (char 0)
+2025-07-09 16:52:05,556 - INFO - [OK] RKH: 0 toplam kay�t al�nd�
+2025-07-09 16:52:05,557 - WARNING - [FAIL] RKH veri al�namad�
+2025-07-09 16:52:05,557 - INFO - [3/3] ��leniyor: RPS
+2025-07-09 16:52:05,870 - ERROR - Error getting performance for RPS: Expecting value: line 1 column 1 (char 0)
+2025-07-09 16:52:08,188 - ERROR - Error getting performance for RPS: Expecting value: line 1 column 1 (char 0)
+2025-07-09 16:52:10,449 - ERROR - Error getting performance for RPS: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 16:52:12,769 - ERROR - Error getting performance for RPS: Expecting value: line 1 column 1 (char 0)
+2025-07-09 16:52:15,114 - ERROR - Error getting performance for RPS: Expecting value: line 1 column 1 (char 0)
+2025-07-09 16:52:17,116 - INFO - [OK] RPS: 0 toplam kay�t al�nd�
+2025-07-09 16:52:17,116 - WARNING - [FAIL] RPS veri al�namad�
+2025-07-09 16:52:17,116 - INFO - [SAVE] 251 kay�t parquet dosyas�na yaz�l�yor...
+2025-07-09 16:52:17,118 - INFO - borsa_bulten_fiyat s�tunu kald�r�ld�
+2025-07-09 16:52:17,128 - INFO - [SUCCESS] �ND�RME TAMAMLANDI!
+2025-07-09 16:52:17,128 - INFO - [FILE] Dosya: data\tefas_test_data.parquet
+2025-07-09 16:52:17,128 - INFO - [STATS] Kay�t say�s�: 251
+2025-07-09 16:52:17,128 - INFO - [FUNDS] Fon say�s�: 1
+2025-07-09 16:52:17,130 - INFO - [OK] Ba�ar�l� fonlar: 1
+2025-07-09 16:52:17,130 - INFO - [FAIL] Ba�ar�s�z fonlar: 2
+2025-07-09 16:52:17,130 - INFO - [CATEGORIES] Fon kategorileri:
+2025-07-09 16:52:17,130 - WARNING - Ba�ar�s�z fonlar: RKH, RPS
+2025-07-09 17:10:29,696 - INFO - ============================================================
+2025-07-09 17:10:29,696 - INFO - TEFAS Fon Verisi İndirme Script'i
+2025-07-09 17:10:29,696 - INFO - ============================================================
+2025-07-09 17:10:29,696 - INFO - Mod: Test (5 fon)
+2025-07-09 17:10:29,696 - INFO - Tarih aralığı: Son 1 yıl
+2025-07-09 17:10:29,697 - INFO - ============================================================
+2025-07-09 17:10:29,697 - INFO - TefasProvider yapılandırılıyor...
+2025-07-09 17:10:30,127 - INFO - Session başarıyla başlatıldı
+2025-07-09 17:10:30,128 - INFO - Fon listesi alınıyor...
+2025-07-09 17:10:30,128 - INFO - Fetching fresh fund list from Takasbank
+2025-07-09 17:10:31,174 - INFO - Takasbank Excel columns: ['Fon Adı', 'Fon Kodu']
+2025-07-09 17:10:31,202 - INFO - Successfully loaded 849 funds from Takasbank
+2025-07-09 17:10:31,202 - INFO - Toplam 849 fon bulundu
+2025-07-09 17:10:31,239 - INFO - [SELECTED] HBF - Veri mevcut
+2025-07-09 17:10:31,922 - INFO - [SELECTED] GIE - Veri mevcut
+2025-07-09 17:10:32,462 - INFO - [SELECTED] KIS - Veri mevcut
+2025-07-09 17:10:32,963 - INFO - Test modu: 3 fon seçildi: HBF, GIE, KIS
+2025-07-09 17:10:32,963 - INFO - [START] 3 fon için veri indirme başlıyor...
+2025-07-09 17:10:32,963 - INFO - Hedef dosya: data\tefas_test_data.parquet
+2025-07-09 17:10:32,963 - INFO - [1/3] İşleniyor: HBF
+2025-07-09 17:10:32,963 - INFO - [FETCH] HBF (HSBC PORTFÖY ALTIN FONU) verisi alınıyor...
+2025-07-09 17:10:43,162 - INFO - [OK] HBF: 251 toplam kayıt alındı
+2025-07-09 17:10:43,162 - INFO - [INFO] HBF kategori bilgisi alınıyor...
+2025-07-09 17:10:43,183 - ERROR - Error getting fund detail (alternative) for HBF: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:10:43,183 - WARNING - HBF: Kategori tahmin edilemedi
+2025-07-09 17:10:43,183 - INFO - [OK] HBF başarılı
+2025-07-09 17:10:43,183 - INFO - [2/3] İşleniyor: GIE
+2025-07-09 17:10:43,183 - INFO - [FETCH] GIE (GARANTİ PORTFÖY GARANTİ BBVA İKLİM ENDEKSİ HİSSE SENEDİ (TL) FONU (HİSSE SENEDİ YOĞUN FON)) verisi alınıyor...
+2025-07-09 17:10:43,491 - ERROR - Error getting performance for GIE: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:10:43,491 - WARNING - GIE: 2024-07-09 - 2024-10-07 = veri yok
+2025-07-09 17:10:45,789 - ERROR - Error getting performance for GIE: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:10:45,789 - WARNING - GIE: 2024-10-08 - 2025-01-06 = veri yok
+2025-07-09 17:10:48,096 - ERROR - Error getting performance for GIE: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:10:48,096 - WARNING - GIE: 2025-01-07 - 2025-04-07 = veri yok
+2025-07-09 17:10:50,358 - ERROR - Error getting performance for GIE: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 17:10:50,358 - WARNING - GIE: 2025-04-08 - 2025-07-07 = veri yok
+2025-07-09 17:10:52,676 - ERROR - Error getting performance for GIE: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:10:52,677 - WARNING - GIE: 2025-07-08 - 2025-07-09 = veri yok
+2025-07-09 17:10:54,677 - INFO - [OK] GIE: 0 toplam kayıt alındı
+2025-07-09 17:10:54,677 - WARNING - [FAIL] GIE veri alınamadı
+2025-07-09 17:10:54,677 - INFO - [3/3] İşleniyor: KIS
+2025-07-09 17:10:54,677 - INFO - [FETCH] KIS (QİNVEST PORTFÖY KİRA SERTİFİKASI KATILIM (DÖVİZ) FONU) verisi alınıyor...
+2025-07-09 17:10:54,982 - ERROR - Error getting performance for KIS: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:10:54,982 - WARNING - KIS: 2024-07-09 - 2024-10-07 = veri yok
+2025-07-09 17:10:57,284 - ERROR - Error getting performance for KIS: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:10:57,284 - WARNING - KIS: 2024-10-08 - 2025-01-06 = veri yok
+2025-07-09 17:10:59,592 - ERROR - Error getting performance for KIS: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:10:59,593 - WARNING - KIS: 2025-01-07 - 2025-04-07 = veri yok
+2025-07-09 17:11:01,942 - ERROR - Error getting performance for KIS: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:11:01,942 - WARNING - KIS: 2025-04-08 - 2025-07-07 = veri yok
+2025-07-09 17:11:04,247 - ERROR - Error getting performance for KIS: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:11:04,247 - WARNING - KIS: 2025-07-08 - 2025-07-09 = veri yok
+2025-07-09 17:11:06,247 - INFO - [OK] KIS: 0 toplam kayıt alındı
+2025-07-09 17:11:06,247 - WARNING - [FAIL] KIS veri alınamadı
+2025-07-09 17:11:06,247 - INFO - [SAVE] 251 kayıt parquet dosyasına yazılıyor...
+2025-07-09 17:11:06,249 - INFO - borsa_bulten_fiyat sütunu kaldırıldı
+2025-07-09 17:11:06,260 - INFO - [SUCCESS] İNDİRME TAMAMLANDI!
+2025-07-09 17:11:06,260 - INFO - [FILE] Dosya: data\tefas_test_data.parquet
+2025-07-09 17:11:06,260 - INFO - [STATS] Kayıt sayısı: 251
+2025-07-09 17:11:06,260 - INFO - [FUNDS] Fon sayısı: 1
+2025-07-09 17:11:06,260 - INFO - [DATE] Tarih aralığı: 2024-07-09 - 2025-07-09
+2025-07-09 17:11:06,260 - INFO - [OK] Başarılı fonlar: 1
+2025-07-09 17:11:06,260 - INFO - [FAIL] Başarısız fonlar: 2
+2025-07-09 17:11:06,261 - INFO - [CATEGORIES] Fon kategorileri:
+2025-07-09 17:11:06,261 - WARNING - Başarısız fonlar: GIE, KIS
+2025-07-09 17:18:17,838 - INFO - TefasProvider yapılandırılıyor...
+2025-07-09 17:18:18,680 - INFO - Session başarıyla başlatıldı
+2025-07-09 17:20:58,305 - INFO - ============================================================
+2025-07-09 17:20:58,305 - INFO - TEFAS Fon Verisi İndirme Script'i
+2025-07-09 17:20:58,305 - INFO - ============================================================
+2025-07-09 17:20:58,305 - INFO - Mod: Test (5 fon)
+2025-07-09 17:20:58,305 - INFO - Tarih aralığı: Son 1 yıl
+2025-07-09 17:20:58,306 - INFO - ============================================================
+2025-07-09 17:20:58,306 - INFO - TefasProvider yapılandırılıyor...
+2025-07-09 17:20:58,325 - DEBUG - Starting new HTTPS connection (1): www.tefas.gov.tr:443
+2025-07-09 17:20:58,676 - DEBUG - https://www.tefas.gov.tr:443 "GET / HTTP/1.1" 200 None
+2025-07-09 17:20:58,713 - INFO - Session başarıyla başlatıldı
+2025-07-09 17:20:58,713 - INFO - Fon listesi alınıyor...
+2025-07-09 17:20:58,713 - INFO - Fetching fresh fund list from Takasbank
+2025-07-09 17:20:58,714 - DEBUG - Starting new HTTPS connection (1): www.takasbank.com.tr:443
+2025-07-09 17:21:09,841 - ERROR - Error fetching Takasbank fund list: HTTPSConnectionPool(host='www.takasbank.com.tr', port=443): Max retries exceeded with url: /plugins/ExcelExportTefasFundsTradingInvestmentPlatform?language=tr (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000286E9BE0F50>: Failed to resolve 'www.takasbank.com.tr' ([Errno 11001] getaddrinfo failed)"))
+2025-07-09 17:21:09,842 - ERROR - Fon listesi alma hatası: Fon listesi alınamadı
+2025-07-09 17:21:09,842 - ERROR - Genel hata: Fon listesi alınamadı
+2025-07-09 17:21:09,842 - ERROR - [ERROR] Beklenmedik hata: Fon listesi alınamadı
+2025-07-09 17:21:53,192 - INFO - ============================================================
+2025-07-09 17:21:53,192 - INFO - TEFAS Fon Verisi İndirme Script'i
+2025-07-09 17:21:53,192 - INFO - ============================================================
+2025-07-09 17:21:53,192 - INFO - Mod: Test (5 fon)
+2025-07-09 17:21:53,193 - INFO - Tarih aralığı: Son 1 yıl
+2025-07-09 17:21:53,193 - INFO - ============================================================
+2025-07-09 17:21:53,193 - INFO - TefasProvider yapılandırılıyor...
+2025-07-09 17:21:53,212 - DEBUG - Starting new HTTPS connection (1): www.tefas.gov.tr:443
+2025-07-09 17:21:53,539 - DEBUG - https://www.tefas.gov.tr:443 "GET / HTTP/1.1" 200 None
+2025-07-09 17:21:53,576 - INFO - Session başarıyla başlatıldı
+2025-07-09 17:21:53,577 - INFO - Fon listesi alınıyor...
+2025-07-09 17:21:53,577 - INFO - Fetching fresh fund list from Takasbank
+2025-07-09 17:21:53,577 - DEBUG - Starting new HTTPS connection (1): www.takasbank.com.tr:443
+2025-07-09 17:21:54,184 - DEBUG - https://www.takasbank.com.tr:443 "GET /plugins/ExcelExportTefasFundsTradingInvestmentPlatform?language=tr HTTP/1.1" 307 0
+2025-07-09 17:21:54,542 - DEBUG - https://www.takasbank.com.tr:443 "GET /plugins/ExcelExportTefasFundsTradingInvestmentPlatform?language=tr HTTP/1.1" 200 None
+2025-07-09 17:21:54,726 - INFO - Takasbank Excel columns: ['Fon Adı', 'Fon Kodu']
+2025-07-09 17:21:54,752 - INFO - Successfully loaded 849 funds from Takasbank
+2025-07-09 17:21:54,752 - INFO - Toplam 849 fon bulundu
+2025-07-09 17:21:54,789 - DEBUG - https://www.tefas.gov.tr:443 "POST /api/DB/BindHistoryInfo HTTP/1.1" 200 None
+2025-07-09 17:21:54,789 - INFO - [SELECTED] TJF - Veri mevcut
+2025-07-09 17:21:55,325 - DEBUG - https://www.tefas.gov.tr:443 "POST /api/DB/BindHistoryInfo HTTP/1.1" 200 None
+2025-07-09 17:21:55,326 - INFO - [SELECTED] RBP - Veri mevcut
+2025-07-09 17:21:55,863 - DEBUG - https://www.tefas.gov.tr:443 "POST /api/DB/BindHistoryInfo HTTP/1.1" 200 None
+2025-07-09 17:21:55,864 - INFO - [SELECTED] HGV - Veri mevcut
+2025-07-09 17:21:56,365 - INFO - Test modu: 3 fon seçildi: TJF, RBP, HGV
+2025-07-09 17:21:56,365 - INFO - [START] 3 fon için veri indirme başlıyor...
+2025-07-09 17:21:56,365 - INFO - Hedef dosya: data\tefas_test_data.parquet
+2025-07-09 17:21:56,365 - INFO - [1/3] İşleniyor: TJF
+2025-07-09 17:21:56,365 - INFO - [FETCH] TJF (TEB PORTFÖY SÜRDÜRÜLEBİLİRLİK FON SEPETİ FONU) verisi alınıyor...
+2025-07-09 17:21:56,404 - DEBUG - https://www.tefas.gov.tr:443 "POST /api/DB/BindHistoryInfo HTTP/1.1" 200 None
+2025-07-09 17:21:56,405 - DEBUG - TJF: 2024-07-09 - 2024-10-07 = 63 kayıt
+2025-07-09 17:21:58,444 - DEBUG - https://www.tefas.gov.tr:443 "POST /api/DB/BindHistoryInfo HTTP/1.1" 200 None
+2025-07-09 17:21:58,446 - DEBUG - TJF: 2024-10-08 - 2025-01-06 = 63 kayıt
+2025-07-09 17:22:00,488 - DEBUG - https://www.tefas.gov.tr:443 "POST /api/DB/BindHistoryInfo HTTP/1.1" 200 None
+2025-07-09 17:22:00,490 - DEBUG - TJF: 2025-01-07 - 2025-04-07 = 63 kayıt
+2025-07-09 17:22:02,526 - DEBUG - https://www.tefas.gov.tr:443 "POST /api/DB/BindHistoryInfo HTTP/1.1" 200 None
+2025-07-09 17:22:02,529 - DEBUG - TJF: 2025-04-08 - 2025-07-07 = 60 kayıt
+2025-07-09 17:22:04,566 - DEBUG - https://www.tefas.gov.tr:443 "POST /api/DB/BindHistoryInfo HTTP/1.1" 200 None
+2025-07-09 17:22:04,566 - DEBUG - TJF: 2025-07-08 - 2025-07-09 = 2 kayıt
+2025-07-09 17:22:06,566 - INFO - [OK] TJF: 251 toplam kayıt alındı
+2025-07-09 17:22:06,567 - INFO - [INFO] TJF kategori bilgisi alınıyor...
+2025-07-09 17:22:06,588 - DEBUG - https://www.tefas.gov.tr:443 "POST /api/DB/GetAllFundAnalyzeData HTTP/1.1" 200 245
+2025-07-09 17:22:06,588 - ERROR - Error getting fund detail (alternative) for TJF: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:22:06,589 - DEBUG - Kategori tahmin ediliyor: TEB PORTFÖY SÜRDÜRÜLEBİLİRLİK FON SEPETİ FONU -> teb portfoy surdurulebilirlik fon sepeti fonu
+2025-07-09 17:22:06,589 - DEBUG - Hicbir kategori eslesmedi
+2025-07-09 17:22:06,589 - WARNING - TJF: Kategori tahmin edilemedi
+2025-07-09 17:22:06,589 - INFO - [OK] TJF başarılı
+2025-07-09 17:22:06,589 - INFO - [2/3] İşleniyor: RBP
+2025-07-09 17:22:06,589 - INFO - [FETCH] RBP (RE-PIE PORTFÖY BİRİNCİ PARA PİYASASI (TL) FONU) verisi alınıyor...
+2025-07-09 17:22:06,590 - DEBUG - Resetting dropped connection: www.tefas.gov.tr
+2025-07-09 17:22:06,927 - DEBUG - https://www.tefas.gov.tr:443 "POST /api/DB/BindHistoryInfo HTTP/1.1" 200 245
+2025-07-09 17:22:06,928 - ERROR - Error getting performance for RBP: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:22:06,928 - WARNING - RBP: 2024-07-09 - 2024-10-07 = veri yok
+2025-07-09 17:22:08,929 - DEBUG - Resetting dropped connection: www.tefas.gov.tr
+2025-07-09 17:22:09,247 - DEBUG - https://www.tefas.gov.tr:443 "POST /api/DB/BindHistoryInfo HTTP/1.1" 200 245
+2025-07-09 17:22:09,248 - ERROR - Error getting performance for RBP: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:22:09,248 - WARNING - RBP: 2024-10-08 - 2025-01-06 = veri yok
+2025-07-09 17:22:11,249 - DEBUG - Resetting dropped connection: www.tefas.gov.tr
+2025-07-09 17:22:11,558 - DEBUG - https://www.tefas.gov.tr:443 "POST /api/DB/BindHistoryInfo HTTP/1.1" 200 245
+2025-07-09 17:22:11,559 - ERROR - Error getting performance for RBP: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:22:11,559 - WARNING - RBP: 2025-01-07 - 2025-04-07 = veri yok
+2025-07-09 17:22:13,561 - DEBUG - Resetting dropped connection: www.tefas.gov.tr
+2025-07-09 17:22:13,884 - DEBUG - https://www.tefas.gov.tr:443 "POST /api/DB/BindHistoryInfo HTTP/1.1" 200 245
+2025-07-09 17:22:13,884 - ERROR - Error getting performance for RBP: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:22:13,885 - WARNING - RBP: 2025-04-08 - 2025-07-07 = veri yok
+2025-07-09 17:22:15,886 - DEBUG - Resetting dropped connection: www.tefas.gov.tr
+2025-07-09 17:22:16,193 - DEBUG - https://www.tefas.gov.tr:443 "POST /api/DB/BindHistoryInfo HTTP/1.1" 200 245
+2025-07-09 17:22:16,193 - ERROR - Error getting performance for RBP: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:22:16,193 - WARNING - RBP: 2025-07-08 - 2025-07-09 = veri yok
+2025-07-09 17:22:18,194 - INFO - [OK] RBP: 0 toplam kayıt alındı
+2025-07-09 17:22:18,194 - WARNING - [FAIL] RBP veri alınamadı
+2025-07-09 17:22:18,194 - INFO - [3/3] İşleniyor: HGV
+2025-07-09 17:22:18,194 - INFO - [FETCH] HGV (HEDEF PORTFÖY BİRİNCİ SERBEST FON) verisi alınıyor...
+2025-07-09 17:22:18,195 - DEBUG - Resetting dropped connection: www.tefas.gov.tr
+2025-07-09 17:22:18,456 - ERROR - Error getting performance for HGV: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 17:22:18,457 - WARNING - HGV: 2024-07-09 - 2024-10-07 = veri yok
+2025-07-09 17:22:20,458 - DEBUG - Starting new HTTPS connection (2): www.tefas.gov.tr:443
+2025-07-09 17:22:20,722 - ERROR - Error getting performance for HGV: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 17:22:20,722 - WARNING - HGV: 2024-10-08 - 2025-01-06 = veri yok
+2025-07-09 17:22:22,723 - DEBUG - Starting new HTTPS connection (3): www.tefas.gov.tr:443
+2025-07-09 17:22:22,983 - ERROR - Error getting performance for HGV: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 17:22:22,983 - WARNING - HGV: 2025-01-07 - 2025-04-07 = veri yok
+2025-07-09 17:22:24,984 - DEBUG - Starting new HTTPS connection (4): www.tefas.gov.tr:443
+2025-07-09 17:22:25,381 - DEBUG - https://www.tefas.gov.tr:443 "POST /api/DB/BindHistoryInfo HTTP/1.1" 200 245
+2025-07-09 17:22:25,382 - ERROR - Error getting performance for HGV: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:22:25,382 - WARNING - HGV: 2025-04-08 - 2025-07-07 = veri yok
+2025-07-09 17:22:27,383 - DEBUG - Resetting dropped connection: www.tefas.gov.tr
+2025-07-09 17:22:27,717 - DEBUG - https://www.tefas.gov.tr:443 "POST /api/DB/BindHistoryInfo HTTP/1.1" 200 245
+2025-07-09 17:22:27,718 - ERROR - Error getting performance for HGV: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:22:27,718 - WARNING - HGV: 2025-07-08 - 2025-07-09 = veri yok
+2025-07-09 17:22:29,718 - INFO - [OK] HGV: 0 toplam kayıt alındı
+2025-07-09 17:22:29,718 - WARNING - [FAIL] HGV veri alınamadı
+2025-07-09 17:22:29,718 - INFO - [SAVE] 251 kayıt parquet dosyasına yazılıyor...
+2025-07-09 17:22:29,720 - INFO - borsa_bulten_fiyat sütunu kaldırıldı
+2025-07-09 17:22:29,730 - INFO - [SUCCESS] İNDİRME TAMAMLANDI!
+2025-07-09 17:22:29,730 - INFO - [FILE] Dosya: data\tefas_test_data.parquet
+2025-07-09 17:22:29,730 - INFO - [STATS] Kayıt sayısı: 251
+2025-07-09 17:22:29,731 - INFO - [FUNDS] Fon sayısı: 1
+2025-07-09 17:22:29,731 - INFO - [DATE] Tarih aralığı: 2024-07-09 - 2025-07-09
+2025-07-09 17:22:29,731 - INFO - [OK] Başarılı fonlar: 1
+2025-07-09 17:22:29,731 - INFO - [FAIL] Başarısız fonlar: 2
+2025-07-09 17:22:29,731 - INFO - [CATEGORIES] Fon kategorileri:
+2025-07-09 17:22:29,731 - WARNING - Başarısız fonlar: RBP, HGV
+2025-07-09 17:29:21,998 - INFO - ============================================================
+2025-07-09 17:29:21,998 - INFO - TEFAS Fon Verisi İndirme Script'i
+2025-07-09 17:29:21,998 - INFO - ============================================================
+2025-07-09 17:29:21,998 - INFO - Mod: Test (5 fon)
+2025-07-09 17:29:21,998 - INFO - Tarih aralığı: Son 1 yıl
+2025-07-09 17:29:21,999 - INFO - ============================================================
+2025-07-09 17:29:21,999 - INFO - TefasProvider yapılandırılıyor...
+2025-07-09 17:29:22,280 - ERROR - Session başlatma hatası: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 17:29:22,280 - INFO - Fon listesi alınıyor...
+2025-07-09 17:29:22,281 - INFO - Fetching fresh fund list from Takasbank
+2025-07-09 17:29:23,336 - INFO - Takasbank Excel columns: ['Fon Adı', 'Fon Kodu']
+2025-07-09 17:29:23,364 - INFO - Successfully loaded 849 funds from Takasbank
+2025-07-09 17:29:23,364 - INFO - Toplam 849 fon bulundu
+2025-07-09 17:29:23,364 - INFO - [RANDOM] BST - Rastgele seçildi
+2025-07-09 17:29:23,364 - INFO - [RANDOM] KIB - Rastgele seçildi
+2025-07-09 17:29:23,364 - INFO - [RANDOM] PIP - Rastgele seçildi
+2025-07-09 17:29:23,364 - INFO - Test modu: 3 fon seçildi: BST, KIB, PIP
+2025-07-09 17:29:23,364 - INFO - [START] 3 fon için veri indirme başlıyor...
+2025-07-09 17:29:23,365 - INFO - Hedef dosya: data\tefas_test_data.parquet
+2025-07-09 17:29:23,365 - INFO - [1/3] İşleniyor: BST
+2025-07-09 17:29:23,365 - INFO - [FETCH] BST (PARDUS PORTFÖY BANKACILIK SEKTÖRÜ DIŞI ŞİRKETLER HİSSE SENEDİ SERBEST (TL) FON (HİSSE SENEDİ YOĞUN FON)) verisi alınıyor...
+2025-07-09 17:29:23,625 - ERROR - Error getting performance for BST: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 17:29:23,625 - WARNING - BST: API hatası: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 17:29:23,625 - WARNING - BST: Deneme 1/3 başarısız: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 17:29:23,625 - INFO - 2 saniye bekleniyor...
+2025-07-09 17:29:37,257 - INFO - [OK] BST: 251 toplam kayıt alındı
+2025-07-09 17:29:37,257 - INFO - [INFO] BST kategori bilgisi alınıyor...
+2025-07-09 17:29:37,279 - ERROR - Error getting fund detail (alternative) for BST: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:29:37,279 - INFO - BST: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-09 17:29:37,279 - INFO - [CATEGORY] BST: Hisse Senedi Şemsiye Fonu
+2025-07-09 17:29:37,279 - INFO - [OK] BST başarılı
+2025-07-09 17:29:37,279 - INFO - [2/3] İşleniyor: KIB
+2025-07-09 17:29:37,279 - INFO - [FETCH] KIB (TRIVE PORTFÖY ROBOTİK TEKNOLOJİLERİ DEĞİŞKEN FON) verisi alınıyor...
+2025-07-09 17:29:37,540 - ERROR - Error getting performance for KIB: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 17:29:37,540 - WARNING - KIB: API hatası: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 17:29:37,541 - WARNING - KIB: Deneme 1/3 başarısız: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 17:29:37,541 - INFO - 2 saniye bekleniyor...
+2025-07-09 17:29:41,163 - ERROR - Error getting performance for KIB: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:29:41,163 - WARNING - KIB: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:29:41,163 - WARNING - KIB: JSON parse hatası, session yenileniyor...
+2025-07-09 17:29:44,164 - INFO - 3 saniye bekleniyor...
+2025-07-09 17:29:48,787 - ERROR - Error getting performance for KIB: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:29:48,788 - WARNING - KIB: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:29:48,788 - WARNING - KIB: JSON parse hatası, session yenileniyor...
+2025-07-09 17:29:53,788 - ERROR - KIB: Tüm denemeler başarısız
+2025-07-09 17:29:56,116 - ERROR - Error getting performance for KIB: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:29:56,117 - WARNING - KIB: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:29:56,117 - WARNING - KIB: JSON parse hatası, session yenileniyor...
+2025-07-09 17:29:58,117 - INFO - 2 saniye bekleniyor...
+2025-07-09 17:30:01,772 - ERROR - Error getting performance for KIB: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 17:30:01,772 - WARNING - KIB: API hatası: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 17:30:01,772 - WARNING - KIB: Deneme 2/3 başarısız: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 17:30:01,772 - INFO - 3 saniye bekleniyor...
+2025-07-09 17:30:06,459 - ERROR - Error getting performance for KIB: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:30:06,459 - WARNING - KIB: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:30:06,459 - WARNING - KIB: JSON parse hatası, session yenileniyor...
+2025-07-09 17:30:11,460 - ERROR - KIB: Tüm denemeler başarısız
+2025-07-09 17:30:13,773 - ERROR - Error getting performance for KIB: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:30:13,773 - WARNING - KIB: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:30:13,773 - WARNING - KIB: JSON parse hatası, session yenileniyor...
+2025-07-09 17:30:15,774 - INFO - 2 saniye bekleniyor...
+2025-07-09 17:30:19,423 - ERROR - Error getting performance for KIB: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:30:19,423 - WARNING - KIB: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:30:19,423 - WARNING - KIB: JSON parse hatası, session yenileniyor...
+2025-07-09 17:30:22,424 - INFO - 3 saniye bekleniyor...
+2025-07-09 17:30:27,061 - ERROR - Error getting performance for KIB: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:30:27,061 - WARNING - KIB: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:30:27,061 - WARNING - KIB: JSON parse hatası, session yenileniyor...
+2025-07-09 17:30:32,061 - ERROR - KIB: Tüm denemeler başarısız
+2025-07-09 17:30:34,375 - ERROR - Error getting performance for KIB: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:30:34,375 - WARNING - KIB: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:30:34,375 - WARNING - KIB: JSON parse hatası, session yenileniyor...
+2025-07-09 17:30:36,376 - INFO - 2 saniye bekleniyor...
+2025-07-09 17:30:38,640 - WARNING - KIB: Deneme 2/3 başarısız: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 17:30:38,640 - INFO - 3 saniye bekleniyor...
+2025-07-09 17:30:43,280 - ERROR - Error getting performance for KIB: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:30:43,280 - WARNING - KIB: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:30:43,280 - WARNING - KIB: JSON parse hatası, session yenileniyor...
+2025-07-09 17:30:48,281 - ERROR - KIB: Tüm denemeler başarısız
+2025-07-09 17:30:48,826 - INFO - [STOP] Kullanıcı tarafından durduruldu
+2025-07-09 17:32:38,267 - INFO - ============================================================
+2025-07-09 17:32:38,267 - INFO - TEFAS Fon Verisi İndirme Script'i
+2025-07-09 17:32:38,267 - INFO - ============================================================
+2025-07-09 17:32:38,267 - INFO - Mod: Test (5 fon)
+2025-07-09 17:32:38,267 - INFO - Tarih aralığı: Son 1 yıl
+2025-07-09 17:32:38,267 - INFO - ============================================================
+2025-07-09 17:32:38,267 - INFO - TefasProvider yapılandırılıyor...
+2025-07-09 17:32:38,696 - INFO - Session başarıyla başlatıldı
+2025-07-09 17:32:38,696 - INFO - Fon listesi alınıyor...
+2025-07-09 17:32:38,697 - INFO - Fetching fresh fund list from Takasbank
+2025-07-09 17:32:39,648 - INFO - Takasbank Excel columns: ['Fon Adı', 'Fon Kodu']
+2025-07-09 17:32:39,674 - INFO - Successfully loaded 849 funds from Takasbank
+2025-07-09 17:32:39,674 - INFO - Toplam 849 fon bulundu
+2025-07-09 17:32:39,674 - INFO - [RANDOM] DLD - Rastgele seçildi
+2025-07-09 17:32:39,675 - INFO - [RANDOM] OPI - Rastgele seçildi
+2025-07-09 17:32:39,675 - INFO - [RANDOM] RCV - Rastgele seçildi
+2025-07-09 17:32:39,675 - INFO - Test modu: 3 fon seçildi: DLD, OPI, RCV
+2025-07-09 17:32:39,675 - INFO - [START] 3 fon için veri indirme başlıyor...
+2025-07-09 17:32:39,675 - INFO - Hedef dosya: data\tefas_test_data.parquet
+2025-07-09 17:32:39,675 - INFO - [1/3] İşleniyor: DLD
+2025-07-09 17:32:39,675 - INFO - [FETCH] DLD (DENİZ PORTFÖY SÜRDÜRÜLEBİLİRLİK HİSSE SENEDİ FONU (HİSSE SENEDİ YOĞUN FON)) verisi alınıyor...
+2025-07-09 17:32:58,317 - INFO - [OK] DLD: 251 toplam kayıt alındı
+2025-07-09 17:32:58,317 - INFO - [INFO] DLD kategori bilgisi alınıyor...
+2025-07-09 17:32:58,338 - ERROR - Error getting fund detail (alternative) for DLD: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:32:58,339 - INFO - DLD: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-09 17:32:58,339 - INFO - [CATEGORY] DLD: Hisse Senedi Şemsiye Fonu
+2025-07-09 17:32:58,339 - INFO - [OK] DLD başarılı
+2025-07-09 17:32:58,339 - INFO - [2/3] İşleniyor: OPI
+2025-07-09 17:32:58,339 - INFO - [FETCH] OPI (OSMANLI PORTFÖY İKİNCİ HİSSE SENEDİ FONU(HİSSE SENEDİ YOĞUN FON)) verisi alınıyor...
+2025-07-09 17:32:58,647 - ERROR - Error getting performance for OPI: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:32:58,648 - WARNING - OPI: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:32:58,648 - WARNING - OPI: JSON parse hatası, session yenileniyor...
+2025-07-09 17:33:00,648 - INFO - 2 saniye bekleniyor...
+2025-07-09 17:33:04,257 - ERROR - Error getting performance for OPI: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:33:04,257 - WARNING - OPI: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:33:04,258 - WARNING - OPI: JSON parse hatası, session yenileniyor...
+2025-07-09 17:33:07,258 - INFO - 3 saniye bekleniyor...
+2025-07-09 17:33:11,856 - ERROR - Error getting performance for OPI: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:33:11,856 - WARNING - OPI: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:33:11,856 - WARNING - OPI: JSON parse hatası, session yenileniyor...
+2025-07-09 17:33:16,857 - ERROR - OPI: Tüm denemeler başarısız
+2025-07-09 17:33:20,165 - ERROR - Error getting performance for OPI: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:33:20,165 - WARNING - OPI: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:33:20,165 - WARNING - OPI: JSON parse hatası, session yenileniyor...
+2025-07-09 17:33:22,165 - INFO - 2 saniye bekleniyor...
+2025-07-09 17:33:25,779 - ERROR - Error getting performance for OPI: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:33:25,779 - WARNING - OPI: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:33:25,779 - WARNING - OPI: JSON parse hatası, session yenileniyor...
+2025-07-09 17:33:28,780 - INFO - 3 saniye bekleniyor...
+2025-07-09 17:33:33,402 - ERROR - Error getting performance for OPI: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:33:33,402 - WARNING - OPI: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:33:33,402 - WARNING - OPI: JSON parse hatası, session yenileniyor...
+2025-07-09 17:33:38,403 - ERROR - OPI: Tüm denemeler başarısız
+2025-07-09 17:33:41,729 - ERROR - Error getting performance for OPI: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:33:41,729 - WARNING - OPI: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:33:41,729 - WARNING - OPI: JSON parse hatası, session yenileniyor...
+2025-07-09 17:33:43,729 - INFO - 2 saniye bekleniyor...
+2025-07-09 17:33:47,341 - ERROR - Error getting performance for OPI: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:33:47,342 - WARNING - OPI: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:33:47,342 - WARNING - OPI: JSON parse hatası, session yenileniyor...
+2025-07-09 17:33:50,342 - INFO - 3 saniye bekleniyor...
+2025-07-09 17:33:53,603 - WARNING - OPI: Deneme 3/3 başarısız: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 17:33:53,603 - ERROR - OPI: Tüm denemeler başarısız
+2025-07-09 17:33:56,925 - ERROR - Error getting performance for OPI: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:33:56,925 - WARNING - OPI: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:33:56,925 - WARNING - OPI: JSON parse hatası, session yenileniyor...
+2025-07-09 17:33:58,926 - INFO - 2 saniye bekleniyor...
+2025-07-09 17:34:02,558 - ERROR - Error getting performance for OPI: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:34:02,559 - WARNING - OPI: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:34:02,559 - WARNING - OPI: JSON parse hatası, session yenileniyor...
+2025-07-09 17:34:05,559 - INFO - 3 saniye bekleniyor...
+2025-07-09 17:34:10,170 - ERROR - Error getting performance for OPI: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:34:10,170 - WARNING - OPI: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:34:10,170 - WARNING - OPI: JSON parse hatası, session yenileniyor...
+2025-07-09 17:34:15,171 - ERROR - OPI: Tüm denemeler başarısız
+2025-07-09 17:34:18,474 - ERROR - Error getting performance for OPI: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:34:18,474 - WARNING - OPI: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:34:18,474 - WARNING - OPI: JSON parse hatası, session yenileniyor...
+2025-07-09 17:34:20,474 - INFO - 2 saniye bekleniyor...
+2025-07-09 17:34:22,736 - INFO - [STOP] Kullanıcı tarafından durduruldu
+2025-07-09 17:39:16,300 - INFO - ============================================================
+2025-07-09 17:39:16,300 - INFO - TEFAS Fon Verisi İndirme Script'i
+2025-07-09 17:39:16,300 - INFO - ============================================================
+2025-07-09 17:39:16,300 - INFO - Mod: Test (5 fon)
+2025-07-09 17:39:16,300 - INFO - Tarih aralığı: Son 1 yıl
+2025-07-09 17:39:16,300 - INFO - ============================================================
+2025-07-09 17:39:16,301 - INFO - TefasProvider yapılandırılıyor...
+2025-07-09 17:39:16,689 - INFO - Session başarıyla başlatıldı
+2025-07-09 17:39:16,689 - INFO - Fon listesi alınıyor...
+2025-07-09 17:39:16,689 - INFO - Fetching fresh fund list from Takasbank
+2025-07-09 17:39:17,713 - INFO - Takasbank Excel columns: ['Fon Adı', 'Fon Kodu']
+2025-07-09 17:39:17,740 - INFO - Successfully loaded 849 funds from Takasbank
+2025-07-09 17:39:17,740 - INFO - Toplam 849 fon bulundu
+2025-07-09 17:39:17,741 - INFO - [RANDOM] AFV - Rastgele seçildi
+2025-07-09 17:39:17,741 - INFO - [RANDOM] AK3 - Rastgele seçildi
+2025-07-09 17:39:17,741 - INFO - Test modu: 2 fon seçildi: AFV, AK3
+2025-07-09 17:39:17,741 - INFO - [START] 2 fon için veri indirme başlıyor...
+2025-07-09 17:39:17,741 - INFO - Hedef dosya: data\tefas_test_data.parquet
+2025-07-09 17:39:17,741 - INFO - [1/2] İşleniyor: AFV
+2025-07-09 17:39:17,741 - INFO - [FETCH] AFV (AK PORTFÖY  AVRUPA YABANCI HİSSE SENEDİ FONU) verisi alınıyor...
+2025-07-09 17:39:35,970 - INFO - [OK] AFV: 251 toplam kayıt alındı
+2025-07-09 17:39:35,970 - INFO - [INFO] AFV kategori bilgisi alınıyor...
+2025-07-09 17:39:35,992 - ERROR - Error getting fund detail (alternative) for AFV: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:39:35,992 - INFO - AFV: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-09 17:39:35,992 - INFO - [CATEGORY] AFV: Hisse Senedi Şemsiye Fonu
+2025-07-09 17:39:35,992 - INFO - [OK] AFV başarılı
+2025-07-09 17:39:35,993 - INFO - [2/2] İşleniyor: AK3
+2025-07-09 17:39:35,993 - INFO - [FETCH] AK3 (AK PORTFÖY HİSSE SENEDİ (TL) FONU (HİSSE SENEDİ YOĞUN FON)) verisi alınıyor...
+2025-07-09 17:39:36,309 - ERROR - Error getting performance for AK3: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:39:36,309 - WARNING - AK3: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:39:36,310 - WARNING - AK3: JSON parse hatası, session yenileniyor...
+2025-07-09 17:39:38,310 - INFO - 2 saniye bekleniyor...
+2025-07-09 17:39:41,928 - ERROR - Error getting performance for AK3: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:39:41,928 - WARNING - AK3: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:39:41,928 - WARNING - AK3: JSON parse hatası, session yenileniyor...
+2025-07-09 17:39:44,928 - ERROR - AK3: Tüm denemeler başarısız
+2025-07-09 17:39:48,230 - ERROR - Error getting performance for AK3: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:39:48,230 - WARNING - AK3: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:39:48,230 - WARNING - AK3: JSON parse hatası, session yenileniyor...
+2025-07-09 17:39:50,230 - INFO - 2 saniye bekleniyor...
+2025-07-09 17:39:52,491 - WARNING - AK3: Deneme 2/2 başarısız: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 17:39:52,491 - ERROR - AK3: Tüm denemeler başarısız
+2025-07-09 17:39:55,805 - ERROR - Error getting performance for AK3: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:39:55,805 - WARNING - AK3: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:39:55,805 - WARNING - AK3: JSON parse hatası, session yenileniyor...
+2025-07-09 17:39:57,806 - INFO - 2 saniye bekleniyor...
+2025-07-09 17:40:01,436 - ERROR - Error getting performance for AK3: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:40:01,437 - WARNING - AK3: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:40:01,437 - WARNING - AK3: JSON parse hatası, session yenileniyor...
+2025-07-09 17:40:04,437 - ERROR - AK3: Tüm denemeler başarısız
+2025-07-09 17:40:07,739 - ERROR - Error getting performance for AK3: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:40:07,739 - WARNING - AK3: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:40:07,739 - WARNING - AK3: JSON parse hatası, session yenileniyor...
+2025-07-09 17:40:09,740 - INFO - 2 saniye bekleniyor...
+2025-07-09 17:40:13,361 - ERROR - Error getting performance for AK3: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:40:13,361 - WARNING - AK3: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:40:13,361 - WARNING - AK3: JSON parse hatası, session yenileniyor...
+2025-07-09 17:40:16,361 - ERROR - AK3: Tüm denemeler başarısız
+2025-07-09 17:40:19,674 - ERROR - Error getting performance for AK3: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:40:19,674 - WARNING - AK3: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:40:19,674 - WARNING - AK3: JSON parse hatası, session yenileniyor...
+2025-07-09 17:40:19,741 - INFO - [STOP] Kullanıcı tarafından durduruldu
+2025-07-09 17:44:18,652 - INFO - ============================================================
+2025-07-09 17:44:18,652 - INFO - TEFAS Fon Verisi İndirme Script'i
+2025-07-09 17:44:18,652 - INFO - ============================================================
+2025-07-09 17:44:18,652 - INFO - Mod: Test (5 fon)
+2025-07-09 17:44:18,652 - INFO - Tarih aralığı: Son 1 yıl
+2025-07-09 17:44:18,652 - INFO - ============================================================
+2025-07-09 17:44:18,652 - INFO - TefasProvider yapılandırılıyor...
+2025-07-09 17:44:18,954 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 17:44:21,384 - INFO - Session başarıyla başlatıldı
+2025-07-09 17:44:21,384 - INFO - Fon listesi alınıyor...
+2025-07-09 17:44:21,384 - INFO - Fetching fresh fund list from Takasbank
+2025-07-09 17:44:32,508 - INFO - [STOP] Kullanıcı tarafından durduruldu
+2025-07-09 17:44:34,613 - INFO - ============================================================
+2025-07-09 17:44:34,613 - INFO - TEFAS Fon Verisi İndirme Script'i
+2025-07-09 17:44:34,613 - INFO - ============================================================
+2025-07-09 17:44:34,613 - INFO - Mod: Test (5 fon)
+2025-07-09 17:44:34,614 - INFO - Tarih aralığı: Son 1 yıl
+2025-07-09 17:44:34,614 - INFO - ============================================================
+2025-07-09 17:44:34,614 - INFO - TefasProvider yapılandırılıyor...
+2025-07-09 17:44:35,038 - INFO - Session başarıyla başlatıldı
+2025-07-09 17:44:35,039 - INFO - Fon listesi alınıyor...
+2025-07-09 17:44:35,039 - INFO - Fetching fresh fund list from Takasbank
+2025-07-09 17:44:36,145 - INFO - Takasbank Excel columns: ['Fon Adı', 'Fon Kodu']
+2025-07-09 17:44:36,176 - INFO - Successfully loaded 849 funds from Takasbank
+2025-07-09 17:44:36,176 - INFO - Toplam 849 fon bulundu
+2025-07-09 17:44:36,176 - INFO - [RANDOM] YBR - Rastgele seçildi
+2025-07-09 17:44:36,176 - INFO - [RANDOM] DBZ - Rastgele seçildi
+2025-07-09 17:44:36,176 - INFO - Test modu: 2 fon seçildi: YBR, DBZ
+2025-07-09 17:44:36,176 - INFO - [START] 2 fon için veri indirme başlıyor...
+2025-07-09 17:44:36,176 - INFO - Hedef dosya: data\tefas_test_data.parquet
+2025-07-09 17:44:36,177 - INFO - [1/2] İşleniyor: YBR
+2025-07-09 17:44:36,177 - INFO - [FETCH] YBR (İŞ PORTFÖY YİRMİBİRİNCİ SERBEST (DÖVİZ) FON) verisi alınıyor...
+2025-07-09 17:44:36,209 - WARNING - YBR: API hatası: No historical data found for this fund
+2025-07-09 17:44:36,210 - WARNING - YBR: 2024-07-09 - 2024-09-07 = veri yok
+2025-07-09 17:44:36,210 - WARNING - YBR: Ardışık 1 chunk başarısız
+2025-07-09 17:44:39,243 - WARNING - YBR: API hatası: No historical data found for this fund
+2025-07-09 17:44:39,244 - WARNING - YBR: 2024-09-08 - 2024-11-07 = veri yok
+2025-07-09 17:44:39,244 - WARNING - YBR: Ardışık 2 chunk başarısız
+2025-07-09 17:44:42,277 - WARNING - YBR: API hatası: No historical data found for this fund
+2025-07-09 17:44:42,277 - WARNING - YBR: 2024-11-08 - 2025-01-07 = veri yok
+2025-07-09 17:44:42,277 - WARNING - YBR: Ardışık 3 chunk başarısız
+2025-07-09 17:44:42,277 - ERROR - YBR: 3 ardışık başarısızlık, fon atlanıyor
+2025-07-09 17:44:42,278 - INFO - [OK] YBR: 0 toplam kayıt alındı
+2025-07-09 17:44:42,278 - WARNING - [FAIL] YBR veri alınamadı
+2025-07-09 17:44:42,278 - INFO - [2/2] İşleniyor: DBZ
+2025-07-09 17:44:42,278 - INFO - [FETCH] DBZ (DENİZ PORTFÖY ÖZEL SEKTÖR BORÇLANMA ARAÇLARI FONU) verisi alınıyor...
+2025-07-09 17:45:00,526 - INFO - [OK] DBZ: 251 toplam kayıt alındı
+2025-07-09 17:45:00,526 - INFO - [INFO] DBZ kategori bilgisi alınıyor...
+2025-07-09 17:45:00,553 - ERROR - Error getting fund detail (alternative) for DBZ: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:45:00,553 - INFO - DBZ: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-09 17:45:00,553 - INFO - [CATEGORY] DBZ: Hisse Senedi Şemsiye Fonu
+2025-07-09 17:45:00,553 - INFO - [OK] DBZ başarılı
+2025-07-09 17:45:00,553 - INFO - [SAVE] 251 kayıt parquet dosyasına yazılıyor...
+2025-07-09 17:45:00,555 - INFO - borsa_bulten_fiyat sütunu kaldırıldı
+2025-07-09 17:45:00,567 - INFO - [SUCCESS] İNDİRME TAMAMLANDI!
+2025-07-09 17:45:00,567 - INFO - [FILE] Dosya: data\tefas_test_data.parquet
+2025-07-09 17:45:00,567 - INFO - [STATS] Kayıt sayısı: 251
+2025-07-09 17:45:00,567 - INFO - [FUNDS] Fon sayısı: 1
+2025-07-09 17:45:00,567 - INFO - [DATE] Tarih aralığı: 2024-07-09 - 2025-07-09
+2025-07-09 17:45:00,567 - INFO - [OK] Başarılı fonlar: 1
+2025-07-09 17:45:00,568 - INFO - [FAIL] Başarısız fonlar: 1
+2025-07-09 17:45:00,568 - INFO - [CATEGORIES] Fon kategorileri:
+2025-07-09 17:45:00,568 - INFO -   Hisse Senedi Şemsiye Fonu: 251 fon
+2025-07-09 17:45:00,568 - WARNING - Başarısız fonlar: YBR
+2025-07-09 17:56:45,447 - INFO - ============================================================
+2025-07-09 17:56:45,447 - INFO - TEFAS Fon Verisi İndirme Script'i
+2025-07-09 17:56:45,447 - INFO - ============================================================
+2025-07-09 17:56:45,448 - INFO - Mod: Test (5 fon)
+2025-07-09 17:56:45,448 - INFO - Tarih aralığı: Son 1 yıl
+2025-07-09 17:56:45,448 - INFO - ============================================================
+2025-07-09 17:56:45,448 - INFO - TefasProvider yapılandırılıyor...
+2025-07-09 17:56:45,866 - INFO - Session başarıyla başlatıldı
+2025-07-09 17:56:45,866 - INFO - Fon listesi alınıyor...
+2025-07-09 17:56:45,866 - INFO - Fetching fresh fund list from Takasbank
+2025-07-09 17:56:46,907 - INFO - Takasbank Excel columns: ['Fon Adı', 'Fon Kodu']
+2025-07-09 17:56:46,934 - INFO - Successfully loaded 849 funds from Takasbank
+2025-07-09 17:56:46,934 - INFO - Toplam 849 fon bulundu
+2025-07-09 17:56:46,934 - INFO - [RANDOM] PMP - Rastgele seçildi
+2025-07-09 17:56:46,934 - INFO - [RANDOM] GNH - Rastgele seçildi
+2025-07-09 17:56:46,934 - INFO - Test modu: 2 fon seçildi: PMP, GNH
+2025-07-09 17:56:46,935 - INFO - [START] 2 fon için veri indirme başlıyor...
+2025-07-09 17:56:46,935 - INFO - Hedef dosya: data\tefas_test_data.parquet
+2025-07-09 17:56:46,935 - INFO - [1/2] İşleniyor: PMP
+2025-07-09 17:56:46,935 - INFO - [FETCH] PMP (PARDUS PORTFÖY MODEL PORTFÖY HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)) verisi alınıyor...
+2025-07-09 17:56:46,975 - WARNING - PMP: API hatası: No historical data found for this fund
+2025-07-09 17:56:46,975 - WARNING - PMP: 2024-07-09 - 2024-09-07 = veri yok
+2025-07-09 17:56:46,975 - WARNING - PMP: Ardışık 1 chunk başarısız
+2025-07-09 17:56:50,009 - WARNING - PMP: API hatası: No historical data found for this fund
+2025-07-09 17:56:50,010 - WARNING - PMP: 2024-09-08 - 2024-11-07 = veri yok
+2025-07-09 17:56:50,010 - WARNING - PMP: Ardışık 2 chunk başarısız
+2025-07-09 17:56:53,042 - WARNING - PMP: API hatası: No historical data found for this fund
+2025-07-09 17:56:53,043 - WARNING - PMP: 2024-11-08 - 2025-01-07 = veri yok
+2025-07-09 17:56:53,043 - WARNING - PMP: Ardışık 3 chunk başarısız
+2025-07-09 17:56:53,043 - ERROR - PMP: 3 ardışık başarısızlık, durduruluyor
+2025-07-09 17:56:53,043 - INFO - PMP: Belirtilen tarih aralığında veri yok, tüm mevcut veri alınıyor...
+2025-07-09 17:56:53,100 - ERROR - Error getting performance for PMP: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:56:53,101 - WARNING - PMP: Tüm veri çekerken hata: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:56:53,101 - INFO - [OK] PMP: 0 toplam kayıt alındı
+2025-07-09 17:56:53,101 - WARNING - [FAIL] PMP veri alınamadı
+2025-07-09 17:56:53,101 - INFO - [2/2] İşleniyor: GNH
+2025-07-09 17:56:53,101 - INFO - [FETCH] GNH (GLOBAL MD PORTFÖY ALGORİTMİK MODEL HİSSE SENEDİ FONU (HİSSE SENEDİ YOĞUN FON)) verisi alınıyor...
+2025-07-09 17:56:53,432 - WARNING - GNH: API hatası: No historical data found for this fund
+2025-07-09 17:56:53,432 - WARNING - GNH: 2024-07-09 - 2024-09-07 = veri yok
+2025-07-09 17:56:53,432 - WARNING - GNH: Ardışık 1 chunk başarısız
+2025-07-09 17:56:56,467 - WARNING - GNH: API hatası: No historical data found for this fund
+2025-07-09 17:56:56,467 - WARNING - GNH: 2024-09-08 - 2024-11-07 = veri yok
+2025-07-09 17:56:56,467 - WARNING - GNH: Ardışık 2 chunk başarısız
+2025-07-09 17:56:59,501 - WARNING - GNH: API hatası: No historical data found for this fund
+2025-07-09 17:56:59,502 - WARNING - GNH: 2024-11-08 - 2025-01-07 = veri yok
+2025-07-09 17:56:59,502 - WARNING - GNH: Ardışık 3 chunk başarısız
+2025-07-09 17:56:59,502 - ERROR - GNH: 3 ardışık başarısızlık, durduruluyor
+2025-07-09 17:56:59,502 - INFO - GNH: Belirtilen tarih aralığında veri yok, tüm mevcut veri alınıyor...
+2025-07-09 17:56:59,539 - ERROR - Error getting performance for GNH: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:56:59,539 - WARNING - GNH: Tüm veri çekerken hata: Expecting value: line 1 column 1 (char 0)
+2025-07-09 17:56:59,539 - INFO - [OK] GNH: 0 toplam kayıt alındı
+2025-07-09 17:56:59,540 - WARNING - [FAIL] GNH veri alınamadı
+2025-07-09 17:56:59,540 - ERROR - [ERROR] Hiç veri alınamadı!
+2025-07-09 18:14:47,902 - INFO - ============================================================
+2025-07-09 18:14:47,903 - INFO - TEFAS Fon Verisi İndirme Script'i
+2025-07-09 18:14:47,903 - INFO - ============================================================
+2025-07-09 18:14:47,903 - INFO - Mod: Test (5 fon)
+2025-07-09 18:14:47,903 - INFO - Tarih aralığı: Son 1 yıl
+2025-07-09 18:14:47,903 - INFO - ============================================================
+2025-07-09 18:14:47,903 - INFO - TefasProvider yapılandırılıyor...
+2025-07-09 18:14:48,601 - INFO - Session başarıyla başlatıldı
+2025-07-09 18:14:48,602 - INFO - Fon listesi alınıyor...
+2025-07-09 18:14:48,602 - INFO - Fetching fresh fund list from Takasbank
+2025-07-09 18:14:49,540 - INFO - Takasbank Excel columns: ['Fon Adı', 'Fon Kodu']
+2025-07-09 18:14:49,567 - INFO - Successfully loaded 849 funds from Takasbank
+2025-07-09 18:14:49,567 - INFO - Toplam 849 fon bulundu
+2025-07-09 18:14:49,567 - INFO - [RANDOM] GTH - Rastgele seçildi
+2025-07-09 18:14:49,567 - INFO - [RANDOM] PMP - Rastgele seçildi
+2025-07-09 18:14:49,568 - INFO - Test modu: 2 fon seçildi: GTH, PMP
+2025-07-09 18:14:49,568 - INFO - [START] 2 fon için veri indirme başlıyor...
+2025-07-09 18:14:49,568 - INFO - Hedef dosya: data\tefas_test_data.parquet
+2025-07-09 18:14:49,568 - INFO - [1/2] İşleniyor: GTH
+2025-07-09 18:14:49,568 - INFO - [FETCH] GTH (GARANTİ PORTFÖY İHRACATÇI ŞİRKETLER HİSSE SENEDİ (TL) FONU (HİSSE SENEDİ YOĞUN FON)) verisi alınıyor...
+2025-07-09 18:14:49,600 - WARNING - GTH: API hatası: No historical data found for this fund
+2025-07-09 18:14:49,600 - WARNING - GTH: 2024-07-09 - 2024-09-07 = veri yok
+2025-07-09 18:14:49,600 - WARNING - GTH: Ardışık 1 chunk başarısız
+2025-07-09 18:14:52,634 - WARNING - GTH: API hatası: No historical data found for this fund
+2025-07-09 18:14:52,634 - WARNING - GTH: 2024-09-08 - 2024-11-07 = veri yok
+2025-07-09 18:14:52,634 - WARNING - GTH: Ardışık 2 chunk başarısız
+2025-07-09 18:14:55,667 - WARNING - GTH: API hatası: No historical data found for this fund
+2025-07-09 18:14:55,667 - WARNING - GTH: 2024-11-08 - 2025-01-07 = veri yok
+2025-07-09 18:14:55,667 - WARNING - GTH: Ardışık 3 chunk başarısız
+2025-07-09 18:14:55,668 - ERROR - GTH: 3 ardışık başarısızlık, durduruluyor
+2025-07-09 18:14:55,668 - INFO - GTH: Belirtilen tarih aralığında veri yok, tüm mevcut veri alınıyor...
+2025-07-09 18:14:55,668 - INFO - GTH: Fonun başlangıç tarihi aranıyor...
+2025-07-09 18:14:55,702 - INFO - GTH: 22 kayıt bulundu (2025-06-09 - 2025-07-09)
+2025-07-09 18:14:55,709 - INFO - GTH: En eski veri tarihi: 2025-06-10
+2025-07-09 18:14:58,746 - INFO - [OK] GTH: 22 toplam kayıt alındı
+2025-07-09 18:14:58,746 - INFO - [INFO] GTH kategori bilgisi alınıyor...
+2025-07-09 18:14:58,768 - ERROR - Error getting fund detail (alternative) for GTH: Expecting value: line 1 column 1 (char 0)
+2025-07-09 18:14:58,768 - INFO - GTH: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-09 18:14:58,768 - INFO - [CATEGORY] GTH: Hisse Senedi Şemsiye Fonu
+2025-07-09 18:14:58,769 - INFO - [OK] GTH başarılı
+2025-07-09 18:14:58,769 - INFO - [2/2] İşleniyor: PMP
+2025-07-09 18:14:58,769 - INFO - [FETCH] PMP (PARDUS PORTFÖY MODEL PORTFÖY HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)) verisi alınıyor...
+2025-07-09 18:14:59,119 - ERROR - Error getting performance for PMP: Expecting value: line 1 column 1 (char 0)
+2025-07-09 18:14:59,119 - WARNING - PMP: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 18:14:59,119 - WARNING - PMP: JSON parse hatası, session yenileniyor...
+2025-07-09 18:14:59,466 - INFO - 3 saniye bekleniyor...
+2025-07-09 18:15:04,114 - ERROR - Error getting performance for PMP: Expecting value: line 1 column 1 (char 0)
+2025-07-09 18:15:04,114 - WARNING - PMP: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 18:15:04,114 - WARNING - PMP: JSON parse hatası, session yenileniyor...
+2025-07-09 18:15:04,437 - ERROR - PMP: Tüm denemeler başarısız
+2025-07-09 18:15:04,438 - WARNING - PMP: Ardışık 1 chunk başarısız
+2025-07-09 18:15:07,740 - ERROR - Error getting performance for PMP: Expecting value: line 1 column 1 (char 0)
+2025-07-09 18:15:07,741 - WARNING - PMP: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 18:15:07,741 - WARNING - PMP: JSON parse hatası, session yenileniyor...
+2025-07-09 18:15:08,062 - ERROR - [ERROR] PMP işlem hatası: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 18:15:08,062 - INFO - [SAVE] 22 kayıt parquet dosyasına yazılıyor...
+2025-07-09 18:15:08,064 - INFO - borsa_bulten_fiyat sütunu kaldırıldı
+2025-07-09 18:15:08,077 - INFO - [SUCCESS] İNDİRME TAMAMLANDI!
+2025-07-09 18:15:08,077 - INFO - [FILE] Dosya: data\tefas_test_data.parquet
+2025-07-09 18:15:08,078 - INFO - [STATS] Kayıt sayısı: 22
+2025-07-09 18:15:08,078 - INFO - [FUNDS] Fon sayısı: 1
+2025-07-09 18:15:08,078 - INFO - [DATE] Tarih aralığı: 2025-06-10 - 2025-07-09
+2025-07-09 18:15:08,078 - INFO - [OK] Başarılı fonlar: 1
+2025-07-09 18:15:08,078 - INFO - [FAIL] Başarısız fonlar: 1
+2025-07-09 18:15:08,078 - INFO - [CATEGORIES] Fon kategorileri:
+2025-07-09 18:15:08,078 - INFO -   Hisse Senedi Şemsiye Fonu: 22 fon
+2025-07-09 18:15:08,078 - WARNING - Başarısız fonlar: PMP
+2025-07-09 21:35:07,577 - INFO - ============================================================
+2025-07-09 21:35:07,577 - INFO - TEFAS Fon Verisi İndirme Script'i
+2025-07-09 21:35:07,577 - INFO - ============================================================
+2025-07-09 21:35:07,577 - INFO - Mod: Test (5 fon)
+2025-07-09 21:35:07,577 - INFO - Tarih aralığı: Son 1 yıl
+2025-07-09 21:35:07,577 - INFO - ============================================================
+2025-07-09 21:35:07,577 - INFO - TefasProvider yapılandırılıyor...
+2025-07-09 21:35:08,463 - INFO - Session başarıyla başlatıldı
+2025-07-09 21:35:08,464 - INFO - Fon listesi alınıyor...
+2025-07-09 21:35:08,464 - INFO - Fetching fresh fund list from Takasbank
+2025-07-09 21:35:09,558 - INFO - Takasbank Excel columns: ['Fon Adı', 'Fon Kodu']
+2025-07-09 21:35:09,590 - INFO - Successfully loaded 849 funds from Takasbank
+2025-07-09 21:35:09,591 - INFO - Toplam 849 fon bulundu
+2025-07-09 21:35:09,591 - INFO - [RANDOM] DSP - Rastgele seçildi
+2025-07-09 21:35:09,591 - INFO - [RANDOM] BOL - Rastgele seçildi
+2025-07-09 21:35:09,591 - INFO - Test modu: 2 fon seçildi: DSP, BOL
+2025-07-09 21:35:09,591 - INFO - [START] 2 fon için veri indirme başlıyor...
+2025-07-09 21:35:09,592 - INFO - Hedef dosya: data\tefas_test_data.parquet
+2025-07-09 21:35:09,592 - INFO - [1/2] İşleniyor: DSP
+2025-07-09 21:35:09,592 - INFO - [FETCH] DSP (DENİZ PORTFÖY DENGELİ FON SEPETİ FONU) verisi alınıyor...
+2025-07-09 21:35:27,823 - INFO - [OK] DSP: 251 toplam kayıt alındı
+2025-07-09 21:35:27,823 - INFO - [INFO] DSP kategori bilgisi alınıyor...
+2025-07-09 21:35:27,847 - ERROR - Error getting fund detail (alternative) for DSP: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:35:27,847 - INFO - DSP: Fon adından tahmin edilen kategori: Fon Sepeti Şemsiye Fonu
+2025-07-09 21:35:27,847 - INFO - [CATEGORY] DSP: Fon Sepeti Şemsiye Fonu
+2025-07-09 21:35:27,847 - INFO - [OK] DSP başarılı
+2025-07-09 21:35:27,847 - INFO - [2/2] İşleniyor: BOL
+2025-07-09 21:35:27,847 - INFO - [FETCH] BOL (AKTİF PORTFÖY BORÇLANMA ARAÇLARI FONU) verisi alınıyor...
+2025-07-09 21:35:28,123 - ERROR - Error getting performance for BOL: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 21:35:28,124 - WARNING - BOL: API hatası: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 21:35:28,124 - WARNING - BOL: Bağlantı kesildi, session tamamen yenileniyor...
+2025-07-09 21:35:28,124 - INFO - TefasProvider yapılandırılıyor...
+2025-07-09 21:35:28,417 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 21:35:30,806 - INFO - Session başarıyla başlatıldı
+2025-07-09 21:35:30,806 - INFO - 3 saniye bekleniyor...
+2025-07-09 21:35:35,445 - ERROR - Error getting performance for BOL: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:35:35,445 - WARNING - BOL: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:35:35,445 - WARNING - BOL: JSON parse hatası, session yenileniyor...
+2025-07-09 21:35:35,766 - ERROR - BOL: Tüm denemeler başarısız
+2025-07-09 21:35:35,766 - WARNING - BOL: Ardışık 1 chunk başarısız
+2025-07-09 21:35:39,125 - ERROR - Error getting performance for BOL: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:35:39,125 - WARNING - BOL: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:35:39,125 - WARNING - BOL: JSON parse hatası, session yenileniyor...
+2025-07-09 21:35:39,446 - INFO - 3 saniye bekleniyor...
+2025-07-09 21:35:42,717 - WARNING - BOL: Bağlantı kesildi, session tamamen yenileniyor...
+2025-07-09 21:35:42,718 - INFO - TefasProvider yapılandırılıyor...
+2025-07-09 21:35:43,120 - INFO - Session başarıyla başlatıldı
+2025-07-09 21:35:43,121 - ERROR - BOL: Tüm denemeler başarısız
+2025-07-09 21:35:43,121 - WARNING - BOL: Ardışık 2 chunk başarısız
+2025-07-09 21:35:46,409 - ERROR - Error getting performance for BOL: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 21:35:46,410 - WARNING - BOL: API hatası: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 21:35:46,410 - WARNING - BOL: Bağlantı kesildi, session tamamen yenileniyor...
+2025-07-09 21:35:46,410 - INFO - TefasProvider yapılandırılıyor...
+2025-07-09 21:35:46,810 - INFO - Session başarıyla başlatıldı
+2025-07-09 21:35:46,812 - INFO - 3 saniye bekleniyor...
+2025-07-09 21:35:51,474 - ERROR - Error getting performance for BOL: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:35:51,474 - WARNING - BOL: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:35:51,474 - WARNING - BOL: JSON parse hatası, session yenileniyor...
+2025-07-09 21:35:51,815 - ERROR - BOL: Tüm denemeler başarısız
+2025-07-09 21:35:51,815 - WARNING - BOL: Ardışık 3 chunk başarısız
+2025-07-09 21:35:51,815 - ERROR - BOL: 3 ardışık başarısızlık, durduruluyor
+2025-07-09 21:35:51,815 - INFO - BOL: Belirtilen tarih aralığında veri yok, tüm mevcut veri alınıyor...
+2025-07-09 21:35:51,815 - INFO - BOL: Fonun başlangıç tarihi aranıyor...
+2025-07-09 21:35:52,137 - ERROR - Error getting performance for BOL: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:35:52,137 - WARNING - BOL: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:35:52,451 - ERROR - Error getting performance for BOL: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:35:52,452 - WARNING - BOL: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:35:52,771 - ERROR - Error getting performance for BOL: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:35:52,771 - WARNING - BOL: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:35:53,051 - ERROR - Error getting performance for BOL: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 21:35:53,051 - WARNING - BOL: API hatası: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 21:35:53,363 - ERROR - Error getting performance for BOL: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:35:53,363 - WARNING - BOL: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:35:53,683 - ERROR - Error getting performance for BOL: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:35:53,683 - WARNING - BOL: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:35:53,684 - WARNING - BOL: Hiçbir tarih aralığında veri bulunamadı
+2025-07-09 21:35:53,684 - INFO - [OK] BOL: 0 toplam kayıt alındı
+2025-07-09 21:35:53,684 - WARNING - [FAIL] BOL veri alınamadı
+2025-07-09 21:35:53,684 - INFO - [SAVE] 251 kayıt parquet dosyasına yazılıyor...
+2025-07-09 21:35:53,685 - INFO - borsa_bulten_fiyat sütunu kaldırıldı
+2025-07-09 21:35:53,696 - INFO - [SUCCESS] İNDİRME TAMAMLANDI!
+2025-07-09 21:35:53,697 - INFO - [FILE] Dosya: data\tefas_test_data.parquet
+2025-07-09 21:35:53,697 - INFO - [STATS] Kayıt sayısı: 251
+2025-07-09 21:35:53,697 - INFO - [FUNDS] Fon sayısı: 1
+2025-07-09 21:35:53,697 - INFO - [DATE] Tarih aralığı: 2024-07-09 - 2025-07-09
+2025-07-09 21:35:53,697 - INFO - [OK] Başarılı fonlar: 1
+2025-07-09 21:35:53,697 - INFO - [FAIL] Başarısız fonlar: 1
+2025-07-09 21:35:53,697 - INFO - [CATEGORIES] Fon kategorileri:
+2025-07-09 21:35:53,698 - INFO -   Fon Sepeti Şemsiye Fonu: 251 fon
+2025-07-09 21:35:53,698 - WARNING - Başarısız fonlar: BOL
+2025-07-09 21:40:58,673 - INFO - ============================================================
+2025-07-09 21:40:58,673 - INFO - TEFAS Fon Verisi İndirme Script'i
+2025-07-09 21:40:58,673 - INFO - ============================================================
+2025-07-09 21:40:58,673 - INFO - Mod: Test (özel fon listesi)
+2025-07-09 21:40:58,673 - INFO - Tarih aralığı: Son 1 yıl
+2025-07-09 21:40:58,673 - INFO - ============================================================
+2025-07-09 21:40:58,673 - INFO - TefasProvider yapılandırılıyor...
+2025-07-09 21:40:59,066 - INFO - Session başarıyla başlatıldı
+2025-07-09 21:40:59,067 - INFO - Fon listesi alınıyor...
+2025-07-09 21:40:59,067 - INFO - Fetching fresh fund list from Takasbank
+2025-07-09 21:41:00,097 - INFO - Takasbank Excel columns: ['Fon Adı', 'Fon Kodu']
+2025-07-09 21:41:00,124 - INFO - Successfully loaded 849 funds from Takasbank
+2025-07-09 21:41:00,124 - INFO - Toplam 849 fon bulundu
+2025-07-09 21:41:00,124 - INFO - [LIST] DSP - Listeden seçildi
+2025-07-09 21:41:00,125 - INFO - [LIST] PPN - Listeden seçildi
+2025-07-09 21:41:00,125 - INFO - [LIST] PMP - Listeden seçildi
+2025-07-09 21:41:00,125 - INFO - Test modu: 3 fon seçildi: DSP, PPN, PMP
+2025-07-09 21:41:00,125 - INFO - [START] 3 fon için veri indirme başlıyor...
+2025-07-09 21:41:00,125 - INFO - Hedef dosya: data\tefas_test_data.parquet
+2025-07-09 21:41:00,125 - INFO - [1/3] İşleniyor: DSP
+2025-07-09 21:41:00,125 - INFO - [FETCH] DSP (DENİZ PORTFÖY DENGELİ FON SEPETİ FONU) verisi alınıyor...
+2025-07-09 21:41:18,396 - INFO - [OK] DSP: 251 toplam kayıt alındı
+2025-07-09 21:41:18,396 - INFO - [INFO] DSP kategori bilgisi alınıyor...
+2025-07-09 21:41:18,417 - ERROR - Error getting fund detail (alternative) for DSP: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:41:18,417 - INFO - DSP: Fon adından tahmin edilen kategori: Fon Sepeti Şemsiye Fonu
+2025-07-09 21:41:18,417 - INFO - [CATEGORY] DSP: Fon Sepeti Şemsiye Fonu
+2025-07-09 21:41:18,417 - INFO - [OK] DSP başarılı
+2025-07-09 21:41:18,418 - INFO - [2/3] İşleniyor: PPN
+2025-07-09 21:41:18,418 - INFO - [FETCH] PPN (NUROL PORTFÖY PARA PİYASASI (TL) FONU) verisi alınıyor...
+2025-07-09 21:41:18,727 - ERROR - Error getting performance for PPN: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:41:18,727 - WARNING - PPN: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:41:18,727 - WARNING - PPN: JSON parse hatası, session yenileniyor...
+2025-07-09 21:41:19,031 - INFO - 3 saniye bekleniyor...
+2025-07-09 21:41:23,657 - ERROR - Error getting performance for PPN: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:41:23,658 - WARNING - PPN: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:41:23,658 - WARNING - PPN: JSON parse hatası, session yenileniyor...
+2025-07-09 21:41:23,973 - ERROR - PPN: Tüm denemeler başarısız
+2025-07-09 21:41:23,973 - WARNING - PPN: Ardışık 1 chunk başarısız
+2025-07-09 21:41:27,277 - ERROR - Error getting performance for PPN: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:41:27,278 - WARNING - PPN: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:41:27,278 - WARNING - PPN: JSON parse hatası, session yenileniyor...
+2025-07-09 21:41:27,587 - INFO - 3 saniye bekleniyor...
+2025-07-09 21:41:32,200 - ERROR - Error getting performance for PPN: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:41:32,200 - WARNING - PPN: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:41:32,201 - WARNING - PPN: JSON parse hatası, session yenileniyor...
+2025-07-09 21:41:32,524 - ERROR - PPN: Tüm denemeler başarısız
+2025-07-09 21:41:32,524 - WARNING - PPN: Ardışık 2 chunk başarısız
+2025-07-09 21:41:35,826 - ERROR - Error getting performance for PPN: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:41:35,826 - WARNING - PPN: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:41:35,827 - WARNING - PPN: JSON parse hatası, session yenileniyor...
+2025-07-09 21:41:36,135 - INFO - 3 saniye bekleniyor...
+2025-07-09 21:41:40,747 - ERROR - Error getting performance for PPN: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:41:40,747 - WARNING - PPN: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:41:40,747 - WARNING - PPN: JSON parse hatası, session yenileniyor...
+2025-07-09 21:41:41,123 - ERROR - PPN: Tüm denemeler başarısız
+2025-07-09 21:41:41,123 - WARNING - PPN: Ardışık 3 chunk başarısız
+2025-07-09 21:41:41,123 - ERROR - PPN: 3 ardışık başarısızlık, durduruluyor
+2025-07-09 21:41:41,123 - INFO - PPN: Belirtilen tarih aralığında veri yok, tüm mevcut veri alınıyor...
+2025-07-09 21:41:41,123 - INFO - PPN: Fonun başlangıç tarihi aranıyor...
+2025-07-09 21:41:41,472 - ERROR - Error getting performance for PPN: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:41:41,473 - WARNING - PPN: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:41:41,820 - ERROR - Error getting performance for PPN: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:41:41,820 - WARNING - PPN: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:41:42,146 - ERROR - Error getting performance for PPN: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:41:42,146 - WARNING - PPN: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:41:42,449 - ERROR - Error getting performance for PPN: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:41:42,449 - WARNING - PPN: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:41:42,717 - ERROR - Error getting performance for PPN: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 21:41:42,717 - WARNING - PPN: API hatası: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 21:41:43,031 - ERROR - Error getting performance for PPN: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:41:43,031 - WARNING - PPN: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:41:43,031 - WARNING - PPN: Hiçbir tarih aralığında veri bulunamadı
+2025-07-09 21:41:43,031 - INFO - [OK] PPN: 0 toplam kayıt alındı
+2025-07-09 21:41:43,031 - WARNING - [FAIL] PPN veri alınamadı
+2025-07-09 21:41:43,031 - INFO - [3/3] İşleniyor: PMP
+2025-07-09 21:41:43,031 - INFO - [FETCH] PMP (PARDUS PORTFÖY MODEL PORTFÖY HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)) verisi alınıyor...
+2025-07-09 21:41:43,336 - ERROR - Error getting performance for PMP: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:41:43,336 - WARNING - PMP: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:41:43,336 - WARNING - PMP: JSON parse hatası, session yenileniyor...
+2025-07-09 21:41:43,644 - INFO - 3 saniye bekleniyor...
+2025-07-09 21:41:46,924 - WARNING - PMP: Bağlantı kesildi, session tamamen yenileniyor...
+2025-07-09 21:41:46,925 - INFO - TefasProvider yapılandırılıyor...
+2025-07-09 21:41:47,320 - INFO - Session başarıyla başlatıldı
+2025-07-09 21:41:47,321 - ERROR - PMP: Tüm denemeler başarısız
+2025-07-09 21:41:47,321 - WARNING - PMP: Ardışık 1 chunk başarısız
+2025-07-09 21:41:50,629 - ERROR - Error getting performance for PMP: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:41:50,629 - WARNING - PMP: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:41:50,629 - WARNING - PMP: JSON parse hatası, session yenileniyor...
+2025-07-09 21:41:50,983 - INFO - 3 saniye bekleniyor...
+2025-07-09 21:41:55,605 - ERROR - Error getting performance for PMP: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:41:55,605 - WARNING - PMP: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:41:55,606 - WARNING - PMP: JSON parse hatası, session yenileniyor...
+2025-07-09 21:41:55,911 - ERROR - PMP: Tüm denemeler başarısız
+2025-07-09 21:41:55,911 - WARNING - PMP: Ardışık 2 chunk başarısız
+2025-07-09 21:41:59,238 - ERROR - Error getting performance for PMP: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:41:59,238 - WARNING - PMP: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:41:59,239 - WARNING - PMP: JSON parse hatası, session yenileniyor...
+2025-07-09 21:41:59,551 - INFO - 3 saniye bekleniyor...
+2025-07-09 21:42:04,172 - ERROR - Error getting performance for PMP: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:42:04,172 - WARNING - PMP: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:42:04,172 - WARNING - PMP: JSON parse hatası, session yenileniyor...
+2025-07-09 21:42:04,476 - ERROR - PMP: Tüm denemeler başarısız
+2025-07-09 21:42:04,476 - WARNING - PMP: Ardışık 3 chunk başarısız
+2025-07-09 21:42:04,476 - ERROR - PMP: 3 ardışık başarısızlık, durduruluyor
+2025-07-09 21:42:04,476 - INFO - PMP: Belirtilen tarih aralığında veri yok, tüm mevcut veri alınıyor...
+2025-07-09 21:42:04,476 - INFO - PMP: Fonun başlangıç tarihi aranıyor...
+2025-07-09 21:42:04,781 - ERROR - Error getting performance for PMP: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:42:04,781 - WARNING - PMP: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:42:05,088 - ERROR - Error getting performance for PMP: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:42:05,088 - WARNING - PMP: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:42:05,399 - ERROR - Error getting performance for PMP: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:42:05,399 - WARNING - PMP: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:42:05,702 - ERROR - Error getting performance for PMP: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:42:05,702 - WARNING - PMP: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:42:05,964 - ERROR - Error getting performance for PMP: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 21:42:05,964 - WARNING - PMP: API hatası: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 21:42:06,285 - ERROR - Error getting performance for PMP: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:42:06,285 - WARNING - PMP: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:42:06,286 - WARNING - PMP: Hiçbir tarih aralığında veri bulunamadı
+2025-07-09 21:42:06,286 - INFO - [OK] PMP: 0 toplam kayıt alındı
+2025-07-09 21:42:06,286 - WARNING - [FAIL] PMP veri alınamadı
+2025-07-09 21:42:06,286 - INFO - [SAVE] 251 kayıt parquet dosyasına yazılıyor...
+2025-07-09 21:42:06,288 - INFO - borsa_bulten_fiyat sütunu kaldırıldı
+2025-07-09 21:42:06,300 - INFO - [SUCCESS] İNDİRME TAMAMLANDI!
+2025-07-09 21:42:06,301 - INFO - [FILE] Dosya: data\tefas_test_data.parquet
+2025-07-09 21:42:06,301 - INFO - [STATS] Kayıt sayısı: 251
+2025-07-09 21:42:06,301 - INFO - [FUNDS] Fon sayısı: 1
+2025-07-09 21:42:06,301 - INFO - [DATE] Tarih aralığı: 2024-07-09 - 2025-07-09
+2025-07-09 21:42:06,301 - INFO - [OK] Başarılı fonlar: 1
+2025-07-09 21:42:06,301 - INFO - [FAIL] Başarısız fonlar: 2
+2025-07-09 21:42:06,301 - INFO - [CATEGORIES] Fon kategorileri:
+2025-07-09 21:42:06,301 - INFO -   Fon Sepeti Şemsiye Fonu: 251 fon
+2025-07-09 21:42:06,301 - WARNING - Başarısız fonlar: PPN, PMP
+2025-07-09 21:47:53,849 - INFO - ============================================================
+2025-07-09 21:47:53,849 - INFO - TEFAS Fon Verisi İndirme Script'i
+2025-07-09 21:47:53,849 - INFO - ============================================================
+2025-07-09 21:47:53,849 - INFO - Mod: Test (özel fon listesi)
+2025-07-09 21:47:53,849 - INFO - Tarih aralığı: Son 1 yıl
+2025-07-09 21:47:53,849 - INFO - ============================================================
+2025-07-09 21:47:53,849 - INFO - TefasProvider yapılandırılıyor...
+2025-07-09 21:47:54,156 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 21:47:56,554 - INFO - Session başarıyla başlatıldı
+2025-07-09 21:47:56,554 - INFO - Fon listesi alınıyor...
+2025-07-09 21:47:56,554 - INFO - Fetching fresh fund list from Takasbank
+2025-07-09 21:47:57,583 - INFO - Takasbank Excel columns: ['Fon Adı', 'Fon Kodu']
+2025-07-09 21:47:57,614 - INFO - Successfully loaded 849 funds from Takasbank
+2025-07-09 21:47:57,614 - INFO - Toplam 849 fon bulundu
+2025-07-09 21:47:57,614 - INFO - [LIST] DSP - Listeden seçildi
+2025-07-09 21:47:57,614 - INFO - [LIST] PPN - Listeden seçildi
+2025-07-09 21:47:57,614 - INFO - [LIST] PMP - Listeden seçildi
+2025-07-09 21:47:57,614 - INFO - Test modu: 3 fon seçildi: DSP, PPN, PMP
+2025-07-09 21:47:57,614 - INFO - [START] 3 fon için veri indirme başlıyor...
+2025-07-09 21:47:57,614 - INFO - Hedef dosya: data\tefas_test_data.parquet
+2025-07-09 21:47:57,614 - INFO - TefasProvider yapılandırılıyor...
+2025-07-09 21:47:58,021 - INFO - Session başarıyla başlatıldı
+2025-07-09 21:47:59,023 - INFO - [1/3] İşleniyor: DSP
+2025-07-09 21:47:59,023 - INFO - [FETCH] DSP (DENİZ PORTFÖY DENGELİ FON SEPETİ FONU) verisi alınıyor...
+2025-07-09 21:48:17,252 - INFO - [OK] DSP: 251 toplam kayıt alındı
+2025-07-09 21:48:17,252 - INFO - [INFO] DSP kategori bilgisi alınıyor...
+2025-07-09 21:48:17,320 - ERROR - Error getting fund detail (alternative) for DSP: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:48:17,320 - INFO - DSP: Fon adından tahmin edilen kategori: Fon Sepeti Şemsiye Fonu
+2025-07-09 21:48:17,320 - INFO - [CATEGORY] DSP: Fon Sepeti Şemsiye Fonu
+2025-07-09 21:48:17,321 - INFO - [OK] DSP başarılı
+2025-07-09 21:48:17,321 - INFO - TefasProvider yapılandırılıyor...
+2025-07-09 21:48:17,738 - INFO - Session başarıyla başlatıldı
+2025-07-09 21:48:18,739 - INFO - [2/3] İşleniyor: PPN
+2025-07-09 21:48:18,740 - INFO - [FETCH] PPN (NUROL PORTFÖY PARA PİYASASI (TL) FONU) verisi alınıyor...
+2025-07-09 21:48:36,963 - INFO - [OK] PPN: 251 toplam kayıt alındı
+2025-07-09 21:48:36,963 - INFO - [INFO] PPN kategori bilgisi alınıyor...
+2025-07-09 21:48:36,984 - ERROR - Error getting fund detail (alternative) for PPN: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:48:36,984 - INFO - PPN: Fon adından tahmin edilen kategori: Para Piyasası Şemsiye Fonu
+2025-07-09 21:48:36,985 - INFO - [CATEGORY] PPN: Para Piyasası Şemsiye Fonu
+2025-07-09 21:48:36,985 - INFO - [OK] PPN başarılı
+2025-07-09 21:48:36,985 - INFO - TefasProvider yapılandırılıyor...
+2025-07-09 21:48:37,383 - INFO - Session başarıyla başlatıldı
+2025-07-09 21:48:38,384 - INFO - [3/3] İşleniyor: PMP
+2025-07-09 21:48:38,385 - INFO - [FETCH] PMP (PARDUS PORTFÖY MODEL PORTFÖY HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)) verisi alınıyor...
+2025-07-09 21:48:38,418 - WARNING - PMP: API hatası: No historical data found for this fund
+2025-07-09 21:48:38,418 - WARNING - PMP: 2024-07-09 - 2024-09-07 = veri yok
+2025-07-09 21:48:38,418 - WARNING - PMP: Ardışık 1 chunk başarısız
+2025-07-09 21:48:41,452 - WARNING - PMP: API hatası: No historical data found for this fund
+2025-07-09 21:48:41,452 - WARNING - PMP: 2024-09-08 - 2024-11-07 = veri yok
+2025-07-09 21:48:41,452 - WARNING - PMP: Ardışık 2 chunk başarısız
+2025-07-09 21:48:44,485 - WARNING - PMP: API hatası: No historical data found for this fund
+2025-07-09 21:48:44,486 - WARNING - PMP: 2024-11-08 - 2025-01-07 = veri yok
+2025-07-09 21:48:44,486 - WARNING - PMP: Ardışık 3 chunk başarısız
+2025-07-09 21:48:44,486 - ERROR - PMP: 3 ardışık başarısızlık, durduruluyor
+2025-07-09 21:48:44,486 - INFO - PMP: Belirtilen tarih aralığında veri yok, tüm mevcut veri alınıyor...
+2025-07-09 21:48:44,486 - INFO - PMP: Fonun başlangıç tarihi aranıyor...
+2025-07-09 21:48:44,535 - INFO - PMP: 22 kayıt bulundu (2025-06-09 - 2025-07-09)
+2025-07-09 21:48:44,541 - INFO - PMP: En eski veri tarihi: 2025-06-10
+2025-07-09 21:48:47,576 - INFO - [OK] PMP: 22 toplam kayıt alındı
+2025-07-09 21:48:47,576 - INFO - [INFO] PMP kategori bilgisi alınıyor...
+2025-07-09 21:48:47,601 - ERROR - Error getting fund detail (alternative) for PMP: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:48:47,602 - INFO - PMP: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-09 21:48:47,602 - INFO - [CATEGORY] PMP: Hisse Senedi Şemsiye Fonu
+2025-07-09 21:48:47,602 - INFO - [OK] PMP başarılı
+2025-07-09 21:48:47,602 - INFO - [SAVE] 524 kayıt parquet dosyasına yazılıyor...
+2025-07-09 21:48:47,604 - INFO - borsa_bulten_fiyat sütunu kaldırıldı
+2025-07-09 21:48:47,615 - INFO - [SUCCESS] İNDİRME TAMAMLANDI!
+2025-07-09 21:48:47,616 - INFO - [FILE] Dosya: data\tefas_test_data.parquet
+2025-07-09 21:48:47,616 - INFO - [STATS] Kayıt sayısı: 524
+2025-07-09 21:48:47,616 - INFO - [FUNDS] Fon sayısı: 3
+2025-07-09 21:48:47,616 - INFO - [DATE] Tarih aralığı: 2024-07-09 - 2025-07-09
+2025-07-09 21:48:47,616 - INFO - [OK] Başarılı fonlar: 3
+2025-07-09 21:48:47,617 - INFO - [FAIL] Başarısız fonlar: 0
+2025-07-09 21:48:47,617 - INFO - [CATEGORIES] Fon kategorileri:
+2025-07-09 21:48:47,617 - INFO -   Fon Sepeti Şemsiye Fonu: 251 fon
+2025-07-09 21:48:47,617 - INFO -   Para Piyasası Şemsiye Fonu: 251 fon
+2025-07-09 21:48:47,617 - INFO -   Hisse Senedi Şemsiye Fonu: 22 fon
+2025-07-09 21:59:07,974 - INFO - ============================================================
+2025-07-09 21:59:07,974 - INFO - TEFAS Fon Verisi İndirme Script'i
+2025-07-09 21:59:07,974 - INFO - ============================================================
+2025-07-09 21:59:07,974 - INFO - Mod: Test (özel fon listesi)
+2025-07-09 21:59:07,974 - INFO - Tarih aralığı: Son 1 yıl
+2025-07-09 21:59:07,974 - INFO - ============================================================
+2025-07-09 21:59:07,975 - INFO - TefasProvider yapılandırılıyor...
+2025-07-09 21:59:08,364 - INFO - Session başarıyla başlatıldı
+2025-07-09 21:59:08,364 - INFO - Fon listesi alınıyor...
+2025-07-09 21:59:08,364 - INFO - Fetching fresh fund list from Takasbank
+2025-07-09 21:59:09,423 - INFO - Takasbank Excel columns: ['Fon Adı', 'Fon Kodu']
+2025-07-09 21:59:09,450 - INFO - Successfully loaded 849 funds from Takasbank
+2025-07-09 21:59:09,451 - INFO - Toplam 849 fon bulundu
+2025-07-09 21:59:09,451 - INFO - [LIST] PPN - Listeden seçildi
+2025-07-09 21:59:09,451 - INFO - [LIST] TLE - Listeden seçildi
+2025-07-09 21:59:09,451 - INFO - Test modu: 2 fon seçildi: PPN, TLE
+2025-07-09 21:59:09,451 - INFO - [START] 2 fon için veri indirme başlıyor...
+2025-07-09 21:59:09,451 - INFO - Hedef dosya: data\tefas_test_data.parquet
+2025-07-09 21:59:09,451 - INFO - TefasProvider yapılandırılıyor...
+2025-07-09 21:59:09,726 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-09 21:59:12,116 - INFO - Session başarıyla başlatıldı
+2025-07-09 21:59:13,118 - INFO - [1/2] İşleniyor: PPN
+2025-07-09 21:59:13,118 - INFO - [FETCH] PPN (NUROL PORTFÖY PARA PİYASASI (TL) FONU) verisi alınıyor...
+2025-07-09 21:59:31,349 - INFO - [OK] PPN: 251 toplam kayıt alındı
+2025-07-09 21:59:31,350 - INFO - [INFO] PPN kategori bilgisi alınıyor...
+2025-07-09 21:59:31,373 - ERROR - Error getting fund detail (alternative) for PPN: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:59:31,373 - INFO - PPN: Fon adından tahmin edilen kategori: Para Piyasası Şemsiye Fonu
+2025-07-09 21:59:31,374 - INFO - [CATEGORY] PPN: Para Piyasası Şemsiye Fonu
+2025-07-09 21:59:31,374 - INFO - [OK] PPN başarılı
+2025-07-09 21:59:31,374 - INFO - TefasProvider yapılandırılıyor...
+2025-07-09 21:59:31,748 - INFO - Session başarıyla başlatıldı
+2025-07-09 21:59:32,749 - INFO - [2/2] İşleniyor: TLE
+2025-07-09 21:59:32,749 - INFO - [FETCH] TLE (AURA PORTFÖY YABANCI BORÇLANMA ARAÇLARI FONU) verisi alınıyor...
+2025-07-09 21:59:50,980 - INFO - [OK] TLE: 251 toplam kayıt alındı
+2025-07-09 21:59:50,980 - INFO - [INFO] TLE kategori bilgisi alınıyor...
+2025-07-09 21:59:51,002 - ERROR - Error getting fund detail (alternative) for TLE: Expecting value: line 1 column 1 (char 0)
+2025-07-09 21:59:51,002 - INFO - TLE: Fon adından tahmin edilen kategori: Borçlanma Araçları Şemsiye Fonu
+2025-07-09 21:59:51,002 - INFO - [CATEGORY] TLE: Borçlanma Araçları Şemsiye Fonu
+2025-07-09 21:59:51,003 - INFO - [OK] TLE başarılı
+2025-07-09 21:59:51,003 - INFO - [SAVE] 502 kayıt parquet dosyasına yazılıyor...
+2025-07-09 21:59:51,005 - INFO - borsa_bulten_fiyat sütunu kaldırıldı
+2025-07-09 21:59:51,017 - INFO - [SUCCESS] İNDİRME TAMAMLANDI!
+2025-07-09 21:59:51,017 - INFO - [FILE] Dosya: data\tefas_test_data.parquet
+2025-07-09 21:59:51,018 - INFO - [STATS] Kayıt sayısı: 502
+2025-07-09 21:59:51,018 - INFO - [FUNDS] Fon sayısı: 2
+2025-07-09 21:59:51,018 - INFO - [DATE] Tarih aralığı: 2024-07-09 - 2025-07-09
+2025-07-09 21:59:51,018 - INFO - [OK] Başarılı fonlar: 2
+2025-07-09 21:59:51,018 - INFO - [FAIL] Başarısız fonlar: 0
+2025-07-09 21:59:51,018 - INFO - [CATEGORIES] Fon kategorileri:
+2025-07-09 21:59:51,018 - INFO -   Para Piyasası Şemsiye Fonu: 251 fon
+2025-07-09 21:59:51,018 - INFO -   Borçlanma Araçları Şemsiye Fonu: 251 fon
