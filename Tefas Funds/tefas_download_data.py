@@ -31,9 +31,9 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 
 # borsa-mcp-main klasörünü path'e ekle
-current_dir = Path(__file__).parent
-project_root = current_dir.parent / "borsa-mcp-main"
-sys.path.insert(0, str(project_root))
+# current_dir = Path(__file__).parent
+# project_root = current_dir.parent / "borsa-mcp-main"
+# sys.path.insert(0, str(project_root))
 
 from providers.tefas_provider import TefasProvider
 from tls12_adapter import TLS12Adapter
