@@ -56,11 +56,18 @@ def compute_rolling_returns(df: pd.DataFrame) -> pd.DataFrame:
 def main():
     parser = argparse.ArgumentParser(description="TEFAS verisine rolling getiriler ekle")
     parser.add_argument("--input", type=str, default="data/tefas_test_data.parquet", help="Giriş Parquet yolu")
-    parser.add_argument("--output", type=str, default="data/tefas_test_data_processed.parquet", help="Çıkış Parquet yolu")
+    parser.add_argument("--output", type=str, default="data/tefas_test_data_processed.parquet", help="Çıkış Parquet (varsayılan) yolu")
+    parser.add_argument("--excel", type=str, default="", help="Opsiyonel Excel çıktı yolu (.xlsx). Boş bırakılırsa --output temel alınır.")
     args = parser.parse_args()
 
     input_path = Path(args.input)
     output_path = Path(args.output)
+
+    # Excel yolu belirle
+    if args.excel:
+        excel_path = Path(args.excel)
+    else:
+        excel_path = output_path.with_suffix(".xlsx")
 
     if not input_path.exists():
         logger.error("Giriş dosyası bulunamadı: %s", input_path)
@@ -85,6 +92,11 @@ def main():
     # Parquet'e yaz
     output_path.parent.mkdir(exist_ok=True)
     df.to_parquet(output_path, engine="pyarrow", compression="zstd", index=False)
+
+    # Excel'e yaz (opsiyonel)
+    df.to_excel(excel_path, index=False)
+    logger.info("Excel çıktı ➜ %s", excel_path)
+
     logger.info("Tamamlandı ➜ %s (%d kayıt, %d fon)", output_path, len(df), df["fon_kodu"].nunique())
 
 if __name__ == "__main__":

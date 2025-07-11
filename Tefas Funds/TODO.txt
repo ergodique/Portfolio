@@ -1,0 +1,20 @@
+[ ] --full indirilen dosyadaki kategorileri gözle check etmek 
+[ ] --test dosyasını data_process'ten geçirmek.
+        -Nihai olarak fon kategorilerine göre ortalama getiri hesaplanması.
+        -En son elimde her hafta için her fon kategorisine göre bir getiri olacak. Fon kategorisi bazında getirileri de hesapladıktan sonra artık bu noktada kolonlara explode yapıp her tarih için kolon kolon bu verileri elde edeceğiz.
+        aynı hafta için tek satır veri elde etmem gerekiyor. 
+[ ] Download classında mümkün olduğu kadar fazla paralelleştirme yapılmalı. Daha hızlı indirebilmek için. 
+[ ] Download classına repair modu yapılmalı ya da repair için ayrı bir class. full veride hangileri eksikse sadece onların verisini indirecek şekilde. indirilmesi gereken veri aralığı yine download edilmiş parquet dosyasından algılanacak. 
+
+
+[ ] Bu library TTRR ekibi ile de paylaşılacak.
+
+
+
+--Örnek çalıştırma komutları
+--download classı
+
+
+
+--process classı
+python tefas_data_process.py --input  data/tefas_1ay_test.parquet --output data/tefas_1ay_test_processed.parquet --excel  data/tefas_1ay_test_processed.xlsx
