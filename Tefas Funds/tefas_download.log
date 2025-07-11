@@ -1200,3 +1200,224 @@
 2025-07-09 21:59:51,018 - INFO - [CATEGORIES] Fon kategorileri:
 2025-07-09 21:59:51,018 - INFO -   Para Piyasası Şemsiye Fonu: 251 fon
 2025-07-09 21:59:51,018 - INFO -   Borçlanma Araçları Şemsiye Fonu: 251 fon
+2025-07-11 16:50:57,361 - INFO - ============================================================
+2025-07-11 16:50:57,361 - INFO - TEFAS Fon Verisi İndirme Script'i
+2025-07-11 16:50:57,361 - INFO - ============================================================
+2025-07-11 16:50:57,362 - INFO - Mod: Test (özel fon listesi)
+2025-07-11 16:50:57,362 - INFO - Tarih aralığı: Son 1 ay
+2025-07-11 16:50:57,362 - INFO - ============================================================
+2025-07-11 16:50:57,362 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 16:50:58,251 - INFO - Session başarıyla başlatıldı
+2025-07-11 16:50:58,251 - INFO - Fon listesi alınıyor...
+2025-07-11 16:50:58,252 - INFO - Fetching fresh fund list from Takasbank
+2025-07-11 16:50:59,465 - INFO - Takasbank Excel columns: ['Fon Adı', 'Fon Kodu']
+2025-07-11 16:50:59,495 - INFO - Successfully loaded 853 funds from Takasbank
+2025-07-11 16:50:59,495 - INFO - Toplam 853 fon bulundu
+2025-07-11 16:50:59,495 - INFO - [LIST] PPN - Listeden seçildi
+2025-07-11 16:50:59,495 - INFO - [LIST] PRD - Listeden seçildi
+2025-07-11 16:50:59,495 - INFO - [LIST] TLE - Listeden seçildi
+2025-07-11 16:50:59,495 - INFO - [LIST] IPV - Listeden seçildi
+2025-07-11 16:50:59,496 - INFO - [LIST] DBH - Listeden seçildi
+2025-07-11 16:50:59,496 - INFO - [LIST] YAY - Listeden seçildi
+2025-07-11 16:50:59,496 - INFO - [LIST] AFA - Listeden seçildi
+2025-07-11 16:50:59,496 - WARNING - [LIST] FUS - Fon listesinde bulunamadı, atlanıyor
+2025-07-11 16:50:59,496 - INFO - Test modu: 7 fon seçildi: PPN, PRD, TLE, IPV, DBH, YAY, AFA, FUS
+2025-07-11 16:50:59,496 - INFO - [START] 7 fon için veri indirme başlıyor...
+2025-07-11 16:50:59,496 - INFO - Hedef dosya: data\tefas_1ay_test.parquet
+2025-07-11 16:50:59,496 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 16:50:59,880 - INFO - Session başarıyla başlatıldı
+2025-07-11 16:51:00,882 - INFO - [1/7] İşleniyor: PPN
+2025-07-11 16:51:00,882 - INFO - [FETCH] PPN (NUROL PORTFÖY PARA PİYASASI (TL) FONU) verisi alınıyor...
+2025-07-11 16:51:03,921 - INFO - [OK] PPN: 23 toplam kayıt alındı
+2025-07-11 16:51:03,921 - INFO - [INFO] PPN kategori bilgisi alınıyor...
+2025-07-11 16:51:03,944 - ERROR - Error getting fund detail (alternative) for PPN: Expecting value: line 1 column 1 (char 0)
+2025-07-11 16:51:03,944 - INFO - PPN: Fon adından tahmin edilen kategori: Para Piyasası Şemsiye Fonu
+2025-07-11 16:51:03,944 - INFO - [CATEGORY] PPN: Para Piyasası Şemsiye Fonu
+2025-07-11 16:51:03,944 - INFO - [OK] PPN başarılı
+2025-07-11 16:51:03,944 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 16:51:04,331 - INFO - Session başarıyla başlatıldı
+2025-07-11 16:51:05,333 - INFO - [2/7] İşleniyor: PRD
+2025-07-11 16:51:05,333 - INFO - [FETCH] PRD (PİRAMİT PORTFÖY PARA PİYASASI (TL) FONU) verisi alınıyor...
+2025-07-11 16:51:08,372 - INFO - [OK] PRD: 23 toplam kayıt alındı
+2025-07-11 16:51:08,372 - INFO - [INFO] PRD kategori bilgisi alınıyor...
+2025-07-11 16:51:08,393 - ERROR - Error getting fund detail (alternative) for PRD: Expecting value: line 1 column 1 (char 0)
+2025-07-11 16:51:08,393 - INFO - PRD: Fon adından tahmin edilen kategori: Para Piyasası Şemsiye Fonu
+2025-07-11 16:51:08,393 - INFO - [CATEGORY] PRD: Para Piyasası Şemsiye Fonu
+2025-07-11 16:51:08,393 - INFO - [OK] PRD başarılı
+2025-07-11 16:51:08,393 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 16:51:08,780 - INFO - Session başarıyla başlatıldı
+2025-07-11 16:51:09,782 - INFO - [3/7] İşleniyor: TLE
+2025-07-11 16:51:09,782 - INFO - [FETCH] TLE (AURA PORTFÖY YABANCI BORÇLANMA ARAÇLARI FONU) verisi alınıyor...
+2025-07-11 16:51:12,820 - INFO - [OK] TLE: 23 toplam kayıt alındı
+2025-07-11 16:51:12,820 - INFO - [INFO] TLE kategori bilgisi alınıyor...
+2025-07-11 16:51:12,841 - ERROR - Error getting fund detail (alternative) for TLE: Expecting value: line 1 column 1 (char 0)
+2025-07-11 16:51:12,841 - INFO - TLE: Fon adından tahmin edilen kategori: Eurobond Şemsiye Fonu
+2025-07-11 16:51:12,842 - INFO - [CATEGORY] TLE: Eurobond Şemsiye Fonu
+2025-07-11 16:51:12,842 - INFO - [OK] TLE başarılı
+2025-07-11 16:51:12,842 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 16:51:13,236 - INFO - Session başarıyla başlatıldı
+2025-07-11 16:51:14,237 - INFO - [4/7] İşleniyor: IPV
+2025-07-11 16:51:14,237 - INFO - [FETCH] IPV (İŞ PORTFÖY EUROBOND BORÇLANMA ARAÇLARI (DÖVİZ) FONU) verisi alınıyor...
+2025-07-11 16:51:17,274 - INFO - [OK] IPV: 23 toplam kayıt alındı
+2025-07-11 16:51:17,274 - INFO - [INFO] IPV kategori bilgisi alınıyor...
+2025-07-11 16:51:17,295 - ERROR - Error getting fund detail (alternative) for IPV: Expecting value: line 1 column 1 (char 0)
+2025-07-11 16:51:17,296 - INFO - IPV: Fon adından tahmin edilen kategori: Eurobond Şemsiye Fonu
+2025-07-11 16:51:17,296 - INFO - [CATEGORY] IPV: Eurobond Şemsiye Fonu
+2025-07-11 16:51:17,296 - INFO - [OK] IPV başarılı
+2025-07-11 16:51:17,296 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 16:51:17,573 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-11 16:51:19,837 - WARNING - Session başlatma deneme 2/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-11 16:51:22,213 - INFO - Session başarıyla başlatıldı
+2025-07-11 16:51:23,215 - INFO - [5/7] İşleniyor: DBH
+2025-07-11 16:51:23,215 - INFO - [FETCH] DBH (DENİZ PORTFÖY EUROBOND (DÖVİZ) BORÇLANMA ARAÇLARI FONU) verisi alınıyor...
+2025-07-11 16:51:26,253 - INFO - [OK] DBH: 23 toplam kayıt alındı
+2025-07-11 16:51:26,253 - INFO - [INFO] DBH kategori bilgisi alınıyor...
+2025-07-11 16:51:26,275 - ERROR - Error getting fund detail (alternative) for DBH: Expecting value: line 1 column 1 (char 0)
+2025-07-11 16:51:26,275 - INFO - DBH: Fon adından tahmin edilen kategori: Eurobond Şemsiye Fonu
+2025-07-11 16:51:26,275 - INFO - [CATEGORY] DBH: Eurobond Şemsiye Fonu
+2025-07-11 16:51:26,275 - INFO - [OK] DBH başarılı
+2025-07-11 16:51:26,275 - INFO - Durum: 5/5 başarılı, 115 toplam kayıt
+2025-07-11 16:51:26,275 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 16:51:26,661 - INFO - Session başarıyla başlatıldı
+2025-07-11 16:51:27,661 - INFO - [6/7] İşleniyor: YAY
+2025-07-11 16:51:27,662 - INFO - [FETCH] YAY (YAPI KREDİ PORTFÖY YABANCI TEKNOLOJİ SEKTÖRÜ HİSSE SENEDİ FONU) verisi alınıyor...
+2025-07-11 16:51:30,706 - INFO - [OK] YAY: 23 toplam kayıt alındı
+2025-07-11 16:51:30,706 - INFO - [INFO] YAY kategori bilgisi alınıyor...
+2025-07-11 16:51:30,729 - ERROR - Error getting fund detail (alternative) for YAY: Expecting value: line 1 column 1 (char 0)
+2025-07-11 16:51:30,729 - INFO - YAY: Fon adından tahmin edilen kategori: Yabancı Hisse Senedi Şemsiye Fonu
+2025-07-11 16:51:30,730 - INFO - [CATEGORY] YAY: Yabancı Hisse Senedi Şemsiye Fonu
+2025-07-11 16:51:30,730 - INFO - [OK] YAY başarılı
+2025-07-11 16:51:30,730 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 16:51:31,009 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-11 16:51:33,274 - WARNING - Session başlatma deneme 2/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-11 16:51:35,549 - WARNING - Session başlatma deneme 3/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-11 16:51:35,549 - ERROR - Session başlatılamadı, devam ediliyor...
+2025-07-11 16:51:36,550 - INFO - [7/7] İşleniyor: AFA
+2025-07-11 16:51:36,551 - INFO - [FETCH] AFA (AK PORTFÖY  AMERİKA YABANCI HİSSE SENEDİ FONU) verisi alınıyor...
+2025-07-11 16:51:39,894 - INFO - [OK] AFA: 23 toplam kayıt alındı
+2025-07-11 16:51:39,894 - INFO - [INFO] AFA kategori bilgisi alınıyor...
+2025-07-11 16:51:39,916 - ERROR - Error getting fund detail (alternative) for AFA: Expecting value: line 1 column 1 (char 0)
+2025-07-11 16:51:39,916 - INFO - AFA: Fon adından tahmin edilen kategori: Yabancı Hisse Senedi Şemsiye Fonu
+2025-07-11 16:51:39,916 - INFO - [CATEGORY] AFA: Yabancı Hisse Senedi Şemsiye Fonu
+2025-07-11 16:51:39,917 - INFO - [OK] AFA başarılı
+2025-07-11 16:51:39,917 - INFO - [SAVE] 161 kayıt parquet dosyasına yazılıyor...
+2025-07-11 16:51:39,922 - INFO - borsa_bulten_fiyat sütunu kaldırıldı
+2025-07-11 16:51:39,964 - INFO - [SUCCESS] İNDİRME TAMAMLANDI!
+2025-07-11 16:51:39,964 - INFO - [FILE] Dosya: data\tefas_1ay_test.parquet
+2025-07-11 16:51:39,964 - INFO - [STATS] Kayıt sayısı: 161
+2025-07-11 16:51:39,964 - INFO - [FUNDS] Fon sayısı: 7
+2025-07-11 16:51:39,964 - INFO - [DATE] Tarih aralığı: 2025-06-11 - 2025-07-11
+2025-07-11 16:51:39,964 - INFO - [OK] Başarılı fonlar: 7
+2025-07-11 16:51:39,964 - INFO - [FAIL] Başarısız fonlar: 0
+2025-07-11 16:51:39,965 - INFO - [CATEGORIES] Fon kategorileri:
+2025-07-11 16:51:39,965 - INFO -   Eurobond Şemsiye Fonu: 69 fon
+2025-07-11 16:51:39,965 - INFO -   Yabancı Hisse Senedi Şemsiye Fonu: 46 fon
+2025-07-11 16:51:39,965 - INFO -   Para Piyasası Şemsiye Fonu: 46 fon
+2025-07-11 16:56:51,010 - INFO - ============================================================
+2025-07-11 16:56:51,011 - INFO - TEFAS Fon Verisi İndirme Script'i
+2025-07-11 16:56:51,011 - INFO - ============================================================
+2025-07-11 16:56:51,011 - INFO - Mod: Test (özel fon listesi)
+2025-07-11 16:56:51,011 - INFO - Tarih aralığı: Son 1 ay
+2025-07-11 16:56:51,011 - INFO - ============================================================
+2025-07-11 16:56:51,011 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 16:56:51,499 - INFO - Session başarıyla başlatıldı
+2025-07-11 16:56:51,499 - INFO - Fon listesi alınıyor...
+2025-07-11 16:56:51,499 - INFO - Fetching fresh fund list from Takasbank
+2025-07-11 16:56:52,505 - INFO - Takasbank Excel columns: ['Fon Adı', 'Fon Kodu']
+2025-07-11 16:56:52,532 - INFO - Successfully loaded 853 funds from Takasbank
+2025-07-11 16:56:52,532 - INFO - Toplam 853 fon bulundu
+2025-07-11 16:56:52,533 - INFO - [LIST] PPN - Listeden seçildi
+2025-07-11 16:56:52,533 - INFO - [LIST] PRD - Listeden seçildi
+2025-07-11 16:56:52,533 - INFO - [LIST] TLE - Listeden seçildi
+2025-07-11 16:56:52,533 - INFO - [LIST] IPV - Listeden seçildi
+2025-07-11 16:56:52,533 - INFO - [LIST] DBH - Listeden seçildi
+2025-07-11 16:56:52,533 - INFO - [LIST] YAY - Listeden seçildi
+2025-07-11 16:56:52,533 - INFO - [LIST] AFA - Listeden seçildi
+2025-07-11 16:56:52,533 - WARNING - [LIST] FUS - Fon listesinde bulunamadı, atlanıyor
+2025-07-11 16:56:52,533 - INFO - Test modu: 7 fon seçildi: PPN, PRD, TLE, IPV, DBH, YAY, AFA, FUS
+2025-07-11 16:56:52,533 - INFO - [START] 7 fon için veri indirme başlıyor...
+2025-07-11 16:56:52,534 - INFO - Hedef dosya: data\tefas_1ay_test.parquet
+2025-07-11 16:56:52,534 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 16:56:52,924 - INFO - Session başarıyla başlatıldı
+2025-07-11 16:56:53,925 - INFO - [1/7] İşleniyor: PPN
+2025-07-11 16:56:53,925 - INFO - [FETCH] PPN (NUROL PORTFÖY PARA PİYASASI (TL) FONU) verisi alınıyor...
+2025-07-11 16:56:56,987 - INFO - [OK] PPN: 23 toplam kayıt alındı
+2025-07-11 16:56:56,987 - INFO - [INFO] PPN kategori bilgisi alınıyor...
+2025-07-11 16:56:57,009 - ERROR - Error getting fund detail (alternative) for PPN: Expecting value: line 1 column 1 (char 0)
+2025-07-11 16:56:57,009 - INFO - PPN: Fon adından tahmin edilen kategori: Para Piyasası Şemsiye Fonu
+2025-07-11 16:56:57,009 - INFO - [CATEGORY] PPN: Para Piyasası Şemsiye Fonu
+2025-07-11 16:56:57,009 - INFO - [OK] PPN başarılı
+2025-07-11 16:56:57,009 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 16:56:57,413 - INFO - Session başarıyla başlatıldı
+2025-07-11 16:56:58,415 - INFO - [2/7] İşleniyor: PRD
+2025-07-11 16:56:58,415 - INFO - [FETCH] PRD (PİRAMİT PORTFÖY PARA PİYASASI (TL) FONU) verisi alınıyor...
+2025-07-11 16:57:01,453 - INFO - [OK] PRD: 23 toplam kayıt alındı
+2025-07-11 16:57:01,453 - INFO - [INFO] PRD kategori bilgisi alınıyor...
+2025-07-11 16:57:01,475 - ERROR - Error getting fund detail (alternative) for PRD: Expecting value: line 1 column 1 (char 0)
+2025-07-11 16:57:01,475 - INFO - PRD: Fon adından tahmin edilen kategori: Para Piyasası Şemsiye Fonu
+2025-07-11 16:57:01,475 - INFO - [CATEGORY] PRD: Para Piyasası Şemsiye Fonu
+2025-07-11 16:57:01,475 - INFO - [OK] PRD başarılı
+2025-07-11 16:57:01,475 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 16:57:01,875 - INFO - Session başarıyla başlatıldı
+2025-07-11 16:57:02,876 - INFO - [3/7] İşleniyor: TLE
+2025-07-11 16:57:02,876 - INFO - [FETCH] TLE (AURA PORTFÖY YABANCI BORÇLANMA ARAÇLARI FONU) verisi alınıyor...
+2025-07-11 16:57:05,917 - INFO - [OK] TLE: 23 toplam kayıt alındı
+2025-07-11 16:57:05,917 - INFO - [INFO] TLE kategori bilgisi alınıyor...
+2025-07-11 16:57:05,943 - ERROR - Error getting fund detail (alternative) for TLE: Expecting value: line 1 column 1 (char 0)
+2025-07-11 16:57:05,943 - INFO - TLE: Fon adından tahmin edilen kategori: Eurobond Şemsiye Fonu
+2025-07-11 16:57:05,943 - INFO - [CATEGORY] TLE: Eurobond Şemsiye Fonu
+2025-07-11 16:57:05,943 - INFO - [OK] TLE başarılı
+2025-07-11 16:57:05,943 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 16:57:06,352 - INFO - Session başarıyla başlatıldı
+2025-07-11 16:57:07,353 - INFO - [4/7] İşleniyor: IPV
+2025-07-11 16:57:07,354 - INFO - [FETCH] IPV (İŞ PORTFÖY EUROBOND BORÇLANMA ARAÇLARI (DÖVİZ) FONU) verisi alınıyor...
+2025-07-11 16:57:10,392 - INFO - [OK] IPV: 23 toplam kayıt alındı
+2025-07-11 16:57:10,392 - INFO - [INFO] IPV kategori bilgisi alınıyor...
+2025-07-11 16:57:10,413 - ERROR - Error getting fund detail (alternative) for IPV: Expecting value: line 1 column 1 (char 0)
+2025-07-11 16:57:10,413 - INFO - IPV: Fon adından tahmin edilen kategori: Eurobond Şemsiye Fonu
+2025-07-11 16:57:10,413 - INFO - [CATEGORY] IPV: Eurobond Şemsiye Fonu
+2025-07-11 16:57:10,413 - INFO - [OK] IPV başarılı
+2025-07-11 16:57:10,413 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 16:57:10,799 - INFO - Session başarıyla başlatıldı
+2025-07-11 16:57:11,801 - INFO - [5/7] İşleniyor: DBH
+2025-07-11 16:57:11,801 - INFO - [FETCH] DBH (DENİZ PORTFÖY EUROBOND (DÖVİZ) BORÇLANMA ARAÇLARI FONU) verisi alınıyor...
+2025-07-11 16:57:14,839 - INFO - [OK] DBH: 23 toplam kayıt alındı
+2025-07-11 16:57:14,839 - INFO - [INFO] DBH kategori bilgisi alınıyor...
+2025-07-11 16:57:14,862 - ERROR - Error getting fund detail (alternative) for DBH: Expecting value: line 1 column 1 (char 0)
+2025-07-11 16:57:14,862 - INFO - DBH: Fon adından tahmin edilen kategori: Eurobond Şemsiye Fonu
+2025-07-11 16:57:14,862 - INFO - [CATEGORY] DBH: Eurobond Şemsiye Fonu
+2025-07-11 16:57:14,862 - INFO - [OK] DBH başarılı
+2025-07-11 16:57:14,862 - INFO - Durum: 5/5 başarılı, 115 toplam kayıt
+2025-07-11 16:57:14,862 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 16:57:15,244 - INFO - Session başarıyla başlatıldı
+2025-07-11 16:57:16,246 - INFO - [6/7] İşleniyor: YAY
+2025-07-11 16:57:16,246 - INFO - [FETCH] YAY (YAPI KREDİ PORTFÖY YABANCI TEKNOLOJİ SEKTÖRÜ HİSSE SENEDİ FONU) verisi alınıyor...
+2025-07-11 16:57:19,282 - INFO - [OK] YAY: 23 toplam kayıt alındı
+2025-07-11 16:57:19,282 - INFO - [INFO] YAY kategori bilgisi alınıyor...
+2025-07-11 16:57:19,304 - ERROR - Error getting fund detail (alternative) for YAY: Expecting value: line 1 column 1 (char 0)
+2025-07-11 16:57:19,304 - INFO - YAY: Fon adından tahmin edilen kategori: Yabancı Hisse Senedi Şemsiye Fonu
+2025-07-11 16:57:19,304 - INFO - [CATEGORY] YAY: Yabancı Hisse Senedi Şemsiye Fonu
+2025-07-11 16:57:19,304 - INFO - [OK] YAY başarılı
+2025-07-11 16:57:19,304 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 16:57:19,684 - INFO - Session başarıyla başlatıldı
+2025-07-11 16:57:20,685 - INFO - [7/7] İşleniyor: AFA
+2025-07-11 16:57:20,686 - INFO - [FETCH] AFA (AK PORTFÖY  AMERİKA YABANCI HİSSE SENEDİ FONU) verisi alınıyor...
+2025-07-11 16:57:23,724 - INFO - [OK] AFA: 23 toplam kayıt alındı
+2025-07-11 16:57:23,725 - INFO - [INFO] AFA kategori bilgisi alınıyor...
+2025-07-11 16:57:23,746 - ERROR - Error getting fund detail (alternative) for AFA: Expecting value: line 1 column 1 (char 0)
+2025-07-11 16:57:23,746 - INFO - AFA: Fon adından tahmin edilen kategori: Yabancı Hisse Senedi Şemsiye Fonu
+2025-07-11 16:57:23,746 - INFO - [CATEGORY] AFA: Yabancı Hisse Senedi Şemsiye Fonu
+2025-07-11 16:57:23,746 - INFO - [OK] AFA başarılı
+2025-07-11 16:57:23,746 - INFO - [SAVE] 161 kayıt parquet dosyasına yazılıyor...
+2025-07-11 16:57:23,748 - INFO - borsa_bulten_fiyat sütunu kaldırıldı
+2025-07-11 16:57:23,759 - INFO - [SUCCESS] İNDİRME TAMAMLANDI!
+2025-07-11 16:57:23,759 - INFO - [FILE] Dosya: data\tefas_1ay_test.parquet
+2025-07-11 16:57:23,760 - INFO - [STATS] Kayıt sayısı: 161
+2025-07-11 16:57:23,760 - INFO - [FUNDS] Fon sayısı: 7
+2025-07-11 16:57:23,760 - INFO - [DATE] Tarih aralığı: 2025-06-11 - 2025-07-11
+2025-07-11 16:57:23,760 - INFO - [OK] Başarılı fonlar: 7
+2025-07-11 16:57:23,760 - INFO - [FAIL] Başarısız fonlar: 0
+2025-07-11 16:57:23,760 - INFO - [CATEGORIES] Fon kategorileri:
+2025-07-11 16:57:23,760 - INFO -   Eurobond Şemsiye Fonu: 3 fon
+2025-07-11 16:57:23,760 - INFO -   Para Piyasası Şemsiye Fonu: 2 fon
+2025-07-11 16:57:23,761 - INFO -   Yabancı Hisse Senedi Şemsiye Fonu: 2 fon

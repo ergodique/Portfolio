@@ -22,6 +22,7 @@ import logging
 import argparse
 import certifi
 from datetime import datetime, timedelta
+from dateutil.relativedelta import relativedelta
 from pathlib import Path
 
 # Gerekli modülleri import et
@@ -51,15 +52,18 @@ logger = logging.getLogger(__name__)
 class TefasDataDownloader:
     """TEFAS fon verilerini toplu olarak indiren sınıf"""
     
-    def __init__(self, test_mode=True, years_back=2, codes_list=None):
+    def __init__(self, test_mode=True, years_back=0, months_back=0, codes_list=None, output_filename=None):
         """
         Args:
             test_mode (bool): True ise sadece ilk 5 fon, False ise tüm fonlar
-            years_back (int): Kaç yıl geriye gidilecek (varsayılan: 2 yıl)
+            years_back (int): Kaç yıl geriye gidilecek (opsiyonel)
+            months_back (int): Kaç ay geriye gidilecek (opsiyonel)
             codes_list (list[str]|None): Test modunda indirilecek fon kodları listesi
+            output_filename (str|None): Parquet çıktısının dosya adı/yolu (varsayılan otomatik)
         """
         self.test_mode = test_mode
-        self.years_back = years_back
+        self.years_back = years_back or 0
+        self.months_back = months_back or 0
         # Test modu için kullanıcı tarafından verilen fon kodları
         if codes_list:
             self.codes_list = [c.strip().upper() for c in codes_list if c.strip()]
@@ -72,7 +76,19 @@ class TefasDataDownloader:
         # Dosya yolları
         self.output_dir = Path("data")
         self.output_dir.mkdir(exist_ok=True)
-        self.output_file = self.output_dir / ("tefas_test_data.parquet" if test_mode else "tefas_all_data.parquet")
+
+        # Çıktı dosyası kullanıcı tarafından belirtilmiş mi?
+        if output_filename and str(output_filename).strip():
+            custom_path = Path(str(output_filename).strip())
+            # Göreli yol ise data/ klasörü altına yaz
+            if not custom_path.is_absolute():
+                custom_path = self.output_dir / custom_path
+            # Üst dizinlerini oluştur
+            custom_path.parent.mkdir(parents=True, exist_ok=True)
+            self.output_file = custom_path
+        else:
+            # Varsayılan isimler
+            self.output_file = self.output_dir / ("tefas_test_data.parquet" if test_mode else "tefas_all_data.parquet")
         self.progress_file = self.output_dir / "download_progress.json"
         
     def _setup_provider(self):
@@ -241,9 +257,17 @@ class TefasDataDownloader:
         """Fon adından kategori tahmin et"""
         # Türkçe karakterleri normalize et
         name_normalized = self._normalize_turkish_text(fund_name)
-        
+
         # Kategori anahtar kelimeleri - normalize edilmiş ve genişletilmiş
         category_keywords = {
+            # Yabancı hisse senedi fonları mutlaka genel hisse fonlarından önce kontrol edilmeli
+            'Yabancı Hisse Senedi Şemsiye Fonu': [
+                # Anahtar kelime dizileri: Tüm elemanların isme dahil olması gerekir
+                ('yabanci', 'hisse'),
+                ('yabanci', 'borsa'),
+                'yabanci hisse', 'yabanci hisse senedi', 'foreign equity', 'foreign stock',
+                'uluslararasi hisse', 'global equity', 'global hisse'
+            ],
             'Fon Sepeti Şemsiye Fonu': [
                 'fon sepeti', 'sepet', 'basket', 'cok fonlu'
             ],
@@ -255,9 +279,13 @@ class TefasDataDownloader:
                 'hisse', 'equity', 'endeks', 'index', 'teknoloji', 'sektor',
                 'bist', 'yogun fon', 'buyume', 'hisse senedi'
             ],
+            # Önemli: Eurobond anahtar kelimeleri bu kategoride tanımlı;
+            # aşağıdaki Borçlanma Araçları kategorisinde bu kelimeler tekrar edilmemeli
+            'Eurobond Şemsiye Fonu': [
+                'yabanci borclanma', 'eurobond', 'foreign bond', 'dis borclanma'
+            ],
             'Borçlanma Araçları Şemsiye Fonu': [
-                'borclanma', 'tahvil', 'bond', 'devlet', 'ozel sektor',
-                'eurobond', 'dis borclanma'
+                'borclanma', 'tahvil', 'bond', 'devlet', 'ozel sektor'
             ],
             'Karma Şemsiye Fonu': [
                 'karma', 'mixed', 'dengeli', 'esnek'
@@ -270,8 +298,7 @@ class TefasDataDownloader:
                 'serbest', 'flexible', 'cok amacli', 'multi', 'birinci'
             ],
             'Değişken Şemsiye Fonu': [
-                'degisken', 'variable', 'robotik', 'teknoloji',
-                'yapay zeka', 'inovasyon', 'surdurulebilirlik'
+                'degisken', 'variable'
             ],
             'Katılım Şemsiye Fonu': [
                 'katilim', 'participation', 'kira sertifikasi',
@@ -288,10 +315,16 @@ class TefasDataDownloader:
         logger.debug(f"Kategori tahmin ediliyor: {fund_name} -> {name_normalized}")
         
         for category, keywords in category_keywords.items():
-            for keyword in keywords:
-                if keyword in name_normalized:
-                    logger.debug(f"Eslesen anahtar kelime: '{keyword}' -> {category}")
-                    return category
+            for kw in keywords:
+                # Eğer tuple ise tüm token'ların geçmesi gerekiyor
+                if isinstance(kw, tuple):
+                    if all(token in name_normalized for token in kw):
+                        logger.debug(f"Eslesen birleşik anahtar: {kw} -> {category}")
+                        return category
+                else:
+                    if kw in name_normalized:
+                        logger.debug(f"Eslesen anahtar kelime: '{kw}' -> {category}")
+                        return category
         
         logger.debug("Hicbir kategori eslesmedi")
         return ''
@@ -301,7 +334,12 @@ class TefasDataDownloader:
         logger.info(f"[FETCH] {fund_code} ({fund_name}) verisi alınıyor...")
         
         end_date = datetime.now().date()
-        start_date = end_date.replace(year=end_date.year - self.years_back)
+        # Tarih aralığını ay veya yıl bazında belirle
+        if self.months_back > 0:
+            start_date = end_date - relativedelta(months=self.months_back)
+        else:
+            years_back = self.years_back if self.years_back > 0 else 2  # Varsayılan 2 yıl
+            start_date = end_date.replace(year=end_date.year - years_back)
         
         # İlk olarak belirtilen tarih aralığını dene
         all_records = self._fetch_date_range(fund_code, start_date, end_date)
@@ -484,8 +522,12 @@ class TefasDataDownloader:
             unique_funds = df['fon_kodu'].nunique()
             date_range = f"{df['tarih'].min().strftime('%Y-%m-%d')} - {df['tarih'].max().strftime('%Y-%m-%d')}"
             
-            # Kategori dağılımı
-            category_counts = df['fon_kategorisi'].value_counts()
+            # Kategori başına benzersiz fon sayısı
+            category_counts = (
+                df.groupby('fon_kategorisi')['fon_kodu']
+                .nunique()
+                .sort_values(ascending=False)  # type: ignore[arg-type]
+            )
             
             logger.info("[SUCCESS] İNDİRME TAMAMLANDI!")
             logger.info(f"[FILE] Dosya: {self.output_file}")
@@ -514,22 +556,34 @@ def main():
     parser = argparse.ArgumentParser(description="TEFAS fon verilerini indir")
     parser.add_argument("--test", action="store_true", help="Test modu (özel fon listesi gerekli)")
     parser.add_argument("--full", action="store_true", help="Tüm fonları indir")
-    parser.add_argument("--years", type=int, default=2, help="Kaç yıl geriye gidilecek (varsayılan: 2)")
+    parser.add_argument("--years", type=int, default=0, help="Kaç yıl geriye gidilecek")
+    parser.add_argument("--months", type=int, default=0, help="Kaç ay geriye gidilecek (örn: 1, 6)")
     parser.add_argument("--codes", type=str, default="", help="Virgülle ayrılmış fon kodları (sadece test modu)")
+    parser.add_argument("--outfile", type=str, default="", help="Özel çıktı dosyası adı/yolu (opsiyonel)")
     
     args = parser.parse_args()
     
     if not (args.test or args.full):
         parser.error("--test veya --full seçeneklerinden birini belirtmelisiniz")
     
+    # Ay / yıl parametre kontrolü
+    if args.months > 0 and args.years > 0:
+        parser.error("--years ve --months aynı anda kullanılamaz")
+
+    months_back = args.months if args.months > 0 else 0
+    years_back = args.years if (args.years > 0 and months_back == 0) else 0
+
     test_mode = args.test
-    years_back = args.years
     
     logger.info("=" * 60)
     logger.info("TEFAS Fon Verisi İndirme Script'i")
     logger.info("=" * 60)
     logger.info(f"Mod: {'Test (özel fon listesi)' if test_mode else 'Tam (tüm fonlar)'}")
-    logger.info(f"Tarih aralığı: Son {years_back} yıl")
+    if months_back > 0:
+        logger.info(f"Tarih aralığı: Son {months_back} ay")
+    else:
+        years_back_log = years_back if years_back > 0 else 2
+        logger.info(f"Tarih aralığı: Son {years_back_log} yıl")
     logger.info("=" * 60)
     
     # Test modu için fon kodlarını liste olarak hazırla
@@ -540,7 +594,7 @@ def main():
         codes_list = [c.strip().upper() for c in args.codes.split(',') if c.strip()]
 
     try:
-        downloader = TefasDataDownloader(test_mode=test_mode, years_back=years_back, codes_list=codes_list)
+        downloader = TefasDataDownloader(test_mode=test_mode, years_back=years_back, months_back=months_back, codes_list=codes_list, output_filename=args.outfile if args.outfile else None)
         downloader.process_all_funds()
         
     except KeyboardInterrupt:
