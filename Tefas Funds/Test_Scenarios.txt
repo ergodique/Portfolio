@@ -1,0 +1,70 @@
+Test senaryoları ve örnek CLI komutları (TEFAS Downloader Repair)
+================================================================
+
+1. Eksik fonların/tarihlerin tamamlanması
+----------------------------------------
+Senaryo: **Tam indirme** yapıldı ancak `XYZ` ve `ABC` fonları hata aldı.
+Hedef: Sadece bu fonların 2025-01-01 – 2025-05-01 aralığındaki verilerini indirip mevcut dosyaya eklemek.
+
+Komut:
+```
+python tefas_download_data.py --repair \
+       --infile data/tefas_full.parquet \
+       --codes XYZ,ABC \
+       --dates 20250101 20250501 \
+       --outfile tefas_full_repaired.parquet
+```
+
+Beklenen:
+• Çıktı `data/tefas_full_repaired.parquet` (veya belirtilen dosya)
+• Logda `[REPAIR]` blokları, `Yeni eklenen` > 0
+• Kayıt sayısı ve fon sayısında artış.
+
+2. Son 1 ayı güncelleme (tüm fonlar)
+------------------------------------
+Senaryo: Bir ay önce indirilen tam dosyanın güncellenmesi.
+
+Komut:
+```
+python tefas_download_data.py --repair \
+       --infile data/tefas_full.parquet
+```
+
+Beklenen:
+• Her fon için son tarihten bugüne kadar eksik günler eklenir.
+• `Yeni eklenen` kayıtlarda > 0, toplam kayıt artar.
+• Fon sayısı değişmeyebilir.
+
+3. Eksik fon ekleme (dosyada hiç olmayan fon)
+--------------------------------------------
+Senaryo: Parquet’te bulunmayan `DEF` fonunun tüm geçmişinin eklenmesi.
+
+Komut:
+```
+python tefas_download_data.py --repair \
+       --infile data/tefas_subset.parquet \
+       --codes DEF
+```
+
+Beklenen:
+• Çıktı dosyasında `DEF` fonu yer alır.
+• Fon sayısı +1.
+
+4. Tarih aralığı olmadan tek fonu güncelleme
+-------------------------------------------
+Senaryo: `GHI` fonu dosyada var; sadece son veriler eksik. Başlangıç/bitiş tarihi verilmeden tamamlanacak.
+
+Komut:
+```
+python tefas_download_data.py --repair \
+       --infile data/tefas_full.parquet \
+       --codes GHI
+```
+
+Beklenen:
+• `GHI` için son tarih +1 günden bugüne eksik kayıtlar eklenir.
+
+Notlar
+------
+* Tüm komutlar Windows PowerShell’de çalıştırılmıştır.
+* Her çalıştırmada `log/tefas_download_YYYYMMDD_HHMMSS.log` dosyası oluşur ve komut satırı (`CMD:`) log başında kayıtlıdır. 

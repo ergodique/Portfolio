@@ -25,6 +25,14 @@ from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 from pathlib import Path
 
+# ---------------------------------------------------------------------------
+# LOGGING SETUP – her çalıştırma için ayrı dosya
+# ---------------------------------------------------------------------------
+# log/ klasörü oluştur ve zaman damgalı bir dosya adı hazırla
+log_dir = Path("log")
+log_dir.mkdir(exist_ok=True)
+_log_file = log_dir / f"tefas_download_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
+
 # Gerekli modülleri import et
 import pandas as pd
 import pyarrow as pa
@@ -38,16 +46,19 @@ import pyarrow.parquet as pq
 from providers.tefas_provider import TefasProvider
 from tls12_adapter import TLS12Adapter
 
-# Logging ayarları
+# Logging ayarları – hem dosya hem stdout
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('tefas_download.log', encoding='utf-8'),
+        logging.FileHandler(_log_file, encoding='utf-8'),
         logging.StreamHandler()
     ]
 )
 logger = logging.getLogger(__name__)
+
+# Komut satırını logla
+logger.info("CMD: %s", " ".join(sys.argv))
 
 class TefasDataDownloader:
     """TEFAS fon verilerini toplu olarak indiren sınıf"""
@@ -79,13 +90,10 @@ class TefasDataDownloader:
 
         # Çıktı dosyası kullanıcı tarafından belirtilmiş mi?
         if output_filename and str(output_filename).strip():
-            custom_path = Path(str(output_filename).strip())
-            # Göreli yol ise data/ klasörü altına yaz
-            if not custom_path.is_absolute():
-                custom_path = self.output_dir / custom_path
-            # Üst dizinlerini oluştur
-            custom_path.parent.mkdir(parents=True, exist_ok=True)
-            self.output_file = custom_path
+            # Kullanıcı yalnızca dosya adını parametre olarak verebilir.
+            # Verilen değerde dizin bilgisi olsa bile yoksayılır; daima data/ altında yazılır.
+            filename_only = Path(str(output_filename).strip()).name
+            self.output_file = self.output_dir / filename_only
         else:
             # Varsayılan isimler
             self.output_file = self.output_dir / ("tefas_test_data.parquet" if test_mode else "tefas_all_data.parquet")
@@ -551,6 +559,102 @@ class TefasDataDownloader:
             logger.error(f"Kaydetme hatası: {e}")
             raise
 
+    def repair_existing_data(self, input_file: Path, codes_list: list[str] | None = None, start_date: datetime | None = None, end_date: datetime | None = None, output_file: Path | None = None):
+        """Var olan parquet dosyasındaki eksik/güncel verileri tamamlar.
+
+        Args:
+            input_file (Path): Mevcut parquet veri dosyası.
+            codes_list (list[str]|None): Sadece belirtilen fon kodları için onarım yapılacaksa.
+            start_date (datetime|None): Başlangıç tarihi (opsiyonel).
+            end_date (datetime|None): Bitiş tarihi (opsiyonel, varsayılan bugün).
+            output_file (Path|None): Çıktı dosyası (varsayılan input_file üzerine yazar).
+        """
+        logger.info("[REPAIR] Başlatıldı: %s", input_file)
+
+        if not input_file.exists():
+            raise FileNotFoundError(f"Giriş dosyası bulunamadı: {input_file}")
+
+        df_existing = pq.read_table(input_file).to_pandas()
+        logger.info("[REPAIR] Var olan kayıt: %d", len(df_existing))
+
+        # Fon listesi – Takasbank'tan çek
+        all_funds = {f['fon_kodu']: f for f in self.provider._get_takasbank_fund_list()}
+
+        # Hedef fon kodları
+        if codes_list:
+            target_codes = [c.strip().upper() for c in codes_list if c.strip()]
+        else:
+            target_codes = sorted(df_existing['fon_kodu'].unique())
+
+        # Tarih aralığı
+        # Kullanıcı yalnızca başlangıç verdi ise bitiş 'bugün' olsun (datetime)
+        if start_date and not end_date:
+            end_date = datetime.today()
+        if end_date and not start_date:
+            # Sadece bitiş tarihi verilmişse her fon için kendi son tarihinden başlanır
+            start_date = None  # Fon bazlı belirlenecek
+
+        all_new_records: list[dict] = []
+        successful = 0
+        failed: list[str] = []
+
+        for code in target_codes:
+            fund_name = all_funds.get(code, {}).get('fon_adi', code)
+            logger.info("[REPAIR] %s işleniyor", code)
+            try:
+                # Fon dataset'te var mı?
+                if code in df_existing['fon_kodu'].values:
+                    fund_df = df_existing[df_existing['fon_kodu'] == code]
+                    last_dt = fund_df['tarih'].max().date()
+                    # Kullanıcı başlangıç verdi mi? Eğer vermediyse last_dt+1 kullan
+                    sd = start_date.date() if start_date else (last_dt + timedelta(days=1))
+                else:
+                    # Fon hiç yok, tamamen indir
+                    sd = start_date.date() if start_date else None
+
+                ed = end_date.date() if end_date else datetime.today().date()
+
+                if sd is None:
+                    # Tüm geçmişi çek
+                    history = self.fetch_fund_history(code, fund_name)
+                else:
+                    history = self._fetch_date_range(code, sd, ed, allow_gaps=True)
+
+                if history:
+                    category = self.get_fund_category(code, fund_name)
+                    for rec in history:
+                        rec['fon_kodu'] = code
+                        rec['fon_kategorisi'] = category
+                    all_new_records.extend(history)
+                    successful += 1
+                else:
+                    logger.warning("[REPAIR] %s için yeni veri bulunamadı", code)
+            except Exception as e:
+                failed.append(code)
+                logger.error("[REPAIR-ERROR] %s: %s", code, e)
+
+        if not all_new_records:
+            logger.warning("[REPAIR] Hiç yeni kayıt eklenmedi")
+            return
+
+        df_new = pd.DataFrame(all_new_records)
+        df_new['tarih'] = pd.to_datetime(df_new['tarih'])
+
+        # Birleştir
+        df_combined = pd.concat([df_existing, df_new], ignore_index=True)
+        df_combined = (
+            df_combined
+            .sort_values(['fon_kodu', 'tarih'])
+            .drop_duplicates(['fon_kodu', 'tarih'])
+            .reset_index(drop=True)
+        )
+
+        out_file = output_file if output_file else input_file
+        out_file.parent.mkdir(exist_ok=True, parents=True)
+        pq.write_table(pa.Table.from_pandas(df_combined), out_file, compression="zstd")
+
+        logger.info("[REPAIR] Tamamlandı ➜ %s | Toplam kayıt: %d | Yeni eklenen: %d | Başarılı fon: %d | Hatalı fon: %d", out_file, len(df_combined), len(df_new), successful, len(failed))
+
 def main():
     """Ana fonksiyon"""
     parser = argparse.ArgumentParser(description="TEFAS fon verilerini indir")
@@ -560,11 +664,14 @@ def main():
     parser.add_argument("--months", type=int, default=0, help="Kaç ay geriye gidilecek (örn: 1, 6)")
     parser.add_argument("--codes", type=str, default="", help="Virgülle ayrılmış fon kodları (sadece test modu)")
     parser.add_argument("--outfile", type=str, default="", help="Özel çıktı dosyası adı/yolu (opsiyonel)")
+    parser.add_argument("--infile", type=str, default="", help="Var olan parquet dosyası (repair modu)")
+    parser.add_argument("--repair", action="store_true", help="Repair/onarma modu")
+    parser.add_argument("--dates", nargs=2, metavar=("START", "END"), help="Başlangıç ve bitiş tarihleri YYYYMMDD (repair modu)")
     
     args = parser.parse_args()
     
-    if not (args.test or args.full):
-        parser.error("--test veya --full seçeneklerinden birini belirtmelisiniz")
+    if not (args.test or args.full or args.repair):
+        parser.error("--test, --full veya --repair seçeneklerinden birini belirtmelisiniz")
     
     # Ay / yıl parametre kontrolü
     if args.months > 0 and args.years > 0:
@@ -592,6 +699,26 @@ def main():
         if not args.codes:
             parser.error("--test modunda --codes parametresi ile en az bir fon kodu belirtmelisiniz")
         codes_list = [c.strip().upper() for c in args.codes.split(',') if c.strip()]
+
+    if args.repair:
+        if not args.infile:
+            parser.error("--repair için --infile zorunlu")
+
+        # Kod listesi hazırla (opsiyonel)
+        repair_codes = [c.strip().upper() for c in args.codes.split(',') if c.strip()] if args.codes else []
+
+        # Tarih aralığı parse
+        sd = ed = None
+        if args.dates:
+            try:
+                sd = datetime.strptime(args.dates[0], "%Y%m%d")
+                ed = datetime.strptime(args.dates[1], "%Y%m%d")
+            except Exception:
+                parser.error("--dates YYYYMMDD YYYYMMDD formatında olmalı")
+
+        downloader = TefasDataDownloader(test_mode=False)
+        downloader.repair_existing_data(Path(args.infile), codes_list=repair_codes if repair_codes else None, start_date=sd, end_date=ed, output_file=Path(args.outfile) if args.outfile else None)
+        return
 
     try:
         downloader = TefasDataDownloader(test_mode=test_mode, years_back=years_back, months_back=months_back, codes_list=codes_list, output_filename=args.outfile if args.outfile else None)

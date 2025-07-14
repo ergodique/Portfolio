@@ -9889,3 +9889,452 @@
 2025-07-11 18:40:39,819 - INFO - Session başarıyla başlatıldı
 2025-07-11 18:40:40,820 - INFO - [811/853] İşleniyor: YSL
 2025-07-11 18:40:40,820 - INFO - [FETCH] YSL (YAPI KREDİ PORTFÖY KAR PAYI ÖDEYEN KİRA SERTİFİKALARI KATILIM SERBEST (DÖVİZ) FON) verisi alınıyor...
+2025-07-11 18:40:43,862 - INFO - [OK] YSL: 23 toplam kayıt alındı
+2025-07-11 18:40:43,862 - INFO - [INFO] YSL kategori bilgisi alınıyor...
+2025-07-11 18:40:43,882 - ERROR - Error getting fund detail (alternative) for YSL: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:40:43,883 - INFO - YSL: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-11 18:40:43,883 - INFO - [CATEGORY] YSL: Serbest Şemsiye Fonu
+2025-07-11 18:40:43,883 - INFO - [OK] YSL başarılı
+2025-07-11 18:40:43,883 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:40:44,303 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:40:45,303 - INFO - [812/853] İşleniyor: YSO
+2025-07-11 18:40:45,304 - INFO - [FETCH] YSO (YAPI KREDİ PORTFÖY SAĞLIK SEKTÖRÜ SERBEST FON) verisi alınıyor...
+2025-07-11 18:40:48,343 - INFO - [OK] YSO: 23 toplam kayıt alındı
+2025-07-11 18:40:48,343 - INFO - [INFO] YSO kategori bilgisi alınıyor...
+2025-07-11 18:40:48,363 - ERROR - Error getting fund detail (alternative) for YSO: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:40:48,364 - INFO - YSO: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-11 18:40:48,364 - INFO - [CATEGORY] YSO: Hisse Senedi Şemsiye Fonu
+2025-07-11 18:40:48,364 - INFO - [OK] YSO başarılı
+2025-07-11 18:40:48,364 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:40:48,673 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-11 18:40:51,052 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:40:52,053 - INFO - [813/853] İşleniyor: YSU
+2025-07-11 18:40:52,054 - INFO - [FETCH] YSU (YAPI KREDİ PORTFÖY ÜÇÜNCÜ DEĞİŞKEN FON) verisi alınıyor...
+2025-07-11 18:40:55,136 - INFO - [OK] YSU: 23 toplam kayıt alındı
+2025-07-11 18:40:55,136 - INFO - [INFO] YSU kategori bilgisi alınıyor...
+2025-07-11 18:40:55,159 - ERROR - Error getting fund detail (alternative) for YSU: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:40:55,159 - INFO - YSU: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-11 18:40:55,159 - INFO - [CATEGORY] YSU: Değişken Şemsiye Fonu
+2025-07-11 18:40:55,159 - INFO - [OK] YSU başarılı
+2025-07-11 18:40:55,160 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:40:55,585 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:40:56,586 - INFO - [814/853] İşleniyor: YTD
+2025-07-11 18:40:56,586 - INFO - [FETCH] YTD (YAPI KREDİ PORTFÖY YABANCI FON SEPETİ FONU) verisi alınıyor...
+2025-07-11 18:40:59,626 - INFO - [OK] YTD: 23 toplam kayıt alındı
+2025-07-11 18:40:59,626 - INFO - [INFO] YTD kategori bilgisi alınıyor...
+2025-07-11 18:40:59,662 - ERROR - Error getting fund detail (alternative) for YTD: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:40:59,663 - INFO - YTD: Fon adından tahmin edilen kategori: Fon Sepeti Şemsiye Fonu
+2025-07-11 18:40:59,663 - INFO - [CATEGORY] YTD: Fon Sepeti Şemsiye Fonu
+2025-07-11 18:40:59,663 - INFO - [OK] YTD başarılı
+2025-07-11 18:40:59,663 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:41:00,063 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:41:01,065 - INFO - [815/853] İşleniyor: YTV
+2025-07-11 18:41:01,065 - INFO - [FETCH] YTV (YAPI KREDİ PORTFÖY TARIM DEĞİŞKEN FON) verisi alınıyor...
+2025-07-11 18:41:04,111 - INFO - [OK] YTV: 23 toplam kayıt alındı
+2025-07-11 18:41:04,111 - INFO - [INFO] YTV kategori bilgisi alınıyor...
+2025-07-11 18:41:04,136 - ERROR - Error getting fund detail (alternative) for YTV: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:41:04,136 - INFO - YTV: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-11 18:41:04,136 - INFO - [CATEGORY] YTV: Değişken Şemsiye Fonu
+2025-07-11 18:41:04,136 - INFO - [OK] YTV başarılı
+2025-07-11 18:41:04,136 - INFO - Durum: 812/815 başarılı, 18392 toplam kayıt
+2025-07-11 18:41:04,136 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:41:04,552 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:41:05,555 - INFO - [816/853] İşleniyor: YTY
+2025-07-11 18:41:05,555 - INFO - [FETCH] YTY (YAPI KREDİ PORTFÖY TARABYA SERBEST (DÖVİZ-AVRO) FON) verisi alınıyor...
+2025-07-11 18:41:08,596 - INFO - [OK] YTY: 23 toplam kayıt alındı
+2025-07-11 18:41:08,597 - INFO - [INFO] YTY kategori bilgisi alınıyor...
+2025-07-11 18:41:08,619 - ERROR - Error getting fund detail (alternative) for YTY: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:41:08,620 - INFO - YTY: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-11 18:41:08,620 - INFO - [CATEGORY] YTY: Serbest Şemsiye Fonu
+2025-07-11 18:41:08,620 - INFO - [OK] YTY başarılı
+2025-07-11 18:41:08,620 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:41:08,999 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:41:10,001 - INFO - [817/853] İşleniyor: YUB
+2025-07-11 18:41:10,002 - INFO - [FETCH] YUB (YAPI KREDİ PORTFÖY KARAKÖY HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)) verisi alınıyor...
+2025-07-11 18:41:13,039 - INFO - [OK] YUB: 23 toplam kayıt alındı
+2025-07-11 18:41:13,040 - INFO - [INFO] YUB kategori bilgisi alınıyor...
+2025-07-11 18:41:13,061 - ERROR - Error getting fund detail (alternative) for YUB: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:41:13,061 - INFO - YUB: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-11 18:41:13,061 - INFO - [CATEGORY] YUB: Hisse Senedi Şemsiye Fonu
+2025-07-11 18:41:13,061 - INFO - [OK] YUB başarılı
+2025-07-11 18:41:13,061 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:41:13,342 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-11 18:41:15,735 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:41:16,736 - INFO - [818/853] İşleniyor: YUN
+2025-07-11 18:41:16,737 - INFO - [FETCH] YUN (YAPI KREDİ PORTFÖY İSTİNYE SERBEST (DÖVİZ) FON) verisi alınıyor...
+2025-07-11 18:41:19,775 - INFO - [OK] YUN: 23 toplam kayıt alındı
+2025-07-11 18:41:19,775 - INFO - [INFO] YUN kategori bilgisi alınıyor...
+2025-07-11 18:41:19,797 - ERROR - Error getting fund detail (alternative) for YUN: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:41:19,797 - INFO - YUN: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-11 18:41:19,797 - INFO - [CATEGORY] YUN: Serbest Şemsiye Fonu
+2025-07-11 18:41:19,797 - INFO - [OK] YUN başarılı
+2025-07-11 18:41:19,797 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:41:20,182 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:41:21,183 - INFO - [819/853] İşleniyor: YVB
+2025-07-11 18:41:21,183 - INFO - [FETCH] YVB (YAPI KREDİ PORTFÖY UZUN VADELİ BORÇLANMA ARAÇLARI FONU) verisi alınıyor...
+2025-07-11 18:41:24,222 - INFO - [OK] YVB: 23 toplam kayıt alındı
+2025-07-11 18:41:24,222 - INFO - [INFO] YVB kategori bilgisi alınıyor...
+2025-07-11 18:41:24,243 - ERROR - Error getting fund detail (alternative) for YVB: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:41:24,243 - INFO - YVB: Fon adından tahmin edilen kategori: Borçlanma Araçları Şemsiye Fonu
+2025-07-11 18:41:24,243 - INFO - [CATEGORY] YVB: Borçlanma Araçları Şemsiye Fonu
+2025-07-11 18:41:24,243 - INFO - [OK] YVB başarılı
+2025-07-11 18:41:24,243 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:41:24,630 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:41:25,631 - INFO - [820/853] İşleniyor: YVG
+2025-07-11 18:41:25,631 - INFO - [FETCH] YVG (YAPI KREDİ PORTFÖY SARIYER SERBEST (DÖVİZ-AVRO) FON) verisi alınıyor...
+2025-07-11 18:41:28,668 - INFO - [OK] YVG: 23 toplam kayıt alındı
+2025-07-11 18:41:28,668 - INFO - [INFO] YVG kategori bilgisi alınıyor...
+2025-07-11 18:41:28,692 - ERROR - Error getting fund detail (alternative) for YVG: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:41:28,693 - INFO - YVG: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-11 18:41:28,693 - INFO - [CATEGORY] YVG: Serbest Şemsiye Fonu
+2025-07-11 18:41:28,693 - INFO - [OK] YVG başarılı
+2025-07-11 18:41:28,693 - INFO - Durum: 817/820 başarılı, 18507 toplam kayıt
+2025-07-11 18:41:28,693 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:41:29,083 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:41:30,085 - INFO - [821/853] İşleniyor: YZC
+2025-07-11 18:41:30,085 - INFO - [FETCH] YZC (YAPI KREDİ PORTFÖY FİNTECH VE BLOCKCHAİN TEKNOLOJİLERİ DEĞİŞKEN FON) verisi alınıyor...
+2025-07-11 18:41:33,123 - INFO - [OK] YZC: 23 toplam kayıt alındı
+2025-07-11 18:41:33,123 - INFO - [INFO] YZC kategori bilgisi alınıyor...
+2025-07-11 18:41:33,146 - ERROR - Error getting fund detail (alternative) for YZC: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:41:33,146 - INFO - YZC: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-11 18:41:33,146 - INFO - [CATEGORY] YZC: Hisse Senedi Şemsiye Fonu
+2025-07-11 18:41:33,146 - INFO - [OK] YZC başarılı
+2025-07-11 18:41:33,146 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:41:33,526 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:41:34,527 - INFO - [822/853] İşleniyor: YZG
+2025-07-11 18:41:34,527 - INFO - [FETCH] YZG (YAPI KREDİ PORTFÖY GÜMÜŞ FON SEPETİ FONU) verisi alınıyor...
+2025-07-11 18:41:37,563 - INFO - [OK] YZG: 23 toplam kayıt alındı
+2025-07-11 18:41:37,563 - INFO - [INFO] YZG kategori bilgisi alınıyor...
+2025-07-11 18:41:37,584 - ERROR - Error getting fund detail (alternative) for YZG: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:41:37,585 - INFO - YZG: Fon adından tahmin edilen kategori: Fon Sepeti Şemsiye Fonu
+2025-07-11 18:41:37,585 - INFO - [CATEGORY] YZG: Fon Sepeti Şemsiye Fonu
+2025-07-11 18:41:37,586 - INFO - [OK] YZG başarılı
+2025-07-11 18:41:37,586 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:41:37,983 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:41:38,985 - INFO - [823/853] İşleniyor: YZH
+2025-07-11 18:41:38,986 - INFO - [FETCH] YZH (TEB PORTFÖY BIST BANKA ENDEKSİ HİSSE SENEDİ FONU (HİSSE SENEDİ YOĞUN)) verisi alınıyor...
+2025-07-11 18:41:42,022 - INFO - [OK] YZH: 23 toplam kayıt alındı
+2025-07-11 18:41:42,022 - INFO - [INFO] YZH kategori bilgisi alınıyor...
+2025-07-11 18:41:42,048 - ERROR - Error getting fund detail (alternative) for YZH: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:41:42,048 - INFO - YZH: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-11 18:41:42,048 - INFO - [CATEGORY] YZH: Hisse Senedi Şemsiye Fonu
+2025-07-11 18:41:42,048 - INFO - [OK] YZH başarılı
+2025-07-11 18:41:42,049 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:41:42,434 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:41:43,436 - INFO - [824/853] İşleniyor: YZK
+2025-07-11 18:41:43,436 - INFO - [FETCH] YZK (YAPI KREDİ PORTFÖY KALAMIŞ SERBEST FON) verisi alınıyor...
+2025-07-11 18:41:46,477 - INFO - [OK] YZK: 23 toplam kayıt alındı
+2025-07-11 18:41:46,477 - INFO - [INFO] YZK kategori bilgisi alınıyor...
+2025-07-11 18:41:46,498 - ERROR - Error getting fund detail (alternative) for YZK: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:41:46,498 - INFO - YZK: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-11 18:41:46,499 - INFO - [CATEGORY] YZK: Serbest Şemsiye Fonu
+2025-07-11 18:41:46,499 - INFO - [OK] YZK başarılı
+2025-07-11 18:41:46,499 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:41:46,773 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-11 18:41:49,038 - WARNING - Session başlatma deneme 2/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-11 18:41:51,423 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:41:52,425 - INFO - [825/853] İşleniyor: ZBD
+2025-07-11 18:41:52,425 - INFO - [FETCH] ZBD (ZİRAAT PORTFÖY DENGELİ DEĞİŞKEN FON) verisi alınıyor...
+2025-07-11 18:41:55,472 - INFO - [OK] ZBD: 23 toplam kayıt alındı
+2025-07-11 18:41:55,472 - INFO - [INFO] ZBD kategori bilgisi alınıyor...
+2025-07-11 18:41:55,494 - ERROR - Error getting fund detail (alternative) for ZBD: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:41:55,494 - INFO - ZBD: Fon adından tahmin edilen kategori: Karma Şemsiye Fonu
+2025-07-11 18:41:55,494 - INFO - [CATEGORY] ZBD: Karma Şemsiye Fonu
+2025-07-11 18:41:55,494 - INFO - [OK] ZBD başarılı
+2025-07-11 18:41:55,494 - INFO - Durum: 822/825 başarılı, 18622 toplam kayıt
+2025-07-11 18:41:55,494 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:41:55,880 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:41:56,882 - INFO - [826/853] İşleniyor: ZBI
+2025-07-11 18:41:56,882 - INFO - [FETCH] ZBI (ZİRAAT PORTFÖY ÇOKLU VARLIK BİRİNCİ KATILIM FONU) verisi alınıyor...
+2025-07-11 18:41:59,922 - INFO - [OK] ZBI: 23 toplam kayıt alındı
+2025-07-11 18:41:59,922 - INFO - [INFO] ZBI kategori bilgisi alınıyor...
+2025-07-11 18:41:59,943 - ERROR - Error getting fund detail (alternative) for ZBI: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:41:59,943 - INFO - ZBI: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-11 18:41:59,943 - INFO - [CATEGORY] ZBI: Serbest Şemsiye Fonu
+2025-07-11 18:41:59,943 - INFO - [OK] ZBI başarılı
+2025-07-11 18:41:59,943 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:42:00,351 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:42:01,353 - INFO - [827/853] İşleniyor: ZBJ
+2025-07-11 18:42:01,354 - INFO - [FETCH] ZBJ (ZİRAAT PORTFÖY BAŞAK PARA PİYASASI (TL) FONU) verisi alınıyor...
+2025-07-11 18:42:04,411 - INFO - [OK] ZBJ: 23 toplam kayıt alındı
+2025-07-11 18:42:04,411 - INFO - [INFO] ZBJ kategori bilgisi alınıyor...
+2025-07-11 18:42:04,432 - ERROR - Error getting fund detail (alternative) for ZBJ: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:42:04,433 - INFO - ZBJ: Fon adından tahmin edilen kategori: Para Piyasası Şemsiye Fonu
+2025-07-11 18:42:04,433 - INFO - [CATEGORY] ZBJ: Para Piyasası Şemsiye Fonu
+2025-07-11 18:42:04,433 - INFO - [OK] ZBJ başarılı
+2025-07-11 18:42:04,433 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:42:04,714 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-11 18:42:07,089 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:42:08,091 - INFO - [828/853] İşleniyor: ZBO
+2025-07-11 18:42:08,091 - INFO - [FETCH] ZBO (ZİRAAT PORTFÖY MUTLAK GETİRİ HEDEFLİ HİSSE SENEDİ SERBEST FON (HİSSE SENEDİ YOĞUN FON)) verisi alınıyor...
+2025-07-11 18:42:11,127 - INFO - [OK] ZBO: 23 toplam kayıt alındı
+2025-07-11 18:42:11,127 - INFO - [INFO] ZBO kategori bilgisi alınıyor...
+2025-07-11 18:42:11,149 - ERROR - Error getting fund detail (alternative) for ZBO: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:42:11,150 - INFO - ZBO: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-11 18:42:11,150 - INFO - [CATEGORY] ZBO: Hisse Senedi Şemsiye Fonu
+2025-07-11 18:42:11,150 - INFO - [OK] ZBO başarılı
+2025-07-11 18:42:11,150 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:42:11,550 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:42:12,550 - INFO - [829/853] İşleniyor: ZCD
+2025-07-11 18:42:12,551 - INFO - [FETCH] ZCD (ZİRAAT PORTFÖY ALTINCI SERBEST (TL) FON) verisi alınıyor...
+2025-07-11 18:42:15,589 - INFO - [OK] ZCD: 23 toplam kayıt alındı
+2025-07-11 18:42:15,590 - INFO - [INFO] ZCD kategori bilgisi alınıyor...
+2025-07-11 18:42:15,611 - ERROR - Error getting fund detail (alternative) for ZCD: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:42:15,611 - INFO - ZCD: Fon adından tahmin edilen kategori: Kıymetli Madenler Şemsiye Fonu
+2025-07-11 18:42:15,611 - INFO - [CATEGORY] ZCD: Kıymetli Madenler Şemsiye Fonu
+2025-07-11 18:42:15,611 - INFO - [OK] ZCD başarılı
+2025-07-11 18:42:15,611 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:42:16,001 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:42:17,003 - INFO - [830/853] İşleniyor: ZCK
+2025-07-11 18:42:17,003 - INFO - [FETCH] ZCK (ZİRAAT PORTFÖY ÇOKLU VARLIK İKİNCİ KATILIM FONU) verisi alınıyor...
+2025-07-11 18:42:20,041 - INFO - [OK] ZCK: 23 toplam kayıt alındı
+2025-07-11 18:42:20,041 - INFO - [INFO] ZCK kategori bilgisi alınıyor...
+2025-07-11 18:42:20,064 - ERROR - Error getting fund detail (alternative) for ZCK: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:42:20,065 - INFO - ZCK: Fon adından tahmin edilen kategori: Katılım Şemsiye Fonu
+2025-07-11 18:42:20,065 - INFO - [CATEGORY] ZCK: Katılım Şemsiye Fonu
+2025-07-11 18:42:20,065 - INFO - [OK] ZCK başarılı
+2025-07-11 18:42:20,065 - INFO - Durum: 827/830 başarılı, 18737 toplam kayıt
+2025-07-11 18:42:20,065 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:42:20,448 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:42:21,449 - INFO - [831/853] İşleniyor: ZCN
+2025-07-11 18:42:21,450 - INFO - [FETCH] ZCN (ZİRAAT PORTFÖY EMTİA FON SEPETİ FONU) verisi alınıyor...
+2025-07-11 18:42:24,487 - INFO - [OK] ZCN: 23 toplam kayıt alındı
+2025-07-11 18:42:24,487 - INFO - [INFO] ZCN kategori bilgisi alınıyor...
+2025-07-11 18:42:24,508 - ERROR - Error getting fund detail (alternative) for ZCN: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:42:24,508 - INFO - ZCN: Fon adından tahmin edilen kategori: Fon Sepeti Şemsiye Fonu
+2025-07-11 18:42:24,509 - INFO - [CATEGORY] ZCN: Fon Sepeti Şemsiye Fonu
+2025-07-11 18:42:24,509 - INFO - [OK] ZCN başarılı
+2025-07-11 18:42:24,509 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:42:24,891 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:42:25,893 - INFO - [832/853] İşleniyor: ZDD
+2025-07-11 18:42:25,893 - INFO - [FETCH] ZDD (ZİRAAT PORTFÖY TEMKİNLİ DEĞİŞKEN FON) verisi alınıyor...
+2025-07-11 18:42:28,930 - INFO - [OK] ZDD: 23 toplam kayıt alındı
+2025-07-11 18:42:28,931 - INFO - [INFO] ZDD kategori bilgisi alınıyor...
+2025-07-11 18:42:28,952 - ERROR - Error getting fund detail (alternative) for ZDD: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:42:28,952 - INFO - ZDD: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-11 18:42:28,953 - INFO - [CATEGORY] ZDD: Değişken Şemsiye Fonu
+2025-07-11 18:42:28,953 - INFO - [OK] ZDD başarılı
+2025-07-11 18:42:28,953 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:42:29,335 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:42:30,337 - INFO - [833/853] İşleniyor: ZDZ
+2025-07-11 18:42:30,337 - INFO - [FETCH] ZDZ (ZİRAAT PORTFÖY AGRESİF DEĞİŞKEN FON) verisi alınıyor...
+2025-07-11 18:42:33,373 - INFO - [OK] ZDZ: 23 toplam kayıt alındı
+2025-07-11 18:42:33,373 - INFO - [INFO] ZDZ kategori bilgisi alınıyor...
+2025-07-11 18:42:33,394 - ERROR - Error getting fund detail (alternative) for ZDZ: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:42:33,394 - INFO - ZDZ: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-11 18:42:33,395 - INFO - [CATEGORY] ZDZ: Değişken Şemsiye Fonu
+2025-07-11 18:42:33,395 - INFO - [OK] ZDZ başarılı
+2025-07-11 18:42:33,395 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:42:33,808 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:42:34,810 - INFO - [834/853] İşleniyor: ZFB
+2025-07-11 18:42:34,810 - INFO - [FETCH] ZFB (AK PORTFÖY FİNTEK VE BLOKZİNCİRİ TEKNOLOJİLERİ DEĞİŞKEN FON) verisi alınıyor...
+2025-07-11 18:42:37,846 - INFO - [OK] ZFB: 23 toplam kayıt alındı
+2025-07-11 18:42:37,847 - INFO - [INFO] ZFB kategori bilgisi alınıyor...
+2025-07-11 18:42:37,874 - ERROR - Error getting fund detail (alternative) for ZFB: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:42:37,874 - INFO - ZFB: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-11 18:42:37,874 - INFO - [CATEGORY] ZFB: Hisse Senedi Şemsiye Fonu
+2025-07-11 18:42:37,874 - INFO - [OK] ZFB başarılı
+2025-07-11 18:42:37,875 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:42:38,267 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:42:39,268 - INFO - [835/853] İşleniyor: ZHH
+2025-07-11 18:42:39,269 - INFO - [FETCH] ZHH (ZİRAAT PORTFÖY HALKBANK SÜRDÜRÜLEBİLİRLİK 30 ŞİRKETLERİ HİSSE SENEDİ FONU (HİSSE SENEDİ YOĞUN FON)) verisi alınıyor...
+2025-07-11 18:42:42,306 - INFO - [OK] ZHH: 23 toplam kayıt alındı
+2025-07-11 18:42:42,306 - INFO - [INFO] ZHH kategori bilgisi alınıyor...
+2025-07-11 18:42:42,327 - ERROR - Error getting fund detail (alternative) for ZHH: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:42:42,327 - INFO - ZHH: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-11 18:42:42,327 - INFO - [CATEGORY] ZHH: Hisse Senedi Şemsiye Fonu
+2025-07-11 18:42:42,327 - INFO - [OK] ZHH başarılı
+2025-07-11 18:42:42,328 - INFO - Durum: 832/835 başarılı, 18852 toplam kayıt
+2025-07-11 18:42:42,328 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:42:42,710 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:42:43,711 - INFO - [836/853] İşleniyor: ZJB
+2025-07-11 18:42:43,711 - INFO - [FETCH] ZJB (ZİRAAT PORTFÖY BİRİNCİ SERBEST (TL) FON) verisi alınıyor...
+2025-07-11 18:42:46,748 - INFO - [OK] ZJB: 23 toplam kayıt alındı
+2025-07-11 18:42:46,749 - INFO - [INFO] ZJB kategori bilgisi alınıyor...
+2025-07-11 18:42:46,772 - ERROR - Error getting fund detail (alternative) for ZJB: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:42:46,772 - INFO - ZJB: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-11 18:42:46,772 - INFO - [CATEGORY] ZJB: Serbest Şemsiye Fonu
+2025-07-11 18:42:46,772 - INFO - [OK] ZJB başarılı
+2025-07-11 18:42:46,772 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:42:47,158 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:42:48,160 - INFO - [837/853] İşleniyor: ZJI
+2025-07-11 18:42:48,160 - INFO - [FETCH] ZJI (ZİRAAT PORTFÖY İKİNCİ SERBEST (TL) FON) verisi alınıyor...
+2025-07-11 18:42:51,254 - INFO - [OK] ZJI: 23 toplam kayıt alındı
+2025-07-11 18:42:51,254 - INFO - [INFO] ZJI kategori bilgisi alınıyor...
+2025-07-11 18:42:51,277 - ERROR - Error getting fund detail (alternative) for ZJI: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:42:51,278 - INFO - ZJI: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-11 18:42:51,278 - INFO - [CATEGORY] ZJI: Serbest Şemsiye Fonu
+2025-07-11 18:42:51,278 - INFO - [OK] ZJI başarılı
+2025-07-11 18:42:51,278 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:42:51,671 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:42:52,674 - INFO - [838/853] İşleniyor: ZJL
+2025-07-11 18:42:52,674 - INFO - [FETCH] ZJL (ZİRAAT PORTFÖY BIST 100 DIŞI ŞİRKETLER HİSSE SENEDİ FONU (HİSSE SENEDİ YOĞUN FON)) verisi alınıyor...
+2025-07-11 18:42:55,712 - INFO - [OK] ZJL: 23 toplam kayıt alındı
+2025-07-11 18:42:55,713 - INFO - [INFO] ZJL kategori bilgisi alınıyor...
+2025-07-11 18:42:55,733 - ERROR - Error getting fund detail (alternative) for ZJL: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:42:55,734 - INFO - ZJL: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-11 18:42:55,734 - INFO - [CATEGORY] ZJL: Hisse Senedi Şemsiye Fonu
+2025-07-11 18:42:55,734 - INFO - [OK] ZJL başarılı
+2025-07-11 18:42:55,734 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:42:56,123 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:42:57,124 - INFO - [839/853] İşleniyor: ZJV
+2025-07-11 18:42:57,124 - INFO - [FETCH] ZJV (ZİRAAT PORTFÖY BIST 30 DIŞI YILDIZ PAZAR ŞİRKETLERİ HİSSE SENEDİ FONU (HİSSE SENEDİ YOĞUN FON)) verisi alınıyor...
+2025-07-11 18:43:00,163 - INFO - [OK] ZJV: 23 toplam kayıt alındı
+2025-07-11 18:43:00,163 - INFO - [INFO] ZJV kategori bilgisi alınıyor...
+2025-07-11 18:43:00,183 - ERROR - Error getting fund detail (alternative) for ZJV: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:43:00,183 - INFO - ZJV: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-11 18:43:00,184 - INFO - [CATEGORY] ZJV: Hisse Senedi Şemsiye Fonu
+2025-07-11 18:43:00,184 - INFO - [OK] ZJV başarılı
+2025-07-11 18:43:00,184 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:43:00,565 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:43:01,566 - INFO - [840/853] İşleniyor: ZLH
+2025-07-11 18:43:01,567 - INFO - [FETCH] ZLH (ZİRAAT PORTFÖY BIST 100-30 ŞİRKETLERİ HİSSE SENEDİ FONU ( HİSSE SENEDİ YOĞUN FON)) verisi alınıyor...
+2025-07-11 18:43:04,613 - INFO - [OK] ZLH: 23 toplam kayıt alındı
+2025-07-11 18:43:04,613 - INFO - [INFO] ZLH kategori bilgisi alınıyor...
+2025-07-11 18:43:04,646 - ERROR - Error getting fund detail (alternative) for ZLH: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:43:04,647 - INFO - ZLH: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-11 18:43:04,647 - INFO - [CATEGORY] ZLH: Hisse Senedi Şemsiye Fonu
+2025-07-11 18:43:04,647 - INFO - [OK] ZLH başarılı
+2025-07-11 18:43:04,647 - INFO - Durum: 837/840 başarılı, 18967 toplam kayıt
+2025-07-11 18:43:04,647 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:43:05,042 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:43:06,044 - INFO - [841/853] İşleniyor: ZMT
+2025-07-11 18:43:06,044 - INFO - [FETCH] ZMT (AZİMUT PORTFÖY 22.0 SERBEST (DÖVİZ-AVRO) FON) verisi alınıyor...
+2025-07-11 18:43:09,098 - INFO - [OK] ZMT: 23 toplam kayıt alındı
+2025-07-11 18:43:09,098 - INFO - [INFO] ZMT kategori bilgisi alınıyor...
+2025-07-11 18:43:09,120 - ERROR - Error getting fund detail (alternative) for ZMT: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:43:09,120 - INFO - ZMT: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-11 18:43:09,120 - INFO - [CATEGORY] ZMT: Serbest Şemsiye Fonu
+2025-07-11 18:43:09,120 - INFO - [OK] ZMT başarılı
+2025-07-11 18:43:09,120 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:43:09,513 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:43:10,514 - INFO - [842/853] İşleniyor: ZMY
+2025-07-11 18:43:10,514 - INFO - [FETCH] ZMY (ZİRAAT PORTFÖY METAVERSE VE YENİ TEKNOLOJİLER DEĞİŞKEN FON) verisi alınıyor...
+2025-07-11 18:43:13,550 - INFO - [OK] ZMY: 23 toplam kayıt alındı
+2025-07-11 18:43:13,550 - INFO - [INFO] ZMY kategori bilgisi alınıyor...
+2025-07-11 18:43:13,572 - ERROR - Error getting fund detail (alternative) for ZMY: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:43:13,572 - INFO - ZMY: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-11 18:43:13,572 - INFO - [CATEGORY] ZMY: Hisse Senedi Şemsiye Fonu
+2025-07-11 18:43:13,572 - INFO - [OK] ZMY başarılı
+2025-07-11 18:43:13,572 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:43:14,011 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:43:15,013 - INFO - [843/853] İşleniyor: ZP6
+2025-07-11 18:43:15,013 - INFO - [FETCH] ZP6 (ZİRAAT PORTFÖY SEDEF KATILIM SERBEST (DÖVİZ - AMERİKAN DOLARI) FON) verisi alınıyor...
+2025-07-11 18:43:18,050 - INFO - [OK] ZP6: 23 toplam kayıt alındı
+2025-07-11 18:43:18,050 - INFO - [INFO] ZP6 kategori bilgisi alınıyor...
+2025-07-11 18:43:18,072 - ERROR - Error getting fund detail (alternative) for ZP6: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:43:18,072 - INFO - ZP6: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-11 18:43:18,072 - INFO - [CATEGORY] ZP6: Serbest Şemsiye Fonu
+2025-07-11 18:43:18,072 - INFO - [OK] ZP6 başarılı
+2025-07-11 18:43:18,072 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:43:18,593 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:43:19,594 - INFO - [844/853] İşleniyor: ZP8
+2025-07-11 18:43:19,595 - INFO - [FETCH] ZP8 (ZİRAAT PORTFÖY KEHRİBAR PARA PİYASASI KATILIM SERBEST (TL) FON) verisi alınıyor...
+2025-07-11 18:43:22,634 - INFO - [OK] ZP8: 23 toplam kayıt alındı
+2025-07-11 18:43:22,635 - INFO - [INFO] ZP8 kategori bilgisi alınıyor...
+2025-07-11 18:43:22,718 - ERROR - Error getting fund detail (alternative) for ZP8: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:43:22,718 - INFO - ZP8: Fon adından tahmin edilen kategori: Para Piyasası Şemsiye Fonu
+2025-07-11 18:43:22,718 - INFO - [CATEGORY] ZP8: Para Piyasası Şemsiye Fonu
+2025-07-11 18:43:22,718 - INFO - [OK] ZP8 başarılı
+2025-07-11 18:43:22,718 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:43:23,103 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:43:24,105 - INFO - [845/853] İşleniyor: ZP9
+2025-07-11 18:43:24,105 - INFO - [FETCH] ZP9 (ZİRAAT PORTFÖY AKİK KATILIM SERBEST (DÖVİZ-AVRO) FON) verisi alınıyor...
+2025-07-11 18:43:27,147 - INFO - [OK] ZP9: 23 toplam kayıt alındı
+2025-07-11 18:43:27,147 - INFO - [INFO] ZP9 kategori bilgisi alınıyor...
+2025-07-11 18:43:27,167 - ERROR - Error getting fund detail (alternative) for ZP9: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:43:27,168 - INFO - ZP9: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-11 18:43:27,168 - INFO - [CATEGORY] ZP9: Serbest Şemsiye Fonu
+2025-07-11 18:43:27,168 - INFO - [OK] ZP9 başarılı
+2025-07-11 18:43:27,168 - INFO - Durum: 842/845 başarılı, 19082 toplam kayıt
+2025-07-11 18:43:27,168 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:43:27,558 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:43:28,560 - INFO - [846/853] İşleniyor: ZPA
+2025-07-11 18:43:28,560 - INFO - [FETCH] ZPA (ZİRAAT PORTFÖY SERBEST (DÖVİZ) FON) verisi alınıyor...
+2025-07-11 18:43:31,598 - INFO - [OK] ZPA: 23 toplam kayıt alındı
+2025-07-11 18:43:31,598 - INFO - [INFO] ZPA kategori bilgisi alınıyor...
+2025-07-11 18:43:31,619 - ERROR - Error getting fund detail (alternative) for ZPA: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:43:31,619 - INFO - ZPA: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-11 18:43:31,620 - INFO - [CATEGORY] ZPA: Serbest Şemsiye Fonu
+2025-07-11 18:43:31,620 - INFO - [OK] ZPA başarılı
+2025-07-11 18:43:31,620 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:43:31,945 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-11 18:43:34,326 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:43:35,327 - INFO - [847/853] İşleniyor: ZPC
+2025-07-11 18:43:35,327 - INFO - [FETCH] ZPC (ZİRAAT PORTFÖY FON SEPETİ FONU) verisi alınıyor...
+2025-07-11 18:43:38,367 - INFO - [OK] ZPC: 23 toplam kayıt alındı
+2025-07-11 18:43:38,367 - INFO - [INFO] ZPC kategori bilgisi alınıyor...
+2025-07-11 18:43:38,389 - ERROR - Error getting fund detail (alternative) for ZPC: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:43:38,389 - INFO - ZPC: Fon adından tahmin edilen kategori: Fon Sepeti Şemsiye Fonu
+2025-07-11 18:43:38,389 - INFO - [CATEGORY] ZPC: Fon Sepeti Şemsiye Fonu
+2025-07-11 18:43:38,389 - INFO - [OK] ZPC başarılı
+2025-07-11 18:43:38,390 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:43:38,841 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:43:39,842 - INFO - [848/853] İşleniyor: ZPE
+2025-07-11 18:43:39,842 - INFO - [FETCH] ZPE (ZİRAAT PORTFÖY KATILIM HİSSE SENEDİ FONU (HİSSE SENEDİ YOĞUN FON)) verisi alınıyor...
+2025-07-11 18:43:42,882 - INFO - [OK] ZPE: 23 toplam kayıt alındı
+2025-07-11 18:43:42,882 - INFO - [INFO] ZPE kategori bilgisi alınıyor...
+2025-07-11 18:43:42,902 - ERROR - Error getting fund detail (alternative) for ZPE: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:43:42,903 - INFO - ZPE: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-11 18:43:42,903 - INFO - [CATEGORY] ZPE: Hisse Senedi Şemsiye Fonu
+2025-07-11 18:43:42,903 - INFO - [OK] ZPE başarılı
+2025-07-11 18:43:42,903 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:43:43,349 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:43:44,351 - INFO - [849/853] İşleniyor: ZPF
+2025-07-11 18:43:44,351 - INFO - [FETCH] ZPF (ZİRAAT PORTFÖY KATILIM FONU (DÖVİZ)) verisi alınıyor...
+2025-07-11 18:43:47,519 - INFO - [OK] ZPF: 23 toplam kayıt alındı
+2025-07-11 18:43:47,519 - INFO - [INFO] ZPF kategori bilgisi alınıyor...
+2025-07-11 18:43:47,545 - ERROR - Error getting fund detail (alternative) for ZPF: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:43:47,545 - INFO - ZPF: Fon adından tahmin edilen kategori: Katılım Şemsiye Fonu
+2025-07-11 18:43:47,545 - INFO - [CATEGORY] ZPF: Katılım Şemsiye Fonu
+2025-07-11 18:43:47,545 - INFO - [OK] ZPF başarılı
+2025-07-11 18:43:47,545 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:43:47,951 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:43:48,953 - INFO - [850/853] İşleniyor: ZPG
+2025-07-11 18:43:48,953 - INFO - [FETCH] ZPG (ZİRAAT PORTFÖY KİRA SERTİFİKALARI (SUKUK) KATILIM FONU) verisi alınıyor...
+2025-07-11 18:43:51,989 - INFO - [OK] ZPG: 23 toplam kayıt alındı
+2025-07-11 18:43:51,990 - INFO - [INFO] ZPG kategori bilgisi alınıyor...
+2025-07-11 18:43:52,011 - ERROR - Error getting fund detail (alternative) for ZPG: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:43:52,011 - INFO - ZPG: Fon adından tahmin edilen kategori: Katılım Şemsiye Fonu
+2025-07-11 18:43:52,011 - INFO - [CATEGORY] ZPG: Katılım Şemsiye Fonu
+2025-07-11 18:43:52,011 - INFO - [OK] ZPG başarılı
+2025-07-11 18:43:52,012 - INFO - Durum: 847/850 başarılı, 19197 toplam kayıt
+2025-07-11 18:43:52,012 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:43:52,416 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:43:53,417 - INFO - [851/853] İşleniyor: ZSF
+2025-07-11 18:43:53,418 - INFO - [FETCH] ZSF (ZİRAAT PORTFÖY S&P/OIC COMCEC (İSEDAK) 50 SHARİAH ŞİRKETLERİ YABANCI HİSSE SENEDİ FONU) verisi alınıyor...
+2025-07-11 18:43:56,459 - INFO - [OK] ZSF: 23 toplam kayıt alındı
+2025-07-11 18:43:56,459 - INFO - [INFO] ZSF kategori bilgisi alınıyor...
+2025-07-11 18:43:56,482 - ERROR - Error getting fund detail (alternative) for ZSF: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:43:56,482 - INFO - ZSF: Fon adından tahmin edilen kategori: Yabancı Hisse Senedi Şemsiye Fonu
+2025-07-11 18:43:56,482 - INFO - [CATEGORY] ZSF: Yabancı Hisse Senedi Şemsiye Fonu
+2025-07-11 18:43:56,482 - INFO - [OK] ZSF başarılı
+2025-07-11 18:43:56,482 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:43:56,810 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-11 18:43:59,213 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:44:00,215 - INFO - [852/853] İşleniyor: ZSG
+2025-07-11 18:44:00,215 - INFO - [FETCH] ZSG (ZİRAAT PORTFÖY ESG SÜRDÜRÜLEBİLİRLİK FON SEPETİ FONU) verisi alınıyor...
+2025-07-11 18:44:03,253 - INFO - [OK] ZSG: 23 toplam kayıt alındı
+2025-07-11 18:44:03,253 - INFO - [INFO] ZSG kategori bilgisi alınıyor...
+2025-07-11 18:44:03,274 - ERROR - Error getting fund detail (alternative) for ZSG: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:44:03,274 - INFO - ZSG: Fon adından tahmin edilen kategori: Fon Sepeti Şemsiye Fonu
+2025-07-11 18:44:03,274 - INFO - [CATEGORY] ZSG: Fon Sepeti Şemsiye Fonu
+2025-07-11 18:44:03,275 - INFO - [OK] ZSG başarılı
+2025-07-11 18:44:03,275 - INFO - TefasProvider yapılandırılıyor...
+2025-07-11 18:44:03,672 - INFO - Session başarıyla başlatıldı
+2025-07-11 18:44:04,673 - INFO - [853/853] İşleniyor: ZVO
+2025-07-11 18:44:04,673 - INFO - [FETCH] ZVO (ZİRAAT PORTFÖY ÜÇÜNCÜ SERBEST (TL) FON) verisi alınıyor...
+2025-07-11 18:44:07,710 - INFO - [OK] ZVO: 23 toplam kayıt alındı
+2025-07-11 18:44:07,710 - INFO - [INFO] ZVO kategori bilgisi alınıyor...
+2025-07-11 18:44:07,731 - ERROR - Error getting fund detail (alternative) for ZVO: Expecting value: line 1 column 1 (char 0)
+2025-07-11 18:44:07,731 - INFO - ZVO: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-11 18:44:07,731 - INFO - [CATEGORY] ZVO: Serbest Şemsiye Fonu
+2025-07-11 18:44:07,732 - INFO - [OK] ZVO başarılı
+2025-07-11 18:44:07,732 - INFO - [SAVE] 19266 kayıt parquet dosyasına yazılıyor...
+2025-07-11 18:44:07,761 - INFO - borsa_bulten_fiyat sütunu kaldırıldı
+2025-07-11 18:44:07,806 - ERROR - Kaydetme hatası: [WinError 3] Failed to open local file 'data/data/tefas_1ay_full.parquet'. Detail: [Windows error 3] The system cannot find the path specified.
+
+2025-07-11 18:44:07,806 - ERROR - Genel hata: [WinError 3] Failed to open local file 'data/data/tefas_1ay_full.parquet'. Detail: [Windows error 3] The system cannot find the path specified.
+
+2025-07-11 18:44:07,807 - ERROR - [ERROR] Beklenmedik hata: [WinError 3] Failed to open local file 'data/data/tefas_1ay_full.parquet'. Detail: [Windows error 3] The system cannot find the path specified.
+
