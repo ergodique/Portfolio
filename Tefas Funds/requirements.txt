@@ -1,0 +1,11 @@
+# Yahoo Finance Downloader Dependencies
+yfinance>=0.2.18
+pandas>=2.0.0
+pyarrow>=10.0.0
+openpyxl>=3.1.0
+python-dateutil>=2.8.0
+
+# Existing TEFAS dependencies  
+requests>=2.28.0
+beautifulsoup4>=4.11.0
+lxml>=4.9.0 

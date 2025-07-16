@@ -1,0 +1,70 @@
+2025-07-16 17:29:13,200 - INFO - CMD: yahoo_finance_downloader.py --months 6 --workers 4 --outfile borsa_test.parquet
+2025-07-16 17:29:13,201 - INFO - Yahoo Finance Downloader başlatıldı
+2025-07-16 17:29:13,201 - INFO - Mod: Paralel
+2025-07-16 17:29:13,201 - INFO - Worker sayısı: 4
+2025-07-16 17:29:13,201 - INFO - Ticker sayısı: 19
+2025-07-16 17:29:13,201 - INFO - Çıktı dosyası: borsa_test.parquet
+2025-07-16 17:29:13,201 - INFO - === PARALEL MOD BAŞLADI ===
+2025-07-16 17:29:13,201 - INFO - Tarih aralığı: 2025-01-16 - 2025-07-16
+2025-07-16 17:29:13,202 - INFO - Paralel işlem: 5 batch, 4 worker
+2025-07-16 17:29:13,913 - INFO - [OK] QQQ: 123 kayıt
+2025-07-16 17:29:13,913 - INFO - [OK] SPY: 123 kayıt
+2025-07-16 17:29:13,914 - INFO - [OK] QQQ başarılı
+2025-07-16 17:29:13,915 - INFO - [OK] SPY başarılı
+2025-07-16 17:29:13,924 - INFO - [OK] XU100.IS: 121 kayıt
+2025-07-16 17:29:13,925 - INFO - [OK] XU100.IS başarılı
+2025-07-16 17:29:13,953 - INFO - [OK] XU030.IS: 121 kayıt
+2025-07-16 17:29:13,953 - INFO - [OK] XU030.IS başarılı
+2025-07-16 17:29:14,177 - INFO - [OK] VEA: 123 kayıt
+2025-07-16 17:29:14,187 - INFO - [OK] EFA: 123 kayıt
+2025-07-16 17:29:14,187 - INFO - [OK] VEA başarılı
+2025-07-16 17:29:14,188 - INFO - [İLERLEME] 5/19 (%26.3) - 611 kayıt
+2025-07-16 17:29:14,189 - INFO - [OK] EFA başarılı
+2025-07-16 17:29:14,200 - INFO - [OK] IWM: 123 kayıt
+2025-07-16 17:29:14,200 - INFO - [OK] IWM başarılı
+2025-07-16 17:29:14,317 - INFO - [OK] EWG: 123 kayıt
+2025-07-16 17:29:14,318 - INFO - [OK] EWG başarılı
+2025-07-16 17:29:14,377 - INFO - [OK] EEM: 123 kayıt
+2025-07-16 17:29:14,378 - INFO - [OK] EEM başarılı
+2025-07-16 17:29:14,454 - INFO - [OK] VWO: 123 kayıt
+2025-07-16 17:29:14,454 - INFO - [OK] VWO başarılı
+2025-07-16 17:29:14,454 - INFO - [İLERLEME] 10/19 (%52.6) - 1226 kayıt
+2025-07-16 17:29:14,481 - INFO - [OK] GLD: 123 kayıt
+2025-07-16 17:29:14,481 - INFO - [OK] GLD başarılı
+2025-07-16 17:29:14,526 - INFO - [OK] EWU: 123 kayıt
+2025-07-16 17:29:14,527 - INFO - [OK] EWU başarılı
+2025-07-16 17:29:14,646 - INFO - [OK] BTC-USD: 181 kayıt
+2025-07-16 17:29:14,646 - INFO - [OK] BTC-USD başarılı
+2025-07-16 17:29:14,680 - INFO - [OK] USO: 123 kayıt
+2025-07-16 17:29:14,681 - INFO - [OK] USO başarılı
+2025-07-16 17:29:14,712 - INFO - [OK] SLV: 123 kayıt
+2025-07-16 17:29:14,712 - INFO - [OK] SLV başarılı
+2025-07-16 17:29:14,712 - INFO - [İLERLEME] 15/19 (%78.9) - 1899 kayıt
+2025-07-16 17:29:14,748 - INFO - [OK] FXI: 123 kayıt
+2025-07-16 17:29:14,749 - INFO - [OK] FXI başarılı
+2025-07-16 17:29:14,759 - INFO - [OK] ETH-USD: 181 kayıt
+2025-07-16 17:29:14,760 - INFO - [OK] ETH-USD başarılı
+2025-07-16 17:29:14,786 - INFO - [OK] USDTRY=X: 127 kayıt
+2025-07-16 17:29:14,786 - INFO - [OK] USDTRY=X başarılı
+2025-07-16 17:29:14,980 - INFO - [OK] EURTRY=X: 127 kayıt
+2025-07-16 17:29:14,981 - INFO - [OK] EURTRY=X başarılı
+2025-07-16 17:29:14,981 - INFO - === VERİ KAYDETME ===
+2025-07-16 17:29:15,394 - INFO - Parquet kaydedildi: data\borsa_test.parquet
+2025-07-16 17:29:15,394 - INFO - Excel kaydedildi: data\borsa_test.xlsx
+2025-07-16 17:29:15,395 - INFO - Istatistikler:
+2025-07-16 17:29:15,395 - INFO -    - Basarili ticker: 19/19
+2025-07-16 17:29:15,395 - INFO -    - Toplam ticker: 19
+2025-07-16 17:29:15,395 - INFO -    - Toplam kayit: 2,457
+2025-07-16 17:29:15,395 - INFO -    - Tarih araligi: 2025-01-16 - 2025-07-15
+2025-07-16 17:29:15,396 - INFO - Ticker basina kayit sayisi:
+2025-07-16 17:29:15,396 - INFO -    - BTC-USD: 181 kayit
+2025-07-16 17:29:15,396 - INFO -    - ETH-USD: 181 kayit
+2025-07-16 17:29:15,396 - INFO -    - EURTRY=X: 127 kayit
+2025-07-16 17:29:15,396 - INFO -    - USDTRY=X: 127 kayit
+2025-07-16 17:29:15,396 - INFO -    - EEM: 123 kayit
+2025-07-16 17:29:15,397 - INFO -    - EFA: 123 kayit
+2025-07-16 17:29:15,397 - INFO -    - EWG: 123 kayit
+2025-07-16 17:29:15,397 - INFO -    - FXI: 123 kayit
+2025-07-16 17:29:15,397 - INFO -    - GLD: 123 kayit
+2025-07-16 17:29:15,397 - INFO -    - IWM: 123 kayit
+2025-07-16 17:29:15,398 - INFO - Islem tamamlandi! Sure: 2.2 saniye

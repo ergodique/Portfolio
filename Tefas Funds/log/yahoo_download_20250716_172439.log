@@ -1,0 +1,31 @@
+2025-07-16 17:24:39,324 - INFO - CMD: yahoo_finance_downloader.py --test --months 6 --workers 4 --outfile borsa_test.parquet
+2025-07-16 17:24:39,324 - INFO - Yahoo Finance Downloader başlatıldı
+2025-07-16 17:24:39,324 - INFO - Mod: Paralel
+2025-07-16 17:24:39,325 - INFO - Worker sayısı: 4
+2025-07-16 17:24:39,325 - INFO - Ticker sayısı: 4
+2025-07-16 17:24:39,325 - INFO - Çıktı dosyası: borsa_test.parquet
+2025-07-16 17:24:39,325 - INFO - === PARALEL MOD BAŞLADI ===
+2025-07-16 17:24:39,325 - INFO - Tarih aralığı: 2025-01-16 - 2025-07-16
+2025-07-16 17:24:39,325 - INFO - Paralel işlem: 4 batch, 4 worker
+2025-07-16 17:24:40,024 - INFO - [OK] GLD: 123 kayıt
+2025-07-16 17:24:40,025 - INFO - [OK] GLD başarılı
+2025-07-16 17:24:40,042 - INFO - [OK] BTC-USD: 181 kayıt
+2025-07-16 17:24:40,042 - INFO - [OK] BTC-USD başarılı
+2025-07-16 17:24:40,051 - INFO - [OK] XU100.IS: 121 kayıt
+2025-07-16 17:24:40,052 - INFO - [OK] XU100.IS başarılı
+2025-07-16 17:24:40,076 - INFO - [OK] SPY: 123 kayıt
+2025-07-16 17:24:40,077 - INFO - [OK] SPY başarılı
+2025-07-16 17:24:40,077 - INFO - === VERİ KAYDETME ===
+2025-07-16 17:24:40,284 - INFO - Parquet kaydedildi: data\borsa_test.parquet
+2025-07-16 17:24:40,285 - INFO - Excel kaydedildi: data\borsa_test.xlsx
+2025-07-16 17:24:40,285 - INFO - Istatistikler:
+2025-07-16 17:24:40,285 - INFO -    - Basarili ticker: 4/4
+2025-07-16 17:24:40,285 - INFO -    - Toplam ticker: 4
+2025-07-16 17:24:40,285 - INFO -    - Toplam kayit: 548
+2025-07-16 17:24:40,285 - INFO -    - Tarih araligi: 2025-01-16 - 2025-07-15
+2025-07-16 17:24:40,286 - INFO - Ticker basina kayit sayisi:
+2025-07-16 17:24:40,286 - INFO -    - BTC-USD: 181 kayit
+2025-07-16 17:24:40,286 - INFO -    - GLD: 123 kayit
+2025-07-16 17:24:40,286 - INFO -    - SPY: 123 kayit
+2025-07-16 17:24:40,286 - INFO -    - XU100.IS: 121 kayit
+2025-07-16 17:24:40,286 - INFO - Islem tamamlandi! Sure: 1.0 saniye
