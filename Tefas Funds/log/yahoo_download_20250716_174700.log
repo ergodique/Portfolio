@@ -1,0 +1,88 @@
+2025-07-16 17:47:00,913 - INFO - CMD: yahoo_finance_downloader.py --full --years 2 --workers 6 --outfile borsa_2yil_full.parquet
+2025-07-16 17:47:00,913 - INFO - Yahoo Finance Downloader başlatıldı
+2025-07-16 17:47:00,914 - INFO - Mod: Paralel
+2025-07-16 17:47:00,914 - INFO - Worker sayısı: 6
+2025-07-16 17:47:00,914 - INFO - Ticker sayısı: 27
+2025-07-16 17:47:00,914 - INFO - Çıktı dosyası: borsa_2yil_full.parquet
+2025-07-16 17:47:00,914 - INFO - === PARALEL MOD BAŞLADI ===
+2025-07-16 17:47:00,915 - INFO - Tarih aralığı: 2024-07-16 - 2025-07-16
+2025-07-16 17:47:00,915 - INFO - Paralel işlem: 7 batch, 6 worker
+2025-07-16 17:47:01,738 - INFO - [OK] XU100.IS: 249 kayıt
+2025-07-16 17:47:01,739 - INFO - [OK] XU030.IS: 249 kayıt
+2025-07-16 17:47:01,740 - INFO - [OK] XU100.IS başarılı
+2025-07-16 17:47:01,740 - INFO - [OK] XU030.IS başarılı
+2025-07-16 17:47:01,796 - INFO - [OK] QQQ: 250 kayıt
+2025-07-16 17:47:01,798 - INFO - [OK] QQQ başarılı
+2025-07-16 17:47:01,811 - INFO - [OK] EFA: 250 kayıt
+2025-07-16 17:47:01,812 - INFO - [OK] EFA başarılı
+2025-07-16 17:47:01,828 - INFO - [OK] IWM: 250 kayıt
+2025-07-16 17:47:01,829 - INFO - [OK] IWM başarılı
+2025-07-16 17:47:01,829 - INFO - [İLERLEME] 5/27 (%18.5) - 1248 kayıt
+2025-07-16 17:47:01,844 - INFO - [OK] SPY: 250 kayıt
+2025-07-16 17:47:01,844 - INFO - [OK] SPY başarılı
+2025-07-16 17:47:01,868 - INFO - [OK] VEA: 250 kayıt
+2025-07-16 17:47:01,868 - INFO - [OK] VEA başarılı
+2025-07-16 17:47:01,892 - INFO - [OK] EWG: 250 kayıt
+2025-07-16 17:47:01,892 - INFO - [OK] EWG başarılı
+2025-07-16 17:47:01,976 - INFO - [OK] FXI: 250 kayıt
+2025-07-16 17:47:01,977 - INFO - [OK] FXI başarılı
+2025-07-16 17:47:01,989 - INFO - [OK] VWO: 250 kayıt
+2025-07-16 17:47:01,990 - INFO - [OK] VWO başarılı
+2025-07-16 17:47:01,990 - INFO - [İLERLEME] 10/27 (%37.0) - 2498 kayıt
+2025-07-16 17:47:02,020 - INFO - [OK] EWU: 250 kayıt
+2025-07-16 17:47:02,020 - INFO - [OK] EWU başarılı
+2025-07-16 17:47:02,034 - INFO - [OK] EEM: 250 kayıt
+2025-07-16 17:47:02,035 - INFO - [OK] EEM başarılı
+2025-07-16 17:47:02,052 - INFO - [OK] SLV: 250 kayıt
+2025-07-16 17:47:02,053 - INFO - [OK] SLV başarılı
+2025-07-16 17:47:02,065 - INFO - [OK] GLD: 250 kayıt
+2025-07-16 17:47:02,065 - INFO - [OK] GLD başarılı
+2025-07-16 17:47:02,124 - INFO - [OK] BTC-USD: 365 kayıt
+2025-07-16 17:47:02,125 - INFO - [OK] BTC-USD başarılı
+2025-07-16 17:47:02,125 - INFO - [İLERLEME] 15/27 (%55.6) - 3863 kayıt
+2025-07-16 17:47:02,138 - INFO - [OK] USO: 250 kayıt
+2025-07-16 17:47:02,138 - INFO - [OK] USO başarılı
+2025-07-16 17:47:02,178 - INFO - [OK] ETH-USD: 365 kayıt
+2025-07-16 17:47:02,179 - INFO - [OK] ETH-USD başarılı
+2025-07-16 17:47:02,204 - INFO - [OK] EURTRY=X: 258 kayıt
+2025-07-16 17:47:02,204 - INFO - [OK] EURTRY=X başarılı
+2025-07-16 17:47:02,261 - INFO - [OK] USDTRY=X: 258 kayıt
+2025-07-16 17:47:02,262 - INFO - [OK] USDTRY=X başarılı
+2025-07-16 17:47:02,273 - INFO - [OK] ^TNX: 250 kayıt
+2025-07-16 17:47:02,273 - INFO - [OK] ^TNX başarılı
+2025-07-16 17:47:02,274 - INFO - [İLERLEME] 20/27 (%74.1) - 5244 kayıt
+2025-07-16 17:47:02,322 - INFO - [OK] ^FVX: 250 kayıt
+2025-07-16 17:47:02,323 - INFO - [OK] ^FVX başarılı
+2025-07-16 17:47:02,350 - INFO - [OK] ^IRX: 250 kayıt
+2025-07-16 17:47:02,350 - INFO - [OK] ^IRX başarılı
+2025-07-16 17:47:02,392 - INFO - [OK] ^TYX: 250 kayıt
+2025-07-16 17:47:02,392 - INFO - [OK] ^TYX başarılı
+2025-07-16 17:47:02,425 - INFO - [OK] GC=F: 252 kayıt
+2025-07-16 17:47:02,426 - INFO - [OK] GC=F başarılı
+2025-07-16 17:47:02,463 - INFO - [OK] CL=F: 252 kayıt
+2025-07-16 17:47:02,463 - INFO - [OK] CL=F başarılı
+2025-07-16 17:47:02,463 - INFO - [İLERLEME] 25/27 (%92.6) - 6498 kayıt
+2025-07-16 17:47:02,481 - INFO - [OK] SI=F: 252 kayıt
+2025-07-16 17:47:02,481 - INFO - [OK] SI=F başarılı
+2025-07-16 17:47:02,538 - INFO - [OK] ^VIX: 250 kayıt
+2025-07-16 17:47:02,538 - INFO - [OK] ^VIX başarılı
+2025-07-16 17:47:02,539 - INFO - === VERİ KAYDETME ===
+2025-07-16 17:47:03,116 - INFO - Parquet kaydedildi: data\borsa_2yil_full.parquet
+2025-07-16 17:47:03,116 - INFO - Excel kaydedildi: data\borsa_2yil_full.xlsx
+2025-07-16 17:47:03,116 - INFO - Istatistikler:
+2025-07-16 17:47:03,117 - INFO -    - Basarili ticker: 27/27
+2025-07-16 17:47:03,117 - INFO -    - Toplam ticker: 27
+2025-07-16 17:47:03,117 - INFO -    - Toplam kayit: 7,000
+2025-07-16 17:47:03,117 - INFO -    - Tarih araligi: 2024-07-16 - 2025-07-15
+2025-07-16 17:47:03,118 - INFO - Ticker basina kayit sayisi:
+2025-07-16 17:47:03,118 - INFO -    - BTC-USD: 365 kayit
+2025-07-16 17:47:03,118 - INFO -    - ETH-USD: 365 kayit
+2025-07-16 17:47:03,118 - INFO -    - EURTRY=X: 258 kayit
+2025-07-16 17:47:03,118 - INFO -    - USDTRY=X: 258 kayit
+2025-07-16 17:47:03,118 - INFO -    - GC=F: 252 kayit
+2025-07-16 17:47:03,119 - INFO -    - SI=F: 252 kayit
+2025-07-16 17:47:03,119 - INFO -    - CL=F: 252 kayit
+2025-07-16 17:47:03,119 - INFO -    - EWG: 250 kayit
+2025-07-16 17:47:03,119 - INFO -    - EWU: 250 kayit
+2025-07-16 17:47:03,119 - INFO -    - EEM: 250 kayit
+2025-07-16 17:47:03,120 - INFO - Islem tamamlandi! Sure: 2.2 saniye
