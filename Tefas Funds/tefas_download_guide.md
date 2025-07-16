@@ -109,4 +109,100 @@ Bu satırlar eksik günleri takvim gününe göre doldurarak doğru getiri hesap
 
 ---
 
-Bu rehber **indir → işleme** hattının son durumunu özetler. Gelecekteki geliştirmeleri yine buraya ekleyin. 
+## 12. Mihenk Taşı v3 – Merged Class ve Major Updates
+
+### 12.1 `tefas_download_data_merged.py` - Birleşik Çözüm
+* **Problem**: Logging çoklama problemi + kod duplikasyonu
+* **Çözüm**: Tek dosyada hem seri hem paralel mod
+* **Özellikler**:
+  - `--workers 1` → Seri mod
+  - `--workers 4+` → Paralel mod
+  - Tek logging setup → çoklama problemi yok
+  - Batch progress tracking: `[BATCH 1/3 (%33.3)] Tamamlandı`
+  - Temiz log mesajları
+
+### 12.2 Fon Kategori Sistemi - Priorite Kuralları
+Kullanıcı feedback'i sonrası priorite sıralı sistem:
+
+```python
+# ÖNCELIK SIRALI KURALLAR
+# 1. SERBEST geçiyorsa kesinlikle serbest
+if "SERBEST" in name: return "Serbest Şemsiye Fonu"
+# 2. DEĞİŞKEN geçiyorsa kesinlikle değişken  
+elif "DEGISKEN" in name: return "Değişken Şemsiye Fonu"
+# 3. KATILIM geçiyorsa kesinlikle katılım
+elif "KATILIM" in name: return "Katılım Şemsiye Fonu"
+```
+
+**Önemli**: `SERBEST + DEĞİŞKEN` → Serbest kazanır, `DEĞİŞKEN + KATILIM` → Değişken kazanır
+
+### 12.3 Codebase Yapısı (Son Durum)
+
+```
+Tefas Funds/
+├── tefas_download_data_merged.py     # ⭐ ANA CLASS (seri+paralel)
+├── tefas_download_data.py            # Legacy - seri mod
+├── tefas_download_data_parallel.py   # Legacy - paralel mod
+├── tefas_data_process.py             # Rolling returns hesaplama
+├── tls12_adapter.py                  # TLS 1.2 adapter
+├── providers/
+│   └── tefas_provider.py             # TEFAS API wrapper (1383 lines)
+├── data/                             # Parquet files
+├── log/                              # Timestamped logs
+└── TODO.txt                          # Task tracking
+```
+
+### 12.4 Data Processing Pipeline
+
+#### Adım 1: Ham Veri İndirme
+```bash
+python tefas_download_data_merged.py --test --codes DSP,PPN --months 2 --workers 4 --outfile test.parquet
+```
+
+#### Adım 2: Rolling Returns İşleme
+```bash
+python tefas_data_process.py --input data/test.parquet --output data/test_processed.parquet
+```
+
+**compute_rolling_returns() Mantığı:**
+1. Fon bazında group by (`fon_kodu`)
+2. Tarih sıralama ve eksik günleri `asfreq('D').ffill()` ile doldurma
+3. 5 farklı pencere: 7d, 30d, 90d, 180d, 365d
+4. Getiri formülü: `current_price / shifted_price - 1`
+5. Orijinal tarihlere geri mapping
+
+### 12.5 Critical Security Issues (TODO)
+
+⚠️ **Memory Overflow Risk**: Full mod 853 fonla 2-5GB RAM kullanım riski
+- Progressive saving gerekli
+- Memory monitoring 
+- Streaming parquet write
+
+### 12.6 Provider API Overview
+
+**TefasProvider Key Methods:**
+- `_get_takasbank_fund_list()` → 853 fon listesi (Excel'den)
+- `get_fund_performance(code, start, end)` → Fiyat geçmişi
+- `get_fund_detail_alternative(code)` → Fon kategorisi
+
+**API Behavior:**
+- Takasbank Excel: Güncel fon listesi
+- TEFAS API: Historik fiyat + kategori
+- Error handling: "No historical data found" → geriye doğru arama
+
+### 12.7 Kullanım Örnekleri (Production Ready)
+
+```bash
+# Test modu - kategori doğrulaması
+python tefas_download_data_merged.py --test --codes BHI,BHL,BCK --months 2 --workers 4
+
+# Küçük production
+python tefas_download_data_merged.py --full --months 1 --workers 6 --outfile prod_1month.parquet
+
+# Processing
+python tefas_data_process.py --input data/prod_1month.parquet --output data/prod_processed.parquet --excel data/analysis.xlsx
+```
+
+---
+
+Bu rehber **indir → işleme** hattının **son durumunu** özetler. Memory güvenliği eklenene kadar `--months` parametresini düşük tutun. Gelecekteki geliştirmeleri yine buraya ekleyin. 

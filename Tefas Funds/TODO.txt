@@ -1,5 +1,6 @@
-[-] --full indirilen dosyadaki kategorileri gözle check etmek (henüz full indirme yapamadım, 4 paralel deniyorum) 
+[+] --full indirilen dosyadaki kategorileri gözle check etmek (henüz full indirme yapamadım, 4 paralel deniyorum) 
         -check ettim ve hataları gördüm. bu fon kategorilerinin yazılması işi process'e alınacak.
+[ ] Downloader'a yüzdesel ilerleme durumu eklenecek. 
 [ ] --test dosyasını data_process'ten geçirmek.
         -Nihai olarak fon kategorilerine göre ortalama getiri hesaplanması.
         -En son elimde her hafta için her fon kategorisine göre bir getiri olacak. 
@@ -11,9 +12,21 @@
         -Bunun yeterli testi yapılmadı. Paralel classı iyi çalışıyor ise onun üzerinden testlere devam edilmeli.
 [+] Download classı için /log dizinine her çalıştırma için çalıştırılan komutun da eklendiği ayrı bir log dosyası oluşturulması. Tek bir log yerine her başlangıçta özel bir log oluşturulması. 
 
+[ ] Yahoo Finance tarafından endeks fiyat bilgileri eklenecek. --bu bir sonraki sprinte kalabilir belki...
 [ ] Bu library TTRR ekibi ile de paylaşılacak.
 
+--CRİTİK GÜVENLİK
+[ ] URGENT: Memory overflow koruması ekle (progressive saving) - full modda büyük veri setlerinde risk var
+[ ] Memory monitoring ve warning sistemi - RAM %80 dolduğunda uyarı
+[ ] Büyük veri setleri için streaming parquet write - append mode ile sürekli yaz
+[ ] --full modunda batch saving: Her 50-100 fon sonra parquet'e kaydet ve memory temizle
 
+--YENİ ÖZELLİKLER 
+[+] Merged class (tefas_download_data_merged.py) - tek dosyada hem seri hem paralel mod
+[+] Fon kategori kuralları güncellendi - SERBEST > DEĞİŞKEN > KATILIM priorite sırası
+[+] Logging çoklama problemi çözüldü - tek logging setup
+[+] Batch progress tracking - X/TOPLAM (%Y) formatında
+[+] Temiz log mesajları - gereksiz duplicate'lar kaldırıldı
 
 --Örnek çalıştırma komutları
 --download classı

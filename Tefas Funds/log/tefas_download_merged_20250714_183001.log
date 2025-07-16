@@ -1,0 +1,14 @@
+2025-07-14 18:30:01,617 - INFO - CMD: tefas_download_data_merged.py --test --codes DSP,PPN,TLE,TCD --months 2 --workers 4 --outfile test_4fon_2ay_sample.parquet
+2025-07-14 18:30:02,370 - INFO - ============================================================
+2025-07-14 18:30:02,370 - INFO - TEFAS Fon Verisi İndirme Script'i (Merged)
+2025-07-14 18:30:02,370 - INFO - ============================================================
+2025-07-14 18:30:02,371 - INFO - Mod: Test - Paralel (4 worker)
+2025-07-14 18:30:02,371 - INFO - Tarih aralığı: Son 2 ay
+2025-07-14 18:30:02,371 - INFO - ============================================================
+2025-07-14 18:30:02,650 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-14 18:30:05,038 - INFO - İndirme modu: Paralel
+2025-07-14 18:30:05,038 - INFO - Worker sayısı: 4
+2025-07-14 18:30:05,038 - INFO - [PARALEL MOD] Başlıyor...
+2025-07-14 18:30:05,038 - INFO - Fon listesi alınıyor...
+2025-07-14 18:30:05,038 - ERROR - Fon listesi alma hatası: 'TefasProvider' object has no attribute 'get_fund_list'
+2025-07-14 18:30:05,038 - ERROR - Fon listesi alınamadı!
