@@ -1,0 +1,63 @@
+2025-07-14 18:33:07,416 - INFO - CMD: tefas_download_data_merged.py --test --codes DSP,PPN,TLE,TCD --months 2 --workers 4 --outfile test_4fon_2ay_sample.parquet
+2025-07-14 18:33:08,164 - INFO - ============================================================
+2025-07-14 18:33:08,164 - INFO - TEFAS Fon Verisi İndirme Script'i (Merged)
+2025-07-14 18:33:08,165 - INFO - ============================================================
+2025-07-14 18:33:08,165 - INFO - Mod: Test - Paralel (4 worker)
+2025-07-14 18:33:08,165 - INFO - Tarih aralığı: Son 2 ay
+2025-07-14 18:33:08,165 - INFO - ============================================================
+2025-07-14 18:33:08,578 - INFO - İndirme modu: Paralel
+2025-07-14 18:33:08,578 - INFO - Worker sayısı: 4
+2025-07-14 18:33:08,578 - INFO - [PARALEL MOD] Başlıyor...
+2025-07-14 18:33:08,578 - INFO - Fon listesi alınıyor...
+2025-07-14 18:33:08,578 - INFO - Fetching fresh fund list from Takasbank
+2025-07-14 18:33:09,673 - INFO - Successfully loaded 853 funds from Takasbank
+2025-07-14 18:33:09,674 - INFO - Toplam 853 fon bulundu
+2025-07-14 18:33:09,674 - INFO - [LIST] DSP - Listeden seçildi
+2025-07-14 18:33:09,674 - INFO - [LIST] PPN - Listeden seçildi
+2025-07-14 18:33:09,674 - INFO - [LIST] TLE - Listeden seçildi
+2025-07-14 18:33:09,674 - INFO - [LIST] TCD - Listeden seçildi
+2025-07-14 18:33:09,674 - INFO - Test modu: 4 fon seçildi: DSP, PPN, TLE, TCD
+2025-07-14 18:33:09,674 - INFO - [START] 4 fon paralel indirme başlıyor...
+2025-07-14 18:33:09,674 - INFO - Hedef dosya: data\test_4fon_2ay_sample.parquet
+2025-07-14 18:33:09,675 - INFO - Worker sayısı: 4
+2025-07-14 18:33:09,675 - INFO - [BATCH 1] 4 fon işleniyor
+2025-07-14 18:33:10,093 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-14 18:33:10,196 - INFO - İndirme modu: Seri
+2025-07-14 18:33:10,196 - INFO - Worker sayısı: 1
+2025-07-14 18:33:10,202 - INFO - İndirme modu: Seri
+2025-07-14 18:33:10,202 - INFO - Worker sayısı: 1
+2025-07-14 18:33:10,205 - INFO - İndirme modu: Seri
+2025-07-14 18:33:10,205 - INFO - Worker sayısı: 1
+2025-07-14 18:33:12,464 - INFO - İndirme modu: Seri
+2025-07-14 18:33:12,465 - INFO - Worker sayısı: 1
+2025-07-14 18:33:13,233 - INFO - [OK] TCD: 40 toplam kayıt alındı
+2025-07-14 18:33:13,239 - INFO - [OK] DSP: 40 toplam kayıt alındı
+2025-07-14 18:33:13,241 - INFO - [OK] TLE: 40 toplam kayıt alındı
+2025-07-14 18:33:13,253 - ERROR - Error getting fund detail (alternative) for TCD: Expecting value: line 1 column 1 (char 0)
+2025-07-14 18:33:13,253 - INFO - TCD: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-14 18:33:13,254 - INFO - [OK] TCD (40 kayıt)
+2025-07-14 18:33:13,261 - ERROR - Error getting fund detail (alternative) for DSP: Expecting value: line 1 column 1 (char 0)
+2025-07-14 18:33:13,261 - ERROR - Error getting fund detail (alternative) for TLE: Expecting value: line 1 column 1 (char 0)
+2025-07-14 18:33:13,261 - INFO - DSP: Fon adından tahmin edilen kategori: Fon Sepeti Şemsiye Fonu
+2025-07-14 18:33:13,261 - INFO - TLE: Fon adından tahmin edilen kategori: Borçlanma Araçları Şemsiye Fonu
+2025-07-14 18:33:13,261 - INFO - [OK] DSP (40 kayıt)
+2025-07-14 18:33:13,261 - INFO - [OK] TLE (40 kayıt)
+2025-07-14 18:33:15,507 - INFO - [OK] PPN: 40 toplam kayıt alındı
+2025-07-14 18:33:15,528 - ERROR - Error getting fund detail (alternative) for PPN: Expecting value: line 1 column 1 (char 0)
+2025-07-14 18:33:15,529 - INFO - PPN: Fon adından tahmin edilen kategori: Para Piyasası Şemsiye Fonu
+2025-07-14 18:33:15,529 - INFO - [OK] PPN (40 kayıt)
+2025-07-14 18:33:15,529 - INFO - [BATCH 1] Tamamlandı. Şu ana kadar başarı: 4, hata: 0
+2025-07-14 18:33:17,530 - INFO - [SAVE] 160 kayıt parquet dosyasına yazılıyor...
+2025-07-14 18:33:17,532 - INFO - borsa_bulten_fiyat sütunu kaldırıldı
+2025-07-14 18:33:17,541 - INFO - [SUCCESS] İNDİRME TAMAMLANDI!
+2025-07-14 18:33:17,541 - INFO - [FILE] Dosya: data\test_4fon_2ay_sample.parquet
+2025-07-14 18:33:17,541 - INFO - [STATS] Kayıt sayısı: 160
+2025-07-14 18:33:17,542 - INFO - [FUNDS] Fon sayısı: 4
+2025-07-14 18:33:17,542 - INFO - [DATE] Tarih aralığı: 2025-05-14 - 2025-07-11
+2025-07-14 18:33:17,542 - INFO - [OK] Başarılı fonlar: 4
+2025-07-14 18:33:17,542 - INFO - [FAIL] Başarısız fonlar: 0
+2025-07-14 18:33:17,542 - INFO - [CATEGORIES] Fon kategorileri:
+2025-07-14 18:33:17,542 - INFO -   Borçlanma Araçları Şemsiye Fonu: 1 fon
+2025-07-14 18:33:17,542 - INFO -   Değişken Şemsiye Fonu: 1 fon
+2025-07-14 18:33:17,542 - INFO -   Fon Sepeti Şemsiye Fonu: 1 fon
+2025-07-14 18:33:17,542 - INFO -   Para Piyasası Şemsiye Fonu: 1 fon

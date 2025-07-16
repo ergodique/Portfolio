@@ -1,0 +1,14 @@
+2025-07-14 19:45:15,443 - INFO - CMD: tefas_download_data_merged.py --test --codes BHI,BHL,BCK,BUL,BVM,BVV,CPT,CPU --months 2 --workers 4 --outfile kategori_test_2ay_sample.parquet
+2025-07-14 19:45:16,182 - INFO - ============================================================
+2025-07-14 19:45:16,183 - INFO - TEFAS Fon Verisi İndirme Script'i (Merged)
+2025-07-14 19:45:16,183 - INFO - ============================================================
+2025-07-14 19:45:16,183 - INFO - Mod: Test - Paralel (4 worker)
+2025-07-14 19:45:16,183 - INFO - Tarih aralığı: Son 2 ay
+2025-07-14 19:45:16,183 - INFO - ============================================================
+2025-07-14 19:45:16,471 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-14 19:45:18,849 - INFO - [PARALEL MOD] Başlıyor...
+2025-07-14 19:45:18,849 - INFO - Fon listesi alınıyor...
+2025-07-14 19:45:18,849 - INFO - Fetching fresh fund list from Takasbank
+2025-07-14 19:45:19,119 - ERROR - Error fetching Takasbank fund list: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-14 19:45:19,119 - ERROR - Fon listesi alınamadı!
+2025-07-14 19:45:19,119 - ERROR - Fon listesi alınamadı!

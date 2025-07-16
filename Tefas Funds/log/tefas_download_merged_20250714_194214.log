@@ -1,0 +1,93 @@
+2025-07-14 19:42:14,473 - INFO - CMD: tefas_download_data_merged.py --test --codes BHI,BHL,BCK,BUL,BVM,BVV,CPT,CPU --months 2 --workers 4 --outfile kategori_test_2ay_sample.parquet
+2025-07-14 19:42:16,900 - INFO - ============================================================
+2025-07-14 19:42:16,900 - INFO - TEFAS Fon Verisi İndirme Script'i (Merged)
+2025-07-14 19:42:16,900 - INFO - ============================================================
+2025-07-14 19:42:16,900 - INFO - Mod: Test - Paralel (4 worker)
+2025-07-14 19:42:16,900 - INFO - Tarih aralığı: Son 2 ay
+2025-07-14 19:42:16,900 - INFO - ============================================================
+2025-07-14 19:42:17,585 - INFO - İndirme modu: Paralel
+2025-07-14 19:42:17,585 - INFO - Worker sayısı: 4
+2025-07-14 19:42:17,585 - INFO - [PARALEL MOD] Başlıyor...
+2025-07-14 19:42:17,585 - INFO - Fon listesi alınıyor...
+2025-07-14 19:42:17,585 - INFO - Fetching fresh fund list from Takasbank
+2025-07-14 19:42:18,750 - INFO - Successfully loaded 853 funds from Takasbank
+2025-07-14 19:42:18,750 - INFO - Toplam 853 fon bulundu
+2025-07-14 19:42:18,750 - INFO - [LIST] BHI - Listeden seçildi
+2025-07-14 19:42:18,750 - INFO - [LIST] BHL - Listeden seçildi
+2025-07-14 19:42:18,750 - INFO - [LIST] BCK - Listeden seçildi
+2025-07-14 19:42:18,751 - INFO - [LIST] BUL - Listeden seçildi
+2025-07-14 19:42:18,751 - INFO - [LIST] BVM - Listeden seçildi
+2025-07-14 19:42:18,751 - INFO - [LIST] BVV - Listeden seçildi
+2025-07-14 19:42:18,751 - INFO - [LIST] CPT - Listeden seçildi
+2025-07-14 19:42:18,751 - INFO - [LIST] CPU - Listeden seçildi
+2025-07-14 19:42:18,751 - INFO - Test modu: 8 fon seçildi: BHI, BHL, BCK, BUL, BVM, BVV, CPT, CPU
+2025-07-14 19:42:18,751 - INFO - [START] 8 fon paralel indirme başlıyor...
+2025-07-14 19:42:18,751 - INFO - Hedef dosya: data\kategori_test_2ay_sample.parquet
+2025-07-14 19:42:18,751 - INFO - Worker sayısı: 4
+2025-07-14 19:42:18,751 - INFO - [BATCH 1] 4 fon işleniyor
+2025-07-14 19:42:19,177 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-14 19:42:19,284 - INFO - İndirme modu: Seri
+2025-07-14 19:42:19,284 - INFO - Worker sayısı: 1
+2025-07-14 19:42:19,284 - INFO - İndirme modu: Seri
+2025-07-14 19:42:19,285 - INFO - Worker sayısı: 1
+2025-07-14 19:42:19,288 - INFO - İndirme modu: Seri
+2025-07-14 19:42:19,288 - INFO - Worker sayısı: 1
+2025-07-14 19:42:21,596 - INFO - İndirme modu: Seri
+2025-07-14 19:42:21,596 - INFO - Worker sayısı: 1
+2025-07-14 19:42:22,323 - INFO - [OK] BHI: 40 toplam kayıt alındı
+2025-07-14 19:42:22,324 - INFO - [OK] BUL: 40 toplam kayıt alındı
+2025-07-14 19:42:22,338 - INFO - [OK] BCK: 40 toplam kayıt alındı
+2025-07-14 19:42:22,345 - ERROR - Error getting fund detail (alternative) for BHI: Expecting value: line 1 column 1 (char 0)
+2025-07-14 19:42:22,346 - ERROR - Error getting fund detail (alternative) for BUL: Expecting value: line 1 column 1 (char 0)
+2025-07-14 19:42:22,346 - INFO - BHI: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-14 19:42:22,347 - INFO - BUL: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-14 19:42:22,347 - INFO - [OK] BHI (40 kayıt)
+2025-07-14 19:42:22,348 - INFO - [OK] BUL (40 kayıt)
+2025-07-14 19:42:22,380 - ERROR - Error getting fund detail (alternative) for BCK: Expecting value: line 1 column 1 (char 0)
+2025-07-14 19:42:22,381 - INFO - BCK: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-14 19:42:22,381 - INFO - [OK] BCK (40 kayıt)
+2025-07-14 19:42:24,634 - INFO - [OK] BHL: 40 toplam kayıt alındı
+2025-07-14 19:42:24,655 - ERROR - Error getting fund detail (alternative) for BHL: Expecting value: line 1 column 1 (char 0)
+2025-07-14 19:42:24,656 - INFO - BHL: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-14 19:42:24,656 - INFO - [OK] BHL (40 kayıt)
+2025-07-14 19:42:24,656 - INFO - [BATCH 1] Tamamlandı. Şu ana kadar başarı: 4, hata: 0
+2025-07-14 19:42:26,657 - INFO - [BATCH 2] 4 fon işleniyor
+2025-07-14 19:42:27,064 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-14 19:42:27,168 - INFO - İndirme modu: Seri
+2025-07-14 19:42:27,168 - INFO - Worker sayısı: 1
+2025-07-14 19:42:27,172 - INFO - İndirme modu: Seri
+2025-07-14 19:42:27,172 - INFO - Worker sayısı: 1
+2025-07-14 19:42:27,179 - INFO - İndirme modu: Seri
+2025-07-14 19:42:27,180 - INFO - Worker sayısı: 1
+2025-07-14 19:42:29,433 - INFO - İndirme modu: Seri
+2025-07-14 19:42:29,434 - INFO - Worker sayısı: 1
+2025-07-14 19:42:30,205 - INFO - [OK] CPT: 40 toplam kayıt alındı
+2025-07-14 19:42:30,207 - INFO - [OK] CPU: 40 toplam kayıt alındı
+2025-07-14 19:42:30,217 - INFO - [OK] BVM: 40 toplam kayıt alındı
+2025-07-14 19:42:30,227 - ERROR - Error getting fund detail (alternative) for CPT: Expecting value: line 1 column 1 (char 0)
+2025-07-14 19:42:30,228 - ERROR - Error getting fund detail (alternative) for CPU: Expecting value: line 1 column 1 (char 0)
+2025-07-14 19:42:30,228 - INFO - CPT: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-14 19:42:30,228 - INFO - CPU: Fon adından tahmin edilen kategori: Katılım Şemsiye Fonu
+2025-07-14 19:42:30,228 - INFO - [OK] CPT (40 kayıt)
+2025-07-14 19:42:30,228 - INFO - [OK] CPU (40 kayıt)
+2025-07-14 19:42:30,239 - ERROR - Error getting fund detail (alternative) for BVM: Expecting value: line 1 column 1 (char 0)
+2025-07-14 19:42:30,239 - INFO - BVM: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-14 19:42:30,239 - INFO - [OK] BVM (40 kayıt)
+2025-07-14 19:42:32,469 - INFO - [OK] BVV: 40 toplam kayıt alındı
+2025-07-14 19:42:32,489 - ERROR - Error getting fund detail (alternative) for BVV: Expecting value: line 1 column 1 (char 0)
+2025-07-14 19:42:32,489 - INFO - BVV: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-14 19:42:32,489 - INFO - [OK] BVV (40 kayıt)
+2025-07-14 19:42:32,490 - INFO - [BATCH 2] Tamamlandı. Şu ana kadar başarı: 8, hata: 0
+2025-07-14 19:42:34,490 - INFO - [SAVE] 320 kayıt parquet dosyasına yazılıyor...
+2025-07-14 19:42:34,492 - INFO - borsa_bulten_fiyat sütunu kaldırıldı
+2025-07-14 19:42:34,501 - INFO - [SUCCESS] İNDİRME TAMAMLANDI!
+2025-07-14 19:42:34,501 - INFO - [FILE] Dosya: data\kategori_test_2ay_sample.parquet
+2025-07-14 19:42:34,501 - INFO - [STATS] Kayıt sayısı: 320
+2025-07-14 19:42:34,501 - INFO - [FUNDS] Fon sayısı: 8
+2025-07-14 19:42:34,501 - INFO - [DATE] Tarih aralığı: 2025-05-14 - 2025-07-11
+2025-07-14 19:42:34,501 - INFO - [OK] Başarılı fonlar: 8
+2025-07-14 19:42:34,501 - INFO - [FAIL] Başarısız fonlar: 0
+2025-07-14 19:42:34,502 - INFO - [CATEGORIES] Fon kategorileri:
+2025-07-14 19:42:34,502 - INFO -   Serbest Şemsiye Fonu: 4 fon
+2025-07-14 19:42:34,502 - INFO -   Değişken Şemsiye Fonu: 3 fon
+2025-07-14 19:42:34,502 - INFO -   Katılım Şemsiye Fonu: 1 fon
