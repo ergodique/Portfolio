@@ -1,0 +1,1 @@
+2025-07-17 14:23:31,292 - INFO - CMD: tefas_download_data_merged.py --test --codes PPN,PRD,TLE,IPV,TCD,IPB,IIH,AHI,AFA,YAY --start-date 2025-01-01 --end-date 2025-07-01 --workers 4 --outfile data/repair_test_10fon.parquet

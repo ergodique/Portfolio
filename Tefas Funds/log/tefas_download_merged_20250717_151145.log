@@ -1,0 +1,1476 @@
+2025-07-17 15:11:45,133 - INFO - CMD: tefas_download_data_merged.py --repair --input data/tefas_full_2yrs.parquet --workers 1
+2025-07-17 15:11:45,212 - INFO - ============================================================
+2025-07-17 15:11:45,212 - INFO - TEFAS Fon Verisi İndirme Script'i (Merged)
+2025-07-17 15:11:45,212 - INFO - ============================================================
+2025-07-17 15:11:45,212 - INFO - Mod: Repair - Seri
+2025-07-17 15:11:45,212 - INFO - Input dosya: data/tefas_full_2yrs.parquet
+2025-07-17 15:11:45,212 - INFO - ============================================================
+2025-07-17 15:11:45,269 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:11:46,426 - INFO - [REPAIR MODE] Eksik veri tamamlama başlıyor...
+2025-07-17 15:11:46,426 - INFO - [REPAIR] Mevcut veri analiz ediliyor: data\tefas_full_2yrs.parquet
+2025-07-17 15:11:46,530 - INFO - [MISSING] OTK: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,530 - INFO - [MISSING] OTM: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,530 - INFO - [MISSING] OUD: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,530 - INFO - [MISSING] OVD: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,530 - INFO - [MISSING] PAF: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,531 - INFO - [MISSING] PAL: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,531 - INFO - [MISSING] PAO: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,531 - INFO - [MISSING] PBI: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,531 - INFO - [MISSING] PBK: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,531 - INFO - [MISSING] PBN: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,531 - INFO - [MISSING] PBR: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,531 - INFO - [MISSING] PDD: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,532 - INFO - [MISSING] PDF: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,532 - INFO - [MISSING] PEA: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,532 - INFO - [MISSING] PFO: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,532 - INFO - [MISSING] PFS: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,532 - INFO - [MISSING] PGD: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,532 - INFO - [MISSING] PGS: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,532 - INFO - [MISSING] PHE: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,533 - INFO - [MISSING] PHI: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,533 - INFO - [MISSING] PHK: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,533 - INFO - [MISSING] PID: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,533 - INFO - [MISSING] PIL: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,533 - INFO - [MISSING] PIP: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,533 - INFO - [MISSING] PIR: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,533 - INFO - [MISSING] PJL: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,533 - INFO - [MISSING] PKD: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,534 - INFO - [MISSING] PKF: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,534 - INFO - [MISSING] PKR: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,534 - INFO - [MISSING] PKT: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,534 - INFO - [MISSING] PKV: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,534 - INFO - [MISSING] PLR: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,534 - INFO - [MISSING] PMP: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,534 - INFO - [MISSING] POS: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,534 - INFO - [MISSING] PP1: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,534 - INFO - [MISSING] PPB: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,535 - INFO - [MISSING] PPE: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,535 - INFO - [MISSING] PPH: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,535 - INFO - [MISSING] PPI: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,535 - INFO - [MISSING] PPJ: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,535 - INFO - [MISSING] PPK: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,535 - INFO - [MISSING] PPM: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,535 - INFO - [MISSING] PPN: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,536 - INFO - [MISSING] PPP: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,536 - INFO - [MISSING] PPS: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,536 - INFO - [MISSING] PPT: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,536 - INFO - [MISSING] PPZ: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,536 - INFO - [MISSING] PRD: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,536 - INFO - [MISSING] PRH: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,536 - INFO - [MISSING] PRU: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,537 - INFO - [MISSING] PRY: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,537 - INFO - [MISSING] PSE: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,537 - INFO - [MISSING] PSL: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,537 - INFO - [MISSING] PTE: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,537 - INFO - [MISSING] PTN: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,537 - INFO - [MISSING] PTO: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,538 - INFO - [MISSING] PTS: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,538 - INFO - [MISSING] PUC: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,538 - INFO - [MISSING] PVK: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,538 - INFO - [MISSING] PYR: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,538 - INFO - [MISSING] RBA: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,538 - INFO - [MISSING] RBB: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,539 - INFO - [MISSING] RBF: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,539 - INFO - [MISSING] RBH: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,539 - INFO - [MISSING] RBI: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,539 - INFO - [MISSING] RBK: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,539 - INFO - [MISSING] RBL: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,539 - INFO - [MISSING] RBN: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,539 - INFO - [MISSING] RBP: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,539 - INFO - [MISSING] RBR: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,540 - INFO - [MISSING] RBT: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,540 - INFO - [MISSING] RBV: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,540 - INFO - [MISSING] RCV: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,540 - INFO - [MISSING] RD1: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,540 - INFO - [MISSING] RDF: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,540 - INFO - [MISSING] RHI: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,540 - INFO - [MISSING] RHS: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,541 - INFO - [MISSING] RIA: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,541 - INFO - [MISSING] RIK: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,541 - INFO - [MISSING] RJG: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,541 - INFO - [MISSING] RKC: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,541 - INFO - [MISSING] RKH: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,541 - INFO - [MISSING] RKS: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,541 - INFO - [MISSING] RKV: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,542 - INFO - [MISSING] RPC: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,542 - INFO - [MISSING] RPD: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,542 - INFO - [MISSING] RPG: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,542 - INFO - [MISSING] RPI: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,542 - INFO - [MISSING] RPM: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,542 - INFO - [MISSING] RPP: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,542 - INFO - [MISSING] RPS: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,543 - INFO - [MISSING] RPT: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,543 - INFO - [MISSING] RPX: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,543 - INFO - [MISSING] RRP: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,543 - INFO - [MISSING] RS1: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,543 - INFO - [MISSING] RTD: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,543 - INFO - [MISSING] RTG: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,543 - INFO - [MISSING] RTH: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,544 - INFO - [MISSING] RTP: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,544 - INFO - [MISSING] RUT: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,544 - INFO - [MISSING] SAS: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,544 - INFO - [MISSING] SBH: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,544 - INFO - [MISSING] SGT: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,544 - INFO - [MISSING] SHE: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,544 - INFO - [MISSING] SNY: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,544 - INFO - [MISSING] SOS: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,545 - INFO - [MISSING] SPE: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,545 - INFO - [MISSING] SPN: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,545 - INFO - [MISSING] SPP: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,545 - INFO - [MISSING] SPR: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,545 - INFO - [MISSING] SPT: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,545 - INFO - [MISSING] SRL: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,546 - INFO - [MISSING] SSK: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,546 - INFO - [MISSING] SSS: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,546 - INFO - [MISSING] ST1: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,546 - INFO - [MISSING] STI: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,546 - INFO - [MISSING] SUA: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,546 - INFO - [MISSING] SUB: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,547 - INFO - [MISSING] SUC: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,547 - INFO - [MISSING] SVB: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,547 - INFO - [MISSING] TAL: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,547 - INFO - [MISSING] TAR: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,547 - INFO - [MISSING] TAU: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,547 - INFO - [MISSING] TBT: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,547 - INFO - [MISSING] TBV: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,547 - INFO - [MISSING] TCA: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,548 - INFO - [MISSING] TCB: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,548 - INFO - [MISSING] TCC: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,548 - INFO - [MISSING] TCD: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,548 - INFO - [MISSING] TCF: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,548 - INFO - [MISSING] TDG: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,548 - INFO - [MISSING] TE3: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,548 - INFO - [MISSING] TE4: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,548 - INFO - [MISSING] TEJ: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,548 - INFO - [MISSING] TFF: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,548 - INFO - [MISSING] TGA: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,549 - INFO - [MISSING] TGE: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,549 - INFO - [MISSING] TGR: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,549 - INFO - [MISSING] THD: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,549 - INFO - [MISSING] THF: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,549 - INFO - [MISSING] THT: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,549 - INFO - [MISSING] THV: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,549 - INFO - [MISSING] TI2: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,550 - INFO - [MISSING] TI3: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,550 - INFO - [MISSING] TI4: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,550 - INFO - [MISSING] TI6: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,550 - INFO - [MISSING] TI7: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,550 - INFO - [MISSING] TIE: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,550 - INFO - [MISSING] TJF: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,551 - INFO - [MISSING] TJI: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,551 - INFO - [MISSING] TJT: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,551 - INFO - [MISSING] TKF: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,551 - INFO - [MISSING] TLE: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,551 - INFO - [MISSING] TLH: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,551 - INFO - [MISSING] TLK: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,552 - INFO - [MISSING] TLY: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,552 - INFO - [MISSING] TLZ: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,552 - INFO - [MISSING] TMC: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,552 - INFO - [MISSING] TMG: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,552 - INFO - [MISSING] TMM: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,552 - INFO - [MISSING] TMZ: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,552 - INFO - [MISSING] TOT: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,552 - INFO - [MISSING] TP2: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,552 - INFO - [MISSING] TPC: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,552 - INFO - [MISSING] TPF: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,553 - INFO - [MISSING] TPJ: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,553 - INFO - [MISSING] TPL: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,553 - INFO - [MISSING] TPP: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,553 - INFO - [MISSING] TPV: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,553 - INFO - [MISSING] TPZ: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,553 - INFO - [MISSING] TRJ: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,553 - INFO - [MISSING] TRO: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,553 - INFO - [MISSING] TRU: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,554 - INFO - [MISSING] TTA: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,554 - INFO - [MISSING] TTE: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,554 - INFO - [MISSING] TTL: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,554 - INFO - [MISSING] TUA: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,554 - INFO - [MISSING] TVN: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,554 - INFO - [MISSING] TYH: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,555 - INFO - [MISSING] TZD: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,555 - INFO - [MISSING] TZT: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,555 - INFO - [MISSING] UNT: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,555 - INFO - [MISSING] UP1: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,555 - INFO - [MISSING] UP2: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,555 - INFO - [MISSING] UPD: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,555 - INFO - [MISSING] UPH: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,556 - INFO - [MISSING] UPP: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,556 - INFO - [MISSING] URA: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,556 - INFO - [MISSING] USY: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,556 - INFO - [MISSING] VAY: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,556 - INFO - [MISSING] VCY: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,556 - INFO - [MISSING] VFK: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,556 - INFO - [MISSING] VMV: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,557 - INFO - [MISSING] VNK: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,557 - INFO - [MISSING] YAC: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,557 - INFO - [MISSING] YAK: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,557 - INFO - [MISSING] YAN: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,557 - INFO - [MISSING] YAS: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,557 - INFO - [MISSING] YAY: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,557 - INFO - [MISSING] YBE: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,557 - INFO - [MISSING] YBH: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,557 - INFO - [MISSING] YBR: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,557 - INFO - [MISSING] YBS: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,558 - INFO - [MISSING] YCK: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,558 - INFO - [MISSING] YCP: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,558 - INFO - [MISSING] YCY: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,558 - INFO - [MISSING] YDI: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,558 - INFO - [MISSING] YDP: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,558 - INFO - [MISSING] YEF: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,559 - INFO - [MISSING] YFV: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,559 - INFO - [MISSING] YGM: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,559 - INFO - [MISSING] YHB: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,559 - INFO - [MISSING] YHI: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,559 - INFO - [MISSING] YHK: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,559 - INFO - [MISSING] YHS: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,560 - INFO - [MISSING] YHZ: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,560 - INFO - [MISSING] YIT: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,560 - INFO - [MISSING] YJH: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,560 - INFO - [MISSING] YJK: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,560 - INFO - [MISSING] YJY: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,560 - INFO - [MISSING] YKS: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,560 - INFO - [MISSING] YKT: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,560 - INFO - [MISSING] YLC: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,561 - INFO - [MISSING] YLE: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,561 - INFO - [MISSING] YLO: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,561 - INFO - [MISSING] YLY: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,561 - INFO - [MISSING] YMD: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,561 - INFO - [MISSING] YMH: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,561 - INFO - [MISSING] YNK: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,561 - INFO - [MISSING] YOT: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,561 - INFO - [MISSING] YP4: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,561 - INFO - [MISSING] YPC: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,562 - INFO - [MISSING] YPK: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,562 - INFO - [MISSING] YPL: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,562 - INFO - [MISSING] YPR: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,562 - INFO - [MISSING] YPV: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,562 - INFO - [MISSING] YSL: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,562 - INFO - [MISSING] YSO: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,563 - INFO - [MISSING] YSU: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,563 - INFO - [MISSING] YTD: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,563 - INFO - [MISSING] YTV: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,563 - INFO - [MISSING] YTY: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,563 - INFO - [MISSING] YUB: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,563 - INFO - [MISSING] YUN: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,563 - INFO - [MISSING] YVB: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,564 - INFO - [MISSING] YVG: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,564 - INFO - [MISSING] YZC: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,564 - INFO - [MISSING] YZG: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,564 - INFO - [MISSING] YZH: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,564 - INFO - [MISSING] YZK: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,564 - INFO - [MISSING] ZBD: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,564 - INFO - [MISSING] ZBI: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,564 - INFO - [MISSING] ZBJ: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,564 - INFO - [MISSING] ZBO: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,565 - INFO - [MISSING] ZCD: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,565 - INFO - [MISSING] ZCK: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,565 - INFO - [MISSING] ZCN: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,565 - INFO - [MISSING] ZDD: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,565 - INFO - [MISSING] ZDZ: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,565 - INFO - [MISSING] ZFB: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,565 - INFO - [MISSING] ZHH: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,565 - INFO - [MISSING] ZJB: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,566 - INFO - [MISSING] ZJI: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,566 - INFO - [MISSING] ZJL: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,566 - INFO - [MISSING] ZJV: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,566 - INFO - [MISSING] ZLH: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,566 - INFO - [MISSING] ZMT: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,566 - INFO - [MISSING] ZMY: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,567 - INFO - [MISSING] ZP6: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,567 - INFO - [MISSING] ZP8: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,567 - INFO - [MISSING] ZP9: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,567 - INFO - [MISSING] ZPA: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,567 - INFO - [MISSING] ZPC: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,567 - INFO - [MISSING] ZPE: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,567 - INFO - [MISSING] ZPF: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,567 - INFO - [MISSING] ZPG: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,568 - INFO - [MISSING] ZSF: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,568 - INFO - [MISSING] ZSG: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,568 - INFO - [MISSING] ZVO: 2025-07-15 - 2025-07-17 (2 gün)
+2025-07-17 15:11:46,568 - INFO - [ANALYSIS] 279 tane fon eksik verili. 571/850 tamamlanmış.
+2025-07-17 15:11:46,569 - INFO - [REPAIR] 279 fon için eksik veri indiriliyor...
+2025-07-17 15:11:46,570 - INFO - [REPAIR] Fon listesi alınıyor...
+2025-07-17 15:11:46,570 - INFO - Fetching fresh fund list from TEFAS API
+2025-07-17 15:11:47,076 - INFO - Successfully loaded 862 funds from TEFAS API
+2025-07-17 15:11:47,077 - INFO - [REPAIR] 862 fon eşleştirildi
+2025-07-17 15:11:47,077 - INFO - [REPAIR] Seri mod
+2025-07-17 15:11:47,077 - INFO - [REPAIR] OTK: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:11:49,653 - ERROR - Error getting fund detail (alternative) for OTK: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:11:49,654 - INFO - OTK: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:11:49,654 - INFO - [REPAIR OK] OTK: 2 yeni kayıt
+2025-07-17 15:11:49,654 - INFO - [REPAIR] OTM: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:11:52,323 - ERROR - Error getting fund detail (alternative) for OTM: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:11:52,323 - INFO - OTM: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:11:52,323 - INFO - [REPAIR OK] OTM: 2 yeni kayıt
+2025-07-17 15:11:52,323 - INFO - [REPAIR] OUD: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:11:54,141 - ERROR - Error getting fund detail (alternative) for OUD: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:11:54,141 - INFO - OUD: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:11:54,142 - INFO - [REPAIR OK] OUD: 2 yeni kayıt
+2025-07-17 15:11:54,142 - INFO - [REPAIR] OVD: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:11:56,585 - ERROR - Error getting fund detail (alternative) for OVD: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:11:56,586 - INFO - OVD: Fon adından tahmin edilen kategori: Fon Sepeti Şemsiye Fonu
+2025-07-17 15:11:56,586 - INFO - [REPAIR OK] OVD: 2 yeni kayıt
+2025-07-17 15:11:56,586 - INFO - [REPAIR] PAF: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:11:58,878 - ERROR - Error getting fund detail (alternative) for PAF: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:11:58,878 - INFO - PAF: Fon adından tahmin edilen kategori: Kıymetli Madenler Şemsiye Fonu
+2025-07-17 15:11:58,879 - INFO - [REPAIR OK] PAF: 2 yeni kayıt
+2025-07-17 15:11:58,879 - INFO - [REPAIR] PAL: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:11:58,929 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:12:01,660 - ERROR - Error getting fund detail (alternative) for PAL: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:12:01,660 - INFO - PAL: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:12:01,660 - INFO - [REPAIR OK] PAL: 2 yeni kayıt
+2025-07-17 15:12:01,660 - INFO - [REPAIR] PAO: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:12:01,708 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:12:05,013 - ERROR - Error getting fund detail (alternative) for PAO: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:12:05,013 - INFO - PAO: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:12:05,013 - INFO - [REPAIR OK] PAO: 2 yeni kayıt
+2025-07-17 15:12:05,013 - INFO - [REPAIR] PBI: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:12:07,288 - ERROR - Error getting fund detail (alternative) for PBI: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:12:07,289 - INFO - PBI: Fon adından tahmin edilen kategori: Fon Sepeti Şemsiye Fonu
+2025-07-17 15:12:07,289 - INFO - [REPAIR OK] PBI: 2 yeni kayıt
+2025-07-17 15:12:07,289 - INFO - [REPAIR] PBK: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:12:09,665 - ERROR - Error getting fund detail (alternative) for PBK: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:12:09,665 - INFO - PBK: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:12:09,665 - INFO - [REPAIR OK] PBK: 2 yeni kayıt
+2025-07-17 15:12:09,666 - INFO - [REPAIR] PBN: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:12:12,014 - ERROR - Error getting fund detail (alternative) for PBN: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:12:12,015 - INFO - PBN: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:12:12,015 - INFO - [REPAIR OK] PBN: 2 yeni kayıt
+2025-07-17 15:12:12,015 - INFO - [REPAIR] PBR: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:12:12,069 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:12:14,511 - ERROR - Error getting fund detail (alternative) for PBR: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:12:14,511 - INFO - PBR: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:12:14,511 - INFO - [REPAIR OK] PBR: 2 yeni kayıt
+2025-07-17 15:12:14,511 - INFO - [REPAIR] PDD: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:12:17,463 - ERROR - Error getting fund detail (alternative) for PDD: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:12:17,464 - INFO - PDD: Fon adından tahmin edilen kategori: Katılım Şemsiye Fonu
+2025-07-17 15:12:17,464 - INFO - [REPAIR OK] PDD: 2 yeni kayıt
+2025-07-17 15:12:17,464 - INFO - [REPAIR] PDF: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:12:19,263 - ERROR - Error getting fund detail (alternative) for PDF: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:12:19,263 - INFO - PDF: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:12:19,264 - INFO - [REPAIR OK] PDF: 2 yeni kayıt
+2025-07-17 15:12:19,264 - INFO - [REPAIR] PEA: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:12:21,666 - ERROR - Error getting fund detail (alternative) for PEA: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:12:21,666 - INFO - PEA: Fon adından tahmin edilen kategori: Kıymetli Madenler Şemsiye Fonu
+2025-07-17 15:12:21,667 - INFO - [REPAIR OK] PEA: 2 yeni kayıt
+2025-07-17 15:12:21,667 - INFO - [REPAIR] PFO: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:12:23,729 - ERROR - Error getting fund detail (alternative) for PFO: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:12:23,730 - INFO - PFO: Fon adından tahmin edilen kategori: Fon Sepeti Şemsiye Fonu
+2025-07-17 15:12:23,730 - INFO - [REPAIR OK] PFO: 2 yeni kayıt
+2025-07-17 15:12:23,730 - INFO - [REPAIR] PFS: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:12:23,780 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:12:24,827 - WARNING - Session başlatma deneme 2/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:12:28,449 - ERROR - Error getting fund detail (alternative) for PFS: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:12:28,450 - INFO - PFS: Fon adından tahmin edilen kategori: Fon Sepeti Şemsiye Fonu
+2025-07-17 15:12:28,450 - INFO - [REPAIR OK] PFS: 2 yeni kayıt
+2025-07-17 15:12:28,450 - INFO - [REPAIR] PGD: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:12:30,525 - ERROR - Error getting fund detail (alternative) for PGD: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:12:30,525 - INFO - PGD: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:12:30,525 - INFO - [REPAIR OK] PGD: 2 yeni kayıt
+2025-07-17 15:12:30,525 - INFO - [REPAIR] PGS: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:12:32,799 - ERROR - Error getting fund detail (alternative) for PGS: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:12:32,799 - INFO - PGS: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:12:32,799 - INFO - [REPAIR OK] PGS: 2 yeni kayıt
+2025-07-17 15:12:32,800 - INFO - [REPAIR] PHE: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:12:32,846 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:12:33,892 - WARNING - Session başlatma deneme 2/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:12:37,286 - ERROR - Error getting fund detail (alternative) for PHE: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:12:37,287 - INFO - PHE: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:12:37,287 - INFO - [REPAIR OK] PHE: 2 yeni kayıt
+2025-07-17 15:12:37,287 - INFO - [REPAIR] PHI: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:12:39,579 - ERROR - Error getting fund detail (alternative) for PHI: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:12:39,580 - INFO - PHI: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:12:39,580 - INFO - [REPAIR OK] PHI: 2 yeni kayıt
+2025-07-17 15:12:39,580 - INFO - [REPAIR] PHK: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:12:39,627 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:12:42,382 - ERROR - Error getting fund detail (alternative) for PHK: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:12:42,383 - INFO - PHK: Fon adından tahmin edilen kategori: Katılım Şemsiye Fonu
+2025-07-17 15:12:42,383 - INFO - [REPAIR OK] PHK: 2 yeni kayıt
+2025-07-17 15:12:42,383 - INFO - [REPAIR] PID: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:12:44,092 - ERROR - Error getting fund detail (alternative) for PID: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:12:44,093 - INFO - PID: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:12:44,093 - INFO - [REPAIR OK] PID: 2 yeni kayıt
+2025-07-17 15:12:44,093 - INFO - [REPAIR] PIL: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:12:46,510 - ERROR - Error getting fund detail (alternative) for PIL: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:12:46,510 - INFO - PIL: Fon adından tahmin edilen kategori: Fon Sepeti Şemsiye Fonu
+2025-07-17 15:12:46,511 - INFO - [REPAIR OK] PIL: 2 yeni kayıt
+2025-07-17 15:12:46,511 - INFO - [REPAIR] PIP: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:12:48,605 - ERROR - Error getting fund detail (alternative) for PIP: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:12:48,606 - INFO - PIP: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:12:48,606 - INFO - [REPAIR OK] PIP: 2 yeni kayıt
+2025-07-17 15:12:48,606 - INFO - [REPAIR] PIR: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:12:50,162 - ERROR - Error getting fund detail (alternative) for PIR: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:12:50,163 - INFO - PIR: Fon adından tahmin edilen kategori: Kıymetli Madenler Şemsiye Fonu
+2025-07-17 15:12:50,163 - INFO - [REPAIR OK] PIR: 2 yeni kayıt
+2025-07-17 15:12:50,163 - INFO - [REPAIR] PJL: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:12:52,104 - ERROR - Error getting fund detail (alternative) for PJL: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:12:52,105 - INFO - PJL: Fon adından tahmin edilen kategori: Para Piyasası Şemsiye Fonu
+2025-07-17 15:12:52,105 - INFO - [REPAIR OK] PJL: 2 yeni kayıt
+2025-07-17 15:12:52,105 - INFO - [REPAIR] PKD: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:12:54,140 - ERROR - Error getting fund detail (alternative) for PKD: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:12:54,140 - INFO - PKD: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:12:54,140 - INFO - [REPAIR OK] PKD: 2 yeni kayıt
+2025-07-17 15:12:54,141 - INFO - [REPAIR] PKF: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:12:55,823 - ERROR - Error getting fund detail (alternative) for PKF: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:12:55,823 - INFO - PKF: Fon adından tahmin edilen kategori: Katılım Şemsiye Fonu
+2025-07-17 15:12:55,823 - INFO - [REPAIR OK] PKF: 2 yeni kayıt
+2025-07-17 15:12:55,823 - INFO - [REPAIR] PKR: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:12:57,994 - ERROR - Error getting fund detail (alternative) for PKR: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:12:57,995 - INFO - PKR: Fon adından tahmin edilen kategori: Katılım Şemsiye Fonu
+2025-07-17 15:12:57,995 - INFO - [REPAIR OK] PKR: 2 yeni kayıt
+2025-07-17 15:12:57,995 - INFO - [REPAIR] PKT: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:13:00,290 - ERROR - Error getting fund detail (alternative) for PKT: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:13:00,291 - INFO - PKT: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:13:00,291 - INFO - [REPAIR OK] PKT: 2 yeni kayıt
+2025-07-17 15:13:00,291 - INFO - [REPAIR] PKV: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:13:02,343 - ERROR - Error getting fund detail (alternative) for PKV: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:13:02,343 - INFO - PKV: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:13:02,343 - INFO - [REPAIR OK] PKV: 2 yeni kayıt
+2025-07-17 15:13:02,344 - INFO - [REPAIR] PLR: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:13:04,712 - ERROR - Error getting fund detail (alternative) for PLR: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:13:04,713 - INFO - PLR: Fon adından tahmin edilen kategori: Para Piyasası Şemsiye Fonu
+2025-07-17 15:13:04,713 - INFO - [REPAIR OK] PLR: 2 yeni kayıt
+2025-07-17 15:13:04,713 - INFO - [REPAIR] PMP: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:13:06,292 - ERROR - Error getting fund detail (alternative) for PMP: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:13:06,292 - INFO - PMP: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:13:06,292 - INFO - [REPAIR OK] PMP: 2 yeni kayıt
+2025-07-17 15:13:06,292 - INFO - [REPAIR] POS: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:13:08,114 - ERROR - Error getting fund detail (alternative) for POS: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:13:08,115 - INFO - POS: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:13:08,115 - INFO - [REPAIR OK] POS: 2 yeni kayıt
+2025-07-17 15:13:08,115 - INFO - [REPAIR] PP1: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:13:10,297 - ERROR - Error getting fund detail (alternative) for PP1: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:13:10,297 - INFO - PP1: Fon adından tahmin edilen kategori: Katılım Şemsiye Fonu
+2025-07-17 15:13:10,297 - INFO - [REPAIR OK] PP1: 2 yeni kayıt
+2025-07-17 15:13:10,297 - INFO - [REPAIR] PPB: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:13:10,345 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:13:13,264 - ERROR - Error getting fund detail (alternative) for PPB: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:13:13,264 - INFO - PPB: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:13:13,265 - INFO - [REPAIR OK] PPB: 2 yeni kayıt
+2025-07-17 15:13:13,265 - INFO - [REPAIR] PPE: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:13:14,851 - ERROR - Error getting fund detail (alternative) for PPE: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:13:14,852 - INFO - PPE: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:13:14,852 - INFO - [REPAIR OK] PPE: 2 yeni kayıt
+2025-07-17 15:13:14,852 - INFO - [REPAIR] PPH: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:13:16,612 - ERROR - Error getting fund detail (alternative) for PPH: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:13:16,613 - INFO - PPH: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:13:16,613 - INFO - [REPAIR OK] PPH: 2 yeni kayıt
+2025-07-17 15:13:16,613 - INFO - [REPAIR] PPI: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:13:18,479 - ERROR - Error getting fund detail (alternative) for PPI: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:13:18,480 - INFO - PPI: Fon adından tahmin edilen kategori: Para Piyasası Şemsiye Fonu
+2025-07-17 15:13:18,480 - INFO - [REPAIR OK] PPI: 2 yeni kayıt
+2025-07-17 15:13:18,480 - INFO - [REPAIR] PPJ: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:13:18,529 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:13:21,014 - ERROR - Error getting fund detail (alternative) for PPJ: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:13:21,014 - INFO - PPJ: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:13:21,014 - INFO - [REPAIR OK] PPJ: 2 yeni kayıt
+2025-07-17 15:13:21,015 - INFO - [REPAIR] PPK: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:13:22,506 - ERROR - Error getting fund detail (alternative) for PPK: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:13:22,506 - INFO - PPK: Fon adından tahmin edilen kategori: Katılım Şemsiye Fonu
+2025-07-17 15:13:22,506 - INFO - [REPAIR OK] PPK: 2 yeni kayıt
+2025-07-17 15:13:22,506 - INFO - [REPAIR] PPM: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:13:24,452 - ERROR - Error getting fund detail (alternative) for PPM: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:13:24,453 - INFO - PPM: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:13:24,453 - INFO - [REPAIR OK] PPM: 2 yeni kayıt
+2025-07-17 15:13:24,453 - INFO - [REPAIR] PPN: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:13:26,569 - ERROR - Error getting fund detail (alternative) for PPN: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:13:26,570 - INFO - PPN: Fon adından tahmin edilen kategori: Para Piyasası Şemsiye Fonu
+2025-07-17 15:13:26,570 - INFO - [REPAIR OK] PPN: 2 yeni kayıt
+2025-07-17 15:13:26,570 - INFO - [REPAIR] PPP: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:13:28,339 - ERROR - Error getting fund detail (alternative) for PPP: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:13:28,339 - INFO - PPP: Fon adından tahmin edilen kategori: Para Piyasası Şemsiye Fonu
+2025-07-17 15:13:28,339 - INFO - [REPAIR OK] PPP: 2 yeni kayıt
+2025-07-17 15:13:28,339 - INFO - [REPAIR] PPS: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:13:30,199 - ERROR - Error getting fund detail (alternative) for PPS: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:13:30,200 - INFO - PPS: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:13:30,200 - INFO - [REPAIR OK] PPS: 2 yeni kayıt
+2025-07-17 15:13:30,200 - INFO - [REPAIR] PPT: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:13:31,775 - ERROR - Error getting fund detail (alternative) for PPT: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:13:31,776 - INFO - PPT: Fon adından tahmin edilen kategori: Para Piyasası Şemsiye Fonu
+2025-07-17 15:13:31,776 - INFO - [REPAIR OK] PPT: 2 yeni kayıt
+2025-07-17 15:13:31,776 - INFO - [REPAIR] PPZ: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:13:33,677 - ERROR - Error getting fund detail (alternative) for PPZ: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:13:33,677 - INFO - PPZ: Fon adından tahmin edilen kategori: Para Piyasası Şemsiye Fonu
+2025-07-17 15:13:33,677 - INFO - [REPAIR OK] PPZ: 2 yeni kayıt
+2025-07-17 15:13:33,678 - INFO - [REPAIR] PRD: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:13:35,882 - ERROR - Error getting fund detail (alternative) for PRD: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:13:35,882 - INFO - PRD: Fon adından tahmin edilen kategori: Para Piyasası Şemsiye Fonu
+2025-07-17 15:13:35,882 - INFO - [REPAIR OK] PRD: 2 yeni kayıt
+2025-07-17 15:13:35,882 - INFO - [REPAIR] PRH: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:13:38,274 - ERROR - Error getting fund detail (alternative) for PRH: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:13:38,274 - INFO - PRH: Fon adından tahmin edilen kategori: Para Piyasası Şemsiye Fonu
+2025-07-17 15:13:38,274 - INFO - [REPAIR OK] PRH: 2 yeni kayıt
+2025-07-17 15:13:38,275 - INFO - [REPAIR] PRU: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:13:40,530 - ERROR - Error getting fund detail (alternative) for PRU: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:13:40,531 - INFO - PRU: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:13:40,531 - INFO - [REPAIR OK] PRU: 2 yeni kayıt
+2025-07-17 15:13:40,531 - INFO - [REPAIR] PRY: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:13:42,592 - ERROR - Error getting fund detail (alternative) for PRY: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:13:42,593 - INFO - PRY: Fon adından tahmin edilen kategori: Para Piyasası Şemsiye Fonu
+2025-07-17 15:13:42,593 - INFO - [REPAIR OK] PRY: 2 yeni kayıt
+2025-07-17 15:13:42,593 - INFO - [REPAIR] PSE: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:13:44,046 - ERROR - Error getting fund detail (alternative) for PSE: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:13:44,046 - INFO - PSE: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:13:44,046 - INFO - [REPAIR OK] PSE: 2 yeni kayıt
+2025-07-17 15:13:44,046 - INFO - [REPAIR] PSL: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:13:44,093 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:13:46,655 - ERROR - Error getting fund detail (alternative) for PSL: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:13:46,656 - INFO - PSL: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:13:46,656 - INFO - [REPAIR OK] PSL: 2 yeni kayıt
+2025-07-17 15:13:46,656 - INFO - [REPAIR] PTE: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:13:48,112 - ERROR - Error getting fund detail (alternative) for PTE: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:13:48,112 - INFO - PTE: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:13:48,112 - INFO - [REPAIR OK] PTE: 2 yeni kayıt
+2025-07-17 15:13:48,112 - INFO - [REPAIR] PTN: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:13:50,297 - ERROR - Error getting fund detail (alternative) for PTN: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:13:50,298 - INFO - PTN: Fon adından tahmin edilen kategori: Kıymetli Madenler Şemsiye Fonu
+2025-07-17 15:13:50,298 - INFO - [REPAIR OK] PTN: 2 yeni kayıt
+2025-07-17 15:13:50,298 - INFO - [REPAIR] PTO: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:13:52,230 - ERROR - Error getting fund detail (alternative) for PTO: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:13:52,230 - INFO - PTO: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:13:52,231 - INFO - [REPAIR OK] PTO: 2 yeni kayıt
+2025-07-17 15:13:52,231 - INFO - [REPAIR] PTS: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:13:53,872 - ERROR - Error getting fund detail (alternative) for PTS: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:13:53,873 - INFO - PTS: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:13:53,873 - INFO - [REPAIR OK] PTS: 2 yeni kayıt
+2025-07-17 15:13:53,873 - INFO - [REPAIR] PUC: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:13:55,660 - ERROR - Error getting fund detail (alternative) for PUC: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:13:55,660 - INFO - PUC: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:13:55,660 - INFO - [REPAIR OK] PUC: 2 yeni kayıt
+2025-07-17 15:13:55,660 - INFO - [REPAIR] PVK: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:13:57,111 - ERROR - Error getting fund detail (alternative) for PVK: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:13:57,111 - INFO - PVK: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:13:57,111 - INFO - [REPAIR OK] PVK: 2 yeni kayıt
+2025-07-17 15:13:57,112 - INFO - [REPAIR] PYR: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:13:59,076 - ERROR - Error getting fund detail (alternative) for PYR: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:13:59,077 - INFO - PYR: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:13:59,077 - INFO - [REPAIR OK] PYR: 2 yeni kayıt
+2025-07-17 15:13:59,077 - INFO - [REPAIR] RBA: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:14:01,067 - ERROR - Error getting fund detail (alternative) for RBA: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:14:01,068 - INFO - RBA: Fon adından tahmin edilen kategori: Katılım Şemsiye Fonu
+2025-07-17 15:14:01,068 - INFO - [REPAIR OK] RBA: 2 yeni kayıt
+2025-07-17 15:14:01,068 - INFO - [REPAIR] RBB: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:14:02,920 - ERROR - Error getting fund detail (alternative) for RBB: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:14:02,921 - INFO - RBB: Fon adından tahmin edilen kategori: Borçlanma Araçları Şemsiye Fonu
+2025-07-17 15:14:02,921 - INFO - [REPAIR OK] RBB: 2 yeni kayıt
+2025-07-17 15:14:02,921 - INFO - [REPAIR] RBF: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:14:04,987 - ERROR - Error getting fund detail (alternative) for RBF: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:14:04,988 - INFO - RBF: Fon adından tahmin edilen kategori: Borçlanma Araçları Şemsiye Fonu
+2025-07-17 15:14:04,988 - INFO - [REPAIR OK] RBF: 2 yeni kayıt
+2025-07-17 15:14:04,988 - INFO - [REPAIR] RBH: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:14:06,766 - ERROR - Error getting fund detail (alternative) for RBH: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:14:06,766 - INFO - RBH: Fon adından tahmin edilen kategori: Katılım Şemsiye Fonu
+2025-07-17 15:14:06,767 - INFO - [REPAIR OK] RBH: 2 yeni kayıt
+2025-07-17 15:14:06,767 - INFO - [REPAIR] RBI: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:14:08,997 - ERROR - Error getting fund detail (alternative) for RBI: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:14:08,997 - INFO - RBI: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:14:08,997 - INFO - [REPAIR OK] RBI: 2 yeni kayıt
+2025-07-17 15:14:08,998 - INFO - [REPAIR] RBK: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:14:11,101 - ERROR - Error getting fund detail (alternative) for RBK: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:14:11,101 - INFO - RBK: Fon adından tahmin edilen kategori: Katılım Şemsiye Fonu
+2025-07-17 15:14:11,101 - INFO - [REPAIR OK] RBK: 2 yeni kayıt
+2025-07-17 15:14:11,102 - INFO - [REPAIR] RBL: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:14:13,351 - ERROR - Error getting fund detail (alternative) for RBL: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:14:13,351 - INFO - RBL: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:14:13,351 - INFO - [REPAIR OK] RBL: 2 yeni kayıt
+2025-07-17 15:14:13,351 - INFO - [REPAIR] RBN: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:14:15,392 - ERROR - Error getting fund detail (alternative) for RBN: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:14:15,392 - INFO - RBN: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:14:15,392 - INFO - [REPAIR OK] RBN: 2 yeni kayıt
+2025-07-17 15:14:15,393 - INFO - [REPAIR] RBP: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:14:17,463 - ERROR - Error getting fund detail (alternative) for RBP: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:14:17,464 - INFO - RBP: Fon adından tahmin edilen kategori: Para Piyasası Şemsiye Fonu
+2025-07-17 15:14:17,464 - INFO - [REPAIR OK] RBP: 2 yeni kayıt
+2025-07-17 15:14:17,464 - INFO - [REPAIR] RBR: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:14:19,769 - ERROR - Error getting fund detail (alternative) for RBR: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:14:19,769 - INFO - RBR: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:14:19,769 - INFO - [REPAIR OK] RBR: 2 yeni kayıt
+2025-07-17 15:14:19,770 - INFO - [REPAIR] RBT: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:14:21,953 - ERROR - Error getting fund detail (alternative) for RBT: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:14:21,953 - INFO - RBT: Fon adından tahmin edilen kategori: Katılım Şemsiye Fonu
+2025-07-17 15:14:21,953 - INFO - [REPAIR OK] RBT: 2 yeni kayıt
+2025-07-17 15:14:21,953 - INFO - [REPAIR] RBV: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:14:23,466 - ERROR - Error getting fund detail (alternative) for RBV: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:14:23,467 - INFO - RBV: Fon adından tahmin edilen kategori: Katılım Şemsiye Fonu
+2025-07-17 15:14:23,467 - INFO - [REPAIR OK] RBV: 2 yeni kayıt
+2025-07-17 15:14:23,467 - INFO - [REPAIR] RCV: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:14:23,515 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:14:26,036 - ERROR - Error getting fund detail (alternative) for RCV: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:14:26,036 - INFO - RCV: Fon adından tahmin edilen kategori: Katılım Şemsiye Fonu
+2025-07-17 15:14:26,036 - INFO - [REPAIR OK] RCV: 2 yeni kayıt
+2025-07-17 15:14:26,036 - INFO - [REPAIR] RD1: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:14:28,479 - ERROR - Error getting fund detail (alternative) for RD1: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:14:28,479 - INFO - RD1: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:14:28,480 - INFO - [REPAIR OK] RD1: 2 yeni kayıt
+2025-07-17 15:14:28,480 - INFO - [REPAIR] RDF: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:14:34,208 - ERROR - Error getting fund detail (alternative) for RDF: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:14:34,208 - INFO - RDF: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:14:34,209 - INFO - [REPAIR OK] RDF: 2 yeni kayıt
+2025-07-17 15:14:34,209 - INFO - [REPAIR] RHI: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:14:35,933 - ERROR - Error getting fund detail (alternative) for RHI: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:14:35,933 - INFO - RHI: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:14:35,934 - INFO - [REPAIR OK] RHI: 2 yeni kayıt
+2025-07-17 15:14:35,934 - INFO - [REPAIR] RHS: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:14:37,315 - ERROR - Error getting fund detail (alternative) for RHS: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:14:37,316 - INFO - RHS: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:14:37,316 - INFO - [REPAIR OK] RHS: 2 yeni kayıt
+2025-07-17 15:14:37,316 - INFO - [REPAIR] RIA: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:14:39,108 - ERROR - Error getting fund detail (alternative) for RIA: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:14:39,109 - INFO - RIA: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:14:39,109 - INFO - [REPAIR OK] RIA: 2 yeni kayıt
+2025-07-17 15:14:39,109 - INFO - [REPAIR] RIK: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:14:41,196 - ERROR - Error getting fund detail (alternative) for RIK: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:14:41,196 - INFO - RIK: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:14:41,196 - INFO - [REPAIR OK] RIK: 2 yeni kayıt
+2025-07-17 15:14:41,196 - INFO - [REPAIR] RJG: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:14:41,243 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:14:42,290 - WARNING - Session başlatma deneme 2/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:14:46,570 - ERROR - Error getting fund detail (alternative) for RJG: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:14:46,571 - INFO - RJG: Fon adından tahmin edilen kategori: Katılım Şemsiye Fonu
+2025-07-17 15:14:46,571 - INFO - [REPAIR OK] RJG: 2 yeni kayıt
+2025-07-17 15:14:46,571 - INFO - [REPAIR] RKC: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:14:48,455 - ERROR - Error getting fund detail (alternative) for RKC: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:14:48,455 - INFO - RKC: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:14:48,456 - INFO - [REPAIR OK] RKC: 2 yeni kayıt
+2025-07-17 15:14:48,456 - INFO - [REPAIR] RKH: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:14:50,263 - ERROR - Error getting fund detail (alternative) for RKH: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:14:50,263 - INFO - RKH: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:14:50,263 - INFO - [REPAIR OK] RKH: 2 yeni kayıt
+2025-07-17 15:14:50,264 - INFO - [REPAIR] RKS: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:14:52,647 - ERROR - Error getting fund detail (alternative) for RKS: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:14:52,647 - INFO - RKS: Fon adından tahmin edilen kategori: Katılım Şemsiye Fonu
+2025-07-17 15:14:52,647 - INFO - [REPAIR OK] RKS: 2 yeni kayıt
+2025-07-17 15:14:52,647 - INFO - [REPAIR] RKV: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:14:54,613 - ERROR - Error getting fund detail (alternative) for RKV: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:14:54,614 - INFO - RKV: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:14:54,614 - INFO - [REPAIR OK] RKV: 2 yeni kayıt
+2025-07-17 15:14:54,614 - INFO - [REPAIR] RPC: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:14:56,409 - ERROR - Error getting fund detail (alternative) for RPC: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:14:56,410 - INFO - RPC: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:14:56,410 - INFO - [REPAIR OK] RPC: 2 yeni kayıt
+2025-07-17 15:14:56,410 - INFO - [REPAIR] RPD: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:14:58,665 - ERROR - Error getting fund detail (alternative) for RPD: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:14:58,665 - INFO - RPD: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:14:58,665 - INFO - [REPAIR OK] RPD: 2 yeni kayıt
+2025-07-17 15:14:58,666 - INFO - [REPAIR] RPG: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:15:01,331 - ERROR - Error getting fund detail (alternative) for RPG: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:15:01,331 - INFO - RPG: Fon adından tahmin edilen kategori: Kıymetli Madenler Şemsiye Fonu
+2025-07-17 15:15:01,331 - INFO - [REPAIR OK] RPG: 2 yeni kayıt
+2025-07-17 15:15:01,331 - INFO - [REPAIR] RPI: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:15:01,380 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:15:02,428 - WARNING - Session başlatma deneme 2/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:15:06,181 - ERROR - Error getting fund detail (alternative) for RPI: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:15:06,181 - INFO - RPI: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:15:06,182 - INFO - [REPAIR OK] RPI: 2 yeni kayıt
+2025-07-17 15:15:06,182 - INFO - [REPAIR] RPM: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:15:08,416 - ERROR - Error getting fund detail (alternative) for RPM: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:15:08,417 - INFO - RPM: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:15:08,417 - INFO - [REPAIR OK] RPM: 2 yeni kayıt
+2025-07-17 15:15:08,417 - INFO - [REPAIR] RPP: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:15:08,469 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:15:11,071 - ERROR - Error getting fund detail (alternative) for RPP: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:15:11,071 - INFO - RPP: Fon adından tahmin edilen kategori: Para Piyasası Şemsiye Fonu
+2025-07-17 15:15:11,071 - INFO - [REPAIR OK] RPP: 2 yeni kayıt
+2025-07-17 15:15:11,071 - INFO - [REPAIR] RPS: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:15:13,102 - ERROR - Error getting fund detail (alternative) for RPS: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:15:13,103 - INFO - RPS: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:15:13,103 - INFO - [REPAIR OK] RPS: 2 yeni kayıt
+2025-07-17 15:15:13,103 - INFO - [REPAIR] RPT: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:15:13,159 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:15:15,759 - ERROR - Error getting fund detail (alternative) for RPT: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:15:15,759 - INFO - RPT: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:15:15,759 - INFO - [REPAIR OK] RPT: 2 yeni kayıt
+2025-07-17 15:15:15,759 - INFO - [REPAIR] RPX: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:15:17,117 - ERROR - Error getting fund detail (alternative) for RPX: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:15:17,117 - INFO - RPX: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:15:17,117 - INFO - [REPAIR OK] RPX: 2 yeni kayıt
+2025-07-17 15:15:17,118 - INFO - [REPAIR] RRP: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:15:17,165 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:15:19,938 - ERROR - Error getting fund detail (alternative) for RRP: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:15:19,938 - INFO - RRP: Fon adından tahmin edilen kategori: Katılım Şemsiye Fonu
+2025-07-17 15:15:19,938 - INFO - [REPAIR OK] RRP: 2 yeni kayıt
+2025-07-17 15:15:19,938 - INFO - [REPAIR] RS1: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:15:19,989 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:15:22,471 - ERROR - Error getting fund detail (alternative) for RS1: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:15:22,471 - INFO - RS1: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:15:22,471 - INFO - [REPAIR OK] RS1: 2 yeni kayıt
+2025-07-17 15:15:22,472 - INFO - [REPAIR] RTD: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:15:24,559 - ERROR - Error getting fund detail (alternative) for RTD: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:15:24,560 - INFO - RTD: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:15:24,560 - INFO - [REPAIR OK] RTD: 2 yeni kayıt
+2025-07-17 15:15:24,560 - INFO - [REPAIR] RTG: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:15:26,015 - ERROR - Error getting fund detail (alternative) for RTG: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:15:26,016 - INFO - RTG: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:15:26,016 - INFO - [REPAIR OK] RTG: 2 yeni kayıt
+2025-07-17 15:15:26,016 - INFO - [REPAIR] RTH: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:15:28,124 - ERROR - Error getting fund detail (alternative) for RTH: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:15:28,124 - INFO - RTH: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:15:28,124 - INFO - [REPAIR OK] RTH: 2 yeni kayıt
+2025-07-17 15:15:28,124 - INFO - [REPAIR] RTP: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:15:30,303 - ERROR - Error getting fund detail (alternative) for RTP: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:15:30,303 - INFO - RTP: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:15:30,303 - INFO - [REPAIR OK] RTP: 2 yeni kayıt
+2025-07-17 15:15:30,303 - INFO - [REPAIR] RUT: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:15:33,000 - ERROR - Error getting fund detail (alternative) for RUT: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:15:33,001 - INFO - RUT: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:15:33,001 - INFO - [REPAIR OK] RUT: 2 yeni kayıt
+2025-07-17 15:15:33,001 - INFO - [REPAIR] SAS: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:15:35,348 - ERROR - Error getting fund detail (alternative) for SAS: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:15:35,349 - INFO - SAS: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:15:35,349 - INFO - [REPAIR OK] SAS: 2 yeni kayıt
+2025-07-17 15:15:35,349 - INFO - [REPAIR] SBH: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:15:37,795 - ERROR - Error getting fund detail (alternative) for SBH: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:15:37,796 - INFO - SBH: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:15:37,796 - INFO - [REPAIR OK] SBH: 2 yeni kayıt
+2025-07-17 15:15:37,796 - INFO - [REPAIR] SGT: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:15:40,503 - ERROR - Error getting fund detail (alternative) for SGT: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:15:40,504 - INFO - SGT: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:15:40,504 - INFO - [REPAIR OK] SGT: 2 yeni kayıt
+2025-07-17 15:15:40,504 - INFO - [REPAIR] SHE: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:15:42,575 - ERROR - Error getting fund detail (alternative) for SHE: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:15:42,575 - INFO - SHE: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:15:42,575 - INFO - [REPAIR OK] SHE: 2 yeni kayıt
+2025-07-17 15:15:42,576 - INFO - [REPAIR] SNY: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:15:44,103 - ERROR - Error getting fund detail (alternative) for SNY: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:15:44,104 - INFO - SNY: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:15:44,104 - INFO - [REPAIR OK] SNY: 2 yeni kayıt
+2025-07-17 15:15:44,104 - INFO - [REPAIR] SOS: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:15:45,946 - ERROR - Error getting fund detail (alternative) for SOS: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:15:45,947 - INFO - SOS: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:15:45,947 - INFO - [REPAIR OK] SOS: 2 yeni kayıt
+2025-07-17 15:15:45,947 - INFO - [REPAIR] SPE: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:15:46,006 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:15:47,057 - WARNING - Session başlatma deneme 2/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:15:50,976 - ERROR - Error getting fund detail (alternative) for SPE: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:15:50,977 - INFO - SPE: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:15:50,977 - INFO - [REPAIR OK] SPE: 2 yeni kayıt
+2025-07-17 15:15:50,977 - INFO - [REPAIR] SPN: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:15:53,065 - ERROR - Error getting fund detail (alternative) for SPN: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:15:53,065 - INFO - SPN: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:15:53,065 - INFO - [REPAIR OK] SPN: 2 yeni kayıt
+2025-07-17 15:15:53,066 - INFO - [REPAIR] SPP: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:15:55,440 - ERROR - Error getting fund detail (alternative) for SPP: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:15:55,441 - INFO - SPP: Fon adından tahmin edilen kategori: Para Piyasası Şemsiye Fonu
+2025-07-17 15:15:55,441 - INFO - [REPAIR OK] SPP: 2 yeni kayıt
+2025-07-17 15:15:55,441 - INFO - [REPAIR] SPR: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:15:57,688 - ERROR - Error getting fund detail (alternative) for SPR: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:15:57,689 - INFO - SPR: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:15:57,689 - INFO - [REPAIR OK] SPR: 2 yeni kayıt
+2025-07-17 15:15:57,689 - INFO - [REPAIR] SPT: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:15:57,738 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:16:00,508 - ERROR - Error getting fund detail (alternative) for SPT: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:16:00,508 - INFO - SPT: Fon adından tahmin edilen kategori: Katılım Şemsiye Fonu
+2025-07-17 15:16:00,508 - INFO - [REPAIR OK] SPT: 2 yeni kayıt
+2025-07-17 15:16:00,508 - INFO - [REPAIR] SRL: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:16:01,923 - ERROR - Error getting fund detail (alternative) for SRL: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:16:01,923 - INFO - SRL: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:16:01,923 - INFO - [REPAIR OK] SRL: 2 yeni kayıt
+2025-07-17 15:16:01,923 - INFO - [REPAIR] SSK: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:16:04,219 - ERROR - Error getting fund detail (alternative) for SSK: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:16:04,220 - INFO - SSK: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:16:04,220 - INFO - [REPAIR OK] SSK: 2 yeni kayıt
+2025-07-17 15:16:04,220 - INFO - [REPAIR] SSS: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:16:06,444 - ERROR - Error getting fund detail (alternative) for SSS: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:16:06,445 - INFO - SSS: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:16:06,445 - INFO - [REPAIR OK] SSS: 2 yeni kayıt
+2025-07-17 15:16:06,445 - INFO - [REPAIR] ST1: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:16:08,361 - ERROR - Error getting fund detail (alternative) for ST1: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:16:08,362 - INFO - ST1: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:16:08,362 - INFO - [REPAIR OK] ST1: 2 yeni kayıt
+2025-07-17 15:16:08,362 - INFO - [REPAIR] STI: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:16:09,780 - ERROR - Error getting fund detail (alternative) for STI: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:16:09,781 - INFO - STI: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:16:09,781 - INFO - [REPAIR OK] STI: 2 yeni kayıt
+2025-07-17 15:16:09,781 - INFO - [REPAIR] SUA: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:16:11,799 - ERROR - Error getting fund detail (alternative) for SUA: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:16:11,800 - INFO - SUA: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:16:11,800 - INFO - [REPAIR OK] SUA: 2 yeni kayıt
+2025-07-17 15:16:11,800 - INFO - [REPAIR] SUB: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:16:13,945 - ERROR - Error getting fund detail (alternative) for SUB: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:16:13,946 - INFO - SUB: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:16:13,946 - INFO - [REPAIR OK] SUB: 2 yeni kayıt
+2025-07-17 15:16:13,946 - INFO - [REPAIR] SUC: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:16:15,924 - ERROR - Error getting fund detail (alternative) for SUC: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:16:15,925 - INFO - SUC: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:16:15,925 - INFO - [REPAIR OK] SUC: 2 yeni kayıt
+2025-07-17 15:16:15,925 - INFO - [REPAIR] SVB: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:16:18,259 - ERROR - Error getting fund detail (alternative) for SVB: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:16:18,259 - INFO - SVB: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:16:18,260 - INFO - [REPAIR OK] SVB: 2 yeni kayıt
+2025-07-17 15:16:18,260 - INFO - [REPAIR] TAL: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:16:18,310 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:16:21,654 - ERROR - Error getting fund detail (alternative) for TAL: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:16:21,655 - INFO - TAL: Fon adından tahmin edilen kategori: Katılım Şemsiye Fonu
+2025-07-17 15:16:21,655 - INFO - [REPAIR OK] TAL: 2 yeni kayıt
+2025-07-17 15:16:21,655 - INFO - [REPAIR] TAR: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:16:23,544 - ERROR - Error getting fund detail (alternative) for TAR: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:16:23,545 - INFO - TAR: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:16:23,545 - INFO - [REPAIR OK] TAR: 2 yeni kayıt
+2025-07-17 15:16:23,545 - INFO - [REPAIR] TAU: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:16:25,622 - ERROR - Error getting fund detail (alternative) for TAU: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:16:25,623 - INFO - TAU: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:16:25,623 - INFO - [REPAIR OK] TAU: 2 yeni kayıt
+2025-07-17 15:16:25,623 - INFO - [REPAIR] TBT: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:16:27,754 - ERROR - Error getting fund detail (alternative) for TBT: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:16:27,755 - INFO - TBT: Fon adından tahmin edilen kategori: Borçlanma Araçları Şemsiye Fonu
+2025-07-17 15:16:27,755 - INFO - [REPAIR OK] TBT: 2 yeni kayıt
+2025-07-17 15:16:27,755 - INFO - [REPAIR] TBV: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:16:27,802 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:16:30,278 - ERROR - Error getting fund detail (alternative) for TBV: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:16:30,278 - INFO - TBV: Fon adından tahmin edilen kategori: Borçlanma Araçları Şemsiye Fonu
+2025-07-17 15:16:30,278 - INFO - [REPAIR OK] TBV: 2 yeni kayıt
+2025-07-17 15:16:30,278 - INFO - [REPAIR] TCA: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:16:31,791 - ERROR - Error getting fund detail (alternative) for TCA: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:16:31,791 - INFO - TCA: Fon adından tahmin edilen kategori: Katılım Şemsiye Fonu
+2025-07-17 15:16:31,792 - INFO - [REPAIR OK] TCA: 2 yeni kayıt
+2025-07-17 15:16:31,792 - INFO - [REPAIR] TCB: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:16:33,621 - ERROR - Error getting fund detail (alternative) for TCB: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:16:33,622 - INFO - TCB: Fon adından tahmin edilen kategori: Para Piyasası Şemsiye Fonu
+2025-07-17 15:16:33,622 - INFO - [REPAIR OK] TCB: 2 yeni kayıt
+2025-07-17 15:16:33,622 - INFO - [REPAIR] TCC: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:16:35,380 - ERROR - Error getting fund detail (alternative) for TCC: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:16:35,381 - INFO - TCC: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:16:35,381 - INFO - [REPAIR OK] TCC: 2 yeni kayıt
+2025-07-17 15:16:35,381 - INFO - [REPAIR] TCD: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:16:37,246 - ERROR - Error getting fund detail (alternative) for TCD: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:16:37,246 - INFO - TCD: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:16:37,246 - INFO - [REPAIR OK] TCD: 2 yeni kayıt
+2025-07-17 15:16:37,246 - INFO - [REPAIR] TCF: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:16:37,296 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:16:39,777 - ERROR - Error getting fund detail (alternative) for TCF: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:16:39,777 - INFO - TCF: Fon adından tahmin edilen kategori: Fon Sepeti Şemsiye Fonu
+2025-07-17 15:16:39,777 - INFO - [REPAIR OK] TCF: 2 yeni kayıt
+2025-07-17 15:16:39,777 - INFO - [REPAIR] TDG: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:16:41,461 - ERROR - Error getting fund detail (alternative) for TDG: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:16:41,461 - INFO - TDG: Fon adından tahmin edilen kategori: Eurobond Şemsiye Fonu
+2025-07-17 15:16:41,461 - INFO - [REPAIR OK] TDG: 2 yeni kayıt
+2025-07-17 15:16:41,461 - INFO - [REPAIR] TE3: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:16:41,511 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:16:44,403 - ERROR - Error getting fund detail (alternative) for TE3: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:16:44,404 - INFO - TE3: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:16:44,404 - INFO - [REPAIR OK] TE3: 2 yeni kayıt
+2025-07-17 15:16:44,404 - INFO - [REPAIR] TE4: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:16:46,641 - ERROR - Error getting fund detail (alternative) for TE4: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:16:46,641 - INFO - TE4: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:16:46,641 - INFO - [REPAIR OK] TE4: 2 yeni kayıt
+2025-07-17 15:16:46,641 - INFO - [REPAIR] TEJ: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:16:48,157 - ERROR - Error getting fund detail (alternative) for TEJ: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:16:48,157 - INFO - TEJ: Fon adından tahmin edilen kategori: Fon Sepeti Şemsiye Fonu
+2025-07-17 15:16:48,157 - INFO - [REPAIR OK] TEJ: 2 yeni kayıt
+2025-07-17 15:16:48,158 - INFO - [REPAIR] TFF: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:16:50,584 - ERROR - Error getting fund detail (alternative) for TFF: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:16:50,584 - INFO - TFF: Fon adından tahmin edilen kategori: Fon Sepeti Şemsiye Fonu
+2025-07-17 15:16:50,584 - INFO - [REPAIR OK] TFF: 2 yeni kayıt
+2025-07-17 15:16:50,584 - INFO - [REPAIR] TGA: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:16:52,024 - ERROR - Error getting fund detail (alternative) for TGA: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:16:52,025 - INFO - TGA: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:16:52,025 - INFO - [REPAIR OK] TGA: 2 yeni kayıt
+2025-07-17 15:16:52,025 - INFO - [REPAIR] TGE: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:16:53,498 - ERROR - Error getting fund detail (alternative) for TGE: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:16:53,498 - INFO - TGE: Fon adından tahmin edilen kategori: Fon Sepeti Şemsiye Fonu
+2025-07-17 15:16:53,498 - INFO - [REPAIR OK] TGE: 2 yeni kayıt
+2025-07-17 15:16:53,499 - INFO - [REPAIR] TGR: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:16:55,802 - ERROR - Error getting fund detail (alternative) for TGR: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:16:55,803 - INFO - TGR: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:16:55,803 - INFO - [REPAIR OK] TGR: 2 yeni kayıt
+2025-07-17 15:16:55,803 - INFO - [REPAIR] THD: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:16:58,121 - ERROR - Error getting fund detail (alternative) for THD: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:16:58,122 - INFO - THD: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:16:58,122 - INFO - [REPAIR OK] THD: 2 yeni kayıt
+2025-07-17 15:16:58,122 - INFO - [REPAIR] THF: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:16:59,989 - ERROR - Error getting fund detail (alternative) for THF: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:16:59,989 - INFO - THF: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:16:59,990 - INFO - [REPAIR OK] THF: 2 yeni kayıt
+2025-07-17 15:16:59,990 - INFO - [REPAIR] THT: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:17:02,283 - ERROR - Error getting fund detail (alternative) for THT: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:17:02,283 - INFO - THT: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:17:02,283 - INFO - [REPAIR OK] THT: 2 yeni kayıt
+2025-07-17 15:17:02,283 - INFO - [REPAIR] THV: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:17:04,102 - ERROR - Error getting fund detail (alternative) for THV: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:17:04,103 - INFO - THV: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:17:04,103 - INFO - [REPAIR OK] THV: 2 yeni kayıt
+2025-07-17 15:17:04,103 - INFO - [REPAIR] TI2: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:17:06,021 - ERROR - Error getting fund detail (alternative) for TI2: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:17:06,022 - INFO - TI2: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:17:06,022 - INFO - [REPAIR OK] TI2: 2 yeni kayıt
+2025-07-17 15:17:06,022 - INFO - [REPAIR] TI3: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:17:08,338 - ERROR - Error getting fund detail (alternative) for TI3: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:17:08,338 - INFO - TI3: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:17:08,338 - INFO - [REPAIR OK] TI3: 2 yeni kayıt
+2025-07-17 15:17:08,338 - INFO - [REPAIR] TI4: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:17:10,157 - ERROR - Error getting fund detail (alternative) for TI4: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:17:10,158 - INFO - TI4: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:17:10,158 - INFO - [REPAIR OK] TI4: 2 yeni kayıt
+2025-07-17 15:17:10,158 - INFO - [REPAIR] TI6: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:17:11,689 - ERROR - Error getting fund detail (alternative) for TI6: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:17:11,689 - INFO - TI6: Fon adından tahmin edilen kategori: Borçlanma Araçları Şemsiye Fonu
+2025-07-17 15:17:11,689 - INFO - [REPAIR OK] TI6: 2 yeni kayıt
+2025-07-17 15:17:11,690 - INFO - [REPAIR] TI7: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:17:13,668 - ERROR - Error getting fund detail (alternative) for TI7: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:17:13,669 - INFO - TI7: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:17:13,669 - INFO - [REPAIR OK] TI7: 2 yeni kayıt
+2025-07-17 15:17:13,669 - INFO - [REPAIR] TIE: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:17:13,716 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:17:16,587 - ERROR - Error getting fund detail (alternative) for TIE: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:17:16,587 - INFO - TIE: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:17:16,587 - INFO - [REPAIR OK] TIE: 2 yeni kayıt
+2025-07-17 15:17:16,588 - INFO - [REPAIR] TJF: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:17:18,559 - ERROR - Error getting fund detail (alternative) for TJF: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:17:18,559 - INFO - TJF: Fon adından tahmin edilen kategori: Fon Sepeti Şemsiye Fonu
+2025-07-17 15:17:18,560 - INFO - [REPAIR OK] TJF: 2 yeni kayıt
+2025-07-17 15:17:18,560 - INFO - [REPAIR] TJI: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:17:20,534 - ERROR - Error getting fund detail (alternative) for TJI: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:17:20,535 - INFO - TJI: Fon adından tahmin edilen kategori: Fon Sepeti Şemsiye Fonu
+2025-07-17 15:17:20,535 - INFO - [REPAIR OK] TJI: 2 yeni kayıt
+2025-07-17 15:17:20,535 - INFO - [REPAIR] TJT: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:17:20,582 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:17:24,004 - ERROR - Error getting fund detail (alternative) for TJT: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:17:24,005 - INFO - TJT: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:17:24,005 - INFO - [REPAIR OK] TJT: 2 yeni kayıt
+2025-07-17 15:17:24,005 - INFO - [REPAIR] TKF: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:17:26,244 - ERROR - Error getting fund detail (alternative) for TKF: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:17:26,244 - INFO - TKF: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:17:26,245 - INFO - [REPAIR OK] TKF: 2 yeni kayıt
+2025-07-17 15:17:26,245 - INFO - [REPAIR] TLE: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:17:28,205 - ERROR - Error getting fund detail (alternative) for TLE: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:17:28,205 - INFO - TLE: Fon adından tahmin edilen kategori: Eurobond Şemsiye Fonu
+2025-07-17 15:17:28,205 - INFO - [REPAIR OK] TLE: 2 yeni kayıt
+2025-07-17 15:17:28,206 - INFO - [REPAIR] TLH: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:17:29,855 - ERROR - Error getting fund detail (alternative) for TLH: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:17:29,855 - INFO - TLH: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:17:29,856 - INFO - [REPAIR OK] TLH: 2 yeni kayıt
+2025-07-17 15:17:29,856 - INFO - [REPAIR] TLK: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:17:31,574 - ERROR - Error getting fund detail (alternative) for TLK: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:17:31,574 - INFO - TLK: Fon adından tahmin edilen kategori: Katılım Şemsiye Fonu
+2025-07-17 15:17:31,574 - INFO - [REPAIR OK] TLK: 2 yeni kayıt
+2025-07-17 15:17:31,574 - INFO - [REPAIR] TLY: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:17:34,024 - ERROR - Error getting fund detail (alternative) for TLY: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:17:34,025 - INFO - TLY: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:17:34,025 - INFO - [REPAIR OK] TLY: 2 yeni kayıt
+2025-07-17 15:17:34,025 - INFO - [REPAIR] TLZ: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:17:36,044 - ERROR - Error getting fund detail (alternative) for TLZ: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:17:36,044 - INFO - TLZ: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:17:36,045 - INFO - [REPAIR OK] TLZ: 2 yeni kayıt
+2025-07-17 15:17:36,045 - INFO - [REPAIR] TMC: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:17:38,193 - ERROR - Error getting fund detail (alternative) for TMC: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:17:38,193 - INFO - TMC: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:17:38,193 - INFO - [REPAIR OK] TMC: 2 yeni kayıt
+2025-07-17 15:17:38,194 - INFO - [REPAIR] TMG: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:17:38,243 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:17:42,161 - ERROR - Error getting fund detail (alternative) for TMG: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:17:42,162 - INFO - TMG: Fon adından tahmin edilen kategori: Yabancı Hisse Senedi Şemsiye Fonu
+2025-07-17 15:17:42,162 - INFO - [REPAIR OK] TMG: 2 yeni kayıt
+2025-07-17 15:17:42,162 - INFO - [REPAIR] TMM: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:17:43,740 - ERROR - Error getting fund detail (alternative) for TMM: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:17:43,740 - INFO - TMM: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:17:43,740 - INFO - [REPAIR OK] TMM: 2 yeni kayıt
+2025-07-17 15:17:43,740 - INFO - [REPAIR] TMZ: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:17:45,972 - ERROR - Error getting fund detail (alternative) for TMZ: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:17:45,973 - INFO - TMZ: Fon adından tahmin edilen kategori: Fon Sepeti Şemsiye Fonu
+2025-07-17 15:17:45,973 - INFO - [REPAIR OK] TMZ: 2 yeni kayıt
+2025-07-17 15:17:45,973 - INFO - [REPAIR] TOT: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:17:48,096 - ERROR - Error getting fund detail (alternative) for TOT: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:17:48,097 - INFO - TOT: Fon adından tahmin edilen kategori: Borçlanma Araçları Şemsiye Fonu
+2025-07-17 15:17:48,097 - INFO - [REPAIR OK] TOT: 2 yeni kayıt
+2025-07-17 15:17:48,097 - INFO - [REPAIR] TP2: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:17:50,244 - ERROR - Error getting fund detail (alternative) for TP2: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:17:50,244 - INFO - TP2: Fon adından tahmin edilen kategori: Para Piyasası Şemsiye Fonu
+2025-07-17 15:17:50,244 - INFO - [REPAIR OK] TP2: 2 yeni kayıt
+2025-07-17 15:17:50,244 - INFO - [REPAIR] TPC: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:17:50,291 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:17:53,637 - ERROR - Error getting fund detail (alternative) for TPC: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:17:53,638 - INFO - TPC: Fon adından tahmin edilen kategori: Fon Sepeti Şemsiye Fonu
+2025-07-17 15:17:53,638 - INFO - [REPAIR OK] TPC: 2 yeni kayıt
+2025-07-17 15:17:53,638 - INFO - [REPAIR] TPF: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:17:55,403 - ERROR - Error getting fund detail (alternative) for TPF: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:17:55,404 - INFO - TPF: Fon adından tahmin edilen kategori: Borçlanma Araçları Şemsiye Fonu
+2025-07-17 15:17:55,404 - INFO - [REPAIR OK] TPF: 2 yeni kayıt
+2025-07-17 15:17:55,404 - INFO - [REPAIR] TPJ: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:17:57,824 - ERROR - Error getting fund detail (alternative) for TPJ: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:17:57,824 - INFO - TPJ: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:17:57,824 - INFO - [REPAIR OK] TPJ: 2 yeni kayıt
+2025-07-17 15:17:57,825 - INFO - [REPAIR] TPL: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:18:00,094 - ERROR - Error getting fund detail (alternative) for TPL: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:18:00,094 - INFO - TPL: Fon adından tahmin edilen kategori: Eurobond Şemsiye Fonu
+2025-07-17 15:18:00,094 - INFO - [REPAIR OK] TPL: 2 yeni kayıt
+2025-07-17 15:18:00,095 - INFO - [REPAIR] TPP: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:18:02,113 - ERROR - Error getting fund detail (alternative) for TPP: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:18:02,113 - INFO - TPP: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:18:02,113 - INFO - [REPAIR OK] TPP: 2 yeni kayıt
+2025-07-17 15:18:02,114 - INFO - [REPAIR] TPV: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:18:02,161 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:18:04,985 - ERROR - Error getting fund detail (alternative) for TPV: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:18:04,986 - INFO - TPV: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:18:04,986 - INFO - [REPAIR OK] TPV: 2 yeni kayıt
+2025-07-17 15:18:04,986 - INFO - [REPAIR] TPZ: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:18:06,491 - ERROR - Error getting fund detail (alternative) for TPZ: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:18:06,491 - INFO - TPZ: Fon adından tahmin edilen kategori: Katılım Şemsiye Fonu
+2025-07-17 15:18:06,491 - INFO - [REPAIR OK] TPZ: 2 yeni kayıt
+2025-07-17 15:18:06,492 - INFO - [REPAIR] TRJ: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:18:08,575 - ERROR - Error getting fund detail (alternative) for TRJ: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:18:08,576 - INFO - TRJ: Fon adından tahmin edilen kategori: Borçlanma Araçları Şemsiye Fonu
+2025-07-17 15:18:08,576 - INFO - [REPAIR OK] TRJ: 2 yeni kayıt
+2025-07-17 15:18:08,576 - INFO - [REPAIR] TRO: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:18:08,631 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:18:09,682 - WARNING - Session başlatma deneme 2/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:18:11,732 - WARNING - Session başlatma deneme 3/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:18:11,732 - ERROR - Session başlatılamadı: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:18:11,732 - ERROR - Provider başlatılamadı: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:18:13,689 - ERROR - Error getting fund detail (alternative) for TRO: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:18:13,689 - INFO - TRO: Fon adından tahmin edilen kategori: Kıymetli Madenler Şemsiye Fonu
+2025-07-17 15:18:13,689 - INFO - [REPAIR OK] TRO: 2 yeni kayıt
+2025-07-17 15:18:13,690 - INFO - [REPAIR] TRU: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:18:16,131 - ERROR - Error getting fund detail (alternative) for TRU: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:18:16,132 - INFO - TRU: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:18:16,132 - INFO - [REPAIR OK] TRU: 2 yeni kayıt
+2025-07-17 15:18:16,132 - INFO - [REPAIR] TTA: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:18:16,182 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:18:19,589 - ERROR - Error getting fund detail (alternative) for TTA: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:18:19,589 - INFO - TTA: Fon adından tahmin edilen kategori: Kıymetli Madenler Şemsiye Fonu
+2025-07-17 15:18:19,590 - INFO - [REPAIR OK] TTA: 2 yeni kayıt
+2025-07-17 15:18:19,590 - INFO - [REPAIR] TTE: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:18:21,645 - ERROR - Error getting fund detail (alternative) for TTE: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:18:21,645 - INFO - TTE: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:18:21,645 - INFO - [REPAIR OK] TTE: 2 yeni kayıt
+2025-07-17 15:18:21,646 - INFO - [REPAIR] TTL: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:18:23,130 - ERROR - Error getting fund detail (alternative) for TTL: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:18:23,130 - INFO - TTL: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:18:23,130 - INFO - [REPAIR OK] TTL: 2 yeni kayıt
+2025-07-17 15:18:23,130 - INFO - [REPAIR] TUA: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:18:25,352 - ERROR - Error getting fund detail (alternative) for TUA: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:18:25,353 - INFO - TUA: Fon adından tahmin edilen kategori: Kıymetli Madenler Şemsiye Fonu
+2025-07-17 15:18:25,353 - INFO - [REPAIR OK] TUA: 2 yeni kayıt
+2025-07-17 15:18:25,353 - INFO - [REPAIR] TVN: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:18:27,571 - ERROR - Error getting fund detail (alternative) for TVN: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:18:27,571 - INFO - TVN: Fon adından tahmin edilen kategori: Fon Sepeti Şemsiye Fonu
+2025-07-17 15:18:27,572 - INFO - [REPAIR OK] TVN: 2 yeni kayıt
+2025-07-17 15:18:27,572 - INFO - [REPAIR] TYH: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:18:29,157 - ERROR - Error getting fund detail (alternative) for TYH: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:18:29,158 - INFO - TYH: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:18:29,158 - INFO - [REPAIR OK] TYH: 2 yeni kayıt
+2025-07-17 15:18:29,158 - INFO - [REPAIR] TZD: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:18:31,203 - ERROR - Error getting fund detail (alternative) for TZD: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:18:31,203 - INFO - TZD: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:18:31,203 - INFO - [REPAIR OK] TZD: 2 yeni kayıt
+2025-07-17 15:18:31,204 - INFO - [REPAIR] TZT: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:18:33,038 - ERROR - Error getting fund detail (alternative) for TZT: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:18:33,038 - INFO - TZT: Fon adından tahmin edilen kategori: Borçlanma Araçları Şemsiye Fonu
+2025-07-17 15:18:33,038 - INFO - [REPAIR OK] TZT: 2 yeni kayıt
+2025-07-17 15:18:33,039 - INFO - [REPAIR] UNT: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:18:34,841 - ERROR - Error getting fund detail (alternative) for UNT: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:18:34,841 - INFO - UNT: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:18:34,841 - INFO - [REPAIR OK] UNT: 2 yeni kayıt
+2025-07-17 15:18:34,841 - INFO - [REPAIR] UP1: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:18:37,127 - ERROR - Error getting fund detail (alternative) for UP1: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:18:37,127 - INFO - UP1: Fon adından tahmin edilen kategori: Kıymetli Madenler Şemsiye Fonu
+2025-07-17 15:18:37,127 - INFO - [REPAIR OK] UP1: 2 yeni kayıt
+2025-07-17 15:18:37,127 - INFO - [REPAIR] UP2: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:18:39,032 - ERROR - Error getting fund detail (alternative) for UP2: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:18:39,033 - INFO - UP2: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:18:39,033 - INFO - [REPAIR OK] UP2: 2 yeni kayıt
+2025-07-17 15:18:39,033 - INFO - [REPAIR] UPD: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:18:39,081 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:18:42,418 - ERROR - Error getting fund detail (alternative) for UPD: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:18:42,419 - INFO - UPD: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:18:42,419 - INFO - [REPAIR OK] UPD: 2 yeni kayıt
+2025-07-17 15:18:42,419 - INFO - [REPAIR] UPH: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:18:44,277 - ERROR - Error getting fund detail (alternative) for UPH: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:18:44,278 - INFO - UPH: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:18:44,278 - INFO - [REPAIR OK] UPH: 2 yeni kayıt
+2025-07-17 15:18:44,278 - INFO - [REPAIR] UPP: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:18:44,326 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:18:46,669 - ERROR - Error getting fund detail (alternative) for UPP: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:18:46,669 - INFO - UPP: Fon adından tahmin edilen kategori: Para Piyasası Şemsiye Fonu
+2025-07-17 15:18:46,669 - INFO - [REPAIR OK] UPP: 2 yeni kayıt
+2025-07-17 15:18:46,669 - INFO - [REPAIR] URA: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:18:48,489 - ERROR - Error getting fund detail (alternative) for URA: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:18:48,490 - INFO - URA: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:18:48,490 - INFO - [REPAIR OK] URA: 2 yeni kayıt
+2025-07-17 15:18:48,490 - INFO - [REPAIR] USY: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:18:50,746 - ERROR - Error getting fund detail (alternative) for USY: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:18:50,746 - INFO - USY: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:18:50,746 - INFO - [REPAIR OK] USY: 2 yeni kayıt
+2025-07-17 15:18:50,747 - INFO - [REPAIR] VAY: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:18:52,597 - ERROR - Error getting fund detail (alternative) for VAY: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:18:52,597 - INFO - VAY: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:18:52,597 - INFO - [REPAIR OK] VAY: 2 yeni kayıt
+2025-07-17 15:18:52,598 - INFO - [REPAIR] VCY: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:18:54,322 - ERROR - Error getting fund detail (alternative) for VCY: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:18:54,323 - INFO - VCY: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:18:54,323 - INFO - [REPAIR OK] VCY: 2 yeni kayıt
+2025-07-17 15:18:54,323 - INFO - [REPAIR] VFK: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:18:56,291 - ERROR - Error getting fund detail (alternative) for VFK: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:18:56,292 - INFO - VFK: Fon adından tahmin edilen kategori: Katılım Şemsiye Fonu
+2025-07-17 15:18:56,292 - INFO - [REPAIR OK] VFK: 2 yeni kayıt
+2025-07-17 15:18:56,292 - INFO - [REPAIR] VMV: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:18:58,188 - ERROR - Error getting fund detail (alternative) for VMV: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:18:58,188 - INFO - VMV: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:18:58,189 - INFO - [REPAIR OK] VMV: 2 yeni kayıt
+2025-07-17 15:18:58,189 - INFO - [REPAIR] VNK: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:19:00,248 - ERROR - Error getting fund detail (alternative) for VNK: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:19:00,249 - INFO - VNK: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:19:00,249 - INFO - [REPAIR OK] VNK: 2 yeni kayıt
+2025-07-17 15:19:00,249 - INFO - [REPAIR] YAC: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:19:00,296 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:19:02,907 - ERROR - Error getting fund detail (alternative) for YAC: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:19:02,908 - INFO - YAC: Fon adından tahmin edilen kategori: Fon Sepeti Şemsiye Fonu
+2025-07-17 15:19:02,908 - INFO - [REPAIR OK] YAC: 2 yeni kayıt
+2025-07-17 15:19:02,908 - INFO - [REPAIR] YAK: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:19:05,008 - ERROR - Error getting fund detail (alternative) for YAK: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:19:05,009 - INFO - YAK: Fon adından tahmin edilen kategori: Diğer Şemsiye Fonu
+2025-07-17 15:19:05,009 - INFO - [REPAIR OK] YAK: 2 yeni kayıt
+2025-07-17 15:19:05,009 - INFO - [REPAIR] YAN: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:19:06,733 - ERROR - Error getting fund detail (alternative) for YAN: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:19:06,734 - INFO - YAN: Fon adından tahmin edilen kategori: Fon Sepeti Şemsiye Fonu
+2025-07-17 15:19:06,734 - INFO - [REPAIR OK] YAN: 2 yeni kayıt
+2025-07-17 15:19:06,734 - INFO - [REPAIR] YAS: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:19:09,215 - ERROR - Error getting fund detail (alternative) for YAS: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:19:09,215 - INFO - YAS: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:19:09,216 - INFO - [REPAIR OK] YAS: 2 yeni kayıt
+2025-07-17 15:19:09,216 - INFO - [REPAIR] YAY: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:19:09,266 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:19:11,944 - ERROR - Error getting fund detail (alternative) for YAY: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:19:11,945 - INFO - YAY: Fon adından tahmin edilen kategori: Yabancı Hisse Senedi Şemsiye Fonu
+2025-07-17 15:19:11,945 - INFO - [REPAIR OK] YAY: 2 yeni kayıt
+2025-07-17 15:19:11,945 - INFO - [REPAIR] YBE: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:19:14,343 - ERROR - Error getting fund detail (alternative) for YBE: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:19:14,344 - INFO - YBE: Fon adından tahmin edilen kategori: Eurobond Şemsiye Fonu
+2025-07-17 15:19:14,344 - INFO - [REPAIR OK] YBE: 2 yeni kayıt
+2025-07-17 15:19:14,344 - INFO - [REPAIR] YBH: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:19:16,566 - ERROR - Error getting fund detail (alternative) for YBH: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:19:16,566 - INFO - YBH: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:19:16,566 - INFO - [REPAIR OK] YBH: 2 yeni kayıt
+2025-07-17 15:19:16,566 - INFO - [REPAIR] YBR: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:19:18,708 - ERROR - Error getting fund detail (alternative) for YBR: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:19:18,708 - INFO - YBR: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:19:18,708 - INFO - [REPAIR OK] YBR: 2 yeni kayıt
+2025-07-17 15:19:18,709 - INFO - [REPAIR] YBS: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:19:20,871 - ERROR - Error getting fund detail (alternative) for YBS: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:19:20,872 - INFO - YBS: Fon adından tahmin edilen kategori: Borçlanma Araçları Şemsiye Fonu
+2025-07-17 15:19:20,872 - INFO - [REPAIR OK] YBS: 2 yeni kayıt
+2025-07-17 15:19:20,872 - INFO - [REPAIR] YCK: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:19:22,841 - ERROR - Error getting fund detail (alternative) for YCK: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:19:22,842 - INFO - YCK: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:19:22,842 - INFO - [REPAIR OK] YCK: 2 yeni kayıt
+2025-07-17 15:19:22,842 - INFO - [REPAIR] YCP: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:19:24,536 - ERROR - Error getting fund detail (alternative) for YCP: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:19:24,537 - INFO - YCP: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:19:24,537 - INFO - [REPAIR OK] YCP: 2 yeni kayıt
+2025-07-17 15:19:24,537 - INFO - [REPAIR] YCY: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:19:26,586 - ERROR - Error getting fund detail (alternative) for YCY: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:19:26,587 - INFO - YCY: Fon adından tahmin edilen kategori: Katılım Şemsiye Fonu
+2025-07-17 15:19:26,587 - INFO - [REPAIR OK] YCY: 2 yeni kayıt
+2025-07-17 15:19:26,587 - INFO - [REPAIR] YDI: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:19:26,639 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:19:29,667 - ERROR - Error getting fund detail (alternative) for YDI: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:19:29,667 - INFO - YDI: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:19:29,667 - INFO - [REPAIR OK] YDI: 2 yeni kayıt
+2025-07-17 15:19:29,667 - INFO - [REPAIR] YDP: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:19:31,840 - ERROR - Error getting fund detail (alternative) for YDP: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:19:31,841 - INFO - YDP: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:19:31,841 - INFO - [REPAIR OK] YDP: 2 yeni kayıt
+2025-07-17 15:19:31,841 - INFO - [REPAIR] YEF: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:19:31,890 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:19:35,086 - ERROR - Error getting fund detail (alternative) for YEF: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:19:35,086 - INFO - YEF: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:19:35,086 - INFO - [REPAIR OK] YEF: 2 yeni kayıt
+2025-07-17 15:19:35,086 - INFO - [REPAIR] YFV: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:19:37,279 - ERROR - Error getting fund detail (alternative) for YFV: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:19:37,280 - INFO - YFV: Fon adından tahmin edilen kategori: Katılım Şemsiye Fonu
+2025-07-17 15:19:37,280 - INFO - [REPAIR OK] YFV: 2 yeni kayıt
+2025-07-17 15:19:37,280 - INFO - [REPAIR] YGM: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:19:39,131 - ERROR - Error getting fund detail (alternative) for YGM: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:19:39,131 - INFO - YGM: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:19:39,132 - INFO - [REPAIR OK] YGM: 2 yeni kayıt
+2025-07-17 15:19:39,132 - INFO - [REPAIR] YHB: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:19:41,298 - ERROR - Error getting fund detail (alternative) for YHB: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:19:41,298 - INFO - YHB: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:19:41,299 - INFO - [REPAIR OK] YHB: 2 yeni kayıt
+2025-07-17 15:19:41,299 - INFO - [REPAIR] YHI: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:19:43,575 - ERROR - Error getting fund detail (alternative) for YHI: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:19:43,576 - INFO - YHI: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:19:43,576 - INFO - [REPAIR OK] YHI: 2 yeni kayıt
+2025-07-17 15:19:43,576 - INFO - [REPAIR] YHK: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:19:43,627 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:19:46,629 - ERROR - Error getting fund detail (alternative) for YHK: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:19:46,629 - INFO - YHK: Fon adından tahmin edilen kategori: Katılım Şemsiye Fonu
+2025-07-17 15:19:46,630 - INFO - [REPAIR OK] YHK: 2 yeni kayıt
+2025-07-17 15:19:46,630 - INFO - [REPAIR] YHS: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:19:48,853 - ERROR - Error getting fund detail (alternative) for YHS: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:19:48,854 - INFO - YHS: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:19:48,854 - INFO - [REPAIR OK] YHS: 2 yeni kayıt
+2025-07-17 15:19:48,854 - INFO - [REPAIR] YHZ: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:19:50,614 - ERROR - Error getting fund detail (alternative) for YHZ: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:19:50,614 - INFO - YHZ: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:19:50,614 - INFO - [REPAIR OK] YHZ: 2 yeni kayıt
+2025-07-17 15:19:50,614 - INFO - [REPAIR] YIT: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:19:50,662 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:19:53,414 - ERROR - Error getting fund detail (alternative) for YIT: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:19:53,414 - INFO - YIT: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:19:53,414 - INFO - [REPAIR OK] YIT: 2 yeni kayıt
+2025-07-17 15:19:53,414 - INFO - [REPAIR] YJH: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:19:55,434 - ERROR - Error getting fund detail (alternative) for YJH: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:19:55,434 - INFO - YJH: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:19:55,434 - INFO - [REPAIR OK] YJH: 2 yeni kayıt
+2025-07-17 15:19:55,435 - INFO - [REPAIR] YJK: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:19:57,887 - ERROR - Error getting fund detail (alternative) for YJK: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:19:57,887 - INFO - YJK: Fon adından tahmin edilen kategori: Fon Sepeti Şemsiye Fonu
+2025-07-17 15:19:57,888 - INFO - [REPAIR OK] YJK: 2 yeni kayıt
+2025-07-17 15:19:57,888 - INFO - [REPAIR] YJY: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:19:59,618 - ERROR - Error getting fund detail (alternative) for YJY: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:19:59,618 - INFO - YJY: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:19:59,618 - INFO - [REPAIR OK] YJY: 2 yeni kayıt
+2025-07-17 15:19:59,619 - INFO - [REPAIR] YKS: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:20:01,574 - ERROR - Error getting fund detail (alternative) for YKS: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:20:01,575 - INFO - YKS: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:20:01,575 - INFO - [REPAIR OK] YKS: 2 yeni kayıt
+2025-07-17 15:20:01,575 - INFO - [REPAIR] YKT: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:20:03,619 - ERROR - Error getting fund detail (alternative) for YKT: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:20:03,620 - INFO - YKT: Fon adından tahmin edilen kategori: Kıymetli Madenler Şemsiye Fonu
+2025-07-17 15:20:03,620 - INFO - [REPAIR OK] YKT: 2 yeni kayıt
+2025-07-17 15:20:03,620 - INFO - [REPAIR] YLC: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:20:03,667 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:20:07,059 - ERROR - Error getting fund detail (alternative) for YLC: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:20:07,060 - INFO - YLC: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:20:07,060 - INFO - [REPAIR OK] YLC: 2 yeni kayıt
+2025-07-17 15:20:07,060 - INFO - [REPAIR] YLE: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:20:08,820 - ERROR - Error getting fund detail (alternative) for YLE: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:20:08,821 - INFO - YLE: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:20:08,821 - INFO - [REPAIR OK] YLE: 2 yeni kayıt
+2025-07-17 15:20:08,821 - INFO - [REPAIR] YLO: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:20:10,231 - ERROR - Error getting fund detail (alternative) for YLO: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:20:10,232 - INFO - YLO: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:20:10,232 - INFO - [REPAIR OK] YLO: 2 yeni kayıt
+2025-07-17 15:20:10,232 - INFO - [REPAIR] YLY: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:20:12,459 - ERROR - Error getting fund detail (alternative) for YLY: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:20:12,460 - INFO - YLY: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:20:12,460 - INFO - [REPAIR OK] YLY: 2 yeni kayıt
+2025-07-17 15:20:12,460 - INFO - [REPAIR] YMD: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:20:14,479 - ERROR - Error getting fund detail (alternative) for YMD: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:20:14,479 - INFO - YMD: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:20:14,479 - INFO - [REPAIR OK] YMD: 2 yeni kayıt
+2025-07-17 15:20:14,479 - INFO - [REPAIR] YMH: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:20:15,910 - ERROR - Error getting fund detail (alternative) for YMH: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:20:15,911 - INFO - YMH: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:20:15,911 - INFO - [REPAIR OK] YMH: 2 yeni kayıt
+2025-07-17 15:20:15,911 - INFO - [REPAIR] YNK: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:20:17,883 - ERROR - Error getting fund detail (alternative) for YNK: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:20:17,884 - INFO - YNK: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:20:17,884 - INFO - [REPAIR OK] YNK: 2 yeni kayıt
+2025-07-17 15:20:17,884 - INFO - [REPAIR] YOT: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:20:20,267 - ERROR - Error getting fund detail (alternative) for YOT: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:20:20,267 - INFO - YOT: Fon adından tahmin edilen kategori: Borçlanma Araçları Şemsiye Fonu
+2025-07-17 15:20:20,267 - INFO - [REPAIR OK] YOT: 2 yeni kayıt
+2025-07-17 15:20:20,267 - INFO - [REPAIR] YP4: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:20:22,137 - ERROR - Error getting fund detail (alternative) for YP4: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:20:22,138 - INFO - YP4: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:20:22,138 - INFO - [REPAIR OK] YP4: 2 yeni kayıt
+2025-07-17 15:20:22,138 - INFO - [REPAIR] YPC: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:20:24,556 - ERROR - Error getting fund detail (alternative) for YPC: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:20:24,557 - INFO - YPC: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:20:24,557 - INFO - [REPAIR OK] YPC: 2 yeni kayıt
+2025-07-17 15:20:24,557 - INFO - [REPAIR] YPK: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:20:24,610 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:20:28,051 - ERROR - Error getting fund detail (alternative) for YPK: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:20:28,051 - INFO - YPK: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:20:28,052 - INFO - [REPAIR OK] YPK: 2 yeni kayıt
+2025-07-17 15:20:28,052 - INFO - [REPAIR] YPL: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:20:28,099 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:20:31,582 - ERROR - Error getting fund detail (alternative) for YPL: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:20:31,582 - INFO - YPL: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:20:31,582 - INFO - [REPAIR OK] YPL: 2 yeni kayıt
+2025-07-17 15:20:31,583 - INFO - [REPAIR] YPR: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:20:33,978 - ERROR - Error getting fund detail (alternative) for YPR: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:20:33,978 - INFO - YPR: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:20:33,979 - INFO - [REPAIR OK] YPR: 2 yeni kayıt
+2025-07-17 15:20:33,979 - INFO - [REPAIR] YPV: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:20:35,460 - ERROR - Error getting fund detail (alternative) for YPV: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:20:35,460 - INFO - YPV: Fon adından tahmin edilen kategori: Fon Sepeti Şemsiye Fonu
+2025-07-17 15:20:35,460 - INFO - [REPAIR OK] YPV: 2 yeni kayıt
+2025-07-17 15:20:35,460 - INFO - [REPAIR] YSL: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:20:36,841 - ERROR - Error getting fund detail (alternative) for YSL: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:20:36,841 - INFO - YSL: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:20:36,842 - INFO - [REPAIR OK] YSL: 2 yeni kayıt
+2025-07-17 15:20:36,842 - INFO - [REPAIR] YSO: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:20:38,594 - ERROR - Error getting fund detail (alternative) for YSO: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:20:38,595 - INFO - YSO: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:20:38,595 - INFO - [REPAIR OK] YSO: 2 yeni kayıt
+2025-07-17 15:20:38,595 - INFO - [REPAIR] YSU: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:20:40,482 - ERROR - Error getting fund detail (alternative) for YSU: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:20:40,483 - INFO - YSU: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:20:40,483 - INFO - [REPAIR OK] YSU: 2 yeni kayıt
+2025-07-17 15:20:40,483 - INFO - [REPAIR] YTD: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:20:42,519 - ERROR - Error getting fund detail (alternative) for YTD: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:20:42,520 - INFO - YTD: Fon adından tahmin edilen kategori: Fon Sepeti Şemsiye Fonu
+2025-07-17 15:20:42,520 - INFO - [REPAIR OK] YTD: 2 yeni kayıt
+2025-07-17 15:20:42,520 - INFO - [REPAIR] YTV: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:20:44,424 - ERROR - Error getting fund detail (alternative) for YTV: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:20:44,425 - INFO - YTV: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:20:44,425 - INFO - [REPAIR OK] YTV: 2 yeni kayıt
+2025-07-17 15:20:44,425 - INFO - [REPAIR] YTY: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:20:46,541 - ERROR - Error getting fund detail (alternative) for YTY: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:20:46,541 - INFO - YTY: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:20:46,541 - INFO - [REPAIR OK] YTY: 2 yeni kayıt
+2025-07-17 15:20:46,541 - INFO - [REPAIR] YUB: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:20:48,060 - ERROR - Error getting fund detail (alternative) for YUB: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:20:48,061 - INFO - YUB: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:20:48,061 - INFO - [REPAIR OK] YUB: 2 yeni kayıt
+2025-07-17 15:20:48,061 - INFO - [REPAIR] YUN: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:20:49,467 - ERROR - Error getting fund detail (alternative) for YUN: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:20:49,467 - INFO - YUN: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:20:49,467 - INFO - [REPAIR OK] YUN: 2 yeni kayıt
+2025-07-17 15:20:49,467 - INFO - [REPAIR] YVB: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:20:49,516 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:20:52,043 - ERROR - Error getting fund detail (alternative) for YVB: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:20:52,044 - INFO - YVB: Fon adından tahmin edilen kategori: Borçlanma Araçları Şemsiye Fonu
+2025-07-17 15:20:52,044 - INFO - [REPAIR OK] YVB: 2 yeni kayıt
+2025-07-17 15:20:52,044 - INFO - [REPAIR] YVG: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:20:54,461 - ERROR - Error getting fund detail (alternative) for YVG: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:20:54,461 - INFO - YVG: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:20:54,461 - INFO - [REPAIR OK] YVG: 2 yeni kayıt
+2025-07-17 15:20:54,461 - INFO - [REPAIR] YZC: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:20:56,270 - ERROR - Error getting fund detail (alternative) for YZC: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:20:56,270 - INFO - YZC: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:20:56,270 - INFO - [REPAIR OK] YZC: 2 yeni kayıt
+2025-07-17 15:20:56,270 - INFO - [REPAIR] YZG: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:20:58,404 - ERROR - Error getting fund detail (alternative) for YZG: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:20:58,404 - INFO - YZG: Fon adından tahmin edilen kategori: Fon Sepeti Şemsiye Fonu
+2025-07-17 15:20:58,404 - INFO - [REPAIR OK] YZG: 2 yeni kayıt
+2025-07-17 15:20:58,404 - INFO - [REPAIR] YZH: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:21:00,047 - ERROR - Error getting fund detail (alternative) for YZH: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:21:00,048 - INFO - YZH: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:21:00,048 - INFO - [REPAIR OK] YZH: 2 yeni kayıt
+2025-07-17 15:21:00,049 - INFO - [REPAIR] YZK: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:21:01,520 - ERROR - Error getting fund detail (alternative) for YZK: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:21:01,521 - INFO - YZK: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:21:01,521 - INFO - [REPAIR OK] YZK: 2 yeni kayıt
+2025-07-17 15:21:01,521 - INFO - [REPAIR] ZBD: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:21:03,207 - ERROR - Error getting fund detail (alternative) for ZBD: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:21:03,208 - INFO - ZBD: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:21:03,208 - INFO - [REPAIR OK] ZBD: 2 yeni kayıt
+2025-07-17 15:21:03,208 - INFO - [REPAIR] ZBI: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:21:05,297 - ERROR - Error getting fund detail (alternative) for ZBI: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:21:05,297 - INFO - ZBI: Fon adından tahmin edilen kategori: Katılım Şemsiye Fonu
+2025-07-17 15:21:05,297 - INFO - [REPAIR OK] ZBI: 2 yeni kayıt
+2025-07-17 15:21:05,298 - INFO - [REPAIR] ZBJ: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:21:07,472 - ERROR - Error getting fund detail (alternative) for ZBJ: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:21:07,473 - INFO - ZBJ: Fon adından tahmin edilen kategori: Para Piyasası Şemsiye Fonu
+2025-07-17 15:21:07,473 - INFO - [REPAIR OK] ZBJ: 2 yeni kayıt
+2025-07-17 15:21:07,473 - INFO - [REPAIR] ZBO: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:21:09,454 - ERROR - Error getting fund detail (alternative) for ZBO: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:21:09,455 - INFO - ZBO: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:21:09,455 - INFO - [REPAIR OK] ZBO: 2 yeni kayıt
+2025-07-17 15:21:09,455 - INFO - [REPAIR] ZCD: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:21:11,015 - ERROR - Error getting fund detail (alternative) for ZCD: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:21:11,016 - INFO - ZCD: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:21:11,016 - INFO - [REPAIR OK] ZCD: 2 yeni kayıt
+2025-07-17 15:21:11,016 - INFO - [REPAIR] ZCK: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:21:12,584 - ERROR - Error getting fund detail (alternative) for ZCK: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:21:12,584 - INFO - ZCK: Fon adından tahmin edilen kategori: Katılım Şemsiye Fonu
+2025-07-17 15:21:12,584 - INFO - [REPAIR OK] ZCK: 2 yeni kayıt
+2025-07-17 15:21:12,584 - INFO - [REPAIR] ZCN: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:21:14,840 - ERROR - Error getting fund detail (alternative) for ZCN: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:21:14,840 - INFO - ZCN: Fon adından tahmin edilen kategori: Fon Sepeti Şemsiye Fonu
+2025-07-17 15:21:14,840 - INFO - [REPAIR OK] ZCN: 2 yeni kayıt
+2025-07-17 15:21:14,840 - INFO - [REPAIR] ZDD: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:21:16,908 - ERROR - Error getting fund detail (alternative) for ZDD: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:21:16,908 - INFO - ZDD: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:21:16,908 - INFO - [REPAIR OK] ZDD: 2 yeni kayıt
+2025-07-17 15:21:16,908 - INFO - [REPAIR] ZDZ: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:21:18,761 - ERROR - Error getting fund detail (alternative) for ZDZ: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:21:18,761 - INFO - ZDZ: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:21:18,762 - INFO - [REPAIR OK] ZDZ: 2 yeni kayıt
+2025-07-17 15:21:18,762 - INFO - [REPAIR] ZFB: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:21:20,589 - ERROR - Error getting fund detail (alternative) for ZFB: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:21:20,589 - INFO - ZFB: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:21:20,589 - INFO - [REPAIR OK] ZFB: 2 yeni kayıt
+2025-07-17 15:21:20,589 - INFO - [REPAIR] ZHH: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:21:20,637 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:21:23,452 - ERROR - Error getting fund detail (alternative) for ZHH: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:21:23,452 - INFO - ZHH: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:21:23,452 - INFO - [REPAIR OK] ZHH: 2 yeni kayıt
+2025-07-17 15:21:23,452 - INFO - [REPAIR] ZJB: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:21:25,786 - ERROR - Error getting fund detail (alternative) for ZJB: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:21:25,787 - INFO - ZJB: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:21:25,787 - INFO - [REPAIR OK] ZJB: 2 yeni kayıt
+2025-07-17 15:21:25,787 - INFO - [REPAIR] ZJI: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:21:27,959 - ERROR - Error getting fund detail (alternative) for ZJI: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:21:27,960 - INFO - ZJI: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:21:27,960 - INFO - [REPAIR OK] ZJI: 2 yeni kayıt
+2025-07-17 15:21:27,960 - INFO - [REPAIR] ZJL: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:21:30,167 - ERROR - Error getting fund detail (alternative) for ZJL: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:21:30,168 - INFO - ZJL: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:21:30,168 - INFO - [REPAIR OK] ZJL: 2 yeni kayıt
+2025-07-17 15:21:30,168 - INFO - [REPAIR] ZJV: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:21:32,224 - ERROR - Error getting fund detail (alternative) for ZJV: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:21:32,224 - INFO - ZJV: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:21:32,225 - INFO - [REPAIR OK] ZJV: 2 yeni kayıt
+2025-07-17 15:21:32,225 - INFO - [REPAIR] ZLH: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:21:32,271 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:21:33,322 - WARNING - Session başlatma deneme 2/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:21:37,658 - ERROR - Error getting fund detail (alternative) for ZLH: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:21:37,659 - INFO - ZLH: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 15:21:37,659 - INFO - [REPAIR OK] ZLH: 2 yeni kayıt
+2025-07-17 15:21:37,659 - INFO - [REPAIR] ZMT: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:21:37,718 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:21:40,473 - ERROR - Error getting fund detail (alternative) for ZMT: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:21:40,473 - INFO - ZMT: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:21:40,473 - INFO - [REPAIR OK] ZMT: 2 yeni kayıt
+2025-07-17 15:21:40,473 - INFO - [REPAIR] ZMY: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:21:42,725 - ERROR - Error getting fund detail (alternative) for ZMY: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:21:42,726 - INFO - ZMY: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 15:21:42,726 - INFO - [REPAIR OK] ZMY: 2 yeni kayıt
+2025-07-17 15:21:42,726 - INFO - [REPAIR] ZP6: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:21:44,308 - ERROR - Error getting fund detail (alternative) for ZP6: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:21:44,309 - INFO - ZP6: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:21:44,309 - INFO - [REPAIR OK] ZP6: 2 yeni kayıt
+2025-07-17 15:21:44,309 - INFO - [REPAIR] ZP8: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:21:46,787 - ERROR - Error getting fund detail (alternative) for ZP8: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:21:46,788 - INFO - ZP8: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:21:46,788 - INFO - [REPAIR OK] ZP8: 2 yeni kayıt
+2025-07-17 15:21:46,788 - INFO - [REPAIR] ZP9: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:21:48,351 - ERROR - Error getting fund detail (alternative) for ZP9: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:21:48,352 - INFO - ZP9: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:21:48,352 - INFO - [REPAIR OK] ZP9: 2 yeni kayıt
+2025-07-17 15:21:48,352 - INFO - [REPAIR] ZPA: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:21:50,630 - ERROR - Error getting fund detail (alternative) for ZPA: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:21:50,631 - INFO - ZPA: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:21:50,631 - INFO - [REPAIR OK] ZPA: 2 yeni kayıt
+2025-07-17 15:21:50,631 - INFO - [REPAIR] ZPC: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:21:52,683 - ERROR - Error getting fund detail (alternative) for ZPC: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:21:52,684 - INFO - ZPC: Fon adından tahmin edilen kategori: Fon Sepeti Şemsiye Fonu
+2025-07-17 15:21:52,684 - INFO - [REPAIR OK] ZPC: 2 yeni kayıt
+2025-07-17 15:21:52,684 - INFO - [REPAIR] ZPE: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:21:54,899 - ERROR - Error getting fund detail (alternative) for ZPE: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:21:54,900 - INFO - ZPE: Fon adından tahmin edilen kategori: Katılım Şemsiye Fonu
+2025-07-17 15:21:54,900 - INFO - [REPAIR OK] ZPE: 2 yeni kayıt
+2025-07-17 15:21:54,900 - INFO - [REPAIR] ZPF: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:21:56,844 - ERROR - Error getting fund detail (alternative) for ZPF: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:21:56,844 - INFO - ZPF: Fon adından tahmin edilen kategori: Katılım Şemsiye Fonu
+2025-07-17 15:21:56,844 - INFO - [REPAIR OK] ZPF: 2 yeni kayıt
+2025-07-17 15:21:56,844 - INFO - [REPAIR] ZPG: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:21:58,556 - ERROR - Error getting fund detail (alternative) for ZPG: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:21:58,556 - INFO - ZPG: Fon adından tahmin edilen kategori: Katılım Şemsiye Fonu
+2025-07-17 15:21:58,557 - INFO - [REPAIR OK] ZPG: 2 yeni kayıt
+2025-07-17 15:21:58,557 - INFO - [REPAIR] ZSF: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:22:00,913 - ERROR - Error getting fund detail (alternative) for ZSF: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:22:00,914 - INFO - ZSF: Fon adından tahmin edilen kategori: Yabancı Hisse Senedi Şemsiye Fonu
+2025-07-17 15:22:00,914 - INFO - [REPAIR OK] ZSF: 2 yeni kayıt
+2025-07-17 15:22:00,914 - INFO - [REPAIR] ZSG: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:22:00,964 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 15:22:03,950 - ERROR - Error getting fund detail (alternative) for ZSG: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:22:03,950 - INFO - ZSG: Fon adından tahmin edilen kategori: Fon Sepeti Şemsiye Fonu
+2025-07-17 15:22:03,950 - INFO - [REPAIR OK] ZSG: 2 yeni kayıt
+2025-07-17 15:22:03,950 - INFO - [REPAIR] ZVO: 2025-07-15 00:00:00 - 2025-07-17 00:00:00
+2025-07-17 15:22:05,490 - ERROR - Error getting fund detail (alternative) for ZVO: Expecting value: line 1 column 1 (char 0)
+2025-07-17 15:22:05,491 - INFO - ZVO: Fon adından tahmin edilen kategori: Serbest Şemsiye Fonu
+2025-07-17 15:22:05,491 - INFO - [REPAIR OK] ZVO: 2 yeni kayıt
+2025-07-17 15:22:05,491 - INFO - [MERGE] 558 yeni kayıt mevcut veriye ekleniyor...
+2025-07-17 15:22:05,543 - INFO - [MERGE] Mevcut kayıt sayısı: 337179
+2025-07-17 15:22:05,826 - INFO - [MERGE SUCCESS] Veri birleştirme tamamlandı!
+2025-07-17 15:22:05,826 - INFO - [FILE] Dosya: data\tefas_full_2yrs.parquet
+2025-07-17 15:22:05,826 - INFO - [STATS] Toplam kayıt: 337,737 (+558 yeni)
+2025-07-17 15:22:05,827 - INFO - [FUNDS] Fon sayısı: 850
+2025-07-17 15:22:05,827 - INFO - [DATE] Tarih aralığı: 2023-07-14 - 2025-07-17
+2025-07-17 15:22:05,830 - INFO - [REPAIR COMPLETE] 279 fon başarıyla güncellendi
+2025-07-17 15:22:05,830 - INFO - [REPAIR STATS] 558 yeni kayıt eklendi

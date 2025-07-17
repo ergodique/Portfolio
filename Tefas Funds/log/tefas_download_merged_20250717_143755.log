@@ -1,0 +1,29 @@
+2025-07-17 14:37:55,482 - INFO - CMD: tefas_download_data_merged.py --repair --input data/tarih_test.parquet --workers 4
+2025-07-17 14:37:55,574 - INFO - ============================================================
+2025-07-17 14:37:55,574 - INFO - TEFAS Fon Verisi İndirme Script'i (Merged)
+2025-07-17 14:37:55,574 - INFO - ============================================================
+2025-07-17 14:37:55,574 - INFO - Mod: Repair - Paralel (4 worker)
+2025-07-17 14:37:55,574 - INFO - Input dosya: data/tarih_test.parquet
+2025-07-17 14:37:55,575 - INFO - ============================================================
+2025-07-17 14:37:55,740 - INFO - [REPAIR MODE] Eksik veri tamamlama başlıyor...
+2025-07-17 14:37:55,740 - INFO - [REPAIR] Mevcut veri analiz ediliyor: data\tarih_test.parquet
+2025-07-17 14:37:55,763 - INFO - [MISSING] PPN: 2025-07-02 - 2025-07-17 (15 gün)
+2025-07-17 14:37:55,764 - INFO - [ANALYSIS] 1 tane fon eksik verili. 0/1 tamamlanmış.
+2025-07-17 14:37:55,764 - INFO - [REPAIR] 1 fon için eksik veri indiriliyor...
+2025-07-17 14:37:55,764 - INFO - [REPAIR] Fon listesi alınıyor...
+2025-07-17 14:37:55,764 - INFO - Fetching fresh fund list from TEFAS API
+2025-07-17 14:37:56,078 - INFO - Successfully loaded 862 funds from TEFAS API
+2025-07-17 14:37:56,079 - INFO - [REPAIR] 862 fon eşleştirildi
+2025-07-17 14:37:56,079 - INFO - [REPAIR] Paralel mod - 4 worker
+2025-07-17 14:37:57,609 - ERROR - Error getting fund detail (alternative) for PPN: Expecting value: line 1 column 1 (char 0)
+2025-07-17 14:37:57,610 - INFO - PPN: Fon adından tahmin edilen kategori: Para Piyasası Şemsiye Fonu
+2025-07-17 14:37:57,610 - INFO - [REPAIR OK] PPN: 11 yeni kayıt
+2025-07-17 14:37:57,611 - INFO - [MERGE] 11 yeni kayıt mevcut veriye ekleniyor...
+2025-07-17 14:37:57,614 - INFO - [MERGE] Mevcut kayıt sayısı: 122
+2025-07-17 14:37:57,622 - INFO - [MERGE SUCCESS] Veri birleştirme tamamlandı!
+2025-07-17 14:37:57,623 - INFO - [FILE] Dosya: data\tarih_test.parquet
+2025-07-17 14:37:57,623 - INFO - [STATS] Toplam kayıt: 133 (+11 yeni)
+2025-07-17 14:37:57,623 - INFO - [FUNDS] Fon sayısı: 1
+2025-07-17 14:37:57,623 - INFO - [DATE] Tarih aralığı: 2025-01-02 - 2025-07-17
+2025-07-17 14:37:57,623 - INFO - [REPAIR COMPLETE] 1 fon başarıyla güncellendi
+2025-07-17 14:37:57,623 - INFO - [REPAIR STATS] 11 yeni kayıt eklendi

@@ -1,0 +1,199 @@
+2025-07-17 13:17:15,447 - INFO - CMD: tefas_download_data_merged.py --test --codes PPN,PRD,TLE,IPV,TCD,IPB,IIH,AHI,AFA,YAY --months 12 --workers 4 --outfile data/test_10fon.parquet
+2025-07-17 13:17:15,537 - INFO - ============================================================
+2025-07-17 13:17:15,538 - INFO - TEFAS Fon Verisi İndirme Script'i (Merged)
+2025-07-17 13:17:15,538 - INFO - ============================================================
+2025-07-17 13:17:15,538 - INFO - Mod: Test - Paralel (4 worker)
+2025-07-17 13:17:15,538 - INFO - Tarih aralığı: Son 12 ay
+2025-07-17 13:17:15,538 - INFO - ============================================================
+2025-07-17 13:17:15,596 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 13:17:16,756 - INFO - [PARALEL MOD] Başlıyor...
+2025-07-17 13:17:16,756 - INFO - Fon listesi alınıyor...
+2025-07-17 13:17:16,756 - INFO - Fetching fresh fund list from TEFAS API
+2025-07-17 13:17:17,046 - INFO - Successfully loaded 861 funds from TEFAS API
+2025-07-17 13:17:17,046 - INFO - Toplam 861 fon bulundu
+2025-07-17 13:17:17,047 - INFO - Filtreden 10 fon geçti
+2025-07-17 13:17:17,047 - INFO - [START] 10 fon paralel indirme başlıyor...
+2025-07-17 13:17:17,047 - INFO - Hedef dosya: data\test_10fon.parquet
+2025-07-17 13:17:17,047 - INFO - Worker sayısı: 4
+2025-07-17 13:17:17,047 - INFO - [BATCH 1] 4 fon işleniyor
+2025-07-17 13:17:17,927 - ERROR - Error getting performance for IPB: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:17,928 - WARNING - IPB: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:17,928 - WARNING - [RETRY 1/3] IPB: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:17,956 - ERROR - Error getting performance for TLE: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:17,957 - WARNING - TLE: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:17,958 - WARNING - [RETRY 1/3] TLE: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:17,989 - ERROR - Error getting performance for AHI: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:17,990 - WARNING - AHI: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:17,990 - WARNING - [RETRY 1/3] AHI: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:18,186 - ERROR - Error getting performance for AFA: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:18,187 - WARNING - AFA: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:18,187 - WARNING - [RETRY 1/3] AFA: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:21,373 - ERROR - Error getting performance for AHI: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:21,373 - WARNING - AHI: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:21,373 - WARNING - [RETRY 2/3] AHI: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:22,722 - ERROR - Error getting performance for IPB: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:22,722 - WARNING - IPB: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:22,722 - WARNING - [RETRY 2/3] IPB: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:22,794 - ERROR - Error getting performance for AFA: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:22,794 - WARNING - AFA: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:22,794 - WARNING - [RETRY 2/3] AFA: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:22,937 - ERROR - Error getting performance for TLE: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:22,937 - WARNING - TLE: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:22,938 - WARNING - [RETRY 2/3] TLE: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:26,418 - ERROR - Error getting performance for AHI: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:26,419 - WARNING - AHI: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:26,419 - ERROR - [CHUNK FAIL] AHI: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:26,419 - INFO - AHI: Belirlenen tarih aralığında veri yok, geriye doğru aranıyor...
+2025-07-17 13:17:27,214 - INFO - AHI: 30 günlük aralıkta 22 kayıt bulundu
+2025-07-17 13:17:27,897 - ERROR - Error getting performance for IPB: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:27,897 - WARNING - IPB: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:27,898 - ERROR - [CHUNK FAIL] IPB: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:27,898 - INFO - IPB: Belirlenen tarih aralığında veri yok, geriye doğru aranıyor...
+2025-07-17 13:17:28,059 - INFO - [OK] AHI: 40 toplam kayıt alındı
+2025-07-17 13:17:28,080 - ERROR - Error getting fund detail (alternative) for AHI: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:28,081 - INFO - AHI: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 13:17:28,081 - INFO - [OK] AHI (40 kayıt)
+2025-07-17 13:17:28,698 - INFO - IPB: 30 günlük aralıkta 22 kayıt bulundu
+2025-07-17 13:17:28,911 - ERROR - Error getting performance for AFA: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:28,911 - WARNING - AFA: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:28,911 - ERROR - [CHUNK FAIL] AFA: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:28,911 - INFO - AFA: Belirlenen tarih aralığında veri yok, geriye doğru aranıyor...
+2025-07-17 13:17:28,958 - ERROR - Error getting performance for TLE: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:28,958 - WARNING - TLE: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:28,958 - ERROR - [CHUNK FAIL] TLE: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:28,959 - INFO - TLE: Belirlenen tarih aralığında veri yok, geriye doğru aranıyor...
+2025-07-17 13:17:29,503 - INFO - [OK] IPB: 40 toplam kayıt alındı
+2025-07-17 13:17:29,524 - ERROR - Error getting fund detail (alternative) for IPB: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:29,524 - INFO - IPB: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 13:17:29,525 - INFO - [OK] IPB (40 kayıt)
+2025-07-17 13:17:29,675 - INFO - AFA: 30 günlük aralıkta 22 kayıt bulundu
+2025-07-17 13:17:29,736 - ERROR - Error getting performance for TLE: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 13:17:29,736 - WARNING - TLE: API hatası: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 13:17:29,736 - WARNING - TLE: Bağlantı kesildi, session tamamen yenileniyor...
+2025-07-17 13:17:29,893 - WARNING - [RETRY 1/3] TLE: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 13:17:30,392 - INFO - [OK] AFA: 40 toplam kayıt alındı
+2025-07-17 13:17:30,413 - ERROR - Error getting fund detail (alternative) for AFA: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:30,414 - INFO - AFA: Fon adından tahmin edilen kategori: Yabancı Hisse Senedi Şemsiye Fonu
+2025-07-17 13:17:30,414 - INFO - [OK] AFA (40 kayıt)
+2025-07-17 13:17:34,321 - INFO - TLE: 30 günlük aralıkta 22 kayıt bulundu
+2025-07-17 13:17:34,977 - INFO - [OK] TLE: 40 toplam kayıt alındı
+2025-07-17 13:17:34,998 - ERROR - Error getting fund detail (alternative) for TLE: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:34,999 - INFO - TLE: Fon adından tahmin edilen kategori: Borçlanma Araçları Şemsiye Fonu
+2025-07-17 13:17:34,999 - INFO - [OK] TLE (40 kayıt)
+2025-07-17 13:17:34,999 - INFO - [BATCH 1/3 (%33.3)] Tamamlandı. Şu ana kadar başarı: 4, hata: 0
+2025-07-17 13:17:37,000 - INFO - [BATCH 2] 4 fon işleniyor
+2025-07-17 13:17:37,887 - ERROR - Error getting performance for IPV: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:37,888 - WARNING - IPV: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:37,888 - WARNING - [RETRY 1/3] IPV: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:37,977 - ERROR - Error getting performance for IIH: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:37,977 - WARNING - IIH: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:37,977 - WARNING - [RETRY 1/3] IIH: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:38,020 - ERROR - Error getting performance for PPN: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:38,021 - WARNING - PPN: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:38,021 - WARNING - [RETRY 1/3] PPN: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:38,026 - ERROR - Error getting performance for PRD: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:38,026 - WARNING - PRD: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:38,026 - WARNING - [RETRY 1/3] PRD: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:41,489 - ERROR - Error getting performance for IPV: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 13:17:41,489 - WARNING - IPV: API hatası: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 13:17:41,490 - WARNING - IPV: Bağlantı kesildi, session tamamen yenileniyor...
+2025-07-17 13:17:41,664 - WARNING - [RETRY 2/3] IPV: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 13:17:41,909 - ERROR - Error getting performance for IIH: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:41,909 - WARNING - IIH: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:41,910 - WARNING - [RETRY 2/3] IIH: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:42,321 - ERROR - Error getting performance for PRD: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:42,322 - WARNING - PRD: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:42,322 - WARNING - [RETRY 2/3] PRD: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:42,459 - ERROR - Error getting performance for PPN: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:42,460 - WARNING - PPN: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:42,460 - WARNING - [RETRY 2/3] PPN: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:47,412 - ERROR - Error getting performance for IIH: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:47,412 - WARNING - IIH: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:47,413 - ERROR - [CHUNK FAIL] IIH: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:47,413 - INFO - IIH: Belirlenen tarih aralığında veri yok, geriye doğru aranıyor...
+2025-07-17 13:17:47,621 - ERROR - Error getting performance for IPV: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:47,621 - WARNING - IPV: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:47,621 - ERROR - [CHUNK FAIL] IPV: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:47,621 - INFO - IPV: Belirlenen tarih aralığında veri yok, geriye doğru aranıyor...
+2025-07-17 13:17:47,895 - ERROR - Error getting performance for PPN: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:47,896 - WARNING - PPN: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:47,896 - ERROR - [CHUNK FAIL] PPN: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:47,896 - INFO - PPN: Belirlenen tarih aralığında veri yok, geriye doğru aranıyor...
+2025-07-17 13:17:48,293 - INFO - IIH: 30 günlük aralıkta 22 kayıt bulundu
+2025-07-17 13:17:48,314 - ERROR - Error getting performance for PRD: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:48,316 - WARNING - PRD: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:48,316 - ERROR - [CHUNK FAIL] PRD: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:48,316 - INFO - PRD: Belirlenen tarih aralığında veri yok, geriye doğru aranıyor...
+2025-07-17 13:17:48,349 - INFO - IPV: 30 günlük aralıkta 22 kayıt bulundu
+2025-07-17 13:17:48,743 - INFO - PPN: 30 günlük aralıkta 22 kayıt bulundu
+2025-07-17 13:17:49,017 - ERROR - Error getting performance for PRD: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 13:17:49,017 - WARNING - PRD: API hatası: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 13:17:49,017 - WARNING - PRD: Bağlantı kesildi, session tamamen yenileniyor...
+2025-07-17 13:17:49,037 - INFO - [OK] IPV: 40 toplam kayıt alındı
+2025-07-17 13:17:49,065 - INFO - [OK] IIH: 40 toplam kayıt alındı
+2025-07-17 13:17:49,073 - ERROR - Error getting fund detail (alternative) for IPV: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:49,074 - INFO - IPV: Fon adından tahmin edilen kategori: Eurobond Şemsiye Fonu
+2025-07-17 13:17:49,074 - INFO - [OK] IPV (40 kayıt)
+2025-07-17 13:17:49,085 - ERROR - Error getting fund detail (alternative) for IIH: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:49,086 - INFO - IIH: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 13:17:49,086 - INFO - [OK] IIH (40 kayıt)
+2025-07-17 13:17:49,181 - WARNING - [RETRY 1/3] PRD: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 13:17:49,638 - INFO - [OK] PPN: 40 toplam kayıt alındı
+2025-07-17 13:17:49,661 - ERROR - Error getting fund detail (alternative) for PPN: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:49,661 - INFO - PPN: Fon adından tahmin edilen kategori: Para Piyasası Şemsiye Fonu
+2025-07-17 13:17:49,661 - INFO - [OK] PPN (40 kayıt)
+2025-07-17 13:17:52,400 - INFO - PRD: 30 günlük aralıkta 22 kayıt bulundu
+2025-07-17 13:17:53,540 - INFO - [OK] PRD: 40 toplam kayıt alındı
+2025-07-17 13:17:53,560 - ERROR - Error getting fund detail (alternative) for PRD: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:53,561 - INFO - PRD: Fon adından tahmin edilen kategori: Para Piyasası Şemsiye Fonu
+2025-07-17 13:17:53,561 - INFO - [OK] PRD (40 kayıt)
+2025-07-17 13:17:53,561 - INFO - [BATCH 2/3 (%66.7)] Tamamlandı. Şu ana kadar başarı: 8, hata: 0
+2025-07-17 13:17:55,562 - INFO - [BATCH 3] 2 fon işleniyor
+2025-07-17 13:17:56,401 - ERROR - Error getting performance for TCD: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:56,402 - WARNING - TCD: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:56,402 - WARNING - [RETRY 1/3] TCD: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:56,405 - ERROR - Error getting performance for YAY: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:56,405 - WARNING - YAY: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:56,405 - WARNING - [RETRY 1/3] YAY: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:59,737 - ERROR - Error getting performance for YAY: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:59,738 - WARNING - YAY: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:17:59,738 - WARNING - [RETRY 2/3] YAY: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:18:00,020 - ERROR - Error getting performance for TCD: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 13:18:00,020 - WARNING - TCD: API hatası: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 13:18:00,020 - WARNING - TCD: Bağlantı kesildi, session tamamen yenileniyor...
+2025-07-17 13:18:00,069 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 13:18:01,226 - WARNING - [RETRY 2/3] TCD: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 13:18:05,052 - ERROR - Error getting performance for YAY: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:18:05,052 - WARNING - YAY: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:18:05,053 - ERROR - [CHUNK FAIL] YAY: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:18:05,053 - INFO - YAY: Belirlenen tarih aralığında veri yok, geriye doğru aranıyor...
+2025-07-17 13:18:05,794 - INFO - YAY: 30 günlük aralıkta 22 kayıt bulundu
+2025-07-17 13:18:06,463 - ERROR - Error getting performance for TCD: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:18:06,463 - WARNING - TCD: API hatası: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:18:06,463 - ERROR - [CHUNK FAIL] TCD: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:18:06,463 - INFO - TCD: Belirlenen tarih aralığında veri yok, geriye doğru aranıyor...
+2025-07-17 13:18:06,608 - INFO - [OK] YAY: 40 toplam kayıt alındı
+2025-07-17 13:18:06,629 - ERROR - Error getting fund detail (alternative) for YAY: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:18:06,629 - INFO - YAY: Fon adından tahmin edilen kategori: Yabancı Hisse Senedi Şemsiye Fonu
+2025-07-17 13:18:06,629 - INFO - [OK] YAY (40 kayıt)
+2025-07-17 13:18:07,257 - INFO - TCD: 30 günlük aralıkta 22 kayıt bulundu
+2025-07-17 13:18:08,018 - INFO - [OK] TCD: 40 toplam kayıt alındı
+2025-07-17 13:18:08,040 - ERROR - Error getting fund detail (alternative) for TCD: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:18:08,040 - INFO - TCD: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 13:18:08,040 - INFO - [OK] TCD (40 kayıt)
+2025-07-17 13:18:08,041 - INFO - [BATCH 3/3 (%100.0)] Tamamlandı. Şu ana kadar başarı: 10, hata: 0
+2025-07-17 13:18:10,041 - INFO - [SAVE] 400 kayıt parquet dosyasına yazılıyor...
+2025-07-17 13:18:10,052 - INFO - [SUCCESS] İNDİRME TAMAMLANDI!
+2025-07-17 13:18:10,052 - INFO - [FILE] Dosya: data\test_10fon.parquet
+2025-07-17 13:18:10,052 - INFO - [STATS] Kayıt sayısı: 400
+2025-07-17 13:18:10,052 - INFO - [FUNDS] Fon sayısı: 10
+2025-07-17 13:18:10,052 - INFO - [DATE] Tarih aralığı: 2025-05-20 - 2025-07-17
+2025-07-17 13:18:10,052 - INFO - [OK] Başarılı fonlar: 10
+2025-07-17 13:18:10,052 - INFO - [FAIL] Başarısız fonlar: 0
+2025-07-17 13:18:10,053 - INFO - [CATEGORIES] Fon kategorileri:
+2025-07-17 13:18:10,053 - INFO -   Değişken Şemsiye Fonu: 2 fon
+2025-07-17 13:18:10,053 - INFO -   Hisse Senedi Şemsiye Fonu: 2 fon
+2025-07-17 13:18:10,053 - INFO -   Yabancı Hisse Senedi Şemsiye Fonu: 2 fon
+2025-07-17 13:18:10,053 - INFO -   Para Piyasası Şemsiye Fonu: 2 fon
+2025-07-17 13:18:10,053 - INFO -   Borçlanma Araçları Şemsiye Fonu: 1 fon
+2025-07-17 13:18:10,053 - INFO -   Eurobond Şemsiye Fonu: 1 fon
