@@ -1,0 +1,287 @@
+2025-07-17 14:27:15,334 - INFO - CMD: tefas_download_data_merged.py --test --codes PPN,PRD,TLE,IPV,TCD,IPB,IIH,AHI,AFA,YAY --start-date 2025-01-01 --end-date 2025-07-01 --workers 4 --outfile data/repair_test_10fon.parquet
+2025-07-17 14:27:15,428 - INFO - ============================================================
+2025-07-17 14:27:15,428 - INFO - TEFAS Fon Verisi İndirme Script'i (Merged)
+2025-07-17 14:27:15,428 - INFO - ============================================================
+2025-07-17 14:27:15,428 - INFO - Mod: Test - Paralel (4 worker)
+2025-07-17 14:27:15,428 - INFO - Tarih aralığı: Son 2 yıl
+2025-07-17 14:27:15,428 - INFO - ============================================================
+2025-07-17 14:27:16,010 - INFO - [PARALEL MOD] Başlıyor...
+2025-07-17 14:27:16,010 - INFO - Fon listesi alınıyor...
+2025-07-17 14:27:16,010 - INFO - Fetching fresh fund list from TEFAS API
+2025-07-17 14:27:16,311 - INFO - Successfully loaded 862 funds from TEFAS API
+2025-07-17 14:27:16,312 - INFO - Toplam 862 fon bulundu
+2025-07-17 14:27:16,312 - INFO - Filtreden 10 fon geçti
+2025-07-17 14:27:16,312 - INFO - [START] 10 fon paralel indirme başlıyor...
+2025-07-17 14:27:16,313 - INFO - Hedef dosya: data\repair_test_10fon.parquet
+2025-07-17 14:27:16,313 - INFO - Worker sayısı: 4
+2025-07-17 14:27:16,313 - INFO - [BATCH 1] 4 fon işleniyor
+2025-07-17 14:27:16,518 - INFO - [DEBUG] IPB: varsayılan 2 yıl, tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 14:27:16,518 - INFO - [DEBUG] TLE: varsayılan 2 yıl, tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 14:27:16,518 - INFO - [CHUNK] IPB: 731 günlük aralığı 3 aylık parçalara bölünüyor...
+2025-07-17 14:27:16,518 - INFO - [CHUNK] TLE: 731 günlük aralığı 3 aylık parçalara bölünüyor...
+2025-07-17 14:27:16,518 - INFO - [CHUNK 1] IPB: 2023-07-17 → 2023-10-15
+2025-07-17 14:27:16,518 - INFO - [CHUNK 1] TLE: 2023-07-17 → 2023-10-15
+2025-07-17 14:27:16,521 - INFO - [DEBUG] AHI: varsayılan 2 yıl, tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 14:27:16,521 - INFO - [CHUNK] AHI: 731 günlük aralığı 3 aylık parçalara bölünüyor...
+2025-07-17 14:27:16,521 - INFO - [CHUNK 1] AHI: 2023-07-17 → 2023-10-15
+2025-07-17 14:27:16,523 - INFO - [DEBUG] AFA: varsayılan 2 yıl, tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 14:27:16,523 - INFO - [CHUNK] AFA: 731 günlük aralığı 3 aylık parçalara bölünüyor...
+2025-07-17 14:27:16,523 - INFO - [CHUNK 1] AFA: 2023-07-17 → 2023-10-15
+2025-07-17 14:27:17,191 - INFO - [CHUNK 1] IPB: 64 kayıt alındı
+2025-07-17 14:27:17,196 - INFO - [CHUNK 1] AFA: 64 kayıt alındı
+2025-07-17 14:27:17,279 - INFO - [CHUNK 1] TLE: 64 kayıt alındı
+2025-07-17 14:27:17,304 - INFO - [CHUNK 1] AHI: 64 kayıt alındı
+2025-07-17 14:27:18,191 - INFO - [CHUNK 2] IPB: 2023-10-16 → 2024-01-14
+2025-07-17 14:27:18,196 - INFO - [CHUNK 2] AFA: 2023-10-16 → 2024-01-14
+2025-07-17 14:27:18,279 - INFO - [CHUNK 2] TLE: 2023-10-16 → 2024-01-14
+2025-07-17 14:27:18,304 - INFO - [CHUNK 2] AHI: 2023-10-16 → 2024-01-14
+2025-07-17 14:27:18,898 - INFO - [CHUNK 2] AFA: 64 kayıt alındı
+2025-07-17 14:27:18,992 - INFO - [CHUNK 2] AHI: 64 kayıt alındı
+2025-07-17 14:27:19,019 - INFO - [CHUNK 2] IPB: 64 kayıt alındı
+2025-07-17 14:27:19,095 - INFO - [CHUNK 2] TLE: 64 kayıt alındı
+2025-07-17 14:27:19,899 - INFO - [CHUNK 3] AFA: 2024-01-15 → 2024-04-14
+2025-07-17 14:27:19,993 - INFO - [CHUNK 3] AHI: 2024-01-15 → 2024-04-14
+2025-07-17 14:27:20,019 - INFO - [CHUNK 3] IPB: 2024-01-15 → 2024-04-14
+2025-07-17 14:27:20,096 - INFO - [CHUNK 3] TLE: 2024-01-15 → 2024-04-14
+2025-07-17 14:27:20,653 - INFO - [CHUNK 3] AFA: 62 kayıt alındı
+2025-07-17 14:27:20,720 - INFO - [CHUNK 3] IPB: 62 kayıt alındı
+2025-07-17 14:27:20,813 - INFO - [CHUNK 3] AHI: 62 kayıt alındı
+2025-07-17 14:27:20,894 - INFO - [CHUNK 3] TLE: 62 kayıt alındı
+2025-07-17 14:27:21,654 - INFO - [CHUNK 4] AFA: 2024-04-15 → 2024-07-14
+2025-07-17 14:27:21,720 - INFO - [CHUNK 4] IPB: 2024-04-15 → 2024-07-14
+2025-07-17 14:27:21,814 - INFO - [CHUNK 4] AHI: 2024-04-15 → 2024-07-14
+2025-07-17 14:27:21,895 - INFO - [CHUNK 4] TLE: 2024-04-15 → 2024-07-14
+2025-07-17 14:27:22,372 - INFO - [CHUNK 4] AFA: 60 kayıt alındı
+2025-07-17 14:27:22,487 - INFO - [CHUNK 4] IPB: 60 kayıt alındı
+2025-07-17 14:27:22,642 - INFO - [CHUNK 4] AHI: 60 kayıt alındı
+2025-07-17 14:27:22,659 - INFO - [CHUNK 4] TLE: 60 kayıt alındı
+2025-07-17 14:27:23,374 - INFO - [CHUNK 5] AFA: 2024-07-15 → 2024-10-13
+2025-07-17 14:27:23,487 - INFO - [CHUNK 5] IPB: 2024-07-15 → 2024-10-13
+2025-07-17 14:27:23,642 - INFO - [CHUNK 5] AHI: 2024-07-15 → 2024-10-13
+2025-07-17 14:27:23,659 - INFO - [CHUNK 5] TLE: 2024-07-15 → 2024-10-13
+2025-07-17 14:27:24,106 - INFO - [CHUNK 5] AFA: 63 kayıt alındı
+2025-07-17 14:27:24,207 - INFO - [CHUNK 5] IPB: 63 kayıt alındı
+2025-07-17 14:27:24,319 - INFO - [CHUNK 5] AHI: 63 kayıt alındı
+2025-07-17 14:27:24,431 - INFO - [CHUNK 5] TLE: 63 kayıt alındı
+2025-07-17 14:27:25,107 - INFO - [CHUNK 6] AFA: 2024-10-14 → 2025-01-12
+2025-07-17 14:27:25,208 - INFO - [CHUNK 6] IPB: 2024-10-14 → 2025-01-12
+2025-07-17 14:27:25,320 - INFO - [CHUNK 6] AHI: 2024-10-14 → 2025-01-12
+2025-07-17 14:27:25,432 - INFO - [CHUNK 6] TLE: 2024-10-14 → 2025-01-12
+2025-07-17 14:27:25,940 - INFO - [CHUNK 6] AFA: 63 kayıt alındı
+2025-07-17 14:27:25,990 - INFO - [CHUNK 6] IPB: 63 kayıt alındı
+2025-07-17 14:27:26,019 - INFO - [CHUNK 6] AHI: 63 kayıt alındı
+2025-07-17 14:27:26,208 - INFO - [CHUNK 6] TLE: 63 kayıt alındı
+2025-07-17 14:27:26,941 - INFO - [CHUNK 7] AFA: 2025-01-13 → 2025-04-13
+2025-07-17 14:27:26,990 - INFO - [CHUNK 7] IPB: 2025-01-13 → 2025-04-13
+2025-07-17 14:27:27,020 - INFO - [CHUNK 7] AHI: 2025-01-13 → 2025-04-13
+2025-07-17 14:27:27,208 - INFO - [CHUNK 7] TLE: 2025-01-13 → 2025-04-13
+2025-07-17 14:27:27,704 - INFO - [CHUNK 7] AFA: 63 kayıt alındı
+2025-07-17 14:27:27,760 - INFO - [CHUNK 7] IPB: 63 kayıt alındı
+2025-07-17 14:27:27,761 - INFO - [CHUNK 7] AHI: 63 kayıt alındı
+2025-07-17 14:27:27,999 - INFO - [CHUNK 7] TLE: 63 kayıt alındı
+2025-07-17 14:27:28,704 - INFO - [CHUNK 8] AFA: 2025-04-14 → 2025-07-13
+2025-07-17 14:27:28,761 - INFO - [CHUNK 8] IPB: 2025-04-14 → 2025-07-13
+2025-07-17 14:27:28,761 - INFO - [CHUNK 8] AHI: 2025-04-14 → 2025-07-13
+2025-07-17 14:27:28,999 - INFO - [CHUNK 8] TLE: 2025-04-14 → 2025-07-13
+2025-07-17 14:27:29,475 - INFO - [CHUNK 8] AHI: 60 kayıt alındı
+2025-07-17 14:27:29,607 - INFO - [CHUNK 8] AFA: 60 kayıt alındı
+2025-07-17 14:27:29,619 - INFO - [CHUNK 8] IPB: 60 kayıt alındı
+2025-07-17 14:27:29,749 - INFO - [CHUNK 8] TLE: 60 kayıt alındı
+2025-07-17 14:27:30,475 - INFO - [CHUNK 9] AHI: 2025-07-14 → 2025-07-17
+2025-07-17 14:27:30,608 - INFO - [CHUNK 9] AFA: 2025-07-14 → 2025-07-17
+2025-07-17 14:27:30,620 - INFO - [CHUNK 9] IPB: 2025-07-14 → 2025-07-17
+2025-07-17 14:27:30,749 - INFO - [CHUNK 9] TLE: 2025-07-14 → 2025-07-17
+2025-07-17 14:27:31,259 - INFO - [CHUNK 9] AHI: 3 kayıt alındı
+2025-07-17 14:27:31,263 - INFO - [CHUNK 9] AFA: 3 kayıt alındı
+2025-07-17 14:27:31,389 - INFO - [CHUNK 9] IPB: 3 kayıt alındı
+2025-07-17 14:27:31,425 - INFO - [CHUNK 9] TLE: 3 kayıt alındı
+2025-07-17 14:27:32,259 - INFO - [CHUNK TOTAL] AHI: 502 toplam kayıt (9 parça)
+2025-07-17 14:27:32,259 - INFO - [OK] AHI: 502 toplam kayıt alındı
+2025-07-17 14:27:32,263 - INFO - [CHUNK TOTAL] AFA: 502 toplam kayıt (9 parça)
+2025-07-17 14:27:32,263 - INFO - [OK] AFA: 502 toplam kayıt alındı
+2025-07-17 14:27:32,280 - ERROR - Error getting fund detail (alternative) for AHI: Expecting value: line 1 column 1 (char 0)
+2025-07-17 14:27:32,281 - INFO - AHI: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 14:27:32,281 - INFO - [OK] AHI (502 kayıt)
+2025-07-17 14:27:32,283 - ERROR - Error getting fund detail (alternative) for AFA: Expecting value: line 1 column 1 (char 0)
+2025-07-17 14:27:32,284 - INFO - AFA: Fon adından tahmin edilen kategori: Yabancı Hisse Senedi Şemsiye Fonu
+2025-07-17 14:27:32,284 - INFO - [OK] AFA (502 kayıt)
+2025-07-17 14:27:32,389 - INFO - [CHUNK TOTAL] IPB: 502 toplam kayıt (9 parça)
+2025-07-17 14:27:32,390 - INFO - [OK] IPB: 502 toplam kayıt alındı
+2025-07-17 14:27:32,411 - ERROR - Error getting fund detail (alternative) for IPB: Expecting value: line 1 column 1 (char 0)
+2025-07-17 14:27:32,411 - INFO - IPB: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 14:27:32,411 - INFO - [OK] IPB (502 kayıt)
+2025-07-17 14:27:32,426 - INFO - [CHUNK TOTAL] TLE: 502 toplam kayıt (9 parça)
+2025-07-17 14:27:32,426 - INFO - [OK] TLE: 502 toplam kayıt alındı
+2025-07-17 14:27:32,447 - ERROR - Error getting fund detail (alternative) for TLE: Expecting value: line 1 column 1 (char 0)
+2025-07-17 14:27:32,447 - INFO - TLE: Fon adından tahmin edilen kategori: Eurobond Şemsiye Fonu
+2025-07-17 14:27:32,447 - INFO - [OK] TLE (502 kayıt)
+2025-07-17 14:27:32,448 - INFO - [BATCH 1/3 (%33.3)] Tamamlandı. Şu ana kadar başarı: 4, hata: 0
+2025-07-17 14:27:34,448 - INFO - [BATCH 2] 4 fon işleniyor
+2025-07-17 14:27:34,654 - INFO - [DEBUG] IPV: varsayılan 2 yıl, tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 14:27:34,654 - INFO - [DEBUG] PRD: varsayılan 2 yıl, tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 14:27:34,654 - INFO - [CHUNK] IPV: 731 günlük aralığı 3 aylık parçalara bölünüyor...
+2025-07-17 14:27:34,654 - INFO - [CHUNK] PRD: 731 günlük aralığı 3 aylık parçalara bölünüyor...
+2025-07-17 14:27:34,654 - INFO - [CHUNK 1] IPV: 2023-07-17 → 2023-10-15
+2025-07-17 14:27:34,654 - INFO - [CHUNK 1] PRD: 2023-07-17 → 2023-10-15
+2025-07-17 14:27:34,657 - INFO - [DEBUG] IIH: varsayılan 2 yıl, tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 14:27:34,657 - INFO - [DEBUG] PPN: varsayılan 2 yıl, tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 14:27:34,657 - INFO - [CHUNK] IIH: 731 günlük aralığı 3 aylık parçalara bölünüyor...
+2025-07-17 14:27:34,657 - INFO - [CHUNK] PPN: 731 günlük aralığı 3 aylık parçalara bölünüyor...
+2025-07-17 14:27:34,657 - INFO - [CHUNK 1] IIH: 2023-07-17 → 2023-10-15
+2025-07-17 14:27:34,657 - INFO - [CHUNK 1] PPN: 2023-07-17 → 2023-10-15
+2025-07-17 14:27:35,395 - INFO - [CHUNK 1] IIH: 64 kayıt alındı
+2025-07-17 14:27:35,434 - INFO - [CHUNK 1] PPN: 64 kayıt alındı
+2025-07-17 14:27:35,459 - INFO - [CHUNK 1] IPV: 64 kayıt alındı
+2025-07-17 14:27:35,487 - WARNING - [CHUNK 1] PRD: Veri alınamadı
+2025-07-17 14:27:36,395 - INFO - [CHUNK 2] IIH: 2023-10-16 → 2024-01-14
+2025-07-17 14:27:36,434 - INFO - [CHUNK 2] PPN: 2023-10-16 → 2024-01-14
+2025-07-17 14:27:36,459 - INFO - [CHUNK 2] IPV: 2023-10-16 → 2024-01-14
+2025-07-17 14:27:36,488 - INFO - [CHUNK 2] PRD: 2023-10-16 → 2024-01-14
+2025-07-17 14:27:37,048 - INFO - [CHUNK 2] IIH: 64 kayıt alındı
+2025-07-17 14:27:37,136 - INFO - [CHUNK 2] IPV: 64 kayıt alındı
+2025-07-17 14:27:37,201 - INFO - [CHUNK 2] PPN: 64 kayıt alındı
+2025-07-17 14:27:37,311 - WARNING - [CHUNK 2] PRD: Veri alınamadı
+2025-07-17 14:27:38,048 - INFO - [CHUNK 3] IIH: 2024-01-15 → 2024-04-14
+2025-07-17 14:27:38,137 - INFO - [CHUNK 3] IPV: 2024-01-15 → 2024-04-14
+2025-07-17 14:27:38,202 - INFO - [CHUNK 3] PPN: 2024-01-15 → 2024-04-14
+2025-07-17 14:27:38,311 - INFO - [CHUNK 3] PRD: 2024-01-15 → 2024-04-14
+2025-07-17 14:27:38,704 - INFO - [CHUNK 3] IIH: 62 kayıt alındı
+2025-07-17 14:27:38,935 - INFO - [CHUNK 3] PPN: 62 kayıt alındı
+2025-07-17 14:27:39,006 - INFO - [CHUNK 3] IPV: 62 kayıt alındı
+2025-07-17 14:27:39,067 - WARNING - [CHUNK 3] PRD: Veri alınamadı
+2025-07-17 14:27:39,704 - INFO - [CHUNK 4] IIH: 2024-04-15 → 2024-07-14
+2025-07-17 14:27:39,935 - INFO - [CHUNK 4] PPN: 2024-04-15 → 2024-07-14
+2025-07-17 14:27:40,006 - INFO - [CHUNK 4] IPV: 2024-04-15 → 2024-07-14
+2025-07-17 14:27:40,068 - INFO - [CHUNK 4] PRD: 2024-04-15 → 2024-07-14
+2025-07-17 14:27:40,381 - INFO - [CHUNK 4] IIH: 60 kayıt alındı
+2025-07-17 14:27:40,662 - INFO - [CHUNK 4] IPV: 60 kayıt alındı
+2025-07-17 14:27:40,722 - INFO - [CHUNK 4] PPN: 60 kayıt alındı
+2025-07-17 14:27:40,758 - WARNING - [CHUNK 4] PRD: Veri alınamadı
+2025-07-17 14:27:41,381 - INFO - [CHUNK 5] IIH: 2024-07-15 → 2024-10-13
+2025-07-17 14:27:41,662 - INFO - [CHUNK 5] IPV: 2024-07-15 → 2024-10-13
+2025-07-17 14:27:41,722 - INFO - [CHUNK 5] PPN: 2024-07-15 → 2024-10-13
+2025-07-17 14:27:41,758 - INFO - [CHUNK 5] PRD: 2024-07-15 → 2024-10-13
+2025-07-17 14:27:42,137 - INFO - [CHUNK 5] IIH: 63 kayıt alındı
+2025-07-17 14:27:42,403 - INFO - [CHUNK 5] IPV: 63 kayıt alındı
+2025-07-17 14:27:42,503 - INFO - [CHUNK 5] PRD: 30 kayıt alındı
+2025-07-17 14:27:42,522 - INFO - [CHUNK 5] PPN: 63 kayıt alındı
+2025-07-17 14:27:43,137 - INFO - [CHUNK 6] IIH: 2024-10-14 → 2025-01-12
+2025-07-17 14:27:43,404 - INFO - [CHUNK 6] IPV: 2024-10-14 → 2025-01-12
+2025-07-17 14:27:43,504 - INFO - [CHUNK 6] PRD: 2024-10-14 → 2025-01-12
+2025-07-17 14:27:43,522 - INFO - [CHUNK 6] PPN: 2024-10-14 → 2025-01-12
+2025-07-17 14:27:43,818 - INFO - [CHUNK 6] IIH: 63 kayıt alındı
+2025-07-17 14:27:44,063 - INFO - [CHUNK 6] IPV: 63 kayıt alındı
+2025-07-17 14:27:44,149 - INFO - [CHUNK 6] PRD: 63 kayıt alındı
+2025-07-17 14:27:44,173 - INFO - [CHUNK 6] PPN: 63 kayıt alındı
+2025-07-17 14:27:44,818 - INFO - [CHUNK 7] IIH: 2025-01-13 → 2025-04-13
+2025-07-17 14:27:45,063 - INFO - [CHUNK 7] IPV: 2025-01-13 → 2025-04-13
+2025-07-17 14:27:45,149 - INFO - [CHUNK 7] PRD: 2025-01-13 → 2025-04-13
+2025-07-17 14:27:45,174 - INFO - [CHUNK 7] PPN: 2025-01-13 → 2025-04-13
+2025-07-17 14:27:45,505 - INFO - [CHUNK 7] IIH: 63 kayıt alındı
+2025-07-17 14:27:45,813 - INFO - [CHUNK 7] IPV: 63 kayıt alındı
+2025-07-17 14:27:45,877 - INFO - [CHUNK 7] PRD: 63 kayıt alındı
+2025-07-17 14:27:45,977 - INFO - [CHUNK 7] PPN: 63 kayıt alındı
+2025-07-17 14:27:46,506 - INFO - [CHUNK 8] IIH: 2025-04-14 → 2025-07-13
+2025-07-17 14:27:46,814 - INFO - [CHUNK 8] IPV: 2025-04-14 → 2025-07-13
+2025-07-17 14:27:46,878 - INFO - [CHUNK 8] PRD: 2025-04-14 → 2025-07-13
+2025-07-17 14:27:46,978 - INFO - [CHUNK 8] PPN: 2025-04-14 → 2025-07-13
+2025-07-17 14:27:47,333 - INFO - [CHUNK 8] IIH: 60 kayıt alındı
+2025-07-17 14:27:47,520 - INFO - [CHUNK 8] IPV: 60 kayıt alındı
+2025-07-17 14:27:47,607 - INFO - [CHUNK 8] PRD: 60 kayıt alındı
+2025-07-17 14:27:47,701 - INFO - [CHUNK 8] PPN: 60 kayıt alındı
+2025-07-17 14:27:48,334 - INFO - [CHUNK 9] IIH: 2025-07-14 → 2025-07-17
+2025-07-17 14:27:48,521 - INFO - [CHUNK 9] IPV: 2025-07-14 → 2025-07-17
+2025-07-17 14:27:48,607 - INFO - [CHUNK 9] PRD: 2025-07-14 → 2025-07-17
+2025-07-17 14:27:48,702 - INFO - [CHUNK 9] PPN: 2025-07-14 → 2025-07-17
+2025-07-17 14:27:49,008 - INFO - [CHUNK 9] IIH: 3 kayıt alındı
+2025-07-17 14:27:49,289 - INFO - [CHUNK 9] PRD: 3 kayıt alındı
+2025-07-17 14:27:49,410 - INFO - [CHUNK 9] IPV: 3 kayıt alındı
+2025-07-17 14:27:49,503 - INFO - [CHUNK 9] PPN: 3 kayıt alındı
+2025-07-17 14:27:50,008 - INFO - [CHUNK TOTAL] IIH: 502 toplam kayıt (9 parça)
+2025-07-17 14:27:50,008 - INFO - [OK] IIH: 502 toplam kayıt alındı
+2025-07-17 14:27:50,031 - ERROR - Error getting fund detail (alternative) for IIH: Expecting value: line 1 column 1 (char 0)
+2025-07-17 14:27:50,032 - INFO - IIH: Fon adından tahmin edilen kategori: Hisse Senedi Şemsiye Fonu
+2025-07-17 14:27:50,032 - INFO - [OK] IIH (502 kayıt)
+2025-07-17 14:27:50,290 - INFO - [CHUNK TOTAL] PRD: 219 toplam kayıt (9 parça)
+2025-07-17 14:27:50,290 - INFO - [OK] PRD: 219 toplam kayıt alındı
+2025-07-17 14:27:50,311 - ERROR - Error getting fund detail (alternative) for PRD: Expecting value: line 1 column 1 (char 0)
+2025-07-17 14:27:50,311 - INFO - PRD: Fon adından tahmin edilen kategori: Para Piyasası Şemsiye Fonu
+2025-07-17 14:27:50,312 - INFO - [OK] PRD (219 kayıt)
+2025-07-17 14:27:50,410 - INFO - [CHUNK TOTAL] IPV: 502 toplam kayıt (9 parça)
+2025-07-17 14:27:50,410 - INFO - [OK] IPV: 502 toplam kayıt alındı
+2025-07-17 14:27:50,433 - ERROR - Error getting fund detail (alternative) for IPV: Expecting value: line 1 column 1 (char 0)
+2025-07-17 14:27:50,434 - INFO - IPV: Fon adından tahmin edilen kategori: Eurobond Şemsiye Fonu
+2025-07-17 14:27:50,434 - INFO - [OK] IPV (502 kayıt)
+2025-07-17 14:27:50,503 - INFO - [CHUNK TOTAL] PPN: 502 toplam kayıt (9 parça)
+2025-07-17 14:27:50,503 - INFO - [OK] PPN: 502 toplam kayıt alındı
+2025-07-17 14:27:50,526 - ERROR - Error getting fund detail (alternative) for PPN: Expecting value: line 1 column 1 (char 0)
+2025-07-17 14:27:50,526 - INFO - PPN: Fon adından tahmin edilen kategori: Para Piyasası Şemsiye Fonu
+2025-07-17 14:27:50,526 - INFO - [OK] PPN (502 kayıt)
+2025-07-17 14:27:50,527 - INFO - [BATCH 2/3 (%66.7)] Tamamlandı. Şu ana kadar başarı: 8, hata: 0
+2025-07-17 14:27:52,527 - INFO - [BATCH 3] 2 fon işleniyor
+2025-07-17 14:27:52,591 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 14:27:52,700 - INFO - [DEBUG] YAY: varsayılan 2 yıl, tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 14:27:52,700 - INFO - [CHUNK] YAY: 731 günlük aralığı 3 aylık parçalara bölünüyor...
+2025-07-17 14:27:52,701 - INFO - [CHUNK 1] YAY: 2023-07-17 → 2023-10-15
+2025-07-17 14:27:53,423 - INFO - [CHUNK 1] YAY: 64 kayıt alındı
+2025-07-17 14:27:53,754 - INFO - [DEBUG] TCD: varsayılan 2 yıl, tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 14:27:53,754 - INFO - [CHUNK] TCD: 731 günlük aralığı 3 aylık parçalara bölünüyor...
+2025-07-17 14:27:53,754 - INFO - [CHUNK 1] TCD: 2023-07-17 → 2023-10-15
+2025-07-17 14:27:54,424 - INFO - [CHUNK 2] YAY: 2023-10-16 → 2024-01-14
+2025-07-17 14:27:54,524 - INFO - [CHUNK 1] TCD: 64 kayıt alındı
+2025-07-17 14:27:55,264 - INFO - [CHUNK 2] YAY: 64 kayıt alındı
+2025-07-17 14:27:55,525 - INFO - [CHUNK 2] TCD: 2023-10-16 → 2024-01-14
+2025-07-17 14:27:56,264 - INFO - [CHUNK 3] YAY: 2024-01-15 → 2024-04-14
+2025-07-17 14:27:56,286 - INFO - [CHUNK 2] TCD: 64 kayıt alındı
+2025-07-17 14:27:56,929 - INFO - [CHUNK 3] YAY: 62 kayıt alındı
+2025-07-17 14:27:57,286 - INFO - [CHUNK 3] TCD: 2024-01-15 → 2024-04-14
+2025-07-17 14:27:57,930 - INFO - [CHUNK 4] YAY: 2024-04-15 → 2024-07-14
+2025-07-17 14:27:58,129 - INFO - [CHUNK 3] TCD: 62 kayıt alındı
+2025-07-17 14:27:58,638 - INFO - [CHUNK 4] YAY: 60 kayıt alındı
+2025-07-17 14:27:59,130 - INFO - [CHUNK 4] TCD: 2024-04-15 → 2024-07-14
+2025-07-17 14:27:59,638 - INFO - [CHUNK 5] YAY: 2024-07-15 → 2024-10-13
+2025-07-17 14:27:59,817 - INFO - [CHUNK 4] TCD: 60 kayıt alındı
+2025-07-17 14:28:00,444 - INFO - [CHUNK 5] YAY: 63 kayıt alındı
+2025-07-17 14:28:00,818 - INFO - [CHUNK 5] TCD: 2024-07-15 → 2024-10-13
+2025-07-17 14:28:01,444 - INFO - [CHUNK 6] YAY: 2024-10-14 → 2025-01-12
+2025-07-17 14:28:01,573 - INFO - [CHUNK 5] TCD: 63 kayıt alındı
+2025-07-17 14:28:02,152 - INFO - [CHUNK 6] YAY: 63 kayıt alındı
+2025-07-17 14:28:02,574 - INFO - [CHUNK 6] TCD: 2024-10-14 → 2025-01-12
+2025-07-17 14:28:03,153 - INFO - [CHUNK 7] YAY: 2025-01-13 → 2025-04-13
+2025-07-17 14:28:03,262 - INFO - [CHUNK 6] TCD: 63 kayıt alındı
+2025-07-17 14:28:03,976 - INFO - [CHUNK 7] YAY: 63 kayıt alındı
+2025-07-17 14:28:04,263 - INFO - [CHUNK 7] TCD: 2025-01-13 → 2025-04-13
+2025-07-17 14:28:04,953 - INFO - [CHUNK 7] TCD: 63 kayıt alındı
+2025-07-17 14:28:04,976 - INFO - [CHUNK 8] YAY: 2025-04-14 → 2025-07-13
+2025-07-17 14:28:05,707 - INFO - [CHUNK 8] YAY: 60 kayıt alındı
+2025-07-17 14:28:05,954 - INFO - [CHUNK 8] TCD: 2025-04-14 → 2025-07-13
+2025-07-17 14:28:06,595 - INFO - [CHUNK 8] TCD: 60 kayıt alındı
+2025-07-17 14:28:06,708 - INFO - [CHUNK 9] YAY: 2025-07-14 → 2025-07-17
+2025-07-17 14:28:07,433 - INFO - [CHUNK 9] YAY: 3 kayıt alındı
+2025-07-17 14:28:07,595 - INFO - [CHUNK 9] TCD: 2025-07-14 → 2025-07-17
+2025-07-17 14:28:08,384 - INFO - [CHUNK 9] TCD: 3 kayıt alındı
+2025-07-17 14:28:08,433 - INFO - [CHUNK TOTAL] YAY: 502 toplam kayıt (9 parça)
+2025-07-17 14:28:08,433 - INFO - [OK] YAY: 502 toplam kayıt alındı
+2025-07-17 14:28:08,454 - ERROR - Error getting fund detail (alternative) for YAY: Expecting value: line 1 column 1 (char 0)
+2025-07-17 14:28:08,455 - INFO - YAY: Fon adından tahmin edilen kategori: Yabancı Hisse Senedi Şemsiye Fonu
+2025-07-17 14:28:08,455 - INFO - [OK] YAY (502 kayıt)
+2025-07-17 14:28:09,384 - INFO - [CHUNK TOTAL] TCD: 502 toplam kayıt (9 parça)
+2025-07-17 14:28:09,384 - INFO - [OK] TCD: 502 toplam kayıt alındı
+2025-07-17 14:28:09,408 - ERROR - Error getting fund detail (alternative) for TCD: Expecting value: line 1 column 1 (char 0)
+2025-07-17 14:28:09,408 - INFO - TCD: Fon adından tahmin edilen kategori: Değişken Şemsiye Fonu
+2025-07-17 14:28:09,408 - INFO - [OK] TCD (502 kayıt)
+2025-07-17 14:28:09,409 - INFO - [BATCH 3/3 (%100.0)] Tamamlandı. Şu ana kadar başarı: 10, hata: 0
+2025-07-17 14:28:11,409 - INFO - [SAVE] 4737 kayıt parquet dosyasına yazılıyor...
+2025-07-17 14:28:11,439 - INFO - [SUCCESS] İNDİRME TAMAMLANDI!
+2025-07-17 14:28:11,439 - INFO - [FILE] Dosya: data\repair_test_10fon.parquet
+2025-07-17 14:28:11,439 - INFO - [STATS] Kayıt sayısı: 4,737
+2025-07-17 14:28:11,439 - INFO - [FUNDS] Fon sayısı: 10
+2025-07-17 14:28:11,440 - INFO - [DATE] Tarih aralığı: 2023-07-17 - 2025-07-17
+2025-07-17 14:28:11,440 - INFO - [OK] Başarılı fonlar: 10
+2025-07-17 14:28:11,440 - INFO - [FAIL] Başarısız fonlar: 0
+2025-07-17 14:28:11,440 - INFO - [CATEGORIES] Fon kategorileri:
+2025-07-17 14:28:11,440 - INFO -   Değişken Şemsiye Fonu: 2 fon
+2025-07-17 14:28:11,440 - INFO -   Eurobond Şemsiye Fonu: 2 fon
+2025-07-17 14:28:11,440 - INFO -   Hisse Senedi Şemsiye Fonu: 2 fon
+2025-07-17 14:28:11,441 - INFO -   Para Piyasası Şemsiye Fonu: 2 fon
+2025-07-17 14:28:11,441 - INFO -   Yabancı Hisse Senedi Şemsiye Fonu: 2 fon

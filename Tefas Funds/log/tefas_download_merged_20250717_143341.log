@@ -1,0 +1,38 @@
+2025-07-17 14:33:41,691 - INFO - CMD: tefas_download_data_merged.py --test --codes PPN --start-date 2025-01-01 --end-date 2025-07-01 --workers 1 --outfile data/tarih_test.parquet
+2025-07-17 14:33:41,785 - INFO - ============================================================
+2025-07-17 14:33:41,785 - INFO - TEFAS Fon Verisi İndirme Script'i (Merged)
+2025-07-17 14:33:41,785 - INFO - ============================================================
+2025-07-17 14:33:41,785 - INFO - Mod: Test - Seri
+2025-07-17 14:33:41,786 - INFO - Tarih aralığı: 2025-01-01 → 2025-07-01
+2025-07-17 14:33:41,786 - INFO - ============================================================
+2025-07-17 14:33:41,950 - INFO - [SERİ MOD] Başlıyor...
+2025-07-17 14:33:41,950 - INFO - Fon listesi alınıyor...
+2025-07-17 14:33:41,950 - INFO - Fetching fresh fund list from TEFAS API
+2025-07-17 14:33:42,264 - INFO - Successfully loaded 862 funds from TEFAS API
+2025-07-17 14:33:42,264 - INFO - Toplam 862 fon bulundu
+2025-07-17 14:33:42,264 - INFO - Filtreden 1 fon geçti
+2025-07-17 14:33:42,264 - INFO - [START] 1 fon seri indirme başlıyor...
+2025-07-17 14:33:42,265 - INFO - Hedef dosya: data\tarih_test.parquet
+2025-07-17 14:33:43,424 - INFO - [1/1] İşleniyor: PPN
+2025-07-17 14:33:43,425 - INFO - [DEBUG] PPN: start_date_str=2025-01-01, end_date_str=2025-07-01
+2025-07-17 14:33:43,425 - INFO - [DEBUG] PPN: spesifik tarih aralığı: 2025-01-01 → 2025-07-01
+2025-07-17 14:33:43,425 - INFO - [CHUNK] PPN: 181 günlük aralığı 3 aylık parçalara bölünüyor...
+2025-07-17 14:33:43,425 - INFO - [CHUNK 1] PPN: 2025-01-01 → 2025-04-01
+2025-07-17 14:33:44,099 - INFO - [CHUNK 1] PPN: 62 kayıt alındı
+2025-07-17 14:33:45,100 - INFO - [CHUNK 2] PPN: 2025-04-02 → 2025-07-01
+2025-07-17 14:33:45,834 - INFO - [CHUNK 2] PPN: 60 kayıt alındı
+2025-07-17 14:33:46,834 - INFO - [CHUNK TOTAL] PPN: 122 toplam kayıt (2 parça)
+2025-07-17 14:33:46,834 - INFO - [OK] PPN: 122 toplam kayıt alındı
+2025-07-17 14:33:46,856 - ERROR - Error getting fund detail (alternative) for PPN: Expecting value: line 1 column 1 (char 0)
+2025-07-17 14:33:46,856 - INFO - PPN: Fon adından tahmin edilen kategori: Para Piyasası Şemsiye Fonu
+2025-07-17 14:33:46,857 - INFO - [OK] PPN başarılı
+2025-07-17 14:33:46,857 - INFO - [SAVE] 122 kayıt parquet dosyasına yazılıyor...
+2025-07-17 14:33:46,870 - INFO - [SUCCESS] İNDİRME TAMAMLANDI!
+2025-07-17 14:33:46,870 - INFO - [FILE] Dosya: data\tarih_test.parquet
+2025-07-17 14:33:46,870 - INFO - [STATS] Kayıt sayısı: 122
+2025-07-17 14:33:46,870 - INFO - [FUNDS] Fon sayısı: 1
+2025-07-17 14:33:46,871 - INFO - [DATE] Tarih aralığı: 2025-01-02 - 2025-07-01
+2025-07-17 14:33:46,871 - INFO - [OK] Başarılı fonlar: 1
+2025-07-17 14:33:46,871 - INFO - [FAIL] Başarısız fonlar: 0
+2025-07-17 14:33:46,871 - INFO - [CATEGORIES] Fon kategorileri:
+2025-07-17 14:33:46,871 - INFO -   Para Piyasası Şemsiye Fonu: 1 fon

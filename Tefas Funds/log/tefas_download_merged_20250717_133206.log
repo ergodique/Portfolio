@@ -1,0 +1,62 @@
+2025-07-17 13:32:06,086 - INFO - CMD: tefas_download_data_merged.py --test --codes PPN,TLE --years 1 --workers 1 --outfile data/debug_chunk_test.parquet
+2025-07-17 13:32:06,174 - INFO - ============================================================
+2025-07-17 13:32:06,174 - INFO - TEFAS Fon Verisi İndirme Script'i (Merged)
+2025-07-17 13:32:06,174 - INFO - ============================================================
+2025-07-17 13:32:06,174 - INFO - Mod: Test - Seri
+2025-07-17 13:32:06,175 - INFO - Tarih aralığı: Son 1 yıl
+2025-07-17 13:32:06,175 - INFO - ============================================================
+2025-07-17 13:32:06,350 - INFO - [SERİ MOD] Başlıyor...
+2025-07-17 13:32:06,350 - INFO - Fon listesi alınıyor...
+2025-07-17 13:32:06,350 - INFO - Fetching fresh fund list from TEFAS API
+2025-07-17 13:32:06,679 - INFO - Successfully loaded 861 funds from TEFAS API
+2025-07-17 13:32:06,679 - INFO - Toplam 861 fon bulundu
+2025-07-17 13:32:06,680 - INFO - Filtreden 2 fon geçti
+2025-07-17 13:32:06,680 - INFO - [START] 2 fon seri indirme başlıyor...
+2025-07-17 13:32:06,680 - INFO - Hedef dosya: data\debug_chunk_test.parquet
+2025-07-17 13:32:07,851 - INFO - [1/2] İşleniyor: TLE
+2025-07-17 13:32:07,851 - INFO - [DEBUG] TLE: years_back=1, tarih aralığı: 2024-07-17 → 2025-07-17
+2025-07-17 13:32:07,851 - INFO - [CHUNK] TLE: 365 günlük aralığı 3 aylık parçalara bölünüyor...
+2025-07-17 13:32:07,851 - INFO - [CHUNK 1] TLE: 2024-07-17 → 2024-10-15
+2025-07-17 13:32:08,671 - INFO - [CHUNK 1] TLE: 64 kayıt alındı
+2025-07-17 13:32:09,672 - INFO - [CHUNK 2] TLE: 2024-10-16 → 2025-01-14
+2025-07-17 13:32:10,470 - INFO - [CHUNK 2] TLE: 63 kayıt alındı
+2025-07-17 13:32:11,471 - INFO - [CHUNK 3] TLE: 2025-01-15 → 2025-04-15
+2025-07-17 13:32:12,197 - INFO - [CHUNK 3] TLE: 63 kayıt alındı
+2025-07-17 13:32:13,197 - INFO - [CHUNK 4] TLE: 2025-04-16 → 2025-07-15
+2025-07-17 13:32:14,279 - INFO - [CHUNK 4] TLE: 59 kayıt alındı
+2025-07-17 13:32:15,279 - INFO - [CHUNK 5] TLE: 2025-07-16 → 2025-07-17
+2025-07-17 13:32:16,093 - INFO - [CHUNK 5] TLE: 2 kayıt alındı
+2025-07-17 13:32:17,094 - INFO - [CHUNK TOTAL] TLE: 251 toplam kayıt (5 parça)
+2025-07-17 13:32:17,094 - INFO - [OK] TLE: 251 toplam kayıt alındı
+2025-07-17 13:32:17,116 - ERROR - Error getting fund detail (alternative) for TLE: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:32:17,116 - INFO - TLE: Fon adından tahmin edilen kategori: Eurobond Şemsiye Fonu
+2025-07-17 13:32:17,117 - INFO - [OK] TLE başarılı
+2025-07-17 13:32:18,654 - INFO - [2/2] İşleniyor: PPN
+2025-07-17 13:32:18,654 - INFO - [DEBUG] PPN: years_back=1, tarih aralığı: 2024-07-17 → 2025-07-17
+2025-07-17 13:32:18,654 - INFO - [CHUNK] PPN: 365 günlük aralığı 3 aylık parçalara bölünüyor...
+2025-07-17 13:32:18,655 - INFO - [CHUNK 1] PPN: 2024-07-17 → 2024-10-15
+2025-07-17 13:32:19,924 - INFO - [CHUNK 1] PPN: 64 kayıt alındı
+2025-07-17 13:32:20,924 - INFO - [CHUNK 2] PPN: 2024-10-16 → 2025-01-14
+2025-07-17 13:32:21,896 - INFO - [CHUNK 2] PPN: 63 kayıt alındı
+2025-07-17 13:32:22,896 - INFO - [CHUNK 3] PPN: 2025-01-15 → 2025-04-15
+2025-07-17 13:32:23,706 - INFO - [CHUNK 3] PPN: 63 kayıt alındı
+2025-07-17 13:32:24,707 - INFO - [CHUNK 4] PPN: 2025-04-16 → 2025-07-15
+2025-07-17 13:32:25,457 - INFO - [CHUNK 4] PPN: 59 kayıt alındı
+2025-07-17 13:32:26,458 - INFO - [CHUNK 5] PPN: 2025-07-16 → 2025-07-17
+2025-07-17 13:32:28,929 - INFO - [CHUNK 5] PPN: 2 kayıt alındı
+2025-07-17 13:32:29,929 - INFO - [CHUNK TOTAL] PPN: 251 toplam kayıt (5 parça)
+2025-07-17 13:32:29,929 - INFO - [OK] PPN: 251 toplam kayıt alındı
+2025-07-17 13:32:29,950 - ERROR - Error getting fund detail (alternative) for PPN: Expecting value: line 1 column 1 (char 0)
+2025-07-17 13:32:29,951 - INFO - PPN: Fon adından tahmin edilen kategori: Para Piyasası Şemsiye Fonu
+2025-07-17 13:32:29,951 - INFO - [OK] PPN başarılı
+2025-07-17 13:32:29,951 - INFO - [SAVE] 502 kayıt parquet dosyasına yazılıyor...
+2025-07-17 13:32:29,963 - INFO - [SUCCESS] İNDİRME TAMAMLANDI!
+2025-07-17 13:32:29,963 - INFO - [FILE] Dosya: data\debug_chunk_test.parquet
+2025-07-17 13:32:29,963 - INFO - [STATS] Kayıt sayısı: 502
+2025-07-17 13:32:29,964 - INFO - [FUNDS] Fon sayısı: 2
+2025-07-17 13:32:29,964 - INFO - [DATE] Tarih aralığı: 2024-07-17 - 2025-07-17
+2025-07-17 13:32:29,964 - INFO - [OK] Başarılı fonlar: 2
+2025-07-17 13:32:29,964 - INFO - [FAIL] Başarısız fonlar: 0
+2025-07-17 13:32:29,964 - INFO - [CATEGORIES] Fon kategorileri:
+2025-07-17 13:32:29,964 - INFO -   Eurobond Şemsiye Fonu: 1 fon
+2025-07-17 13:32:29,964 - INFO -   Para Piyasası Şemsiye Fonu: 1 fon

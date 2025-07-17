@@ -1,0 +1,20 @@
+2025-07-17 13:10:41,751 - INFO - CMD: tefas_download_data_merged.py --test --codes PPN,PRD,TLE,IPV,TCD,IPB,IIH,AHI,AFA,YAY --months 12 --workers 4 --outfile data/test_10fon.parquet
+2025-07-17 13:10:41,848 - INFO - ============================================================
+2025-07-17 13:10:41,848 - INFO - TEFAS Fon Verisi İndirme Script'i (Merged)
+2025-07-17 13:10:41,849 - INFO - ============================================================
+2025-07-17 13:10:41,849 - INFO - Mod: Test - Paralel (4 worker)
+2025-07-17 13:10:41,849 - INFO - Tarih aralığı: Son 12 ay
+2025-07-17 13:10:41,849 - INFO - ============================================================
+2025-07-17 13:10:42,023 - INFO - [PARALEL MOD] Başlıyor...
+2025-07-17 13:10:42,023 - INFO - Fon listesi alınıyor...
+2025-07-17 13:10:42,023 - INFO - Fetching fresh fund list from Takasbank
+2025-07-17 13:10:42,373 - INFO - DEBUG: Content-Type: text/html
+2025-07-17 13:10:42,373 - INFO - DEBUG: Content başlangıç: b'<!DOCTYPE html>\r\n<html><head>\r\n<meta http-equiv="P'
+2025-07-17 13:10:42,549 - WARNING - DEBUG: Excel okuma hatası: File is not a zip file
+2025-07-17 13:10:42,550 - ERROR - DEBUG: CSV okuma hatası: Error tokenizing data. C error: Expected 1 fields in line 7, saw 2
+
+2025-07-17 13:10:42,560 - ERROR - DEBUG: Son deneme hatası: Error tokenizing data. C error: Expected 1 fields in line 7, saw 2
+
+2025-07-17 13:10:42,560 - ERROR - Error fetching Takasbank fund list: Dosya hiçbir formatta okunamadı
+2025-07-17 13:10:42,560 - WARNING - Fon listesi boş geldi
+2025-07-17 13:10:42,561 - ERROR - Fon listesi alınamadı!

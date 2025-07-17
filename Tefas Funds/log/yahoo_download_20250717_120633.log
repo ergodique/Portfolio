@@ -1,0 +1,103 @@
+2025-07-17 12:06:33,729 - INFO - CMD: yahoo_finance_downloader.py --full --years 2
+2025-07-17 12:06:33,729 - INFO - Yahoo Finance Downloader başlatıldı
+2025-07-17 12:06:33,729 - INFO - Mod: Paralel
+2025-07-17 12:06:33,729 - INFO - Worker sayısı: 4
+2025-07-17 12:06:33,730 - INFO - Ticker sayısı: 23
+2025-07-17 12:06:33,730 - INFO - Çıktı dosyası: yahoo_finance_data.parquet
+2025-07-17 12:06:33,730 - INFO - === PARALEL MOD BAŞLADI ===
+2025-07-17 12:06:33,730 - INFO - Relative tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 12:06:33,730 - INFO - Tarih aralığı: 2023-07-17 - 2025-07-17
+2025-07-17 12:06:33,733 - INFO - Paralel işlem: 5 batch, 4 worker
+2025-07-17 12:06:33,734 - INFO - Relative tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 12:06:33,734 - INFO - Relative tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 12:06:33,734 - INFO - Relative tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 12:06:33,735 - INFO - Relative tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 12:06:34,473 - INFO - [OK] XU030.IS: 498 kayıt
+2025-07-17 12:06:34,474 - INFO - [OK] XU100.IS: 499 kayıt
+2025-07-17 12:06:34,474 - INFO - Relative tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 12:06:34,474 - INFO - Relative tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 12:06:34,475 - INFO - [OK] XU030.IS başarılı
+2025-07-17 12:06:34,475 - INFO - [OK] XU100.IS başarılı
+2025-07-17 12:06:34,490 - INFO - [OK] XBANK.IS: 498 kayıt
+2025-07-17 12:06:34,490 - INFO - Relative tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 12:06:34,490 - INFO - [OK] XBANK.IS başarılı
+2025-07-17 12:06:34,568 - INFO - [OK] SPY: 502 kayıt
+2025-07-17 12:06:34,568 - INFO - Relative tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 12:06:34,568 - INFO - [OK] SPY başarılı
+2025-07-17 12:06:34,612 - INFO - [OK] QQQ: 502 kayıt
+2025-07-17 12:06:34,613 - INFO - Relative tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 12:06:34,613 - INFO - [OK] QQQ başarılı
+2025-07-17 12:06:34,613 - INFO - [İLERLEME] 5/23 (%21.7) - 2499 kayıt
+2025-07-17 12:06:34,663 - INFO - [OK] EFA: 502 kayıt
+2025-07-17 12:06:34,663 - INFO - Relative tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 12:06:34,665 - INFO - [OK] EFA başarılı
+2025-07-17 12:06:34,679 - INFO - [OK] IWM: 502 kayıt
+2025-07-17 12:06:34,679 - INFO - Relative tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 12:06:34,679 - INFO - [OK] IWM başarılı
+2025-07-17 12:06:34,728 - INFO - [OK] VEA: 502 kayıt
+2025-07-17 12:06:34,728 - INFO - Relative tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 12:06:34,728 - INFO - [OK] VEA başarılı
+2025-07-17 12:06:34,804 - INFO - [OK] EWG: 502 kayıt
+2025-07-17 12:06:34,804 - INFO - Relative tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 12:06:34,804 - INFO - [OK] EWG başarılı
+2025-07-17 12:06:34,853 - INFO - [OK] EEM: 502 kayıt
+2025-07-17 12:06:34,858 - INFO - [OK] EWU: 502 kayıt
+2025-07-17 12:06:34,859 - INFO - Relative tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 12:06:34,859 - INFO - Relative tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 12:06:34,859 - INFO - [OK] EEM başarılı
+2025-07-17 12:06:34,861 - INFO - [İLERLEME] 10/23 (%43.5) - 5009 kayıt
+2025-07-17 12:06:34,861 - INFO - [OK] EWU başarılı
+2025-07-17 12:06:34,875 - INFO - [OK] VWO: 502 kayıt
+2025-07-17 12:06:34,876 - INFO - Relative tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 12:06:34,876 - INFO - [OK] VWO başarılı
+2025-07-17 12:06:34,961 - INFO - [OK] FXI: 502 kayıt
+2025-07-17 12:06:34,961 - INFO - Relative tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 12:06:34,961 - INFO - [OK] FXI başarılı
+2025-07-17 12:06:34,978 - INFO - [OK] BTC-USD: 731 kayıt
+2025-07-17 12:06:34,981 - INFO - Relative tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 12:06:34,981 - INFO - [OK] BTC-USD başarılı
+2025-07-17 12:06:34,992 - INFO - [OK] ETH-USD: 731 kayıt
+2025-07-17 12:06:34,994 - INFO - Relative tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 12:06:34,994 - INFO - [OK] ETH-USD başarılı
+2025-07-17 12:06:34,995 - INFO - [İLERLEME] 15/23 (%65.2) - 7977 kayıt
+2025-07-17 12:06:35,011 - INFO - [OK] USDTRY=X: 520 kayıt
+2025-07-17 12:06:35,011 - INFO - Relative tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 12:06:35,012 - INFO - [OK] USDTRY=X başarılı
+2025-07-17 12:06:35,091 - INFO - [OK] EURTRY=X: 520 kayıt
+2025-07-17 12:06:35,091 - INFO - Relative tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 12:06:35,091 - INFO - [OK] EURTRY=X başarılı
+2025-07-17 12:06:35,107 - INFO - [OK] ^FVX: 502 kayıt
+2025-07-17 12:06:35,107 - INFO - Relative tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 12:06:35,107 - INFO - [OK] ^FVX başarılı
+2025-07-17 12:06:35,125 - INFO - [OK] ^TNX: 502 kayıt
+2025-07-17 12:06:35,125 - INFO - Relative tarih aralığı: 2023-07-17 → 2025-07-17
+2025-07-17 12:06:35,125 - INFO - [OK] ^TNX başarılı
+2025-07-17 12:06:35,143 - INFO - [OK] GC=F: 504 kayıt
+2025-07-17 12:06:35,143 - INFO - [OK] GC=F başarılı
+2025-07-17 12:06:35,143 - INFO - [İLERLEME] 20/23 (%87.0) - 10525 kayıt
+2025-07-17 12:06:35,221 - INFO - [OK] SI=F: 504 kayıt
+2025-07-17 12:06:35,222 - INFO - [OK] SI=F başarılı
+2025-07-17 12:06:35,240 - INFO - [OK] ^VIX: 502 kayıt
+2025-07-17 12:06:35,242 - INFO - [OK] ^VIX başarılı
+2025-07-17 12:06:35,253 - INFO - [OK] CL=F: 504 kayıt
+2025-07-17 12:06:35,253 - INFO - [OK] CL=F başarılı
+2025-07-17 12:06:35,253 - INFO - === VERİ KAYDETME ===
+2025-07-17 12:06:36,067 - INFO - Parquet kaydedildi: data\yahoo_finance_data.parquet
+2025-07-17 12:06:36,067 - INFO - Excel kaydedildi: data\yahoo_finance_data.xlsx
+2025-07-17 12:06:36,067 - INFO - Istatistikler:
+2025-07-17 12:06:36,067 - INFO -    - Basarili ticker: 23/23
+2025-07-17 12:06:36,068 - INFO -    - Toplam ticker: 23
+2025-07-17 12:06:36,068 - INFO -    - Toplam kayit: 12,035
+2025-07-17 12:06:36,068 - INFO -    - Tarih araligi: 2023-07-17 - 2025-07-16
+2025-07-17 12:06:36,069 - INFO - Ticker basina kayit sayisi:
+2025-07-17 12:06:36,069 - INFO -    - BTC-USD: 731 kayit
+2025-07-17 12:06:36,069 - INFO -    - ETH-USD: 731 kayit
+2025-07-17 12:06:36,069 - INFO -    - EURTRY=X: 520 kayit
+2025-07-17 12:06:36,069 - INFO -    - USDTRY=X: 520 kayit
+2025-07-17 12:06:36,069 - INFO -    - CL=F: 504 kayit
+2025-07-17 12:06:36,069 - INFO -    - GC=F: 504 kayit
+2025-07-17 12:06:36,070 - INFO -    - SI=F: 504 kayit
+2025-07-17 12:06:36,070 - INFO -    - EWG: 502 kayit
+2025-07-17 12:06:36,070 - INFO -    - EFA: 502 kayit
+2025-07-17 12:06:36,070 - INFO -    - EEM: 502 kayit
+2025-07-17 12:06:36,071 - INFO - İşlem tamamlandı! Süre: 2.3 saniye

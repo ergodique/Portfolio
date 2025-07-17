@@ -1,0 +1,11 @@
+2025-07-17 14:21:00,624 - INFO - CMD: tefas_download_data_merged.py --repair --input data/tefas_full_2yrs.parquet --workers 1
+2025-07-17 14:21:00,717 - INFO - ============================================================
+2025-07-17 14:21:00,717 - INFO - TEFAS Fon Verisi İndirme Script'i (Merged)
+2025-07-17 14:21:00,717 - INFO - ============================================================
+2025-07-17 14:21:00,717 - INFO - Mod: Repair - Seri
+2025-07-17 14:21:00,717 - INFO - Input dosya: data/tefas_full_2yrs.parquet
+2025-07-17 14:21:00,718 - INFO - ============================================================
+2025-07-17 14:21:00,892 - INFO - [REPAIR MODE] Eksik veri tamamlama başlıyor...
+2025-07-17 14:21:00,892 - INFO - [REPAIR] Mevcut veri analiz ediliyor: data\tefas_full_2yrs.parquet
+2025-07-17 14:21:00,990 - INFO - [ANALYSIS] 0 tane fon eksik verili. 850/850 tamamlanmış.
+2025-07-17 14:21:00,991 - INFO - [REPAIR] Tüm fonlar güncel! Eksik veri yok.

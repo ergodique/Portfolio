@@ -1,0 +1,12 @@
+2025-07-17 14:28:57,117 - INFO - CMD: tefas_download_data_merged.py --repair --input data/repair_test_10fon.parquet --workers 4
+2025-07-17 14:28:57,211 - INFO - ============================================================
+2025-07-17 14:28:57,211 - INFO - TEFAS Fon Verisi İndirme Script'i (Merged)
+2025-07-17 14:28:57,211 - INFO - ============================================================
+2025-07-17 14:28:57,211 - INFO - Mod: Repair - Paralel (4 worker)
+2025-07-17 14:28:57,211 - INFO - Input dosya: data/repair_test_10fon.parquet
+2025-07-17 14:28:57,211 - INFO - ============================================================
+2025-07-17 14:28:57,270 - WARNING - Session başlatma deneme 1/3: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-07-17 14:28:58,427 - INFO - [REPAIR MODE] Eksik veri tamamlama başlıyor...
+2025-07-17 14:28:58,427 - INFO - [REPAIR] Mevcut veri analiz ediliyor: data\repair_test_10fon.parquet
+2025-07-17 14:28:58,465 - INFO - [ANALYSIS] 0 tane fon eksik verili. 10/10 tamamlanmış.
+2025-07-17 14:28:58,465 - INFO - [REPAIR] Tüm fonlar güncel! Eksik veri yok.

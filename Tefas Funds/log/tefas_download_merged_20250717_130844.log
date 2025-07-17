@@ -1,0 +1,13 @@
+2025-07-17 13:08:44,201 - INFO - CMD: tefas_download_data_merged.py --test --codes PPN,PRD,TLE,IPV,TCD,IPB,IIH,AHI,AFA,YAY --months 12 --workers 4 --outfile data/test_10fon.parquet
+2025-07-17 13:08:44,286 - INFO - ============================================================
+2025-07-17 13:08:44,286 - INFO - TEFAS Fon Verisi İndirme Script'i (Merged)
+2025-07-17 13:08:44,286 - INFO - ============================================================
+2025-07-17 13:08:44,286 - INFO - Mod: Test - Paralel (4 worker)
+2025-07-17 13:08:44,286 - INFO - Tarih aralığı: Son 12 ay
+2025-07-17 13:08:44,287 - INFO - ============================================================
+2025-07-17 13:08:44,453 - INFO - [PARALEL MOD] Başlıyor...
+2025-07-17 13:08:44,453 - INFO - Fon listesi alınıyor...
+2025-07-17 13:08:44,454 - INFO - Fetching fresh fund list from Takasbank
+2025-07-17 13:08:44,860 - ERROR - Error fetching Takasbank fund list: Excel file format cannot be determined, you must specify an engine manually.
+2025-07-17 13:08:44,861 - WARNING - Fon listesi boş geldi
+2025-07-17 13:08:44,861 - ERROR - Fon listesi alınamadı!
