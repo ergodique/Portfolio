@@ -1,0 +1,6 @@
+# Tüm metin dosyaları LF olarak izlenir
+* text=auto eol=lf
+
+# İstisna: Windows betikleri isterse CRLF olabilir
+*.bat  text eol=crlf
+*.cmd  text eol=crlf 
