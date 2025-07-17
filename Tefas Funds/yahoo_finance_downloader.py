@@ -2,14 +2,18 @@ import argparse
 import logging
 import sys
 import time
+import urllib3
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 import pandas as pd
 import yfinance as yf
 from dateutil.relativedelta import relativedelta
+
+# SSL warning'lerini kapat
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # Logging ayarları
 log_file = Path("log") / f"yahoo_download_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
@@ -34,6 +38,7 @@ class YahooFinanceDownloader:
         # Türkiye Borsası
         "XU100.IS",     # BIST 100 Endeksi
         "XU030.IS",     # BIST 30 Endeksi  
+        "XBANK.IS",     # BIST Banka Endeksi  
         
         # ABD Borsası
         "SPY",          # S&P 500 ETF
@@ -81,28 +86,47 @@ class YahooFinanceDownloader:
         months_back: int = 0,
         ticker_list: Optional[List[str]] = None,
         workers: int = 1,
-        output_filename: str = "yahoo_finance_data.parquet",
-        parallel_mode: Optional[bool] = None
+        output_filename: str = "data/yahoo_finance_data.parquet",
+        parallel_mode: Optional[bool] = None,
+        repair_mode: bool = False,
+        input_file: Optional[str] = None,
+        start_date: Optional[str] = None,
+        end_date: Optional[str] = None
     ):
         """
         Yahoo Finance Downloader
         
         Args:
             test_mode: Test modu (ticker listesini kısıtlar)
-            
             years_back: Kaç yıl geriye git
             months_back: Kaç ay geriye git  
             ticker_list: İndirilecek ticker listesi
             workers: Paralel thread sayısı
             output_filename: Çıktı dosya adı
             parallel_mode: Paralel mod (None ise worker sayısına göre otomatik)
+            repair_mode: Repair modu - eksik verileri tamamla
+            input_file: Repair için input parquet dosyası
+            start_date: Başlangıç tarihi (YYYYMMDD formatında, örn: 20230101)
+            end_date: Bitiş tarihi (YYYYMMDD formatında, örn: 20250701)
         """
         self.test_mode = test_mode
         self.years_back = years_back
         self.months_back = months_back
         self.workers = max(1, workers)
         self.output_filename = output_filename
+        self.repair_mode = repair_mode
+        self.input_file = input_file
+        self.start_date = start_date
+        self.end_date = end_date
         
+        # Data klasörünü oluştur (varsa dokunma)
+        output_dir = Path(self.output_filename).parent
+        if not output_dir.exists():
+            output_dir.mkdir(parents=True, exist_ok=True)
+            logger.info(f"Data klasörü oluşturuldu: {output_dir}")
+        else:
+            logger.debug(f"Data klasörü mevcut: {output_dir}")
+            
         # Paralel mod belirleme
         if parallel_mode is None:
             self.parallel_mode = self.workers > 1
@@ -126,6 +150,22 @@ class YahooFinanceDownloader:
 
     def calculate_date_range(self) -> tuple[datetime, datetime]:
         """Tarih aralığını hesapla"""
+        
+        # Önce custom tarih aralığını kontrol et
+        if self.start_date and self.end_date:
+            try:
+                start_date = datetime.strptime(self.start_date, '%Y%m%d')
+                end_date = datetime.strptime(self.end_date, '%Y%m%d')
+                
+                logger.info(f"Custom tarih aralığı: {start_date.strftime('%Y-%m-%d')} → {end_date.strftime('%Y-%m-%d')}")
+                return start_date, end_date
+                
+            except ValueError as e:
+                logger.error(f"Tarih formatı hatası: {e}")
+                logger.error("Tarih formatı YYYYMMDD olmalı (örn: 20230101)")
+                raise
+        
+        # Custom tarih yoksa eski mantık: bugünden geriye doğru
         end_date = datetime.now()
         
         # Years parametresi öncelikli - eğer years verilmişse months'u görmezden gel
@@ -136,6 +176,7 @@ class YahooFinanceDownloader:
         else:
             start_date = end_date - relativedelta(years=1)  # Varsayılan 1 yıl
             
+        logger.info(f"Relative tarih aralığı: {start_date.strftime('%Y-%m-%d')} → {end_date.strftime('%Y-%m-%d')}")
         return start_date, end_date
 
     def fetch_ticker_data(self, ticker: str, start_date: datetime, end_date: datetime, retries: int = 3) -> List[Dict[str, Any]]:
@@ -358,18 +399,204 @@ class YahooFinanceDownloader:
             logger.error(f"Veri kaydetme hatası: {e}")
             raise
 
+    def analyze_missing_dates(self) -> Dict[str, Tuple[datetime, datetime]]:
+        """Eksik tarih aralıklarını analiz et"""
+        if not self.input_file or not Path(self.input_file).exists():
+            logger.error(f"[REPAIR] Input dosyası bulunamadı: {self.input_file}")
+            return {}
+        
+        logger.info(f"[REPAIR] Mevcut veri analiz ediliyor: {self.input_file}")
+        
+        try:
+            # Mevcut veriyi oku
+            existing_df = pd.read_parquet(self.input_file)
+            logger.info(f"[REPAIR] Mevcut kayıt sayısı: {len(existing_df):,}")
+            
+            # Tarih sütununu datetime'a çevir
+            existing_df['tarih'] = pd.to_datetime(existing_df['tarih'])
+            
+            # Her ticker için son tarihi bul
+            ticker_last_dates = existing_df.groupby('ticker')['tarih'].max()
+            logger.info(f"[REPAIR] {len(ticker_last_dates)} ticker analiz ediliyor...")
+            
+            missing_ranges = {}
+            today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+            
+            for ticker, last_date in ticker_last_dates.items():
+                if ticker in self.ticker_list:  # Sadece istenen ticker'lar için
+                    next_day = last_date + timedelta(days=1)
+                    
+                    if next_day.date() < today.date():
+                        missing_ranges[ticker] = (next_day, today)
+            
+            completed_tickers = len(ticker_last_dates) - len(missing_ranges)
+            total_tickers = len(self.ticker_list)
+            
+            logger.info(f"[ANALYSIS] {len(missing_ranges)} tane ticker eksik verili. {completed_tickers}/{total_tickers} tamamlanmış.")
+            
+            return missing_ranges
+            
+        except Exception as e:
+            logger.error(f"[REPAIR] Analiz hatası: {e}")
+            return {}
+
+    def repair_missing_data(self):
+        """Eksik verileri indir ve mevcut dosyaya ekle"""
+        logger.info("[REPAIR MODE] Eksik veri tamamlama başlıyor...")
+        
+        try:
+            # Eksik aralıkları analiz et
+            missing_ranges = self.analyze_missing_dates()
+            
+            if not missing_ranges:
+                logger.info("[REPAIR] Tüm ticker'lar güncel! Eksik veri yok.")
+                return
+            
+            logger.info(f"[REPAIR] {len(missing_ranges)} ticker için eksik veri indiriliyor...")
+            
+            all_new_records = []
+            
+            def repair_single_ticker(ticker):
+                """Tek bir ticker için repair işlemi"""
+                start_date, end_date = missing_ranges[ticker]
+                
+                try:
+                    logger.info(f"[REPAIR] {ticker}: {start_date.strftime('%Y-%m-%d')} - {end_date.strftime('%Y-%m-%d')}")
+                    
+                    # Request'ler arası delay ekle (rate limiting için)
+                    time.sleep(0.5)
+                    
+                    # Veriyi indir
+                    new_data = self.fetch_ticker_data(ticker, start_date, end_date)
+                    
+                    if new_data:
+                        logger.info(f"[REPAIR] {ticker}: {len(new_data)} yeni kayıt")
+                        return new_data
+                    else:
+                        logger.warning(f"[REPAIR] {ticker}: Veri bulunamadı")
+                        return []
+                        
+                except Exception as e:
+                    logger.error(f"[REPAIR] {ticker} hatası: {e}")
+                    return []
+            
+            # Seri veya paralel mod seçimi
+            if self.parallel_mode:
+                # Paralel mod
+                logger.info(f"[REPAIR] Paralel mod - {self.workers} worker")
+                with ThreadPoolExecutor(max_workers=self.workers) as executor:
+                    future_to_ticker = {
+                        executor.submit(repair_single_ticker, ticker): ticker
+                        for ticker in missing_ranges.keys()
+                    }
+                    
+                    try:
+                        for future in as_completed(future_to_ticker):
+                            ticker = future_to_ticker[future]
+                            try:
+                                new_data = future.result()
+                                if new_data:
+                                    all_new_records.extend(new_data)
+                            except Exception as e:
+                                logger.error(f"[REPAIR] {ticker} paralel hatası: {e}")
+                    except KeyboardInterrupt:
+                        logger.info("[STOP] Kullanıcı tarafından durduruldu - paralel işlemler sonlandırılıyor...")
+                        
+                        # Çalışan görevleri iptal et
+                        for future in future_to_ticker:
+                            if not future.done():
+                                future.cancel()
+                        
+                        # Executor'ı graceful shutdown yap
+                        executor.shutdown(wait=False)
+                        
+                        # Tamamlanan sonuçları kontrol et
+                        for future in future_to_ticker:
+                            if future.done() and not future.cancelled():
+                                ticker = future_to_ticker[future]
+                                try:
+                                    new_data = future.result()
+                                    if new_data:
+                                        all_new_records.extend(new_data)
+                                        logger.info(f"[SAVED] {ticker}: {len(new_data)} kayıt kurtarıldı")
+                                except Exception:
+                                    pass
+                        
+                        logger.info(f"[STOP] {len(all_new_records)} kayıt kurtarıldı, işlem durduruluyor...")
+            else:
+                # Seri mod
+                logger.info("[REPAIR] Seri mod")
+                try:
+                    for ticker in missing_ranges.keys():
+                        new_data = repair_single_ticker(ticker)
+                        if new_data:
+                            all_new_records.extend(new_data)
+                except KeyboardInterrupt:
+                    logger.info(f"[STOP] Kullanıcı tarafından durduruldu - {len(all_new_records)} kayıt kurtarıldı")
+            
+            # Yeni verileri mevcut dosya ile birleştir
+            if all_new_records:
+                self.merge_with_existing_data(all_new_records)
+            else:
+                logger.warning("[REPAIR] Hiç yeni veri indirilemedi!")
+                
+        except Exception as e:
+            logger.error(f"[REPAIR] Genel hata: {e}")
+            raise
+
+    def merge_with_existing_data(self, new_records: List[Dict[str, Any]]):
+        """Yeni verileri mevcut dosya ile birleştir"""
+        try:
+            logger.info(f"[MERGE] {len(new_records)} yeni kayıt birleştiriliyor...")
+            
+            # Yeni verileri DataFrame'e çevir
+            new_df = pd.DataFrame(new_records)
+            
+            # Mevcut veriyi oku
+            existing_df = pd.read_parquet(self.input_file)
+            
+            # Birleştir ve duplikatları kaldır
+            combined_df = pd.concat([existing_df, new_df], ignore_index=True)
+            combined_df = combined_df.drop_duplicates(subset=['tarih', 'ticker'], keep='last')
+            
+            # Tarihe göre sırala
+            combined_df['tarih'] = pd.to_datetime(combined_df['tarih'])
+            combined_df = combined_df.sort_values(['ticker', 'tarih'])
+            combined_df['tarih'] = combined_df['tarih'].dt.strftime('%Y-%m-%d')
+            
+            # Kaydet
+            combined_df.to_parquet(self.output_filename, index=False)
+            
+            logger.info(f"[MERGE] Tamamlandı!")
+            logger.info(f"[MERGE] Eski kayıt: {len(existing_df):,}")
+            logger.info(f"[MERGE] Yeni kayıt: {len(new_df):,}")
+            logger.info(f"[MERGE] Toplam kayıt: {len(combined_df):,}")
+            logger.info(f"[MERGE] Dosya: {self.output_filename}")
+            
+        except Exception as e:
+            logger.error(f"[MERGE] Birleştirme hatası: {e}")
+            raise
+
     def run(self):
         """Ana çalışma fonksiyonu"""
         start_time = time.time()
         
         try:
-            if self.parallel_mode:
-                self.process_all_tickers_parallel()
+            if self.repair_mode:
+                # Repair mode
+                if not self.input_file:
+                    logger.error("[REPAIR] --input parametresi gerekli!")
+                    return
+                self.repair_missing_data()
             else:
-                self.process_all_tickers_serial()
+                # Normal download mode
+                if self.parallel_mode:
+                    self.process_all_tickers_parallel()
+                else:
+                    self.process_all_tickers_serial()
                 
             elapsed_time = time.time() - start_time
-            logger.info(f"Islem tamamlandi! Sure: {elapsed_time:.1f} saniye")
+            logger.info(f"İşlem tamamlandı! Süre: {elapsed_time:.1f} saniye")
             
         except Exception as e:
             logger.error(f"İşlem hatası: {e}")
@@ -384,13 +611,19 @@ def main():
     parser.add_argument('--test', action='store_true', help='Test modu (4 ticker)')
     parser.add_argument('--full', action='store_true', help='Tam mod (tüm ticker\'lar)')
     
-    # Zaman parametreleri
-    parser.add_argument('--years', type=int, default=0, help='Kaç yıl geriye git')
-    parser.add_argument('--months', type=int, default=12, help='Kaç ay geriye git (varsayılan: 12)')
+    # Repair mode
+    parser.add_argument('--repair', action='store_true', help='Repair modu - eksik verileri tamamla')
+    parser.add_argument('--input', type=str, help='Repair için input parquet dosyası')
+    
+    # Tarih parametreleri
+    parser.add_argument('--start-date', type=str, help='Başlangıç tarihi (YYYYMMDD, örn: 20230101)')
+    parser.add_argument('--end-date', type=str, help='Bitiş tarihi (YYYYMMDD, örn: 20250701)')
+    parser.add_argument('--years', type=int, default=0, help='Kaç yıl geriye git (custom tarih yoksa)')
+    parser.add_argument('--months', type=int, default=12, help='Kaç ay geriye git (varsayılan: 12, custom tarih yoksa)')
     
     # İşlem parametreleri
     parser.add_argument('--workers', type=int, default=4, help='Paralel thread sayısı (varsayılan: 4)')
-    parser.add_argument('--outfile', type=str, default='yahoo_finance_data.parquet', help='Çıktı dosya adı')
+    parser.add_argument('--outfile', type=str, default='data/yahoo_finance_data.parquet', help='Çıktı dosya adı')
     
     # Ticker listesi
     parser.add_argument('--tickers', type=str, nargs='+', help='Özel ticker listesi (örn: SPY QQQ XU100.IS)')
@@ -407,7 +640,11 @@ def main():
         months_back=args.months,
         ticker_list=args.tickers,
         workers=args.workers,
-        output_filename=args.outfile
+        output_filename=args.outfile,
+        repair_mode=args.repair,
+        input_file=args.input,
+        start_date=args.start_date,
+        end_date=args.end_date
     )
     
     downloader.run()

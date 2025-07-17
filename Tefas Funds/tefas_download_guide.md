@@ -1,208 +1,213 @@
-# TEFAS Toplu Veri İndirme Scripti – Geliştirme Güncesi
+# TEFAS Fon Veri İndirme Rehberi
 
-Bu dosya, `tefas_download_data.py` betiğini adım adım nasıl geliştirdiğimizi ve nasıl kullanacağınızı özetler. Mevcut sohbeti kaybetseniz bile yalnızca bu rehber aracılığıyla projeye kaldığınız yerden devam edebilirsiniz.
+Bu dosya, `tefas_download_data_merged.py` betiğini adım adım nasıl geliştirdiğimizi ve nasıl kullanacağınızı özetler. Mevcut sohbeti kaybetseniz bile yalnızca bu rehber aracılığıyla projeye kaldığınız yerden devam edebilirsiniz.
 
----
+## 1. Provider Sınıfı (`providers/tefas_provider.py`)
 
-## 1. Başlangıç Problemi
-* **Hata**: `Expecting value: line 1 column 1 (char 0)` → TEFAS Mart 2024 itibarıyla CSRF token koruması ekledi.
-* **İlk Çözüm**: `TefasProvider` içinde token alma/yönetme mekanizması.
+Bu sınıf TEFAS API'si ile iletişimi sağlar. Fon bilgilerini çekme, performans verilerini alma gibi temel işlevleri içerir.
 
-## 2. Toplu İndirme Betiği (`tefas_download_data.py`)
-1. **Oluşturuldu** – Tüm fonların geçmişini indir, Parquet’e yaz.
-2. **Temel Özellikler**
-   * Test modu / tam mod
-   * Yıllar geriye parametresi (`--years`)
-   * 60 günlük chunk’larla istek
-   * 3 sn rate-limit gecikmesi
-   * Başarısız chunk için 2 retry
-   * Hata yönetimi (JSON parse, ConnectionReset)
-   * Kategori belirleme (API + ad tahmini)
-   * Çıktı: `data/tefas_[test|all]_data.parquet`
+**Ana metodlar:**
+- `get_fund_performance(fund_code, start_date, end_date)`: Belirli tarih aralığında fon performansını getirir
+- `_get_takasbank_fund_list()`: Takasbank'tan güncel fon listesini alır
 
-## 3. Windows Uyumluluğu
-* Dinamik temp klasörü
-* `openpyxl` zorunluluğu
-* Emoji yerine `[OK]`, `[ERROR]` etiketleri
+## 2. Ana İndirme Betiği (`tefas_download_data_merged.py`)
 
-## 4. Fon Kodu/Kategori Sütunları
-* `borsa_bulten_fiyat` kaldırıldı
-* `fon_kodu` ve `fon_kategorisi` eklendi
+Bu betik hem seri hem paralel mod destekler ve repair özelliği içerir.
 
-## 5. Yeni Fon (≤1 Yıl) Desteği
-* `fetch_fund_history` → tarih aralığında veri yoksa geriye doğru tarar (30g, 90g, 180g, 365g…)
-* En eski tarihten itibaren tüm mevcut veri alınır (`allow_gaps=True`)
+### Temel Kullanım
 
-## 6. Test Modu İçin Özel Fon Listesi
-* CLI parametresi: `--codes DSP,BOL,GTH`
-* `TefasDataDownloader(codes_list=…)`
-* Rastgele seçim kaldırıldı → Yalnızca belirtilen kodlar indirilir
-
-## 7. Oturum Yenileme & Fonlar Arası Gecikme
-* Her fon başlamadan **yeni session** (`self.provider = self._setup_provider()`)
-* Fonlar arasında `time.sleep(4)`
-
-## 8. Komut Satırı Kullanımı
+**Test Modu (5 fon):**
 ```bash
-# Sadece seçili fonlar (test)
-python tefas_download_data.py --test --codes DSP,PPN,PMP --years 1
-
-# Tüm fonlar (tüm geçmiş)
-python tefas_download_data.py --full --years 3
+python tefas_download_data_merged.py --test --years 1 --workers 1
 ```
 
-## 9. Sık Karşılaşılan Hatalar & Çözümler
-| Hata | Çözüm |
-|------|-------|
-| `Expecting value …` (JSON parse) | Betik otomatik session yeniler; gerekirse `--years` değerini azaltın |
-| `ConnectionResetError 10054` | Oturum yenileme + 4 sn gecikme problemi çözer |
-| `openpyxl not found` | `pip install openpyxl` |
-| `Belirtilen fon kodları bulunamadı` | `--codes` listesini kontrol edin (büyük harf) |
-
-## 10. Gelecek Adımlar
-* Çok iş parçacıklı indirme ⇒ Daha hızlı ama TEFAS rate-limit’i test edilmeli
-* Kategori bilgisini yerel önbelleğe alma ⇒ API çağrısı azalır
-
----
-
-Bu rehber, betiğin mevcut **mihenk taşı** sürümünü belgelemektedir. Yeni geliştirmelerde buraya not ekleyerek ilerleyin. 
-
-## 11. Veri İşleme Aşaması – Rolling Getiriler (Mihenk Taşı v2)
-
-### 11.1 `tefas_data_process.py`
-* **Amaç** : İndirilen ham Parquet dosyasına (test veya full) kaydırmalı getiri kolonları eklemek.
-* **Yeni Kolonlar**  
-  `ret_1w`, `ret_1m`, `ret_3m`, `ret_6m`, `ret_12m`  → sırasıyla 7, 30, 90, 180, 365 takvim günü getirisi.
-* **Takvim Günü Mantığı**  
-  1. Fon bazında kayıtlar tarih sırasına dizilir.  
-  2. `asfreq('D')` ile eksik takvim günleri eklenir.  
-  3. `ffill()` → fiyat son bilinen değerle ileriye doldurulur.  
-  4. Getiri formülü = `fiyat / fiyat.shift(N) - 1`  
-  5. Sonuç orijinal tarihlere geri eşlenir (`reindex`).
-* **Kullanım**
+**Belirli Fonlar:**
 ```bash
-python tefas_data_process.py \
-  --input data/tefas_test_data.parquet \
-  --output data/tefas_test_data_processed.parquet
-```
-* **Çıktı** : Tüm kolonlar Parquet’te korunur (pandas `to_parquet`).
-
-### 11.2 Sütun Kontrolü
-Log çıktısında:
-```
-Son sütun listesi: [..., 'ret_1w', 'ret_1m', 'ret_3m', 'ret_6m', 'ret_12m']
-```
-Parquet okuyarak doğrulayabilirsiniz:
-```python
-import pandas as pd
-df = pd.read_parquet('data/tefas_test_data_processed.parquet')
-print(df.columns)
+python tefas_download_data_merged.py --test --codes DSP,PPN,PMP --years 1 --workers 4
 ```
 
-### 11.3 Önemli Kod Parçası
-```40:46:Tefas Funds/tefas_data_process.py
-s_daily = (
-    g.set_index("tarih")["fiyat"].asfreq("D").ffill()
-)
-```
-Bu satırlar eksik günleri takvim gününe göre doldurarak doğru getiri hesaplamasını sağlar.
-
----
-
-## 12. Mihenk Taşı v3 – Merged Class ve Major Updates
-
-### 12.1 `tefas_download_data_merged.py` - Birleşik Çözüm
-* **Problem**: Logging çoklama problemi + kod duplikasyonu
-* **Çözüm**: Tek dosyada hem seri hem paralel mod
-* **Özellikler**:
-  - `--workers 1` → Seri mod
-  - `--workers 4+` → Paralel mod
-  - Tek logging setup → çoklama problemi yok
-  - Batch progress tracking: `[BATCH 1/3 (%33.3)] Tamamlandı`
-  - Temiz log mesajları
-
-### 12.2 Fon Kategori Sistemi - Priorite Kuralları
-Kullanıcı feedback'i sonrası priorite sıralı sistem:
-
-```python
-# ÖNCELIK SIRALI KURALLAR
-# 1. SERBEST geçiyorsa kesinlikle serbest
-if "SERBEST" in name: return "Serbest Şemsiye Fonu"
-# 2. DEĞİŞKEN geçiyorsa kesinlikle değişken  
-elif "DEGISKEN" in name: return "Değişken Şemsiye Fonu"
-# 3. KATILIM geçiyorsa kesinlikle katılım
-elif "KATILIM" in name: return "Katılım Şemsiye Fonu"
+**Tüm Fonlar:**
+```bash
+python tefas_download_data_merged.py --full --years 3 --workers 6
 ```
 
-**Önemli**: `SERBEST + DEĞİŞKEN` → Serbest kazanır, `DEĞİŞKEN + KATILIM` → Değişken kazanır
+**Repair Mode (Eksik verileri tamamla):**
+```bash
+python tefas_download_data_merged.py --repair --input data/tefas_full_2yrs.parquet --workers 4
+```
 
-### 12.3 Codebase Yapısı (Son Durum)
+### Ana Özellikler
+
+- ✅ **Seri/Paralel Mod**: `--workers 1` (seri) veya `--workers 4+` (paralel)
+- ✅ **Repair Mode**: Eksik verileri otomatik tespit edip tamamlar
+- ✅ **Graceful Shutdown**: Ctrl+C ile o ana kadarki sonuçları kaydeder
+- ✅ **SSL Warnings**: Otomatik olarak engellenmiş
+- ✅ **Progress Tracking**: Detaylı ilerleme takibi
+
+## 3. Veri İşleme (`tefas_data_process.py`)
+
+İndirilen ham verilere rolling returns ekler:
+
+```bash
+python tefas_data_process.py --input data/raw.parquet --output data/processed.parquet
+```
+
+**Eklenen sütunlar**: `ret_1w`, `ret_1m`, `ret_3m`, `ret_6m`, `ret_12m`
+
+## 4. Yahoo Finance İntegrasyonu
+
+**Veri İndirme:**
+```bash
+python yahoo_finance_downloader.py --tickers "ASELS.IS,SISE.IS" --years 2
+```
+
+**Veri İşleme:**
+```bash
+python yahoo_finance_data_process.py --input yahoo_finance_data.parquet --output processed_data.parquet
+```
+
+## 5. Codebase Yapısı
 
 ```
 Tefas Funds/
-├── tefas_download_data_merged.py     # ⭐ ANA CLASS (seri+paralel)
-├── tefas_download_data.py            # Legacy - seri mod
-├── tefas_download_data_parallel.py   # Legacy - paralel mod
+├── tefas_download_data_merged.py     # ⭐ ANA BETIK (seri+paralel+repair)
 ├── tefas_data_process.py             # Rolling returns hesaplama
-├── tls12_adapter.py                  # TLS 1.2 adapter
+├── yahoo_finance_downloader.py       # Yahoo Finance data indirme
+├── yahoo_finance_data_process.py     # Yahoo Finance data işleme
 ├── providers/
-│   └── tefas_provider.py             # TEFAS API wrapper (1383 lines)
+│   └── tefas_provider.py             # TEFAS API wrapper
 ├── data/                             # Parquet files
 ├── log/                              # Timestamped logs
-└── TODO.txt                          # Task tracking
+└── requirements.txt                  # Python dependencies
 ```
 
-### 12.4 Data Processing Pipeline
+## 6. Sık Kullanılan Komutlar
 
-#### Adım 1: Ham Veri İndirme
+**Günlük repair (önerilen):**
 ```bash
-python tefas_download_data_merged.py --test --codes DSP,PPN --months 2 --workers 4 --outfile test.parquet
+python tefas_download_data_merged.py --repair --input data/tefas_full_2yrs.parquet --workers 1
 ```
 
-#### Adım 2: Rolling Returns İşleme
+**İlk kurulum (tüm fonlar 2 yıl):**
 ```bash
-python tefas_data_process.py --input data/test.parquet --output data/test_processed.parquet
+python tefas_download_data_merged.py --full --years 2 --workers 4
 ```
 
-**compute_rolling_returns() Mantığı:**
-1. Fon bazında group by (`fon_kodu`)
-2. Tarih sıralama ve eksik günleri `asfreq('D').ffill()` ile doldurma
-3. 5 farklı pencere: 7d, 30d, 90d, 180d, 365d
-4. Getiri formülü: `current_price / shifted_price - 1`
-5. Orijinal tarihlere geri mapping
-
-### 12.5 Critical Security Issues (TODO)
-
-⚠️ **Memory Overflow Risk**: Full mod 853 fonla 2-5GB RAM kullanım riski
-- Progressive saving gerekli
-- Memory monitoring 
-- Streaming parquet write
-
-### 12.6 Provider API Overview
-
-**TefasProvider Key Methods:**
-- `_get_takasbank_fund_list()` → 853 fon listesi (Excel'den)
-- `get_fund_performance(code, start, end)` → Fiyat geçmişi
-- `get_fund_detail_alternative(code)` → Fon kategorisi
-
-**API Behavior:**
-- Takasbank Excel: Güncel fon listesi
-- TEFAS API: Historik fiyat + kategori
-- Error handling: "No historical data found" → geriye doğru arama
-
-### 12.7 Kullanım Örnekleri (Production Ready)
-
+**Test (belirli fonlar):**
 ```bash
-# Test modu - kategori doğrulaması
-python tefas_download_data_merged.py --test --codes BHI,BHL,BCK --months 2 --workers 4
-
-# Küçük production
-python tefas_download_data_merged.py --full --months 1 --workers 6 --outfile prod_1month.parquet
-
-# Processing
-python tefas_data_process.py --input data/prod_1month.parquet --output data/prod_processed.parquet --excel data/analysis.xlsx
+python tefas_download_data_merged.py --test --codes "DSP,PPN,BHI" --months 6 --workers 2
 ```
 
----
+**Spesifik tarih aralığı:**
+```bash
+python tefas_download_data_merged.py --test --codes "PPN,TLE,IPV" --start-date 2025-01-01 --end-date 2025-07-01 --workers 4
+```
 
-Bu rehber **indir → işleme** hattının **son durumunu** özetler. Memory güvenliği eklenene kadar `--months` parametresini düşük tutun. Gelecekteki geliştirmeleri yine buraya ekleyin. 
+## 7. Son Geliştirmeler ve Çözülen Sorunlar
+
+### 🔧 Major Fixes (Temmuz 2025)
+
+#### 1. TEFAS Provider Fund List Sorunu ✅
+- **Sorun**: Takasbank Excel URL'si HTML döndürüyordu (`Content-Type: text/html`)
+- **Çözüm**: TEFAS'ın kendi `BindComparisonFundReturns` API'sini kullandık
+- **Sonuç**: 861 fon başarıyla yükleniyor
+
+#### 2. Fon Kategori Sınıflandırma İyileştirmesi ✅  
+- **Sorun**: "Yabancı" + "Borçlanma" kombinasyonu eksikti
+- **Çözüm**: `_guess_category_from_name()` metoduna kombinasyon kuralı eklendi
+- **Sonuç**: Eurobond fonları doğru kategorize ediliyor
+
+#### 3. Tarih Aralığı Sorunu & Chunk-based İndirme ✅
+- **Sorun**: 12 ay veri isteniyor, sadece ~2 ay geliyordu
+- **Root Cause**: TEFAS API uzun tarih aralıklarında timeout yapıyor
+- **Çözüm**: 120+ günlük aralıkları 90 günlük parçalara bölen sistem
+- **Sonuç**: 1 yıl = 4 chunk × 90 gün, sıralı indirme + gecikme
+
+#### 4. Repair Mode Kategori Düzeltmesi ✅
+- **Sorun**: `'fon_adi': f'Repair - {fund_code}'` sahte isimler → yanlış kategoriler
+- **Çözüm**: `_get_takasbank_fund_list()` ile gerçek fon isimleri eşleştirme
+- **Sonuç**: Repair mode'da kategoriler doğru atanıyor
+
+#### 5. Spesifik Tarih Aralığı Parametreleri ✅
+- **Eklenen**: `--start-date YYYY-MM-DD` ve `--end-date YYYY-MM-DD` parametreleri
+- **Çakışma Kontrolü**: `--start-date/--end-date` ile `--months/--years` aynı anda kullanılamaz
+- **Örnekler**: 
+  ```bash
+  # 6 aylık spesifik aralık
+  --start-date 2025-01-01 --end-date 2025-07-01
+  
+  # Başlangıç tarihi belirtili 
+  --start-date 2024-01-01  # → bugüne kadar
+  
+  # Bitiş tarihi belirtili
+  --end-date 2025-06-30    # → 2 yıl geriye
+  ```
+
+### 🛠️ Infrastructure İyileştirmeleri
+
+#### Rate Limiting & Reliability
+```python
+# Chunk'lar arası delay
+time.sleep(1)
+
+# Request'ler arası jitter
+base_delay = 0.5 + (attempt * 0.3)  
+jitter = random.uniform(0.1, 0.3)
+time.sleep(base_delay + jitter)
+```
+
+#### Auto-Directory Creation
+- `data/` klasörü otomatik oluşturulur [[memory:3537521]]
+- Mevcut içerik korunur
+
+#### Graceful Shutdown (Ctrl+C)
+- Seri ve paralel modlarda desteklenir
+- O ana kadarki veriler kaydedilir
+- Repair mode'da çalışan task'lar tamamlanır
+
+#### Logging & Progress Tracking
+```bash
+# Chunk sistemi logları
+[CHUNK 1] PPN: 2024-01-01 → 2024-03-31 (90 gün)
+[CHUNK 2] PPN: 2024-04-01 → 2024-06-29 (90 gün)
+[CHUNK TOTAL] PPN: 502 toplam kayıt (4 parça)
+```
+
+### 📊 Test Sonuçları
+
+**10 Fon Kategorik Dağılım:**
+- Değişken Şemsiye Fonu: 2 fon (IPB, TCD)
+- Eurobond Şemsiye Fonu: 2 fon (TLE, IPV)  
+- Hisse Senedi Şemsiye Fonu: 2 fon (AHI, IIH)
+- Para Piyasası Şemsiye Fonu: 2 fon (PPN, PRD)
+- Yabancı Hisse Senedi Şemsiye Fonu: 2 fon (AFA, YAY)
+
+**Performance Metrics:**
+- **Chunk sistemi**: 12 ay veri → 4 chunk × 90 gün
+- **Rate limiting**: 0.5-1.5s gecikme + jitter
+- **Repair mode**: Eksik veri tespit + gerçek fon isimleri
+
+## 8. Debugging & Troubleshooting
+
+### Yaygın Sorunlar
+
+**1. SSL Certificate Warnings**
+```python
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+```
+
+**2. Connection Reset Errors**  
+- Rate limiting aktif, retry mekanizması var
+- Chunk sistemi timeout'ları azaltır
+
+**3. Tarih Aralığı Sorunları**
+- `--start-date`/`--end-date` parametrelerini kontrol et
+- Debug loglarında tarih değerlerini gözlemle
+
+### Test Araçları
+
+**Repair Mode Testi için veri silme:**
+```bash
+python remove_last_records.py data/tefas_full_2yrs.parquet
+# → Her fondan son 2 kaydı siler, repair testi için eksik veri oluşturur
+``` 

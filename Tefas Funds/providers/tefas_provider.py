@@ -39,7 +39,7 @@ class TefasProvider:
     
     def _get_takasbank_fund_list(self) -> List[Dict[str, str]]:
         """
-        Get complete fund list from Takasbank Excel file.
+        Get complete fund list from TEFAS API (instead of Takasbank).
         Returns list of dicts with 'fon_kodu' and 'fon_adi'.
         """
         try:
@@ -47,49 +47,62 @@ class TefasProvider:
             if self._fund_list_cache and self._fund_list_cache_time:
                 elapsed = datetime.now() - self._fund_list_cache_time
                 if elapsed.total_seconds() < self._cache_duration:
-                    logger.info("Using cached Takasbank fund list")
+                    logger.info("Using cached TEFAS fund list")
                     return self._fund_list_cache
             
-            logger.info("Fetching fresh fund list from Takasbank")
+            logger.info("Fetching fresh fund list from TEFAS API")
             
-            # Download Excel file
-            response = self.session.get(self.takasbank_url, timeout=10)
+            # Use TEFAS's own API instead of Takasbank
+            comparison_url = "https://www.tefas.gov.tr/api/DB/BindComparisonFundReturns"
+            
+            # Set parameters for comprehensive fund list retrieval
+            data = {
+                'calismatipi': '2',  # Search/list mode
+                'fontip': 'YAT',     # Investment funds
+                'sfontur': 'Tümü',   # All categories
+                'kurucukod': '',     # No founder filter (get all)
+                'fongrup': '',       # Fund group
+                'bastarih': 'Başlangıç',  # Start date placeholder
+                'bittarih': 'Bitiş',      # End date placeholder
+                'fonturkod': '',     # Fund type code
+                'fonunvantip': '',   # Fund title type
+                'strperiod': '1,1,1,1,1,1,1',  # All periods
+                'islemdurum': '1'    # Active funds only
+            }
+            
+            headers = {
+                'Accept': 'application/json, text/javascript, */*; q=0.01',
+                'Accept-Language': 'tr-TR,tr;q=0.9,en-US;q=0.8,en;q=0.7',
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                'Origin': 'https://www.tefas.gov.tr',
+                'Referer': 'https://www.tefas.gov.tr/FonKarsilastirma.aspx',
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+            
+            response = self.session.post(comparison_url, data=data, headers=headers, timeout=15)
             response.raise_for_status()
             
-            # Save to temp file (cross-platform)
-            temp_dir = tempfile.gettempdir()
-            temp_file = os.path.join(temp_dir, 'takasbank_funds.xlsx')
-            # Ensure directory exists (it should, but guard anyway)
-            os.makedirs(temp_dir, exist_ok=True)
-            with open(temp_file, 'wb') as f:
-                f.write(response.content)
+            result_data = response.json()
+            all_funds = result_data.get('data', []) if isinstance(result_data, dict) else result_data
             
-            # Read Excel with pandas
-            df = pd.read_excel(temp_file)
-            
-            # Convert to list of dicts
+            # Convert to expected format
             fund_list = []
-            for _, row in df.iterrows():
+            for fund in all_funds:
                 fund_list.append({
-                    'fon_kodu': str(row['Fon Kodu']).strip(),
-                    'fon_adi': str(row['Fon Adı']).strip()
+                    'fon_kodu': str(fund.get('FONKODU', '')).strip(),
+                    'fon_adi': str(fund.get('FONUNVAN', '')).strip()
                 })
             
             # Update cache
             self._fund_list_cache = fund_list
             self._fund_list_cache_time = datetime.now()
             
-            # Clean up temp file
-            try:
-                os.remove(temp_file)
-            except:
-                pass
-            
-            logger.info(f"Successfully loaded {len(fund_list)} funds from Takasbank")
+            logger.info(f"Successfully loaded {len(fund_list)} funds from TEFAS API")
             return fund_list
             
         except Exception as e:
-            logger.error(f"Error fetching Takasbank fund list: {e}")
+            logger.error(f"Error fetching TEFAS fund list: {e}")
             return []
     
     def _normalize_turkish(self, text: str) -> str:

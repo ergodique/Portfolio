@@ -1,18 +1,26 @@
 #!/usr/bin/env python3
 """
-TEFAS Fon Verisi İndirme Script'i (Merged - Seri & Paralel)
-===========================================================
+TEFAS Fon Verisi İndirme Script'i (Merged - Seri & Paralel & Repair)
+=====================================================================
 
 Bu script TEFAS'ta bulunan tüm fonların geçmiş fiyat verilerini indirir
-ve tek bir parquet dosyasında birleştirir. Hem seri hem paralel mod destekler.
+ve tek bir parquet dosyasında birleştirir. Seri, paralel ve repair modları destekler.
 
 Seri mod: Fonları tek tek sırayla indirir
 Paralel mod: Fonları batch'ler halinde paralel indirir (daha hızlı)
+Repair mod: Mevcut dosyadaki eksik tarihleri tespit eder ve sadece eksikleri indirir
 
 Kullanım:
+    # Test modu
     python tefas_download_data_merged.py --test --codes ABC,XYZ --workers 1  # Seri
     python tefas_download_data_merged.py --test --codes ABC,XYZ --workers 4  # Paralel  
+    
+    # Tam veri indirme
     python tefas_download_data_merged.py --full --months 1 --workers 6       # Paralel full
+    
+    # Repair modu (eksik verileri tamamla)
+    python tefas_download_data_merged.py --repair --input data/existing.parquet --workers 4
+    python tefas_download_data_merged.py --repair --input data/existing.parquet --workers 1  # Seri repair
 """
 
 import sys
@@ -25,7 +33,16 @@ from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Tuple
+import requests
+import pandas as pd
+import numpy as np
+import random
+import json
+import urllib3
+
+# SSL warning'lerini kapat
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # ---------------------------------------------------------------------------
 # LOGGING SETUP – tek dosya, çoklama problemi yok
@@ -49,7 +66,6 @@ logger = logging.getLogger(__name__)
 logger.info("CMD: %s", " ".join(sys.argv))
 
 # Gerekli modülleri import et
-import pandas as pd
 import pyarrow as pa
 import pyarrow.parquet as pq
 
@@ -61,7 +77,8 @@ class TefasDataDownloaderMerged:
     """TEFAS fon verilerini hem seri hem paralel olarak indiren birleşik sınıf"""
     
     def __init__(self, test_mode=True, years_back=0, months_back=0, codes_list=None, 
-                 output_filename=None, workers=1, parallel_mode=None):
+                 output_filename=None, workers=1, parallel_mode=None, repair_mode=False, 
+                 input_file=None, start_date_str=None, end_date_str=None):
         """
         Args:
             test_mode (bool): True ise sadece belirtilen fon listesi, False ise tüm fonlar
@@ -71,11 +88,19 @@ class TefasDataDownloaderMerged:
             output_filename (str|None): Parquet çıktısının dosya adı/yolu (varsayılan otomatik)
             workers (int): Paralel işleme için worker sayısı (1 = seri mod)
             parallel_mode (bool|None): Paralel mod zorlaması (None = workers'a göre otomatik)
+            repair_mode (bool): True ise mevcut dosyadaki eksikleri tamamlama modu
+            input_file (str|None): Repair modunda okunacak mevcut dosya yolu
+            start_date_str (str|None): Başlangıç tarihi (YYYY-MM-DD formatında)
+            end_date_str (str|None): Bitiş tarihi (YYYY-MM-DD formatında)
         """
         self.test_mode = test_mode
         self.years_back = years_back or 0
         self.months_back = months_back or 0
+        self.start_date_str = start_date_str
+        self.end_date_str = end_date_str
         self.workers = max(1, workers)  # En az 1 worker
+        self.repair_mode = repair_mode
+        self.input_file = Path(input_file) if input_file else None
         
         # Paralel mod belirleme
         if parallel_mode is not None:
@@ -89,7 +114,12 @@ class TefasDataDownloaderMerged:
         else:
             self.codes_list = []
             
-        self.provider = self._setup_provider()
+        self.provider: Optional[TefasProvider] = None
+        try:
+            self.provider = self._setup_provider()
+        except Exception as e:
+            logger.error(f"Provider başlatılamadı: {e}")
+        
         self.chunk_size_days = 60  # Her istekte 60 günlük veri
         self.request_delay = 3  # İstekler arası bekleme süresi (saniye)
         
@@ -108,85 +138,93 @@ class TefasDataDownloaderMerged:
         self.progress_file = self.output_dir / "download_progress.json"
         
     def _setup_provider(self):
-        """TefasProvider'ı yapılandır"""
-        logger.debug("TefasProvider yapılandırılıyor...")
-        
-        tp = TefasProvider()
-        
-        # TLS 1.2 adapter ekle
-        try:
-            tp.session.mount("https://", TLS12Adapter())
-            tp.session.verify = certifi.where()
-        except Exception as e:
-            logger.warning(f"TLS adapter ayarlanamadı: {e}")
-        
-        # Headers ayarla
-        tp.session.headers.update({
-            "User-Agent": ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-                          "AppleWebKit/537.36 (KHTML, like Gecko) "
-                          "Chrome/126.0 Safari/537.36"),
-            "X-Requested-With": "XMLHttpRequest",
-            "Origin": tp.base_url,
-            "Referer": f"{tp.base_url}/TarihselVeriler.aspx"
-        })
-        
-        # İlk session başlatma - birkaç kez dene
-        for attempt in range(3):
+        """Provider'ı kur veya yenile - daha agresif session management ile"""
+        max_attempts = 3
+        for attempt in range(max_attempts):
             try:
-                response = tp.session.get(tp.base_url, timeout=15)
-                if response.status_code == 200:
-                    logger.debug("Session başarıyla başlatıldı")
-                    break
-                else:
-                    logger.warning(f"Session başlatma: HTTP {response.status_code}")
+                provider = TefasProvider()
+                
+                # Session'ı yenile
+                if hasattr(provider, 'session'):
+                    provider.session.close()
+                
+                provider.session = requests.Session()
+                provider.session.verify = False
+                
+                # User-Agent rotation for better stability
+                user_agents = [
+                    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+                    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+                    'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+                ]
+                
+                provider.session.headers.update({
+                    'User-Agent': random.choice(user_agents),
+                    'Accept': 'application/json, text/javascript, */*; q=0.01',
+                    'Accept-Language': 'tr-TR,tr;q=0.9,en-US;q=0.8,en;q=0.7',
+                    'Accept-Encoding': 'gzip, deflate, br',
+                    'Connection': 'keep-alive',
+                    'Cache-Control': 'no-cache',
+                    'Pragma': 'no-cache'
+                })
+                
+                # Test connection
+                test_url = "https://www.tefas.gov.tr"
+                response = provider.session.get(test_url, timeout=10)
+                response.raise_for_status()
+                
+                logger.debug(f"Provider başarıyla kuruldu (deneme {attempt + 1})")
+                return provider
+                
             except Exception as e:
-                logger.warning(f"Session başlatma deneme {attempt+1}/3: {e}")
-                if attempt < 2:
-                    time.sleep(2)
+                logger.warning(f"Session başlatma deneme {attempt + 1}/{max_attempts}: {e}")
+                if attempt < max_attempts - 1:
+                    time.sleep(2 ** attempt)  # Exponential backoff
                 else:
-                    logger.error("Session başlatılamadı, devam ediliyor...")
-        
-        return tp
+                    logger.error(f"Session başlatılamadı: {e}")
+                    raise
 
     def get_fund_list(self):
-        """Fon listesini al (test modu veya tam liste)"""
+        """Takasbank'tan fon listesini al"""
         logger.info("Fon listesi alınıyor...")
+        
+        if not self.provider:
+            self.provider = self._setup_provider()
+        
+        if not self.provider:
+            logger.error("Provider başlatılamadı, fon listesi alınamıyor")
+            return []
         
         try:
             all_funds = self.provider._get_takasbank_fund_list()
             if not all_funds:
-                logger.error("Fon listesi alınamadı!")
+                logger.warning("Fon listesi boş geldi")
                 return []
             
             logger.info(f"Toplam {len(all_funds)} fon bulundu")
             
-            # Test modu için filtreleme
-            if self.test_mode and self.codes_list:
-                # Fon kodlarını sözlükten seç
-                fund_map = {f['fon_kodu']: f for f in all_funds}
-                selected_funds = []
-                for code in self.codes_list:
-                    if code in fund_map:
-                        selected_funds.append(fund_map[code])
-                        logger.info(f"[LIST] {code} - Listeden seçildi")
-                    else:
-                        logger.warning(f"[LIST] {code} - Fon listesinde bulunamadı, atlanıyor")
-
-                if not selected_funds:
-                    logger.error("Belirtilen fon kodlarından hiçbiri Takasbank listesinde bulunamadı")
-                    return []
-                
-                logger.info(f"Test modu: {len(selected_funds)} fon seçildi: {', '.join(self.codes_list)}")
-                return selected_funds
-            elif self.test_mode:
-                # Kod listesi verilmemişse ilk 5 fonu al
-                return all_funds[:5]
-            else:
-                return all_funds
-                
+            # Kod listesi belirtilmişse filtrele
+            if self.codes_list:
+                filtered_funds = [fund for fund in all_funds 
+                                if fund.get('fon_kodu', '').upper() in [code.upper() for code in self.codes_list]]
+                logger.info(f"Filtreden {len(filtered_funds)} fon geçti")
+                return filtered_funds
+            
+            return all_funds
+            
         except Exception as e:
-            logger.error(f"Fon listesi alma hatası: {e}")
+            logger.error(f"Fon listesi alınamadı: {e}")
             return []
+
+    def clear_session(self):
+        """Session'ı temizle ve yenile"""
+        logger.debug("Session temizleniyor...")
+        if self.provider and hasattr(self.provider, 'session'):
+            try:
+                self.provider.session.close()
+            except:
+                pass
+        self.provider = self._setup_provider()
 
     def fetch_fund_chunk(self, fund_code, start_date, end_date, retries=2):
         """Belirli bir tarih aralığında fon verisi al"""
@@ -244,6 +282,13 @@ class TefasDataDownloaderMerged:
     def get_fund_category(self, fund_code, fund_name):
         """Fon kategorisini API'den al, başarısız olursa adından tahmin et"""
         try:
+            if not self.provider:
+                self.provider = self._setup_provider()
+            
+            if not self.provider:
+                logger.warning(f"{fund_code}: Provider yok, kategori tahmin edilecek")
+                return self._guess_category_from_name(fund_name)
+                
             # API'den kategori bilgisini al
             details = self.provider.get_fund_detail_alternative(fund_code)
             if details and 'fon_kategori' in details:
@@ -302,7 +347,9 @@ class TefasDataDownloaderMerged:
             return "Fon Sepeti Şemsiye Fonu"
         elif any(keyword in name_normalized for keyword in ["ALTIN", "GOLD", "GUMUSH", "SILVER", "KIYMETLI"]):
             return "Kıymetli Madenler Şemsiye Fonu"
-        elif any(keyword in name_normalized for keyword in ["EURO", "EUROBOND"]):
+        # YABANCI + BORCLANMA kombinasyonu veya EURO/EUROBOND
+        elif (all(keyword in name_normalized for keyword in ["YABANCI", "BORCLANMA"]) or 
+              any(keyword in name_normalized for keyword in ["EURO", "EUROBOND"])):
             return "Eurobond Şemsiye Fonu"
         elif any(keyword in name_normalized for keyword in ["BORCLANMA", "BOND", "TAHVIL"]):
             return "Borçlanma Araçları Şemsiye Fonu"
@@ -315,17 +362,51 @@ class TefasDataDownloaderMerged:
         logger.debug(f"[FETCH] {fund_code} ({fund_name}) verisi alınıyor...")
         
         # Tarih aralığı hesapla
-        end_date = datetime.now()
+        # Debug: Tarih değerlerini kontrol et
+        logger.info(f"[DEBUG] {fund_code}: start_date_str={self.start_date_str}, end_date_str={self.end_date_str}")
         
-        if self.months_back > 0:
-            start_date = end_date - relativedelta(months=self.months_back)
-        elif self.years_back > 0:
-            start_date = end_date - relativedelta(years=self.years_back)
+        # Önce spesifik tarih aralığını kontrol et
+        if self.start_date_str and self.end_date_str:
+            try:
+                start_date = datetime.strptime(self.start_date_str, '%Y-%m-%d')
+                end_date = datetime.strptime(self.end_date_str, '%Y-%m-%d')
+                logger.info(f"[DEBUG] {fund_code}: spesifik tarih aralığı: {start_date.strftime('%Y-%m-%d')} → {end_date.strftime('%Y-%m-%d')}")
+            except ValueError as e:
+                logger.error(f"[ERROR] Geçersiz tarih formatı: {e}")
+                logger.info(f"[ERROR] Tarih formatı YYYY-MM-DD olmalı (örn: 2025-01-01)")
+                raise
+        elif self.start_date_str:
+            try:
+                start_date = datetime.strptime(self.start_date_str, '%Y-%m-%d')
+                end_date = datetime.now()
+                logger.info(f"[DEBUG] {fund_code}: başlangıç tarihi belirtildi: {start_date.strftime('%Y-%m-%d')} → {end_date.strftime('%Y-%m-%d')}")
+            except ValueError as e:
+                logger.error(f"[ERROR] Geçersiz başlangıç tarihi formatı: {e}")
+                raise
+        elif self.end_date_str:
+            try:
+                end_date = datetime.strptime(self.end_date_str, '%Y-%m-%d')
+                start_date = end_date - relativedelta(years=2)  # Varsayılan 2 yıl geriye
+                logger.info(f"[DEBUG] {fund_code}: bitiş tarihi belirtildi: {start_date.strftime('%Y-%m-%d')} → {end_date.strftime('%Y-%m-%d')}")
+            except ValueError as e:
+                logger.error(f"[ERROR] Geçersiz bitiş tarihi formatı: {e}")
+                raise
         else:
-            start_date = end_date - relativedelta(years=2)  # Varsayılan 2 yıl
+            # Mevcut months/years mantığı
+            end_date = datetime.now()
+            
+            if self.months_back > 0:
+                start_date = end_date - relativedelta(months=self.months_back)
+                logger.info(f"[DEBUG] {fund_code}: months_back={self.months_back}, tarih aralığı: {start_date.strftime('%Y-%m-%d')} → {end_date.strftime('%Y-%m-%d')}")
+            elif self.years_back > 0:
+                start_date = end_date - relativedelta(years=self.years_back)
+                logger.info(f"[DEBUG] {fund_code}: years_back={self.years_back}, tarih aralığı: {start_date.strftime('%Y-%m-%d')} → {end_date.strftime('%Y-%m-%d')}")
+            else:
+                start_date = end_date - relativedelta(years=2)  # Varsayılan 2 yıl
+                logger.info(f"[DEBUG] {fund_code}: varsayılan 2 yıl, tarih aralığı: {start_date.strftime('%Y-%m-%d')} → {end_date.strftime('%Y-%m-%d')}")
         
         # Önce belirlenen tarih aralığını dene
-        all_data = self._fetch_date_range(fund_code, start_date, end_date, allow_gaps=True)
+        all_data = self._fetch_date_range(fund_code, start_date, end_date, retries=3, allow_gaps=True)
         
         # Eğer veri yoksa (yeni fon olabilir), geriye doğru arama yap
         if not all_data:
@@ -339,26 +420,103 @@ class TefasDataDownloaderMerged:
             
         return all_data
 
-    def _fetch_date_range(self, fund_code, start_date, end_date, allow_gaps=False):
-        """Belirli tarih aralığındaki veriyi chunk'lar halinde al"""
-        all_data = []
-        current_start = start_date
+    def _fetch_date_range(self, fund_code, start_date, end_date, retries=3, allow_gaps=False):
+        """Belirli tarih aralığı için veriyi çek - uzun aralıkları parçalara böler"""
         
-        while current_start < end_date:
-            chunk_end = min(current_start + timedelta(days=self.chunk_size_days), end_date)
-            
-            chunk_data = self.fetch_fund_chunk(fund_code, current_start, chunk_end)
-            
-            if chunk_data:
-                all_data.extend(chunk_data)
-            elif not allow_gaps:
-                # Boşluk toleransı yoksa dur
-                logger.warning(f"{fund_code}: Veri boşluğu tespit edildi, durduruldu")
-                break
-            
-            current_start = chunk_end + timedelta(days=1)
+        if isinstance(start_date, str):
+            start_date = datetime.strptime(start_date, '%Y-%m-%d').date()
+        if isinstance(end_date, str):
+            end_date = datetime.strptime(end_date, '%Y-%m-%d').date()
         
-        return all_data
+        # Tarih aralığını hesapla
+        total_days = (end_date - start_date).days
+        
+        # Eğer 4 aydan (120 gün) uzunsa, parçalara böl
+        if total_days > 120:
+            logger.info(f"[CHUNK] {fund_code}: {total_days} günlük aralığı 3 aylık parçalara bölünüyor...")
+            
+            all_data = []
+            chunk_size = 90  # 3 aylık parçalar
+            current_start = datetime.combine(start_date, datetime.min.time())
+            end_datetime = datetime.combine(end_date, datetime.min.time())
+            
+            chunk_count = 0
+            while current_start < end_datetime:
+                chunk_count += 1
+                current_end = min(current_start + timedelta(days=chunk_size), end_datetime)
+                
+                logger.info(f"[CHUNK {chunk_count}] {fund_code}: {current_start.strftime('%Y-%m-%d')} → {current_end.strftime('%Y-%m-%d')}")
+                
+                # Bu chunk için veri al
+                chunk_data = self._fetch_single_chunk(fund_code, current_start.date(), current_end.date(), retries)
+                
+                if chunk_data:
+                    all_data.extend(chunk_data)
+                    logger.info(f"[CHUNK {chunk_count}] {fund_code}: {len(chunk_data)} kayıt alındı")
+                else:
+                    logger.warning(f"[CHUNK {chunk_count}] {fund_code}: Veri alınamadı")
+                
+                # Chunk'lar arası delay
+                time.sleep(1)
+                current_start = current_end + timedelta(days=1)
+            
+            logger.info(f"[CHUNK TOTAL] {fund_code}: {len(all_data)} toplam kayıt ({chunk_count} parça)")
+            return all_data
+        
+        else:
+            # Kısa aralık - direkt al
+            return self._fetch_single_chunk(fund_code, start_date, end_date, retries)
+    
+    def _fetch_single_chunk(self, fund_code, start_date, end_date, retries=3):
+        """Tek bir chunk için veri al (orijinal mantık)"""
+        for attempt in range(retries):
+            try:
+                # Rate limiting için delay ekle
+                base_delay = 0.5 + (attempt * 0.3)  # Base delay + exponential backoff
+                jitter = random.uniform(0.1, 0.3)   # Random jitter
+                time.sleep(base_delay + jitter)
+                
+                # Provider'ı kontrol et ve gerekirse yenile
+                if not self.provider:
+                    self.provider = self._setup_provider()
+                
+                if not self.provider:
+                    logger.error(f"{fund_code}: Provider başlatılamadı")
+                    return []
+                
+                result = self.provider.get_fund_performance(
+                    fund_code=fund_code,
+                    start_date=start_date.strftime('%Y-%m-%d'),
+                    end_date=end_date.strftime('%Y-%m-%d')
+                )
+                
+                # Error message kontrolü
+                if result.get("error_message"):
+                    logger.debug(f"{fund_code}: API hatası: {result['error_message']}")
+                    if "No historical data found" in result["error_message"]:
+                        logger.debug(f"{fund_code}: {start_date} - {end_date} = veri yok")
+                        return []
+                    else:
+                        raise Exception(result["error_message"])
+                
+                price_history = result.get("fiyat_geçmisi", [])
+                if price_history:
+                    logger.debug(f"[CHUNK OK] {fund_code}: {len(price_history)} kayıt ({start_date} - {end_date})")
+                    return price_history
+                else:
+                    logger.debug(f"[CHUNK EMPTY] {fund_code}: Veri yok ({start_date} - {end_date})")
+                    return []
+                    
+            except Exception as e:
+                if attempt < retries - 1:
+                    wait_time = 2 ** attempt  # Exponential backoff: 1, 2, 4 saniye
+                    logger.debug(f"[RETRY {attempt+1}/{retries}] {fund_code}: {e}")
+                    time.sleep(wait_time)
+                else:
+                    logger.error(f"[CHUNK FAIL] {fund_code}: {e}")
+                    return []
+        
+        return []
 
     def _fetch_all_available_data(self, fund_code):
         """Fonun mevcut olan tüm verisini al (yeni fonlar için)"""
@@ -369,7 +527,7 @@ class TefasDataDownloaderMerged:
             end_date = datetime.now()
             start_date = end_date - timedelta(days=days)
             
-            data = self._fetch_date_range(fund_code, start_date, end_date, allow_gaps=True)
+            data = self._fetch_date_range(fund_code, start_date, end_date, retries=3, allow_gaps=True)
             
             if data:
                 logger.info(f"{fund_code}: {days} günlük aralıkta {len(data)} kayıt bulundu")
@@ -382,6 +540,7 @@ class TefasDataDownloaderMerged:
                     fund_code, 
                     earliest_date - timedelta(days=30),  # Biraz daha erken başla
                     datetime.now(),
+                    retries=3,
                     allow_gaps=True
                 )
                 
@@ -453,18 +612,48 @@ class TefasDataDownloaderMerged:
                         for fund in batch
                     }
 
-                    for future in as_completed(future_to_code):
-                        code = future_to_code[future]
-                        try:
-                            data = future.result()
-                            if data:
-                                all_records.extend(data)
-                                successful_funds.append(code)
-                            else:
+                    try:
+                        for future in as_completed(future_to_code):
+                            code = future_to_code[future]
+                            try:
+                                data = future.result()
+                                if data:
+                                    all_records.extend(data)
+                                    successful_funds.append(code)
+                                else:
+                                    failed_funds.append(code)
+                            except Exception as exc:
+                                logger.error(f"[EXCEPTION] {code}: {exc}")
                                 failed_funds.append(code)
-                        except Exception as exc:
-                            logger.error(f"[EXCEPTION] {code}: {exc}")
-                            failed_funds.append(code)
+                                
+                    except KeyboardInterrupt:
+                        logger.info(f"[STOP] Kullanıcı tarafından durduruldu - batch {batch_idx} işlemi sonlandırılıyor...")
+                        
+                        # Çalışan görevleri iptal et
+                        for future in future_to_code:
+                            if not future.done():
+                                future.cancel()
+                        
+                        # Executor'ı graceful shutdown yap
+                        executor.shutdown(wait=False)
+                        
+                        # Tamamlanan sonuçları kontrol et
+                        for future in future_to_code:
+                            if future.done() and not future.cancelled():
+                                code = future_to_code[future]
+                                try:
+                                    data = future.result(timeout=0.1)
+                                    if data:
+                                        all_records.extend(data)
+                                        successful_funds.append(code)
+                                    else:
+                                        failed_funds.append(code)
+                                except Exception:
+                                    failed_funds.append(code)
+                        
+                        logger.info(f"[STOP] O ana kadar {len(successful_funds)} fon tamamlandı")
+                        # Batch loop'unu kır
+                        break
 
                 percent = batch_idx / total_batches * 100
                 logger.info(f"[BATCH {batch_idx}/{total_batches} (%{percent:.1f})] Tamamlandı. Şu ana kadar başarı: {len(successful_funds)}, hata: {len(failed_funds)}")
@@ -528,6 +717,9 @@ class TefasDataDownloaderMerged:
                         failed_funds.append(fund_code)
                         logger.warning(f"[FAIL] {fund_code} veri alınamadı")
                         
+                except KeyboardInterrupt:
+                    logger.info("[STOP] Kullanıcı tarafından durduruldu")
+                    break
                 except Exception as e:
                     failed_funds.append(fund_code)
                     logger.error(f"[ERROR] {fund_code} işlem hatası: {e}")
@@ -546,9 +738,288 @@ class TefasDataDownloaderMerged:
             logger.error(f"Seri işlem hatası: {e}")
             raise
 
+    def analyze_missing_dates(self) -> Dict[str, Tuple[datetime, datetime]]:
+        """Mevcut dosyadaki eksik tarihleri analiz eder"""
+        if not self.input_file or not self.input_file.exists():
+            raise FileNotFoundError(f"Repair modu için geçerli input dosyası gerekli: {self.input_file}")
+        
+        logger.info(f"[REPAIR] Mevcut veri analiz ediliyor: {self.input_file}")
+        
+        try:
+            # Mevcut veriyi oku (input_file zaten kontrol edildi)
+            df = pd.read_parquet(str(self.input_file))
+            
+            if df.empty:
+                logger.warning("Mevcut dosya boş!")
+                return {}
+            
+            # Tarih sütununu datetime'a çevir
+            df['tarih'] = pd.to_datetime(df['tarih'])
+            
+            # Her fon için en son tarihi bul
+            fund_last_dates = df.groupby('fon_kodu')['tarih'].max()
+            
+            # Bugünün tarihi
+            today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+            
+            # Eksik aralıkları hesapla
+            missing_ranges = {}
+            for fund_code, last_date in fund_last_dates.items():
+                # En son tarihten bugüne kadar olan süre
+                next_date = last_date + timedelta(days=1)
+                
+                if next_date < today:
+                    missing_ranges[fund_code] = (next_date, today)
+                    days_missing = (today - next_date).days
+                    logger.info(f"[MISSING] {fund_code}: {next_date.strftime('%Y-%m-%d')} - {today.strftime('%Y-%m-%d')} ({days_missing} gün)")
+            
+            completed_funds = len(fund_last_dates) - len(missing_ranges)
+            total_funds = len(fund_last_dates)
+            
+            logger.info(f"[ANALYSIS] {len(missing_ranges)} tane fon eksik verili. {completed_funds}/{total_funds} tamamlanmış.")
+            
+            return missing_ranges
+            
+        except Exception as e:
+            logger.error(f"Analiz hatası: {e}")
+            raise
+
+    def repair_missing_data(self):
+        """Eksik verileri indir ve mevcut dosyaya ekle"""
+        logger.info("[REPAIR MODE] Eksik veri tamamlama başlıyor...")
+        
+        try:
+            # Eksik aralıkları analiz et
+            missing_ranges = self.analyze_missing_dates()
+            
+            if not missing_ranges:
+                logger.info("[REPAIR] Tüm fonlar güncel! Eksik veri yok.")
+                return
+            
+            logger.info(f"[REPAIR] {len(missing_ranges)} fon için eksik veri indiriliyor...")
+            
+            # Gerçek fon listesini al (kategori bilgileri için)
+            logger.info("[REPAIR] Fon listesi alınıyor...")
+            try:
+                if not self.provider:
+                    self.provider = self._setup_provider()
+                if self.provider:
+                    full_funds_list = self.provider._get_takasbank_fund_list()
+                else:
+                    full_funds_list = []
+            except Exception as e:
+                logger.warning(f"[REPAIR] Fon listesi alınamadı: {e}, kodlar kullanılacak")
+                full_funds_list = []
+            
+            # Fon kodlarını isme eşleştir
+            fund_map = {}
+            if full_funds_list:
+                for fund in full_funds_list:
+                    fund_map[fund.get('fon_kodu', '')] = fund.get('fon_adi', '')
+                logger.info(f"[REPAIR] {len(fund_map)} fon eşleştirildi")
+            
+            # Eksik veriler için fonları hazırla
+            funds_to_repair = []
+            for fund_code in missing_ranges.keys():
+                # Gerçek fon adını bul
+                real_fund_name = fund_map.get(fund_code, f'Bilinmeyen Fon - {fund_code}')
+                funds_to_repair.append({
+                    'fon_kodu': fund_code,
+                    'fon_adi': real_fund_name
+                })
+            
+            # Her fon için sadece eksik aralığı indir
+            all_new_data = []
+            successful_repairs = 0
+            failed_repairs = []
+            
+            def repair_single_fund(fund_info):
+                """Tek bir fon için repair işlemi"""
+                fund_code = fund_info['fon_kodu']
+                start_date, end_date = missing_ranges[fund_code]
+                
+                try:
+                    # Bu fon için yeni downloader
+                    temp_downloader = TefasDataDownloaderMerged(
+                        test_mode=True,
+                        codes_list=[fund_code],
+                        workers=1,
+                        parallel_mode=False
+                    )
+                    
+                    # Request'ler arası delay ekle (rate limiting için)
+                    time.sleep(random.uniform(0.5, 1.5))
+                    
+                    # Sadece eksik aralığı indir
+                    new_data = temp_downloader._fetch_date_range(fund_code, start_date, end_date, retries=3, allow_gaps=True)
+                    
+                    if new_data:
+                        # Fon kodunu ve kategorisini ekle
+                        category = temp_downloader.get_fund_category(fund_code, fund_info['fon_adi'])
+                        for record in new_data:
+                            record['fon_kodu'] = fund_code
+                            record['fon_kategorisi'] = category
+                        
+                        logger.info(f"[REPAIR OK] {fund_code}: {len(new_data)} yeni kayıt")
+                        return new_data
+                    else:
+                        logger.warning(f"[REPAIR EMPTY] {fund_code}: Yeni veri bulunamadı")
+                        return []
+                        
+                except Exception as e:
+                    logger.error(f"[REPAIR ERROR] {fund_code}: {e}")
+                    return []
+
+            # Seri veya paralel mod seçimi
+            if self.workers == 1 or not self.parallel_mode:
+                # Seri mod - daha güvenli
+                logger.info(f"[REPAIR] Seri mod")
+                for fund in funds_to_repair:
+                    fund_code = fund['fon_kodu']
+                    logger.info(f"[REPAIR] {fund_code}: {missing_ranges[fund_code][0]} - {missing_ranges[fund_code][1]}")
+                    
+                    try:
+                        new_data = repair_single_fund(fund)
+                        if new_data:
+                            all_new_data.extend(new_data)
+                            successful_repairs += 1
+                        else:
+                            failed_repairs.append(fund_code)
+                            
+                    except KeyboardInterrupt:
+                        logger.info("[STOP] Kullanıcı tarafından durduruldu")
+                        break
+                    except Exception as e:
+                        logger.error(f"[REPAIR FAIL] {fund_code}: {e}")
+                        failed_repairs.append(fund_code)
+            else:
+                # Paralel mod
+                logger.info(f"[REPAIR] Paralel mod - {self.workers} worker")
+                with ThreadPoolExecutor(max_workers=self.workers) as executor:
+                    future_to_code = {
+                        executor.submit(repair_single_fund, fund): fund['fon_kodu']
+                        for fund in funds_to_repair
+                    }
+                    
+                    try:
+                        for future in as_completed(future_to_code):
+                            fund_code = future_to_code[future]
+                            try:
+                                new_data = future.result()
+                                if new_data:
+                                    all_new_data.extend(new_data)
+                                    successful_repairs += 1
+                                else:
+                                    failed_repairs.append(fund_code)
+                            except Exception as e:
+                                logger.error(f"[REPAIR FAIL] {fund_code}: {e}")
+                                failed_repairs.append(fund_code)
+                                
+                    except KeyboardInterrupt:
+                        logger.info("[STOP] Kullanıcı tarafından durduruldu - paralel işlemler sonlandırılıyor...")
+                        
+                        # Çalışan görevleri iptal et
+                        for future in future_to_code:
+                            if not future.done():
+                                future.cancel()
+                        
+                        # Executor'ı graceful shutdown yap
+                        executor.shutdown(wait=False)
+                        
+                        # Tamamlanan sonuçları kontrol et
+                        for future in future_to_code:
+                            if future.done() and not future.cancelled():
+                                fund_code = future_to_code[future]
+                                try:
+                                    new_data = future.result(timeout=0.1)
+                                    if new_data:
+                                        all_new_data.extend(new_data)
+                                        successful_repairs += 1
+                                    else:
+                                        failed_repairs.append(fund_code)
+                                except Exception as e:
+                                    failed_repairs.append(fund_code)
+                        
+                        logger.info(f"[STOP] O ana kadar {successful_repairs} fon tamamlandı")
+                        # KeyboardInterrupt'ı yeniden raise et ki ana loop'ta da yakalanabilsin
+                        raise
+            
+            # Yeni verileri mevcut dosyaya ekle
+            if all_new_data:
+                self.merge_with_existing_data(all_new_data)
+                logger.info(f"[REPAIR COMPLETE] {successful_repairs} fon başarıyla güncellendi")
+                logger.info(f"[REPAIR STATS] {len(all_new_data)} yeni kayıt eklendi")
+            else:
+                logger.warning("[REPAIR] Hiç yeni veri indirilemedi!")
+            
+            if failed_repairs:
+                logger.warning(f"[REPAIR FAILED] Başarısız fonlar: {', '.join(failed_repairs)}")
+                
+        except Exception as e:
+            logger.error(f"Repair hatası: {e}")
+            raise
+
+    def merge_with_existing_data(self, new_data: List[Dict[str, Any]]):
+        """Yeni verileri mevcut dosyaya ekle ve birleştir"""
+        logger.info(f"[MERGE] {len(new_data)} yeni kayıt mevcut veriye ekleniyor...")
+        
+        try:
+            # Mevcut veriyi oku (input_file repair modunda None olamaz)
+            existing_df = pd.read_parquet(str(self.input_file))
+            logger.info(f"[MERGE] Mevcut kayıt sayısı: {len(existing_df)}")
+            
+            # Yeni veriyi DataFrame'e çevir
+            new_df = pd.DataFrame(new_data)
+            
+            # Tarih sütunlarını datetime'a çevir
+            existing_df['tarih'] = pd.to_datetime(existing_df['tarih'])
+            new_df['tarih'] = pd.to_datetime(new_df['tarih'])
+            
+            # Verileri birleştir
+            combined_df = pd.concat([existing_df, new_df], ignore_index=True)
+            
+            # Duplikatları temizle ve sırala
+            combined_df = combined_df.drop_duplicates(['fon_kodu', 'tarih']).sort_values(['fon_kodu', 'tarih']).reset_index(drop=True)
+            
+            # borsa_bulten_fiyat sütununu kaldır (eğer varsa)
+            if 'borsa_bulten_fiyat' in combined_df.columns:
+                combined_df = combined_df.drop(columns=['borsa_bulten_fiyat'])
+            
+            # Çıktı dosyasını belirle
+            if self.repair_mode:
+                # Repair modunda input dosyasının üzerine yaz
+                output_file = self.input_file
+            else:
+                # Normal modda yeni dosya oluştur
+                output_file = self.output_file
+            
+            # Parquet dosyasına yaz
+            pq.write_table(
+                pa.Table.from_pandas(combined_df),
+                output_file,
+                compression="zstd"
+            )
+            
+            # İstatistikler
+            added_records = len(combined_df) - len(existing_df)
+            unique_funds = combined_df['fon_kodu'].nunique()
+            date_range = f"{combined_df['tarih'].min().strftime('%Y-%m-%d')} - {combined_df['tarih'].max().strftime('%Y-%m-%d')}"
+            
+            logger.info("[MERGE SUCCESS] Veri birleştirme tamamlandı!")
+            logger.info(f"[FILE] Dosya: {output_file}")
+            logger.info(f"[STATS] Toplam kayıt: {len(combined_df):,} (+{added_records:,} yeni)")
+            logger.info(f"[FUNDS] Fon sayısı: {unique_funds}")
+            logger.info(f"[DATE] Tarih aralığı: {date_range}")
+            
+        except Exception as e:
+            logger.error(f"Merge hatası: {e}")
+            raise
+
     def process_all_funds(self):
-        """Ana işlem metodu - mod seçimine göre paralel veya seri"""
-        if self.parallel_mode:
+        """Ana işlem metodu - mod seçimine göre paralel, seri veya repair"""
+        if self.repair_mode:
+            self.repair_missing_data()
+        elif self.parallel_mode:
             self.process_all_funds_parallel()
         else:
             self.process_all_funds_serial()
@@ -610,31 +1081,47 @@ class TefasDataDownloaderMerged:
 
 def main():
     """Ana fonksiyon"""
-    parser = argparse.ArgumentParser(description="TEFAS fon verilerini indir (Seri & Paralel)")
+    parser = argparse.ArgumentParser(description="TEFAS fon verilerini indir (Seri & Paralel & Repair)")
     parser.add_argument("--test", action="store_true", help="Test modu (özel fon listesi gerekli)")
     parser.add_argument("--full", action="store_true", help="Tüm fonları indir")
+    parser.add_argument("--repair", action="store_true", help="Repair modu (mevcut dosyadaki eksikleri tamamla)")
     parser.add_argument("--years", type=int, default=0, help="Kaç yıl geriye gidilecek")
     parser.add_argument("--months", type=int, default=0, help="Kaç ay geriye gidilecek (örn: 1, 6)")
+    parser.add_argument("--start-date", type=str, default="", help="Başlangıç tarihi (YYYY-MM-DD formatında)")
+    parser.add_argument("--end-date", type=str, default="", help="Bitiş tarihi (YYYY-MM-DD formatında)")
     parser.add_argument("--codes", type=str, default="", help="Virgülle ayrılmış fon kodları (sadece test modu)")
+    parser.add_argument("--input", type=str, default="", help="Repair modu için input parquet dosyası")
     parser.add_argument("--outfile", type=str, default="", help="Özel çıktı dosyası adı/yolu (opsiyonel)")
     parser.add_argument("--workers", type=int, default=1, help="Eşzamanlı worker sayısı (1=seri, >1=paralel)")
     
     args = parser.parse_args()
     
-    if not (args.test or args.full):
-        parser.error("--test veya --full seçeneklerinden birini belirtmelisiniz")
+    if not (args.test or args.full or args.repair):
+        parser.error("--test, --full veya --repair seçeneklerinden birini belirtmelisiniz")
     
-    # Ay / yıl parametre kontrolü
+    # Repair modu kontrolü
+    if args.repair and not args.input:
+        parser.error("--repair modunda --input parametresi ile parquet dosyası belirtmelisiniz")
+    
+    # Parametre kontrolleri
     if args.months > 0 and args.years > 0:
         parser.error("--years ve --months aynı anda kullanılamaz")
+    
+    # Tarih aralığı ve months/years çakışma kontrolü
+    has_date_range = bool(args.start_date or args.end_date)
+    has_time_params = args.months > 0 or args.years > 0
+    
+    if has_date_range and has_time_params:
+        parser.error("--start-date/--end-date ile --months/--years aynı anda kullanılamaz")
 
     months_back = args.months if args.months > 0 else 0
     years_back = args.years if (args.years > 0 and months_back == 0) else 0
     test_mode = args.test
+    repair_mode = args.repair
     
     # Test modu için fon kodları
     codes_list = []
-    if test_mode:
+    if test_mode and not repair_mode:
         if not args.codes:
             parser.error("--test modunda --codes parametresi ile en az bir fon kodu belirtmelisiniz")
         codes_list = [c.strip().upper() for c in args.codes.split(',') if c.strip()]
@@ -646,12 +1133,23 @@ def main():
     logger.info("=" * 60)
     logger.info("TEFAS Fon Verisi İndirme Script'i (Merged)")
     logger.info("=" * 60)
-    logger.info(f"Mod: {'Test' if test_mode else 'Tam'} - {mode_text}")
-    if months_back > 0:
-        logger.info(f"Tarih aralığı: Son {months_back} ay")
+    if repair_mode:
+        logger.info(f"Mod: Repair - {mode_text}")
+        logger.info(f"Input dosya: {args.input}")
     else:
-        years_back_log = years_back if years_back > 0 else 2
-        logger.info(f"Tarih aralığı: Son {years_back_log} yıl")
+        logger.info(f"Mod: {'Test' if test_mode else 'Tam'} - {mode_text}")
+        # Tarih aralığı bilgisini göster
+        if args.start_date and args.end_date:
+            logger.info(f"Tarih aralığı: {args.start_date} → {args.end_date}")
+        elif args.start_date:
+            logger.info(f"Tarih aralığı: {args.start_date} → günümüz")
+        elif args.end_date:
+            logger.info(f"Tarih aralığı: 2 yıl geriye → {args.end_date}")
+        elif months_back > 0:
+            logger.info(f"Tarih aralığı: Son {months_back} ay")
+        else:
+            years_back_log = years_back if years_back > 0 else 2
+            logger.info(f"Tarih aralığı: Son {years_back_log} yıl")
     logger.info("=" * 60)
     
     try:
@@ -661,7 +1159,11 @@ def main():
             months_back=months_back,
             codes_list=codes_list,
             output_filename=args.outfile if args.outfile else None,
-            workers=args.workers
+            workers=args.workers,
+            repair_mode=repair_mode,
+            input_file=args.input if repair_mode else None,
+            start_date_str=args.start_date if args.start_date else None,
+            end_date_str=args.end_date if args.end_date else None
         )
         downloader.process_all_funds()
         
