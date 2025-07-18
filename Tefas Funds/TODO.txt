@@ -1,21 +1,21 @@
 [+] --full indirilen dosyadaki kategorileri gözle check etmek (henüz full indirme yapamadım, 4 paralel deniyorum) 
         -check ettim ve hataları gördüm. bu fon kategorilerinin yazılması işi process'e alınacak.
-[ ] Downloader'a yüzdesel ilerleme durumu eklenecek. 
-[ ] --test dosyasını data_process'ten geçirmek.
+[+] Downloaderlara yüzdesel ilerleme durumu eklenecek. 
+[+] --test dosyasını data_process'ten geçirmek.
         -Nihai olarak fon kategorilerine göre ortalama getiri hesaplanması.
         -En son elimde her hafta için her fon kategorisine göre bir getiri olacak. 
         -Fon kategorisi bazında getirileri de hesapladıktan sonra artık bu noktada kolonlara explode yapıp her tarih için kolon kolon bu verileri elde edeceğiz.
         -Fon inflow/outflow , kategori bazında net inflow/outflow bilgisinin çekilmesi.
         aynı hafta için tek satır veri elde etmem gerekiyor. 
 [+] Download classında mümkün olduğu kadar fazla paralelleştirme yapılmalı. Daha hızlı indirebilmek için. 
-[-] Download classına repair modu yapılmalı ya da repair için ayrı bir class. full veride hangileri eksikse sadece onların verisini indirecek şekilde. indirilmesi gereken veri aralığı yine download edilmiş parquet dosyasından algılanacak.
+[+] Download classına repair modu yapılmalı ya da repair için ayrı bir class. full veride hangileri eksikse sadece onların verisini indirecek şekilde. indirilmesi gereken veri aralığı yine download edilmiş parquet dosyasından algılanacak.
         -Bunun yeterli testi yapılmadı. Paralel classı iyi çalışıyor ise onun üzerinden testlere devam edilmeli.
 [+] Download classı için /log dizinine her çalıştırma için çalıştırılan komutun da eklendiği ayrı bir log dosyası oluşturulması. Tek bir log yerine her başlangıçta özel bir log oluşturulması. 
 
-[ ] Yahoo Finance tarafından endeks fiyat bilgileri eklenecek. --bu bir sonraki sprinte kalabilir belki...
+[+] Yahoo Finance tarafından endeks fiyat bilgileri eklenecek.
 [ ] Bu library TTRR ekibi ile de paylaşılacak.
 
---CRİTİK GÜVENLİK
+--Kritik Güvenlik
 [ ] URGENT: Memory overflow koruması ekle (progressive saving) - full modda büyük veri setlerinde risk var
 [ ] Memory monitoring ve warning sistemi - RAM %80 dolduğunda uyarı
 [ ] Büyük veri setleri için streaming parquet write - append mode ile sürekli yaz
@@ -27,11 +27,3 @@
 [+] Logging çoklama problemi çözüldü - tek logging setup
 [+] Batch progress tracking - X/TOPLAM (%Y) formatında
 [+] Temiz log mesajları - gereksiz duplicate'lar kaldırıldı
-
---Örnek çalıştırma komutları
---download classı
-
-
-
---process classı
-python tefas_data_process.py --input  data/tefas_1ay_test.parquet --output data/tefas_1ay_test_processed.parquet --excel  data/tefas_1ay_test_processed.xlsx

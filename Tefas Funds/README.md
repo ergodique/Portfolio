@@ -63,9 +63,10 @@ Long format TEFAS verisini wide format'a dönüştürür ve ML için hazırlar.
 Global borsa endekslerini ve ETF'leri indirme.
 
 **Kapsam:**
-- 🇹🇷 Türkiye: XU100, XU030, XBANK
-- 🇺🇸 ABD: SPY, QQQ, IWM
-- 🌍 Global: EFA, VWO, DJP, TLT
+- 🇹🇷 Türkiye: XU100, XU030, XBANK #BIST100,30 ve Banka Endeksi
+- 🇺🇸 ABD: SPY, QQQ, IWM #S&P500,Nasdaq,Russel 2000
+- 🌍 Global: EFA, VWO, DJP, TLT #Amerikan Tahvilleri, Avrupa Endeksleri ve Gelişmekte Olan Ülkeler.
+#Kapsam downloader classında defaul tickers altında bulunabilir. 
 
 ### 4. Yahoo Finance İşleme (`yahoo_finance_data_process.py`)
 
@@ -78,6 +79,7 @@ TEFAS API'lerini abstraction layer'ı ile sarmalamış provider class'ı.
 ## 📊 TEFAS Veri İndirme
 
 ### Test Modunda Kullanım
+Not: 1 dk içinde fazla request atmak ip ban ile sonuçlanabiliyor. 4-6 paralelliği çok geçmemeye çalışın. Repair modda ise seri ya da max 2 worker deneyerek başlayın...
 
 **10 fon ile test:**
 ```bash
@@ -93,13 +95,13 @@ python tefas_download_data_merged.py --test --codes "PPN,AAK,TLE,IPV,TCD" --work
 **Tüm fonlar (850+ fon):**
 ```bash
 # 1 ay veri - paralel
-python tefas_download_data_merged.py --full --months 1 --workers 6
+python tefas_download_data_merged.py --full --months 1 --workers 4
 
 # 1 yıl veri - paralel
-python tefas_download_data_merged.py --full --years 1 --workers 6
+python tefas_download_data_merged.py --full --years 1 --workers 4
 
 # Özel tarih aralığı
-python tefas_download_data_merged.py --full --start-date 2023-01-01 --end-date 2023-12-31 --workers 6
+python tefas_download_data_merged.py --full --start-date 2023-01-01 --end-date 2023-12-31 --workers 4
 ```
 
 ### Repair Modu (Eksik Veri Tamamlama)
@@ -174,6 +176,7 @@ kategori_flow_1m        # 1 aylık para giriş/çıkış oranı
 - ve diğerleri...
 
 ## 🌍 Yahoo Finance İndirme
+Not: Tefas'a göre çok daha hızlı ve paralellik destekleyen bir api. Yüzlerce tickerın 5-10 senelik verileri saniyeler içinde indirilebildiği için kullanımı daha kolay. 
 
 ### Temel Kullanım
 
@@ -352,12 +355,3 @@ Bu veri seti şu amaçlar için kullanılabilir:
 - 📈 **Portfolio Optimization**: Modern portfolio theory uygulamaları
 - 🔄 **Factor Analysis**: Risk faktörlerinin fon getirileri üzerindeki etkisi
 
----
-
-## 💡 Katkıda Bulunma
-
-Sistem sürekli gelişim halindedir. Öneriler ve bug raporları için issue açabilirsiniz.
-
-## 📝 Lisans
-
-Bu proje MIT lisansı ile lisanslanmıştır. 
