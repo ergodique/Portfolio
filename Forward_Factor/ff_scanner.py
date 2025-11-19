@@ -248,8 +248,18 @@ class ForwardFactorDashboard(tk.Tk):
         # --- Results Table ---
         self.tree = ttk.Treeview(
             main_frame,
-            columns=("Ticker", "Expiry Pair", "Front DTE", "Back DTE", "Front IV", "Back IV", "Fwd Vol", "Fwd Factor"),
-            show="headings"
+            columns=(
+                "Ticker",
+                "Expiry Pair",
+                "Front DTE",
+                "Back DTE",
+                "Front IV",
+                "Back IV",
+                "Fwd Vol",
+                "Fwd Factor",
+                "Cal Mid",
+            ),
+            show="headings",
         )
         self.tree.grid(row=1, column=0, sticky="nsew")
         main_frame.grid_rowconfigure(1, weight=1)
@@ -264,16 +274,18 @@ class ForwardFactorDashboard(tk.Tk):
         self.tree.heading("Back IV", text="Back IV (%)")
         self.tree.heading("Fwd Vol", text="Fwd Vol (%)")
         self.tree.heading("Fwd Factor", text="Fwd Factor (%)")
+        self.tree.heading("Cal Mid", text="Cal Mid ($)")
 
         # --- Define Column Styles ---
         self.tree.column("Ticker", anchor="center", width=80)
-        self.tree.column("Expiry Pair", anchor="center", width=100)
-        self.tree.column("Front DTE", anchor="center", width=80)
-        self.tree.column("Back DTE", anchor="center", width=80)
-        self.tree.column("Front IV", anchor="center", width=100)
-        self.tree.column("Back IV", anchor="center", width=100)
-        self.tree.column("Fwd Vol", anchor="center", width=100)
-        self.tree.column("Fwd Factor", anchor="center", width=120)
+        self.tree.column("Expiry Pair", anchor="center", width=90)
+        self.tree.column("Front DTE", anchor="center", width=70)
+        self.tree.column("Back DTE", anchor="center", width=70)
+        self.tree.column("Front IV", anchor="center", width=80)
+        self.tree.column("Back IV", anchor="center", width=80)
+        self.tree.column("Fwd Vol", anchor="center", width=80)
+        self.tree.column("Fwd Factor", anchor="center", width=90)
+        self.tree.column("Cal Mid", anchor="center", width=90)
 
         # --- Scrollbar ---
         scrollbar = ttk.Scrollbar(main_frame, orient="vertical", command=self.tree.yview)
@@ -294,16 +306,21 @@ class ForwardFactorDashboard(tk.Tk):
         oi_entry = ttk.Entry(filters_frame, width=15, textvariable=self.oi_var)
         oi_entry.grid(row=0, column=3, padx=(0, 20), sticky="w")
 
-        # Row 1: IV and spread filters
+        # Row 1: IV and calendar spread / cost filters
         ttk.Label(filters_frame, text="Min IV (%)").grid(row=1, column=0, padx=(0, 5), sticky="w")
         self.min_iv_var = tk.StringVar(value="0")
         iv_entry = ttk.Entry(filters_frame, width=15, textvariable=self.min_iv_var)
         iv_entry.grid(row=1, column=1, padx=(0, 20), sticky="w")
 
-        ttk.Label(filters_frame, text="Max Spread (%)").grid(row=1, column=2, padx=(0, 5), sticky="w")
-        self.max_spread_var = tk.StringVar(value="100")
-        spread_entry = ttk.Entry(filters_frame, width=15, textvariable=self.max_spread_var)
+        ttk.Label(filters_frame, text="Max Cal Spread ($)").grid(row=1, column=2, padx=(0, 5), sticky="w")
+        self.max_cal_spread_var = tk.StringVar(value="9999")
+        spread_entry = ttk.Entry(filters_frame, width=15, textvariable=self.max_cal_spread_var)
         spread_entry.grid(row=1, column=3, padx=(0, 20), sticky="w")
+
+        ttk.Label(filters_frame, text="Max Cal Mid ($)").grid(row=1, column=4, padx=(0, 5), sticky="w")
+        self.max_cal_mid_var = tk.StringVar(value="9999")
+        cal_mid_entry = ttk.Entry(filters_frame, width=15, textvariable=self.max_cal_mid_var)
+        cal_mid_entry.grid(row=1, column=5, padx=(0, 20), sticky="w")
 
         filter_btn = ttk.Button(filters_frame, text="Filter (Current List)", command=self.apply_filters)
         filter_btn.grid(row=0, column=4, padx=(10, 0))
@@ -545,9 +562,10 @@ class ForwardFactorDashboard(tk.Tk):
             self.min_volume = int(self.volume_var.get() or "0")
             self.min_open_interest = int(self.oi_var.get() or "0")
             self.min_iv = float(self.min_iv_var.get() or "0")
-            self.max_spread_pct = float(self.max_spread_var.get() or "100")
+            self.max_cal_spread = float(self.max_cal_spread_var.get() or "9999")
+            self.max_cal_mid = float(self.max_cal_mid_var.get() or "9999")
         except ValueError:
-            messagebox.showerror("Invalid Input", "Volume, Open Interest, IV and Spread filters must be numeric.")
+            messagebox.showerror("Invalid Input", "Volume, Open Interest, IV and calendar filters must be numeric.")
             return
         
         if not self.all_symbols:
@@ -563,7 +581,8 @@ class ForwardFactorDashboard(tk.Tk):
             text=(
                 f"Scanning {len(self.all_symbols)} symbols with filters: "
                 f"Vol >= {self.min_volume}, OI >= {self.min_open_interest}, "
-                f"IV >= {self.min_iv}%, Spread <= {self.max_spread_pct}%..."
+                f"IV >= {self.min_iv}%, CalSpread <= {self.max_cal_spread}$, "
+                f"CalMid <= {self.max_cal_mid}$..."
             )
         )
         thread = threading.Thread(target=self._scan_all_symbols, daemon=True)
@@ -678,7 +697,8 @@ class ForwardFactorDashboard(tk.Tk):
                 f"{row['Front IV']:.2f}",
                 f"{row['Back IV']:.2f}",
                 f"{row['Fwd Vol']:.2f}",
-                f"{row['Fwd Factor']:.2f}"
+                f"{row['Fwd Factor']:.2f}",
+                f"{row.get('Cal Mid', float('nan')):.3f}" if not pd.isna(row.get("Cal Mid", float("nan"))) else "n/a",
             ))
         
         self.last_updated_label.config(text=f"Last Updated: {datetime.now().strftime('%H:%M:%S')}")
@@ -728,11 +748,11 @@ class ForwardFactorDashboard(tk.Tk):
                     debug_reasons.append(f"{dte1_target}-{dte2_target}d: Invalid DTE order (dte1={dte1}, dte2={dte2})")
                     continue # Skip if expiries are the same or in wrong order
 
-                # Get ATM IV for both expiries with volume/OI/spread filters
-                iv1, vol1, oi1, spread1 = self._get_atm_iv_with_filters(
+                # Get ATM IV and book data for both expiries
+                iv1, vol1, oi1, bid1, ask1, mid1 = self._get_atm_iv_with_filters(
                     ticker, expiry1_date.strftime('%Y-%m-%d'), current_price
                 )
-                iv2, vol2, oi2, spread2 = self._get_atm_iv_with_filters(
+                iv2, vol2, oi2, bid2, ask2, mid2 = self._get_atm_iv_with_filters(
                     ticker, expiry2_date.strftime('%Y-%m-%d'), current_price
                 )
 
@@ -763,11 +783,35 @@ class ForwardFactorDashboard(tk.Tk):
                     )
                     continue
 
-                # Apply bid/ask spread filter
-                if spread1 > self.max_spread_pct or spread2 > self.max_spread_pct:
+                # Calendar pricing: long back-month, short front-month (call calendar)
+                # Worst-case debit (buy back at ask, sell front at bid)
+                if bid1 <= 0 or ask2 <= 0:
                     debug_reasons.append(
-                        f"{dte1_target}-{dte2_target}d: Spread filter fail "
-                        f"(spread1%={spread1:.2f}, spread2%={spread2:.2f}, max_spread%={self.max_spread_pct})"
+                        f"{dte1_target}-{dte2_target}d: No usable bid/ask for calendar legs "
+                        f"(front_bid={bid1}, back_ask={ask2})"
+                    )
+                    continue
+                if mid1 <= 0 or mid2 <= 0:
+                    debug_reasons.append(
+                        f"{dte1_target}-{dte2_target}d: No usable mid prices for calendar legs "
+                        f"(front_mid={mid1}, back_mid={mid2})"
+                    )
+                    continue
+
+                cal_spread = ask2 - bid1
+                cal_mid = mid2 - mid1
+
+                # Apply calendar spread / mid filters (absolute $)
+                if cal_spread > self.max_cal_spread:
+                    debug_reasons.append(
+                        f"{dte1_target}-{dte2_target}d: CalSpread filter fail "
+                        f"(cal_spread={cal_spread:.3f}, max={self.max_cal_spread})"
+                    )
+                    continue
+                if cal_mid > self.max_cal_mid:
+                    debug_reasons.append(
+                        f"{dte1_target}-{dte2_target}d: CalMid filter fail "
+                        f"(cal_mid={cal_mid:.3f}, max={self.max_cal_mid})"
                     )
                     continue
 
@@ -790,7 +834,8 @@ class ForwardFactorDashboard(tk.Tk):
                     "Front IV": iv1 * 100,
                     "Back IV": iv2 * 100,
                     "Fwd Vol": fwd_sigma * 100,
-                    "Fwd Factor": ff_ratio * 100
+                    "Fwd Factor": ff_ratio * 100,
+                    "Cal Mid": cal_mid if cal_mid != float("inf") else float("nan"),
                 })
             except Exception as e:
                 # Continue to next pair if this one fails
@@ -807,8 +852,8 @@ class ForwardFactorDashboard(tk.Tk):
 
     def _get_atm_iv_with_filters(self, ticker, expiry_date, current_price):
         """
-        Gets the implied volatility, volume, and open interest of the at-the-money (ATM) call option.
-        Returns: (iv, volume, open_interest)
+        Gets the implied volatility and order book data of the ATM call.
+        Returns: (iv, volume, open_interest, bid, ask, mid)
         """
         opt_chain = ticker.option_chain(expiry_date)
         calls = opt_chain.calls
@@ -824,13 +869,18 @@ class ForwardFactorDashboard(tk.Tk):
         volume = atm_call.get('volume', 0) if 'volume' in atm_call else 0
         open_interest = atm_call.get('openInterest', 0) if 'openInterest' in atm_call else 0
 
-        bid = atm_call.get('bid', 0.0) if 'bid' in atm_call else 0.0
-        ask = atm_call.get('ask', 0.0) if 'ask' in atm_call else 0.0
-        mid = (bid + ask) / 2.0 if bid and ask and bid > 0 and ask > 0 else 0.0
-        if mid > 0 and ask >= bid:
-            spread_pct = ((ask - bid) / mid) * 100.0
-        else:
-            spread_pct = 9999.0  # effectively filtered out if user sets a reasonable max spread
+        bid = float(atm_call.get('bid', 0.0)) if 'bid' in atm_call else 0.0
+        ask = float(atm_call.get('ask', 0.0)) if 'ask' in atm_call else 0.0
+        last = float(atm_call.get('lastPrice', 0.0)) if 'lastPrice' in atm_call else 0.0
+
+        # Fallback: if bid/ask yoksa veya 0 ise, lastPrice'i mid/bid/ask olarak kullan
+        if not (bid > 0 and ask > 0):
+            if last > 0 and not pd.isna(last):
+                bid = ask = last
+            else:
+                raise Exception(f"No usable bid/ask/lastPrice for {expiry_date}")
+
+        mid = (bid + ask) / 2.0 if bid > 0 and ask > 0 else 0.0
         
         # Handle NaN values
         if pd.isna(iv):
@@ -840,7 +890,7 @@ class ForwardFactorDashboard(tk.Tk):
         if pd.isna(open_interest):
             open_interest = 0
         
-        return float(iv), int(volume), int(open_interest), float(spread_pct)
+        return float(iv), int(volume), int(open_interest), bid, ask, mid
 
     def _calculate_forward_vol_and_factor(self, dte1, iv1, dte2, iv2):
         """
