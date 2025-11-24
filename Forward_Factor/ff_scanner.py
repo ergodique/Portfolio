@@ -18,175 +18,6 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 # mid price kullanarak oluşturalacak calendar fiyatlarını ekle
 # 
 
-def get_optionable_symbols(
-    max_pages: int = 120,
-    pause: float = 0.3,
-    cache_path: Path | None = None,
-    use_cache_on_fail: bool = True,
-):
-    """
-    Opsiyonlanabilir sembolleri Yahoo screener'dan, o mümkün değilse Nasdaq Trader listesinden çeker.
-    """
-    yahoo_symbols = _fetch_optionable_from_yahoo(max_pages=max_pages, pause=pause)
-
-    if not yahoo_symbols:
-        print("[info] Yahoo screener endpoint unavailable. Falling back to Nasdaq optionable list...")
-        try:
-            yahoo_symbols = _fetch_optionable_from_nasdaq()
-        except Exception as e:
-            print(f"[warn] Failed to fetch optionable list from Nasdaq: {e}")
-
-    symbols = sorted(set(filter(None, yahoo_symbols)))
-
-    if symbols and cache_path:
-        try:
-            cache_path.parent.mkdir(parents=True, exist_ok=True)
-            with open(cache_path, "w", encoding="utf-8") as f:
-                json.dump(
-                    {
-                        "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                        "source": "yahoo_or_nasdaq_optionable",
-                        "count": len(symbols),
-                        "symbols": symbols,
-                    },
-                    f,
-                    indent=2,
-                )
-        except Exception as e:
-            print(f"[warn] Could not write cache to {cache_path}: {e}")
-
-    if symbols:
-        return symbols
-
-    if use_cache_on_fail and cache_path and cache_path.exists():
-        try:
-            with open(cache_path, "r", encoding="utf-8") as f:
-                cached = json.load(f)
-            cached_symbols = cached.get("symbols", [])
-            print(f"[info] Using cached optionable list ({len(cached_symbols)} symbols) from {cache_path}")
-            return cached_symbols
-        except Exception as e:
-            print(f"[warn] Failed to read cached symbols from {cache_path}: {e}")
-
-    return []
-
-
-def _fetch_optionable_from_yahoo(max_pages: int, pause: float) -> list[str]:
-    base_urls = [
-        "https://query1.finance.yahoo.com/v7/finance/screener/predefined/saved",
-        "https://query1.finance.yahoo.com/v1/finance/screener/predefined/saved",
-    ]
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
-        "Accept": "application/json, text/javascript, */*; q=0.01",
-        "Connection": "keep-alive",
-        "Referer": "https://finance.yahoo.com/",
-    }
-
-    symbols: list[str] = []
-    total_hits = 0
-
-    for page in range(max_pages):
-        start = page * 100
-        params = {
-            "scrIds": "optionable",
-            "count": 100,
-            "start": start,
-            "formatted": "false",
-            "lang": "en-US",
-            "region": "US",
-            "corsDomain": "finance.yahoo.com",
-        }
-
-        page_ok = False
-        last_error: str | None = None
-
-        for base_url in base_urls:
-            try:
-                resp = requests.get(base_url, headers=headers, params=params, timeout=10)
-                if resp.status_code == 404:
-                    last_error = f"404 at {base_url}"
-                    continue
-                resp.raise_for_status()
-
-                content_type = resp.headers.get("Content-Type", "")
-                if not content_type.startswith("application/json"):
-                    last_error = f"Non-JSON ({content_type})"
-                    continue
-
-                data = resp.json() or {}
-                quotes = (
-                    data.get("finance", {})
-                    .get("result", [{}])[0]
-                    .get("quotes", [])
-                )
-
-                if not quotes:
-                    page_ok = True
-                    break
-
-                symbols.extend(q.get("symbol") for q in quotes if q.get("symbol"))
-                total_hits += len(quotes)
-                page_ok = True
-                break
-            except Exception as e:
-                last_error = str(e)
-                continue
-
-        if not page_ok:
-            print(f"[warn] Failed to fetch page start {start}: {last_error}")
-        else:
-            time.sleep(pause)
-
-        # Yahoo bazen 1000-1500 kayıt sonra tekrar eder; yeterince veri geldiyse çıkalım.
-        if total_hits == 0 and not page_ok:
-            continue
-        if total_hits >= 4000:
-            break
-
-    return symbols
-
-
-def _fetch_optionable_from_nasdaq() -> list[str]:
-    """
-    Nasdaq Trader option symbology dosyasından opsiyonlanabilir underlyings listesini çeker.
-    """
-    url = "https://ftp.nasdaqtrader.com/SymbolDirectory/options.txt"
-    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
-    resp = requests.get(url, headers=headers, timeout=30)
-    resp.raise_for_status()
-
-    text = resp.text.strip()
-    if not text:
-        return []
-
-    # Dosyanın sonunda özet satırları var; onları filtrele
-    lines = [line for line in text.splitlines() if line and not line.startswith("File Creation Time")]
-    buffer = "\n".join(lines)
-
-    df = pd.read_csv(StringIO(buffer), sep="|").dropna(how="all")
-    df.columns = [c.strip() for c in df.columns]
-
-    candidate_cols = [c for c in df.columns if "Underlying" in c]
-    if not candidate_cols:
-        raise ValueError(f"Could not identify underlying column in Nasdaq file. Columns: {df.columns.tolist()}")
-    underlyings: list[str] = []
-
-    for col in candidate_cols:
-        vals = (
-            df[col]
-            .astype(str)
-            .str.strip()
-            .str.upper()
-        )
-        vals = [v for v in vals if v and v != col.upper()]
-        underlyings.extend(vals)
-
-    if not underlyings:
-        raise ValueError("Nasdaq option file did not return any underlyings")
-
-    return sorted(set(underlyings))
-
 class ForwardFactorDashboard(tk.Tk):
     """
     A dashboard to display the forward factor for stock options across all optionable stocks.
@@ -257,6 +88,11 @@ class ForwardFactorDashboard(tk.Tk):
                 "Back IV",
                 "Fwd Vol",
                 "Fwd Factor",
+                "Front Vol",
+                "Front OI",
+                "Cal Front Bid",
+                "Cal Back Ask",
+                "Cal Spread",
                 "Cal Mid",
             ),
             show="headings",
@@ -274,6 +110,11 @@ class ForwardFactorDashboard(tk.Tk):
         self.tree.heading("Back IV", text="Back IV (%)")
         self.tree.heading("Fwd Vol", text="Fwd Vol (%)")
         self.tree.heading("Fwd Factor", text="Fwd Factor (%)")
+        self.tree.heading("Front Vol", text="Front Vol")
+        self.tree.heading("Front OI", text="Front OI")
+        self.tree.heading("Cal Front Bid", text="Front Bid ($)")
+        self.tree.heading("Cal Back Ask", text="Back Ask ($)")
+        self.tree.heading("Cal Spread", text="Cal Spread ($)")
         self.tree.heading("Cal Mid", text="Cal Mid ($)")
 
         # --- Define Column Styles ---
@@ -285,6 +126,11 @@ class ForwardFactorDashboard(tk.Tk):
         self.tree.column("Back IV", anchor="center", width=80)
         self.tree.column("Fwd Vol", anchor="center", width=80)
         self.tree.column("Fwd Factor", anchor="center", width=90)
+        self.tree.column("Front Vol", anchor="center", width=80)
+        self.tree.column("Front OI", anchor="center", width=80)
+        self.tree.column("Cal Front Bid", anchor="center", width=90)
+        self.tree.column("Cal Back Ask", anchor="center", width=90)
+        self.tree.column("Cal Spread", anchor="center", width=90)
         self.tree.column("Cal Mid", anchor="center", width=90)
 
         # --- Scrollbar ---
@@ -322,23 +168,38 @@ class ForwardFactorDashboard(tk.Tk):
         cal_mid_entry = ttk.Entry(filters_frame, width=15, textvariable=self.max_cal_mid_var)
         cal_mid_entry.grid(row=1, column=5, padx=(0, 20), sticky="w")
 
+        # Row 2: DTE limits and single ticker controls
+        ttk.Label(filters_frame, text="Min Front DTE").grid(row=2, column=0, padx=(0, 5), sticky="w")
+        self.min_front_dte_var = tk.StringVar(value="25")
+        min_front_entry = ttk.Entry(filters_frame, width=10, textvariable=self.min_front_dte_var)
+        min_front_entry.grid(row=2, column=1, padx=(0, 20), sticky="w")
+
+        ttk.Label(filters_frame, text="Max Back DTE").grid(row=2, column=2, padx=(0, 5), sticky="w")
+        self.max_back_dte_var = tk.StringVar(value="95")
+        max_back_entry = ttk.Entry(filters_frame, width=10, textvariable=self.max_back_dte_var)
+        max_back_entry.grid(row=2, column=3, padx=(0, 20), sticky="w")
+
         filter_btn = ttk.Button(filters_frame, text="Filter (Current List)", command=self.apply_filters)
         filter_btn.grid(row=0, column=4, padx=(10, 0))
         
-        load_all_btn = ttk.Button(filters_frame, text="Load All Symbols (Yahoo)", command=self._load_all_symbols)
+        load_all_btn = ttk.Button(filters_frame, text="Load All Symbols (CBOE)", command=self._load_all_symbols)
         load_all_btn.grid(row=0, column=5, padx=(10, 0))
 
         refresh_btn = ttk.Button(filters_frame, text="Refresh Batch (CBOE)", command=self.refresh_batch)
         refresh_btn.grid(row=0, column=6, padx=(10, 0))
 
-        # Row 2: Single ticker run
-        ttk.Label(filters_frame, text="Single Ticker:").grid(row=2, column=0, padx=(0, 5), sticky="w")
+        # Row 3: Single ticker run + STOP
+        ttk.Label(filters_frame, text="Single Ticker:").grid(row=3, column=0, padx=(0, 5), sticky="w")
         self.single_ticker_var = tk.StringVar()
         single_entry = ttk.Entry(filters_frame, width=15, textvariable=self.single_ticker_var)
-        single_entry.grid(row=2, column=1, padx=(0, 20), sticky="w")
+        single_entry.grid(row=3, column=1, padx=(0, 20), sticky="w")
 
         single_btn = ttk.Button(filters_frame, text="Run Single", command=self.run_single_ticker)
-        single_btn.grid(row=2, column=2, padx=(10, 0), sticky="w")
+        single_btn.grid(row=3, column=2, padx=(10, 0), sticky="w")
+
+        # Row 2: Stop scan button
+        stop_btn = ttk.Button(filters_frame, text="STOP", command=self.stop_scan)
+        stop_btn.grid(row=3, column=3, padx=(10, 0), sticky="w")
 
         # --- Status Bar ---
         self.status_label = ttk.Label(main_frame, text="Initializing symbol list...", anchor="w", relief=tk.SUNKEN)
@@ -489,23 +350,19 @@ class ForwardFactorDashboard(tk.Tk):
         self.apply_filters()
 
     def _load_all_symbols(self):
-        """Load all optionable symbols in background thread."""
-        self.status_label.config(text="Loading all optionable symbols from Yahoo Finance... This may take a few minutes.")
-        thread = threading.Thread(target=self._fetch_symbols, daemon=True)
-        thread.start()
-
-    def _fetch_symbols(self):
-        """Fetch all optionable symbols."""
-        try:
-            optionable_cache = self.cache_dir / "optionable_symbols.json"
-            symbols = get_optionable_symbols(
-                max_pages=120,
-                pause=0.3,
-                cache_path=optionable_cache,
+        """Load the full CBOE optionable universe into the current symbol list."""
+        if not self.master_symbols:
+            messagebox.showwarning(
+                "No CBOE Symbols",
+                "CBOE master list not loaded. Please ensure 'optionable_tickers_cboe.csv' exists "
+                "or use 'Refresh Batch (CBOE)' to load symbols.",
             )
-            self.after(0, lambda s=symbols: self._set_symbol_list(s, "Loaded Yahoo Finance optionable symbols"))
-        except Exception as e:
-            self.after(0, self._show_error, f"Error loading symbols: {str(e)}")
+            return
+
+        self._set_symbol_list(
+            self.master_symbols,
+            f"Loaded full CBOE optionable universe ({len(self.master_symbols)} symbols)",
+        )
 
     def _get_ticker_data(self, ticker_symbol):
         """
@@ -517,44 +374,57 @@ class ForwardFactorDashboard(tk.Tk):
             if ticker_symbol in self.ticker_cache:
                 return self.ticker_cache[ticker_symbol]
         
-        # Fetch data
+        # Fetch data with retry logic
         ticker = yf.Ticker(ticker_symbol)
+        max_retries = 3
+        last_error = None
+
+        for attempt in range(max_retries):
+            try:
+                # Get options list (only once)
+                options_list = ticker.options
+                if not options_list or len(options_list) == 0:
+                    # Empty options list might be due to rate limiting or transient error
+                    # Since we are using CBOE optionable list, we expect options to exist.
+                    raise Exception(f"No options available (attempt {attempt + 1}/{max_retries})")
+                
+                # Get expiries dates
+                expiries_dates = pd.to_datetime(options_list)
+                today = pd.to_datetime(date.today())
+                days_to_expiry = (expiries_dates - today).days
+                
+                # Get current stock price (only once)
+                hist = ticker.history(period="1d")
+                if hist.empty:
+                    raise Exception(f"No price data (attempt {attempt + 1}/{max_retries})")
+                current_price = float(hist['Close'].iloc[-1])
+                if pd.isna(current_price) or current_price <= 0:
+                    raise Exception(f"Invalid price data (attempt {attempt + 1}/{max_retries})")
+                
+                # Cache the data
+                ticker_data = {
+                    'options': options_list,
+                    'expiries_dates': expiries_dates,
+                    'days_to_expiry': days_to_expiry,
+                    'current_price': current_price,
+                    'ticker': ticker  # Keep ticker object for option_chain calls
+                }
+                
+                with self.cache_lock:
+                    self.ticker_cache[ticker_symbol] = ticker_data
+                
+                return ticker_data
+
+            except Exception as e:
+                last_error = e
+                # If it's not the last attempt, wait and retry
+                if attempt < max_retries - 1:
+                    sleep_time = (attempt + 1) * 2  # 2s, 4s, 6s
+                    time.sleep(sleep_time)
+                else:
+                    pass # Will raise after loop
         
-        try:
-            # Get options list (only once)
-            options_list = ticker.options
-            if not options_list or len(options_list) == 0:
-                raise Exception(f"No options available for {ticker_symbol}")
-            
-            # Get expiries dates
-            expiries_dates = pd.to_datetime(options_list)
-            today = pd.to_datetime(date.today())
-            days_to_expiry = (expiries_dates - today).days
-            
-            # Get current stock price (only once)
-            hist = ticker.history(period="1d")
-            if hist.empty:
-                raise Exception(f"No price data for {ticker_symbol}")
-            current_price = float(hist['Close'].iloc[-1])
-            if pd.isna(current_price) or current_price <= 0:
-                raise Exception(f"Invalid price data for {ticker_symbol}")
-            
-            # Cache the data
-            ticker_data = {
-                'options': options_list,
-                'expiries_dates': expiries_dates,
-                'days_to_expiry': days_to_expiry,
-                'current_price': current_price,
-                'ticker': ticker  # Keep ticker object for option_chain calls
-            }
-            
-            with self.cache_lock:
-                self.ticker_cache[ticker_symbol] = ticker_data
-            
-            return ticker_data
-            
-        except Exception as e:
-            raise Exception(f"Error fetching ticker data for {ticker_symbol}: {str(e)}")
+        raise Exception(f"Error fetching ticker data for {ticker_symbol}: {str(last_error)}")
 
     def apply_filters(self):
         """Apply filters and start scanning."""
@@ -564,8 +434,13 @@ class ForwardFactorDashboard(tk.Tk):
             self.min_iv = float(self.min_iv_var.get() or "0")
             self.max_cal_spread = float(self.max_cal_spread_var.get() or "9999")
             self.max_cal_mid = float(self.max_cal_mid_var.get() or "9999")
+            self.min_front_dte = int(self.min_front_dte_var.get() or "0")
+            self.max_back_dte = int(self.max_back_dte_var.get() or "365")
         except ValueError:
-            messagebox.showerror("Invalid Input", "Volume, Open Interest, IV and calendar filters must be numeric.")
+            messagebox.showerror(
+                "Invalid Input",
+                "Volume, Open Interest, IV, DTE and calendar filters must be numeric.",
+            )
             return
         
         if not self.all_symbols:
@@ -576,17 +451,31 @@ class ForwardFactorDashboard(tk.Tk):
         with self.cache_lock:
             self.ticker_cache.clear()
         self.processed_count = 0
+        self.shutting_down = False
         
         self.status_label.config(
             text=(
                 f"Scanning {len(self.all_symbols)} symbols with filters: "
                 f"Vol >= {self.min_volume}, OI >= {self.min_open_interest}, "
                 f"IV >= {self.min_iv}%, CalSpread <= {self.max_cal_spread}$, "
-                f"CalMid <= {self.max_cal_mid}$..."
+                f"CalMid <= {self.max_cal_mid}$, "
+                f"Front DTE >= {self.min_front_dte}, Back DTE <= {self.max_back_dte}..."
             )
         )
         thread = threading.Thread(target=self._scan_all_symbols, daemon=True)
         thread.start()
+
+    def stop_scan(self):
+        """
+        Stop the current scan without closing the application.
+        """
+        self.shutting_down = True
+        try:
+            if self.current_executor is not None:
+                self.current_executor.shutdown(wait=False, cancel_futures=True)
+        except Exception:
+            pass
+        self.status_label.config(text="Scan stopped by user.")
 
     def run_single_ticker(self):
         """
@@ -609,52 +498,80 @@ class ForwardFactorDashboard(tk.Tk):
             all_results = []
             total = len(self.all_symbols)
             errors = []
+            chunk_size = 100 # Reduced for more frequent UI updates
             
             # Use ThreadPoolExecutor for parallel processing
-            with ThreadPoolExecutor(max_workers=4) as executor:
+            # Decreased max_workers to 5 to further reduce rate limiting risk
+            with ThreadPoolExecutor(max_workers=5) as executor:
                 self.current_executor = executor
-                try:
-                    # Submit all tasks
-                    future_to_symbol = {
-                        executor.submit(self.fetch_forward_factor_data, symbol): symbol 
-                        for symbol in self.all_symbols
-                    }
-                    
-                    # Process completed tasks
-                    for future in as_completed(future_to_symbol):
-                        if self.shutting_down:
-                            break
+                
+                # Split symbols into chunks
+                for i in range(0, total, chunk_size):
+                    if self.shutting_down:
+                        break
+                        
+                    # Sleep between chunks (but not before the first one)
+                    if i > 0:
+                        print(f"Sleeping 5s to cooldown rate limits... (Processed {i}/{total})")
+                        time.sleep(5)
 
-                        symbol = future_to_symbol[future]
+                    chunk_symbols = self.all_symbols[i:i + chunk_size]
+                    
+                    try:
+                        # Submit chunk tasks
+                        future_to_symbol = {
+                            executor.submit(self.fetch_forward_factor_data, symbol): symbol 
+                            for symbol in chunk_symbols
+                        }
                         
-                        try:
-                            results = future.result()
-                            if results:
-                                all_results.extend(results)
-                                print(f"✓ {symbol}: Found {len(results)} results")
-                            else:
-                                print(f"⚠ {symbol}: No results - check debug output above for details")
-                        except Exception as e:
-                            error_msg = str(e)
-                            errors.append(f"{symbol}: {error_msg}")
-                            print(f"✗ {symbol}: {error_msg}")
+                        # Process completed tasks for this chunk
+                        for future in as_completed(future_to_symbol):
+                            if self.shutting_down:
+                                break
+
+                            symbol = future_to_symbol[future]
+                            
+                            try:
+                                results = future.result()
+                                if results:
+                                    all_results.extend(results)
+                                    print(f"✓ {symbol}: Found {len(results)} results")
+                                else:
+                                    print(f"⚠ {symbol}: No results - check debug output above for details")
+                            except Exception as e:
+                                error_msg = str(e)
+                                errors.append(f"{symbol}: {error_msg}")
+                                print(f"✗ {symbol}: {error_msg}")
+                            
+                            # Update progress (thread-safe)
+                            with self.progress_lock:
+                                self.processed_count += 1
+                                processed = self.processed_count
+                            
+                            # Update status bar
+                            if processed % 5 == 0 or processed == total:
+                                def update_progress(p=processed, t=total, c=len(all_results)):
+                                    self.status_label.config(
+                                        text=f"Scanning... {p}/{t} symbols processed. Found {c} results so far.")
+                                    self.update_idletasks()
+                                self.after(0, update_progress)
                         
-                        # Update progress (thread-safe)
-                        with self.progress_lock:
-                            self.processed_count += 1
-                            processed = self.processed_count
+                        # --- Update Table After Each Chunk ---
+                        # Sort current accumulated results by Fwd Factor (descending)
+                        all_results.sort(key=lambda x: x.get("Fwd Factor", -float('inf')), reverse=True)
                         
-                        # Update UI every 5 symbols or on last symbol
-                        if processed % 5 == 0 or processed == total:
-                            def update_progress(p=processed, t=total, c=len(all_results)):
-                                self.status_label.config(
-                                    text=f"Scanning... {p}/{t} symbols processed. Found {c} results so far.")
-                                self.update_idletasks()
-                            self.after(0, update_progress)
-                finally:
-                    self.current_executor = None
+                        # Pass a COPY of the list to avoid thread safety issues with UI
+                        results_copy = list(all_results)
+                        self.after(0, self._populate_table, results_copy)
+                        # -------------------------------------
+                                
+                    except Exception as e:
+                        print(f"Chunk processing error: {e}")
+                
+                # End of chunks loop
+                self.current_executor = None
             
-            # Sort by Forward Factor (descending)
+            # Final sort and update
             all_results.sort(key=lambda x: x.get("Fwd Factor", -float('inf')), reverse=True)
             
             # Final status update
@@ -698,6 +615,11 @@ class ForwardFactorDashboard(tk.Tk):
                 f"{row['Back IV']:.2f}",
                 f"{row['Fwd Vol']:.2f}",
                 f"{row['Fwd Factor']:.2f}",
+                row.get("Front Vol", ""),
+                row.get("Front OI", ""),
+                f"{row.get('Cal Front Bid', float('nan')):.3f}" if not pd.isna(row.get("Cal Front Bid", float("nan"))) else "n/a",
+                f"{row.get('Cal Back Ask', float('nan')):.3f}" if not pd.isna(row.get("Cal Back Ask", float("nan"))) else "n/a",
+                f"{row.get('Cal Spread', float('nan')):.3f}" if not pd.isna(row.get("Cal Spread", float("nan"))) else "n/a",
                 f"{row.get('Cal Mid', float('nan')):.3f}" if not pd.isna(row.get("Cal Mid", float("nan"))) else "n/a",
             ))
         
@@ -728,6 +650,7 @@ class ForwardFactorDashboard(tk.Tk):
 
         results = []
         debug_reasons = []  # Track why pairs are skipped
+        processed_dte_pairs = set()
 
         for dte1_target, dte2_target in target_days_pairs:
             try:
@@ -744,9 +667,30 @@ class ForwardFactorDashboard(tk.Tk):
                 expiry2_date = expiries_dates[idx2]
                 dte2 = int(days_to_expiry[idx2])
 
+                # Avoid duplicates (if same DTE pair is already processed for a higher priority target)
+                if (dte1, dte2) in processed_dte_pairs:
+                    continue
+                processed_dte_pairs.add((dte1, dte2))
+
                 if dte1 >= dte2 or dte1 < 0:
-                    debug_reasons.append(f"{dte1_target}-{dte2_target}d: Invalid DTE order (dte1={dte1}, dte2={dte2})")
-                    continue # Skip if expiries are the same or in wrong order
+                    debug_reasons.append(
+                        f"{dte1_target}-{dte2_target}d: Invalid DTE order (dte1={dte1}, dte2={dte2})"
+                    )
+                    continue  # Skip if expiries are the same or in wrong order
+
+                # Apply DTE window filters
+                if dte1 < self.min_front_dte:
+                    debug_reasons.append(
+                        f"{dte1_target}-{dte2_target}d: Front DTE below min_front_dte "
+                        f"(front_dte={dte1}, min_front_dte={self.min_front_dte})"
+                    )
+                    continue
+                if dte2 > self.max_back_dte:
+                    debug_reasons.append(
+                        f"{dte1_target}-{dte2_target}d: Back DTE above max_back_dte "
+                        f"(back_dte={dte2}, max_back_dte={self.max_back_dte})"
+                    )
+                    continue
 
                 # Get ATM IV and book data for both expiries
                 iv1, vol1, oi1, bid1, ask1, mid1 = self._get_atm_iv_with_filters(
@@ -835,6 +779,11 @@ class ForwardFactorDashboard(tk.Tk):
                     "Back IV": iv2 * 100,
                     "Fwd Vol": fwd_sigma * 100,
                     "Fwd Factor": ff_ratio * 100,
+                    "Front Vol": vol1,
+                    "Front OI": oi1,
+                    "Cal Front Bid": bid1,
+                    "Cal Back Ask": ask2,
+                    "Cal Spread": cal_spread,
                     "Cal Mid": cal_mid if cal_mid != float("inf") else float("nan"),
                 })
             except Exception as e:
