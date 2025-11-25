@@ -154,6 +154,7 @@ class ForwardFactorDashboard(tk.Tk):
 
         # Row 1: IV and calendar spread / cost filters
         ttk.Label(filters_frame, text="Min IV (%)").grid(row=1, column=0, padx=(0, 5), sticky="w")
+        ttk.Label(filters_frame, text="Min IV (%)").grid(row=1, column=0, padx=(0, 5), sticky="w")
         self.min_iv_var = tk.StringVar(value="0")
         iv_entry = ttk.Entry(filters_frame, width=15, textvariable=self.min_iv_var)
         iv_entry.grid(row=1, column=1, padx=(0, 20), sticky="w")
@@ -168,7 +169,7 @@ class ForwardFactorDashboard(tk.Tk):
         cal_mid_entry = ttk.Entry(filters_frame, width=15, textvariable=self.max_cal_mid_var)
         cal_mid_entry.grid(row=1, column=5, padx=(0, 20), sticky="w")
 
-        # Row 2: DTE limits and single ticker controls
+        # Row 2: DTE limits and Forward Factor Filter
         ttk.Label(filters_frame, text="Min Front DTE").grid(row=2, column=0, padx=(0, 5), sticky="w")
         self.min_front_dte_var = tk.StringVar(value="25")
         min_front_entry = ttk.Entry(filters_frame, width=10, textvariable=self.min_front_dte_var)
@@ -179,27 +180,33 @@ class ForwardFactorDashboard(tk.Tk):
         max_back_entry = ttk.Entry(filters_frame, width=10, textvariable=self.max_back_dte_var)
         max_back_entry.grid(row=2, column=3, padx=(0, 20), sticky="w")
 
+        ttk.Label(filters_frame, text="Min Fwd Factor (%):").grid(row=2, column=4, padx=(0, 5), sticky="w")
+        self.min_ff_var = tk.StringVar(value="5")
+        ff_entry = ttk.Entry(filters_frame, width=15, textvariable=self.min_ff_var)
+        ff_entry.grid(row=2, column=5, padx=(0, 20), sticky="w")
+        
+        # Row 3: Buttons (Moved down to make space)
         filter_btn = ttk.Button(filters_frame, text="Filter (Current List)", command=self.apply_filters)
-        filter_btn.grid(row=0, column=4, padx=(10, 0))
+        filter_btn.grid(row=3, column=4, padx=(10, 0))
         
         load_all_btn = ttk.Button(filters_frame, text="Load All Symbols (CBOE)", command=self._load_all_symbols)
-        load_all_btn.grid(row=0, column=5, padx=(10, 0))
+        load_all_btn.grid(row=3, column=5, padx=(10, 0))
 
         refresh_btn = ttk.Button(filters_frame, text="Refresh Batch (CBOE)", command=self.refresh_batch)
-        refresh_btn.grid(row=0, column=6, padx=(10, 0))
+        refresh_btn.grid(row=3, column=6, padx=(10, 0))
 
-        # Row 3: Single ticker run + STOP
-        ttk.Label(filters_frame, text="Single Ticker:").grid(row=3, column=0, padx=(0, 5), sticky="w")
+        # Row 4: Single ticker run + STOP
+        ttk.Label(filters_frame, text="Single Ticker:").grid(row=4, column=0, padx=(0, 5), sticky="w")
         self.single_ticker_var = tk.StringVar()
         single_entry = ttk.Entry(filters_frame, width=15, textvariable=self.single_ticker_var)
-        single_entry.grid(row=3, column=1, padx=(0, 20), sticky="w")
+        single_entry.grid(row=4, column=1, padx=(0, 20), sticky="w")
 
         single_btn = ttk.Button(filters_frame, text="Run Single", command=self.run_single_ticker)
-        single_btn.grid(row=3, column=2, padx=(10, 0), sticky="w")
+        single_btn.grid(row=4, column=2, padx=(10, 0), sticky="w")
 
-        # Row 2: Stop scan button
+        # Stop scan button
         stop_btn = ttk.Button(filters_frame, text="STOP", command=self.stop_scan)
-        stop_btn.grid(row=3, column=3, padx=(10, 0), sticky="w")
+        stop_btn.grid(row=4, column=3, padx=(10, 0), sticky="w")
 
         # --- Status Bar ---
         self.status_label = ttk.Label(main_frame, text="Initializing symbol list...", anchor="w", relief=tk.SUNKEN)
@@ -432,6 +439,7 @@ class ForwardFactorDashboard(tk.Tk):
             self.min_volume = int(self.volume_var.get() or "0")
             self.min_open_interest = int(self.oi_var.get() or "0")
             self.min_iv = float(self.min_iv_var.get() or "0")
+            self.min_ff = float(self.min_ff_var.get() or "5")
             self.max_cal_spread = float(self.max_cal_spread_var.get() or "9999")
             self.max_cal_mid = float(self.max_cal_mid_var.get() or "9999")
             self.min_front_dte = int(self.min_front_dte_var.get() or "0")
@@ -439,7 +447,7 @@ class ForwardFactorDashboard(tk.Tk):
         except ValueError:
             messagebox.showerror(
                 "Invalid Input",
-                "Volume, Open Interest, IV, DTE and calendar filters must be numeric.",
+                "Volume, Open Interest, IV, FwdFactor, DTE and calendar filters must be numeric.",
             )
             return
         
@@ -456,7 +464,7 @@ class ForwardFactorDashboard(tk.Tk):
         self.status_label.config(
             text=(
                 f"Scanning {len(self.all_symbols)} symbols with filters: "
-                f"Vol >= {self.min_volume}, OI >= {self.min_open_interest}, "
+                f"Vol >= {self.min_volume}, OI >= {self.min_open_interest}, FF >= {self.min_ff}%, "
                 f"IV >= {self.min_iv}%, CalSpread <= {self.max_cal_spread}$, "
                 f"CalMid <= {self.max_cal_mid}$, "
                 f"Front DTE >= {self.min_front_dte}, Back DTE <= {self.max_back_dte}..."
@@ -768,6 +776,14 @@ class ForwardFactorDashboard(tk.Tk):
                     
                 if np.isinf(ff_ratio) or pd.isna(ff_ratio):
                     debug_reasons.append(f"{dte1_target}-{dte2_target}d: Forward factor invalid (ff_ratio={ff_ratio})")
+                    continue
+
+                # Apply Forward Factor Filter
+                if (ff_ratio * 100.0) < self.min_ff:
+                    debug_reasons.append(
+                        f"{dte1_target}-{dte2_target}d: FF filter fail "
+                        f"(ff={ff_ratio*100:.2f}%, min={self.min_ff}%)"
+                    )
                     continue
 
                 results.append({
