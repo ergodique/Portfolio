@@ -93,8 +93,7 @@ class ForwardFactorDashboard(tk.Tk):
                 "Stock Price",
                 "Front Bid/Ask",
                 "Back Bid/Ask",
-                "Cal Spread",
-                "Cal Mid",
+                "Cal Debit",
                 "R/R",
             ),
             show="headings",
@@ -117,8 +116,7 @@ class ForwardFactorDashboard(tk.Tk):
         self.tree.heading("Stock Price", text="Stock Price ($)")
         self.tree.heading("Front Bid/Ask", text="Front Bid/Ask ($)")
         self.tree.heading("Back Bid/Ask", text="Back Bid/Ask ($)")
-        self.tree.heading("Cal Spread", text="Cal Spread ($)")
-        self.tree.heading("Cal Mid", text="Cal Mid ($)")
+        self.tree.heading("Cal Debit", text="Cal Debit ($)")
         self.tree.heading("R/R", text="R/R")
 
         # --- Define Column Styles ---
@@ -135,8 +133,7 @@ class ForwardFactorDashboard(tk.Tk):
         self.tree.column("Stock Price", anchor="center", width=90)
         self.tree.column("Front Bid/Ask", anchor="center", width=130)
         self.tree.column("Back Bid/Ask", anchor="center", width=130)
-        self.tree.column("Cal Spread", anchor="center", width=90)
-        self.tree.column("Cal Mid", anchor="center", width=90)
+        self.tree.column("Cal Debit", anchor="center", width=90)
         self.tree.column("R/R", anchor="center", width=60)
 
         # --- Scrollbar ---
@@ -158,22 +155,16 @@ class ForwardFactorDashboard(tk.Tk):
         oi_entry = ttk.Entry(filters_frame, width=15, textvariable=self.oi_var)
         oi_entry.grid(row=0, column=3, padx=(0, 20), sticky="w")
 
-        # Row 1: IV and calendar spread / cost filters
-        ttk.Label(filters_frame, text="Min IV (%)").grid(row=1, column=0, padx=(0, 5), sticky="w")
+        # Row 1: IV and calendar debit filter
         ttk.Label(filters_frame, text="Min IV (%)").grid(row=1, column=0, padx=(0, 5), sticky="w")
         self.min_iv_var = tk.StringVar(value="0")
         iv_entry = ttk.Entry(filters_frame, width=15, textvariable=self.min_iv_var)
         iv_entry.grid(row=1, column=1, padx=(0, 20), sticky="w")
 
-        ttk.Label(filters_frame, text="Max Cal Spread ($)").grid(row=1, column=2, padx=(0, 5), sticky="w")
-        self.max_cal_spread_var = tk.StringVar(value="9999")
-        spread_entry = ttk.Entry(filters_frame, width=15, textvariable=self.max_cal_spread_var)
-        spread_entry.grid(row=1, column=3, padx=(0, 20), sticky="w")
-
-        ttk.Label(filters_frame, text="Max Cal Mid ($)").grid(row=1, column=4, padx=(0, 5), sticky="w")
-        self.max_cal_mid_var = tk.StringVar(value="9999")
-        cal_mid_entry = ttk.Entry(filters_frame, width=15, textvariable=self.max_cal_mid_var)
-        cal_mid_entry.grid(row=1, column=5, padx=(0, 20), sticky="w")
+        ttk.Label(filters_frame, text="Max Cal Debit ($)").grid(row=1, column=2, padx=(0, 5), sticky="w")
+        self.max_cal_debit_var = tk.StringVar(value="6")
+        cal_debit_entry = ttk.Entry(filters_frame, width=15, textvariable=self.max_cal_debit_var)
+        cal_debit_entry.grid(row=1, column=3, padx=(0, 20), sticky="w")
 
         # Row 2: DTE limits and Forward Factor Filter
         ttk.Label(filters_frame, text="Min Front DTE").grid(row=2, column=0, padx=(0, 5), sticky="w")
@@ -460,14 +451,14 @@ class ForwardFactorDashboard(tk.Tk):
             self.min_open_interest = int(self.oi_var.get() or "0")
             self.min_iv = float(self.min_iv_var.get() or "0")
             self.min_ff = float(self.min_ff_var.get() or "5")
-            self.max_cal_spread = float(self.max_cal_spread_var.get() or "9999")
-            self.max_cal_mid = float(self.max_cal_mid_var.get() or "9999")
+            self.max_cal_debit = float(self.max_cal_debit_var.get() or "9999")
             self.min_front_dte = int(self.min_front_dte_var.get() or "0")
             self.max_back_dte = int(self.max_back_dte_var.get() or "365")
+            self.min_rr = float(self.min_rr_var.get() or "0")
         except ValueError:
             messagebox.showerror(
                 "Invalid Input",
-                "Volume, Open Interest, IV, FwdFactor, DTE and calendar filters must be numeric.",
+                "Volume, Open Interest, IV, FwdFactor, R/R, DTE and calendar filters must be numeric.",
             )
             return
         
@@ -485,8 +476,7 @@ class ForwardFactorDashboard(tk.Tk):
             text=(
                 f"Scanning {len(self.all_symbols)} symbols with filters: "
                 f"Vol >= {self.min_volume}, OI >= {self.min_open_interest}, FF >= {self.min_ff}%, "
-                f"IV >= {self.min_iv}%, CalSpread <= {self.max_cal_spread}$, "
-                f"CalMid <= {self.max_cal_mid}$, "
+                f"IV >= {self.min_iv}%, CalDebit <= {self.max_cal_debit}$, R/R >= {self.min_rr}, "
                 f"Front DTE >= {self.min_front_dte}, Back DTE <= {self.max_back_dte}..."
             )
         )
@@ -690,6 +680,10 @@ class ForwardFactorDashboard(tk.Tk):
             stock_price = row.get("Stock Price", float("nan"))
             stock_price_str = f"{stock_price:.2f}" if not pd.isna(stock_price) else "n/a"
             
+            # Format Cal Debit
+            cal_debit = row.get("Cal Debit", float("nan"))
+            cal_debit_str = f"{cal_debit:.2f}" if not pd.isna(cal_debit) else "n/a"
+            
             self.tree.insert("", "end", values=(
                 row["Ticker"],
                 row["Expiry Pair"],
@@ -704,8 +698,7 @@ class ForwardFactorDashboard(tk.Tk):
                 stock_price_str,
                 front_ba_str,
                 back_ba_str,
-                f"{row.get('Cal Spread', float('nan')):.3f}" if not pd.isna(row.get("Cal Spread", float("nan"))) else "n/a",
-                f"{row.get('Cal Mid', float('nan')):.3f}" if not pd.isna(row.get("Cal Mid", float("nan"))) else "n/a",
+                cal_debit_str,
                 rr_str,
             ))
         
@@ -829,19 +822,13 @@ class ForwardFactorDashboard(tk.Tk):
                     continue
 
                 cal_spread = ask2 - bid1
-                cal_mid = mid2 - mid1
+                cal_debit = mid2 - mid1
 
-                # Apply calendar spread / mid filters (absolute $)
-                if cal_spread > self.max_cal_spread:
+                # Apply calendar debit filter (absolute $)
+                if cal_debit > self.max_cal_debit:
                     debug_reasons.append(
-                        f"{dte1_target}-{dte2_target}d: CalSpread filter fail "
-                        f"(cal_spread={cal_spread:.3f}, max={self.max_cal_spread})"
-                    )
-                    continue
-                if cal_mid > self.max_cal_mid:
-                    debug_reasons.append(
-                        f"{dte1_target}-{dte2_target}d: CalMid filter fail "
-                        f"(cal_mid={cal_mid:.3f}, max={self.max_cal_mid})"
+                        f"{dte1_target}-{dte2_target}d: CalDebit filter fail "
+                        f"(cal_debit={cal_debit:.3f}, max={self.max_cal_debit})"
                     )
                     continue
 
@@ -873,15 +860,23 @@ class ForwardFactorDashboard(tk.Tk):
                 # time decay: back_mid * sqrt(remaining_dte / original_back_dte)
                 # where remaining_dte = dte2 - dte1 (time left on back month when front expires)
                 #
-                # Risk = Calendar cost (cal_mid)
+                # Risk = Calendar cost (cal_debit)
                 remaining_dte = dte2 - dte1
                 if dte2 > 0 and remaining_dte > 0:
                     # Estimate back month value when front expires (using sqrt time decay)
                     back_value_at_front_exp = mid2 * np.sqrt(remaining_dte / dte2)
-                    max_profit = back_value_at_front_exp - cal_mid
-                    reward_risk = max_profit / cal_mid if cal_mid > 0 and max_profit > 0 else float("nan")
+                    max_profit = back_value_at_front_exp - cal_debit
+                    reward_risk = max_profit / cal_debit if cal_debit > 0 and max_profit > 0 else float("nan")
                 else:
                     reward_risk = float("nan")
+
+                # Apply R/R Filter
+                if pd.isna(reward_risk) or reward_risk < self.min_rr:
+                    debug_reasons.append(
+                        f"{dte1_target}-{dte2_target}d: R/R filter fail "
+                        f"(R/R={reward_risk:.2f if not pd.isna(reward_risk) else 'nan'}, min={self.min_rr})"
+                    )
+                    continue
 
                 results.append({
                     "Ticker": ticker_symbol,
@@ -900,7 +895,7 @@ class ForwardFactorDashboard(tk.Tk):
                     "Back Bid": bid2,
                     "Back Ask": ask2,
                     "Cal Spread": cal_spread,
-                    "Cal Mid": cal_mid if cal_mid != float("inf") else float("nan"),
+                    "Cal Debit": cal_debit if cal_debit != float("inf") else float("nan"),
                     "R/R": reward_risk,
                 })
             except Exception as e:
