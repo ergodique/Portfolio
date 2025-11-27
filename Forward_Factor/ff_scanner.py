@@ -90,10 +90,12 @@ class ForwardFactorDashboard(tk.Tk):
                 "Fwd Factor",
                 "Front Vol",
                 "Front OI",
-                "Cal Front Bid",
-                "Cal Back Ask",
+                "Stock Price",
+                "Front Bid/Ask",
+                "Back Bid/Ask",
                 "Cal Spread",
                 "Cal Mid",
+                "R/R",
             ),
             show="headings",
         )
@@ -112,10 +114,12 @@ class ForwardFactorDashboard(tk.Tk):
         self.tree.heading("Fwd Factor", text="Fwd Factor (%)")
         self.tree.heading("Front Vol", text="Front Vol")
         self.tree.heading("Front OI", text="Front OI")
-        self.tree.heading("Cal Front Bid", text="Front Bid ($)")
-        self.tree.heading("Cal Back Ask", text="Back Ask ($)")
+        self.tree.heading("Stock Price", text="Stock Price ($)")
+        self.tree.heading("Front Bid/Ask", text="Front Bid/Ask ($)")
+        self.tree.heading("Back Bid/Ask", text="Back Bid/Ask ($)")
         self.tree.heading("Cal Spread", text="Cal Spread ($)")
         self.tree.heading("Cal Mid", text="Cal Mid ($)")
+        self.tree.heading("R/R", text="R/R")
 
         # --- Define Column Styles ---
         self.tree.column("Ticker", anchor="center", width=80)
@@ -128,10 +132,12 @@ class ForwardFactorDashboard(tk.Tk):
         self.tree.column("Fwd Factor", anchor="center", width=90)
         self.tree.column("Front Vol", anchor="center", width=80)
         self.tree.column("Front OI", anchor="center", width=80)
-        self.tree.column("Cal Front Bid", anchor="center", width=90)
-        self.tree.column("Cal Back Ask", anchor="center", width=90)
+        self.tree.column("Stock Price", anchor="center", width=90)
+        self.tree.column("Front Bid/Ask", anchor="center", width=130)
+        self.tree.column("Back Bid/Ask", anchor="center", width=130)
         self.tree.column("Cal Spread", anchor="center", width=90)
         self.tree.column("Cal Mid", anchor="center", width=90)
+        self.tree.column("R/R", anchor="center", width=60)
 
         # --- Scrollbar ---
         scrollbar = ttk.Scrollbar(main_frame, orient="vertical", command=self.tree.yview)
@@ -423,13 +429,21 @@ class ForwardFactorDashboard(tk.Tk):
                 return ticker_data
 
             except Exception as e:
+                error_str = str(e).lower()
                 last_error = e
-                # If it's not the last attempt, wait and retry
-                if attempt < max_retries - 1:
-                    sleep_time = (attempt + 1) * 2  # 2s, 4s, 6s
+                
+                # Check if it's a rate limit error
+                is_rate_limit = "rate" in error_str or "too many" in error_str or "429" in error_str
+                
+                if is_rate_limit:
+                    # Rate limit detected: wait 60 seconds before retry
+                    print(f"[Rate Limit] {ticker_symbol}: Waiting 60s before retry (attempt {attempt + 1}/{max_retries})...")
+                    time.sleep(60)
+                elif attempt < max_retries - 1:
+                    # Normal retry with shorter wait
+                    sleep_time = (attempt + 1) * 2  # 2s, 4s
                     time.sleep(sleep_time)
-                else:
-                    pass # Will raise after loop
+                # else: Will raise after loop
         
         raise Exception(f"Error fetching ticker data for {ticker_symbol}: {str(last_error)}")
 
@@ -525,56 +539,86 @@ class ForwardFactorDashboard(tk.Tk):
 
                     chunk_symbols = self.all_symbols[i:i + chunk_size]
                     
-                    try:
-                        # Submit chunk tasks
-                        future_to_symbol = {
-                            executor.submit(self.fetch_forward_factor_data, symbol): symbol 
-                            for symbol in chunk_symbols
-                        }
-                        
-                        # Process completed tasks for this chunk
-                        for future in as_completed(future_to_symbol):
-                            if self.shutting_down:
-                                break
+                    # Track symbols that need retry due to rate limiting
+                    retry_queue = list(chunk_symbols)
+                    
+                    while retry_queue and not self.shutting_down:
+                        try:
+                            # Submit tasks for current queue
+                            future_to_symbol = {
+                                executor.submit(self.fetch_forward_factor_data, symbol): symbol 
+                                for symbol in retry_queue
+                            }
+                            
+                            # Clear retry queue - will be repopulated if rate limit errors occur
+                            retry_queue = []
+                            rate_limit_detected = False
+                            
+                            # Process completed tasks for this chunk
+                            for future in as_completed(future_to_symbol):
+                                if self.shutting_down:
+                                    break
 
-                            symbol = future_to_symbol[future]
-                            
-                            try:
-                                results = future.result()
-                                if results:
-                                    all_results.extend(results)
-                                    print(f"✓ {symbol}: Found {len(results)} results")
-                                else:
-                                    print(f"⚠ {symbol}: No results - check debug output above for details")
-                            except Exception as e:
-                                error_msg = str(e)
-                                errors.append(f"{symbol}: {error_msg}")
-                                print(f"✗ {symbol}: {error_msg}")
-                            
-                            # Update progress (thread-safe)
-                            with self.progress_lock:
-                                self.processed_count += 1
-                                processed = self.processed_count
-                            
-                            # Update status bar
-                            if processed % 5 == 0 or processed == total:
-                                def update_progress(p=processed, t=total, c=len(all_results)):
-                                    self.status_label.config(
-                                        text=f"Scanning... {p}/{t} symbols processed. Found {c} results so far.")
-                                    self.update_idletasks()
-                                self.after(0, update_progress)
-                        
-                        # --- Update Table After Each Chunk ---
-                        # Sort current accumulated results by Fwd Factor (descending)
-                        all_results.sort(key=lambda x: x.get("Fwd Factor", -float('inf')), reverse=True)
-                        
-                        # Pass a COPY of the list to avoid thread safety issues with UI
-                        results_copy = list(all_results)
-                        self.after(0, self._populate_table, results_copy)
-                        # -------------------------------------
+                                symbol = future_to_symbol[future]
                                 
-                    except Exception as e:
-                        print(f"Chunk processing error: {e}")
+                                try:
+                                    results = future.result()
+                                    if results:
+                                        all_results.extend(results)
+                                        print(f"+ {symbol}: Found {len(results)} results")
+                                    else:
+                                        print(f"- {symbol}: No results - check debug output above for details")
+                                except Exception as e:
+                                    error_msg = str(e).lower()
+                                    
+                                    # Check if it's a rate limit error
+                                    if "rate" in error_msg or "too many" in error_msg or "429" in error_msg:
+                                        print(f"[Rate Limit] {symbol}: Adding to retry queue")
+                                        retry_queue.append(symbol)
+                                        rate_limit_detected = True
+                                    else:
+                                        errors.append(f"{symbol}: {str(e)}")
+                                        print(f"X {symbol}: {str(e)}")
+                                
+                                # Update progress (thread-safe)
+                                with self.progress_lock:
+                                    self.processed_count += 1
+                                    processed = self.processed_count
+                                
+                                # Update status bar
+                                if processed % 5 == 0 or processed == total:
+                                    def update_progress(p=processed, t=total, c=len(all_results)):
+                                        self.status_label.config(
+                                            text=f"Scanning... {p}/{t} symbols processed. Found {c} results so far.")
+                                        self.update_idletasks()
+                                    self.after(0, update_progress)
+                            
+                            # If rate limit was detected and we have symbols to retry, wait 60 seconds
+                            if retry_queue and rate_limit_detected:
+                                print(f"[Rate Limit] Waiting 60s before retrying {len(retry_queue)} symbols...")
+                                # Update status to show waiting
+                                def update_waiting(rq=len(retry_queue)):
+                                    self.status_label.config(
+                                        text=f"Rate limited - waiting 60s before retrying {rq} symbols...")
+                                    self.update_idletasks()
+                                self.after(0, update_waiting)
+                                time.sleep(60)
+                                # Reset processed count for retried symbols
+                                with self.progress_lock:
+                                    self.processed_count -= len(retry_queue)
+                                    
+                        except Exception as e:
+                            print(f"Chunk processing error: {e}")
+                            break
+                    
+                    # --- Update Table After Each Chunk ---
+                    # Sort current accumulated results by Fwd Factor (descending)
+                    all_results.sort(key=lambda x: x.get("Fwd Factor", -float('inf')), reverse=True)
+                    
+                    # Pass a COPY of the list to avoid thread safety issues with UI
+                    results_copy = list(all_results)
+                    self.after(0, self._populate_table, results_copy)
+                    # -------------------------------------
                 
                 # End of chunks loop
                 self.current_executor = None
@@ -614,6 +658,32 @@ class ForwardFactorDashboard(tk.Tk):
         
         # Insert new data
         for row in data:
+            # Format Front Bid/Ask: "Bid / Ask (Spread)"
+            front_bid = row.get("Front Bid", float("nan"))
+            front_ask = row.get("Front Ask", float("nan"))
+            if not pd.isna(front_bid) and not pd.isna(front_ask):
+                front_spread = front_ask - front_bid
+                front_ba_str = f"{front_bid:.2f} / {front_ask:.2f} ({front_spread:.2f})"
+            else:
+                front_ba_str = "n/a"
+            
+            # Format Back Bid/Ask: "Bid / Ask (Spread)"
+            back_bid = row.get("Back Bid", float("nan"))
+            back_ask = row.get("Back Ask", float("nan"))
+            if not pd.isna(back_bid) and not pd.isna(back_ask):
+                back_spread = back_ask - back_bid
+                back_ba_str = f"{back_bid:.2f} / {back_ask:.2f} ({back_spread:.2f})"
+            else:
+                back_ba_str = "n/a"
+            
+            # Format R/R
+            rr = row.get("R/R", float("nan"))
+            rr_str = f"{rr:.2f}" if not pd.isna(rr) and not np.isinf(rr) else "n/a"
+            
+            # Format Stock Price
+            stock_price = row.get("Stock Price", float("nan"))
+            stock_price_str = f"{stock_price:.2f}" if not pd.isna(stock_price) else "n/a"
+            
             self.tree.insert("", "end", values=(
                 row["Ticker"],
                 row["Expiry Pair"],
@@ -625,10 +695,12 @@ class ForwardFactorDashboard(tk.Tk):
                 f"{row['Fwd Factor']:.2f}",
                 row.get("Front Vol", ""),
                 row.get("Front OI", ""),
-                f"{row.get('Cal Front Bid', float('nan')):.3f}" if not pd.isna(row.get("Cal Front Bid", float("nan"))) else "n/a",
-                f"{row.get('Cal Back Ask', float('nan')):.3f}" if not pd.isna(row.get("Cal Back Ask", float("nan"))) else "n/a",
+                stock_price_str,
+                front_ba_str,
+                back_ba_str,
                 f"{row.get('Cal Spread', float('nan')):.3f}" if not pd.isna(row.get("Cal Spread", float("nan"))) else "n/a",
                 f"{row.get('Cal Mid', float('nan')):.3f}" if not pd.isna(row.get("Cal Mid", float("nan"))) else "n/a",
+                rr_str,
             ))
         
         self.last_updated_label.config(text=f"Last Updated: {datetime.now().strftime('%H:%M:%S')}")
@@ -786,6 +858,25 @@ class ForwardFactorDashboard(tk.Tk):
                     )
                     continue
 
+                # Calculate R/R (Reward / Risk) for Long Call Calendar Spread
+                # Max Profit occurs when front month expires worthless and stock is at strike
+                # At that point, back month still has time value remaining
+                # Max Profit = Back month value at front expiration - Initial Cost
+                # 
+                # Approximation: Back month value at front expiration can be estimated using
+                # time decay: back_mid * sqrt(remaining_dte / original_back_dte)
+                # where remaining_dte = dte2 - dte1 (time left on back month when front expires)
+                #
+                # Risk = Calendar cost (cal_mid)
+                remaining_dte = dte2 - dte1
+                if dte2 > 0 and remaining_dte > 0:
+                    # Estimate back month value when front expires (using sqrt time decay)
+                    back_value_at_front_exp = mid2 * np.sqrt(remaining_dte / dte2)
+                    max_profit = back_value_at_front_exp - cal_mid
+                    reward_risk = max_profit / cal_mid if cal_mid > 0 and max_profit > 0 else float("nan")
+                else:
+                    reward_risk = float("nan")
+
                 results.append({
                     "Ticker": ticker_symbol,
                     "Expiry Pair": f"{dte1_target}-{dte2_target}d",
@@ -797,10 +888,14 @@ class ForwardFactorDashboard(tk.Tk):
                     "Fwd Factor": ff_ratio * 100,
                     "Front Vol": vol1,
                     "Front OI": oi1,
-                    "Cal Front Bid": bid1,
-                    "Cal Back Ask": ask2,
+                    "Stock Price": current_price,
+                    "Front Bid": bid1,
+                    "Front Ask": ask1,
+                    "Back Bid": bid2,
+                    "Back Ask": ask2,
                     "Cal Spread": cal_spread,
                     "Cal Mid": cal_mid if cal_mid != float("inf") else float("nan"),
+                    "R/R": reward_risk,
                 })
             except Exception as e:
                 # Continue to next pair if this one fails

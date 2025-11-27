@@ -19,19 +19,33 @@ Sorgu, bir musterinin vadeli mevduat hesaplarini banka geneli ortalamalarla kars
 - Vade siniflandirmasi yapiyor (1 aya kadar, 3 aya kadar, vb.)
 - Kanal siniflandirmasi yapiyor (SUBE, DIGITAL, DIGER)
 
-### Periyot Tarihi Hesaplama Mantigi
+### Periyot Tarihi Hesaplama Mantigi (+0 Yaklasimi)
 
-Vade baslangic tarihini **bir sonraki Cuma'ya** yuvarliyor:
+Vade baslangic tarihini **ayni haftanin Cumasina** yuvarliyor. Boylece Cumartesi'den Cuma'ya kadar olan tum gunler ayni haftanin Cumasina eslesir:
 
 | Vade Baslangic Gunu | Eklenen Gun | Sonuc |
 |---------------------|-------------|-------|
-| Pazartesi (Monday)  | +4          | Cuma  |
-| Sali (Tuesday)      | +10         | Sonraki Cuma |
-| Carsamba (Wednesday)| +9          | Sonraki Cuma |
-| Persembe (Thursday) | +8          | Sonraki Cuma |
-| Cuma (Friday)       | +7          | Sonraki Cuma |
-| Cumartesi (Saturday)| +6          | Sonraki Cuma |
-| Pazar (Sunday)      | +5          | Cuma  |
+| Cuma (Friday)       | +0          | Ayni Cuma |
+| Persembe (Thursday) | +1          | Ayni Haftanin Cumasi |
+| Carsamba (Wednesday)| +2          | Ayni Haftanin Cumasi |
+| Sali (Tuesday)      | +3          | Ayni Haftanin Cumasi |
+| Pazartesi (Monday)  | +4          | Ayni Haftanin Cumasi |
+| Pazar (Sunday)      | +5          | Ayni Haftanin Cumasi |
+| Cumartesi (Saturday)| +6          | Sonraki Cuma (yeni hafta) |
+
+**Haftalik Gruplama Gorseli:**
+
+```
+Hafta 40 Periyodu: 3 Ekim (Cuma)
++-----------------------------------------------------------------------+
+|  Cmt 27  |  Paz 28  |  Pzt 29  |  Sal 30  |  Car 1   |  Per 2   |  Cum 3   |
+|   +6     |   +5     |   +4     |   +3     |   +2     |   +1     |   +0     |
+|    |         |          |          |          |          |          |      |
++----+---------+----------+----------+----------+----------+----------+------+
+     |                                                                 |
+     +-------------------------> 3 Ekim <------------------------------+
+                              (Hafta 40 Cumasi)
+```
 
 ### Ornek Cikti:
 
@@ -193,7 +207,16 @@ Ortalama Bakiye Buyuklugu:
 
 **Amac:** Musteri hesaplarini **onceki periyottaki** banka geneli ortalamalarla karsilastirarak **bagil (relative) degerler** hesaplamak.
 
-**Kritik Nokta:** JOIN, `onceki_period_tarihi` uzerinden yapiliyor! Yani musteri 2025-11-14 periyodunda hesap actiysa, karsilastirma 2025-11-07 periyodundaki banka ortalamalariyla yapiliyor.
+**Kritik Nokta:** JOIN, `onceki_period_tarihi` uzerinden yapiliyor! Yani musteri 40. haftada hesap actiysa, karsilastirma 39. haftanin banka ortalamalariyla yapiliyor.
+
+### Bagil Hesaplama Mantigi:
+
+```
+Hafta 40'da acilan hesap --> Hafta 39 ortalamasiyla karsilastirilir
+
+vade_period_tarihi = 3 Ekim (Hafta 40 Cumasi)
+onceki_period_tarihi = 26 Eylul (Hafta 39 Cumasi) = vade_period_tarihi - 7 gun
+```
 
 ### JOIN Mantigi:
 
@@ -331,5 +354,4 @@ Bu yaklasimla **buyuk tabloya sadece 1 kez** gidiliyor ve sonraki tum islemler C
 
 ---
 
-
-
+*Dokuman Tarihi: Kasim 2025*
