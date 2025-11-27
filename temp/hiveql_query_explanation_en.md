@@ -19,19 +19,33 @@ The query compares a customer's time deposit accounts with bank-wide averages to
 - Performs maturity classification (up to 1 month, up to 3 months, etc.)
 - Performs channel classification (BRANCH, DIGITAL, OTHER)
 
-### Period Date Calculation Logic
+### Period Date Calculation Logic (+0 Approach)
 
-Rounds the maturity start date to **the next Friday**:
+Rounds the maturity start date to **the same week's Friday**. This way, all days from Saturday to Friday are mapped to that week's Friday:
 
 | Maturity Start Day | Days Added | Result |
 |--------------------|------------|--------|
-| Monday             | +4         | Friday |
-| Tuesday            | +10        | Next Friday |
-| Wednesday          | +9         | Next Friday |
-| Thursday           | +8         | Next Friday |
-| Friday             | +7         | Next Friday |
-| Saturday           | +6         | Next Friday |
-| Sunday             | +5         | Friday |
+| Friday             | +0         | Same Friday |
+| Thursday           | +1         | Same Week's Friday |
+| Wednesday          | +2         | Same Week's Friday |
+| Tuesday            | +3         | Same Week's Friday |
+| Monday             | +4         | Same Week's Friday |
+| Sunday             | +5         | Same Week's Friday |
+| Saturday           | +6         | Next Friday (new week) |
+
+**Weekly Grouping Visualization:**
+
+```
+Week 40 Period: October 3 (Friday)
++-----------------------------------------------------------------------+
+|  Sat 27  |  Sun 28  |  Mon 29  |  Tue 30  |  Wed 1   |  Thu 2   |  Fri 3   |
+|   +6     |   +5     |   +4     |   +3     |   +2     |   +1     |   +0     |
+|    |         |          |          |          |          |          |      |
++----+---------+----------+----------+----------+----------+----------+------+
+     |                                                                 |
+     +-------------------------> Oct 3 <-------------------------------+
+                              (Week 40 Friday)
+```
 
 ### Sample Output:
 
@@ -205,7 +219,16 @@ Average Balance Size:
 
 **Purpose:** Calculate **relative values** by comparing customer accounts with bank-wide averages from the **previous period**.
 
-**Critical Point:** The JOIN is performed on `onceki_period_tarihi` (previous period date)! So if a customer opened an account in the 2025-11-14 period, the comparison is made with bank averages from the 2025-11-07 period.
+**Critical Point:** The JOIN is performed on `onceki_period_tarihi` (previous period date)! So if a customer opened an account in week 40, the comparison is made with bank averages from week 39.
+
+### Relative Calculation Logic:
+
+```
+Account opened in Week 40 --> Compared with Week 39 averages
+
+vade_period_tarihi = October 3 (Week 40 Friday)
+onceki_period_tarihi = September 26 (Week 39 Friday) = vade_period_tarihi - 7 days
+```
 
 ### JOIN Logic:
 
@@ -352,4 +375,3 @@ With this approach, **the large table is accessed only once** and all subsequent
 ---
 
 *Document Date: November 2025*
-
