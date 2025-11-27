@@ -190,8 +190,14 @@ class ForwardFactorDashboard(tk.Tk):
         self.min_ff_var = tk.StringVar(value="5")
         ff_entry = ttk.Entry(filters_frame, width=15, textvariable=self.min_ff_var)
         ff_entry.grid(row=2, column=5, padx=(0, 20), sticky="w")
+
+        # Row 3: R/R Filter
+        ttk.Label(filters_frame, text="Min R/R:").grid(row=3, column=0, padx=(0, 5), sticky="w")
+        self.min_rr_var = tk.StringVar(value="1.5")
+        rr_entry = ttk.Entry(filters_frame, width=10, textvariable=self.min_rr_var)
+        rr_entry.grid(row=3, column=1, padx=(0, 20), sticky="w")
         
-        # Row 3: Buttons (Moved down to make space)
+        # Row 3: Buttons
         filter_btn = ttk.Button(filters_frame, text="Filter (Current List)", command=self.apply_filters)
         filter_btn.grid(row=3, column=4, padx=(10, 0))
         
