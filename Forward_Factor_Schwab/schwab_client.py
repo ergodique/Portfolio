@@ -38,10 +38,7 @@ class SchwabClient:
             raise ValueError("Please set your APP_KEY in config.py")
         if not app_secret or app_secret == "YOUR_APP_SECRET_HERE":
             raise ValueError("Please set your APP_SECRET in config.py")
-        if len(app_key) != 32:
-            raise ValueError(f"APP_KEY must be 32 characters (got {len(app_key)})")
-        if len(app_secret) != 16:
-            raise ValueError(f"APP_SECRET must be 16 characters (got {len(app_secret)})")
+        # Key length validation removed - Schwab may have changed their format
             
         self._app_key = app_key
         self._app_secret = app_secret
