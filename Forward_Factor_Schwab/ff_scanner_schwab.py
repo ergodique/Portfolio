@@ -49,7 +49,7 @@ class ForwardFactorDashboard(tk.Tk):
 
         # Master symbol universe (from CBOE CSV)
         self.master_symbols: list[str] = []
-        self.batch_size: int = 100  # Smaller batches for real-time API
+        self.batch_size: int = 500  # Larger batches - Schwab has generous rate limits
         self.next_batch_start: int = 0
 
         # Test symbols - high option volume stocks (fallback only)
@@ -143,6 +143,7 @@ class ForwardFactorDashboard(tk.Tk):
                 "Front Vol",
                 "Front OI",
                 "Stock Price",
+                "Strike",
                 "Front Bid/Ask",
                 "Back Bid/Ask",
                 "Cal Debit",
@@ -167,6 +168,7 @@ class ForwardFactorDashboard(tk.Tk):
         self.tree.heading("Front Vol", text="Front Vol")
         self.tree.heading("Front OI", text="Front OI")
         self.tree.heading("Stock Price", text="Stock Price ($)")
+        self.tree.heading("Strike", text="Strike ($)")
         self.tree.heading("Front Bid/Ask", text="Front Bid/Ask ($)")
         self.tree.heading("Back Bid/Ask", text="Back Bid/Ask ($)")
         self.tree.heading("Cal Debit", text="Cal Debit ($)")
@@ -185,6 +187,7 @@ class ForwardFactorDashboard(tk.Tk):
         self.tree.column("Front Vol", anchor="center", width=80)
         self.tree.column("Front OI", anchor="center", width=80)
         self.tree.column("Stock Price", anchor="center", width=90)
+        self.tree.column("Strike", anchor="center", width=80)
         self.tree.column("Front Bid/Ask", anchor="center", width=130)
         self.tree.column("Back Bid/Ask", anchor="center", width=130)
         self.tree.column("Cal Debit", anchor="center", width=90)
@@ -378,12 +381,17 @@ class ForwardFactorDashboard(tk.Tk):
         chain = self.schwab_client.get_option_chain(
             symbol=ticker_symbol,
             contract_type="CALL",
-            strike_count=20,
+            strike_count=5,  # Only need ATM strikes
             include_underlying_quote=True
         )
         
         if not chain:
             raise Exception(f"No option chain data for {ticker_symbol}")
+        
+        # Debug: Check for API errors
+        if 'error' in chain or 'errors' in chain:
+            error_detail = chain.get('error') or chain.get('errors')
+            raise Exception(f"API error: {error_detail}")
         
         # Extract underlying price
         underlying = chain.get('underlying', {})
@@ -400,10 +408,22 @@ class ForwardFactorDashboard(tk.Tk):
         
         # Extract expiry dates from call map
         call_exp_map = chain.get('callExpDateMap', {})
+        
+        # Debug: If no callExpDateMap, check what keys we have
+        if not call_exp_map:
+            available_keys = list(chain.keys())
+            # Try alternative key names
+            for alt_key in ['callExpDateMap', 'calls', 'callMap', 'CALL']:
+                if alt_key in chain and chain[alt_key]:
+                    call_exp_map = chain[alt_key]
+                    break
+            if not call_exp_map:
+                raise Exception(f"No expiry dates for {ticker_symbol}. Available keys: {available_keys[:5]}")
+        
         expiry_dates = sorted(call_exp_map.keys())
         
         if not expiry_dates:
-            raise Exception(f"No expiry dates for {ticker_symbol}")
+            raise Exception(f"No expiry dates for {ticker_symbol} (empty callExpDateMap)")
         
         # Cache the data
         ticker_data = {
@@ -489,10 +509,10 @@ class ForwardFactorDashboard(tk.Tk):
             all_results = []
             total = len(self.all_symbols)
             errors = []
-            chunk_size = 50  # Smaller chunks for real-time API
+            chunk_size = 200  # Process in chunks for UI updates
             
-            # Use ThreadPoolExecutor with fewer workers (Schwab has rate limits)
-            with ThreadPoolExecutor(max_workers=3) as executor:
+            # 10 workers to stay within API rate limits
+            with ThreadPoolExecutor(max_workers=10) as executor:
                 self.current_executor = executor
                 
                 for i in range(0, total, chunk_size):
@@ -501,16 +521,18 @@ class ForwardFactorDashboard(tk.Tk):
                         
                     if i > 0:
                         print(f"Processed {i}/{total} symbols...")
-                        time.sleep(1)  # Small delay between chunks
 
                     chunk_symbols = self.all_symbols[i:i + chunk_size]
                     retry_queue = list(chunk_symbols)
+                    retry_count = 0
+                    max_retries = 2
                     
-                    while retry_queue and not self.shutting_down:
+                    while retry_queue and not self.shutting_down and retry_count <= max_retries:
                         try:
+                            current_batch = list(retry_queue)
                             future_to_symbol = {
                                 executor.submit(self.fetch_forward_factor_data, symbol): symbol 
-                                for symbol in retry_queue
+                                for symbol in current_batch
                             }
                             
                             retry_queue = []
@@ -525,32 +547,43 @@ class ForwardFactorDashboard(tk.Tk):
                                     results = future.result()
                                     if results:
                                         all_results.extend(results)
-                                        print(f"+ {symbol}: Found {len(results)} results")
+                                        print(f"✓ {symbol}: {len(results)} results")
                                     else:
-                                        print(f"- {symbol}: No results")
+                                        print(f"· {symbol}: filtered out")
                                 except Exception as e:
                                     error_msg = str(e).lower()
-                                    if "rate" in error_msg or "limit" in error_msg:
-                                        print(f"[Rate Limit] {symbol}: Retrying...")
+                                    if "rate" in error_msg or "limit" in error_msg or "429" in error_msg:
+                                        print(f"⏳ {symbol}: Rate limit, will retry...")
                                         retry_queue.append(symbol)
+                                    elif "timeout" in error_msg or "timed out" in error_msg or "read timeout" in error_msg:
+                                        print(f"⏳ {symbol}: Timeout, will retry...")
+                                        retry_queue.append(symbol)
+                                    elif "no option chain" in error_msg or "no expiry" in error_msg:
+                                        # Debug: print actual error for first few
+                                        if len(errors) < 10:
+                                            print(f"· {symbol}: No options - {str(e)[:100]}")
+                                        else:
+                                            print(f"· {symbol}: No options")
                                     else:
                                         errors.append(f"{symbol}: {str(e)}")
-                                        print(f"X {symbol}: {str(e)}")
+                                        print(f"✗ {symbol}: {str(e)[:60]}")
                                 
                                 with self.progress_lock:
                                     self.processed_count += 1
                                     processed = self.processed_count
                                 
-                                if processed % 5 == 0 or processed == total:
-                                    def update_progress(p=processed, t=total, c=len(all_results)):
+                                # Update UI every 200 symbols
+                                if processed % 200 == 0 or processed == total:
+                                    def update_progress(p=processed, t=total, c=len(all_results), e=len(errors)):
                                         self.status_label.config(
-                                            text=f"Scanning... {p}/{t} symbols. Found {c} results.")
+                                            text=f"Scanning... {p}/{t} symbols. Found {c} results. Errors: {e}")
                                         self.update_idletasks()
                                     self.after(0, update_progress)
                             
                             if retry_queue:
-                                print(f"Waiting 30s before retrying {len(retry_queue)} symbols...")
-                                time.sleep(30)
+                                retry_count += 1
+                                print(f"\n🔄 Retrying {len(retry_queue)} symbols (attempt {retry_count}/{max_retries})...")
+                                time.sleep(5)
                                 with self.progress_lock:
                                     self.processed_count -= len(retry_queue)
                                     
@@ -558,7 +591,14 @@ class ForwardFactorDashboard(tk.Tk):
                             print(f"Chunk error: {e}")
                             break
                     
+                    # Log any symbols that failed all retries
+                    if retry_queue:
+                        for sym in retry_queue:
+                            errors.append(f"{sym}: Failed after {max_retries} retries")
+                        print(f"⚠ {len(retry_queue)} symbols failed after all retries")
+                    
                     # Update table after each chunk
+                    print(f"\n📊 Processed {min(i + chunk_size, total)}/{total} symbols. Found {len(all_results)} results so far.\n")
                     all_results.sort(key=lambda x: x.get("Fwd Factor", -float('inf')), reverse=True)
                     results_copy = list(all_results)
                     self.after(0, self._populate_table, results_copy)
@@ -616,6 +656,10 @@ class ForwardFactorDashboard(tk.Tk):
             stock_price = row.get("Stock Price", float("nan"))
             stock_price_str = f"{stock_price:.2f}" if not pd.isna(stock_price) else "n/a"
             
+            # Format Strike Price
+            strike = row.get("Strike", float("nan"))
+            strike_str = f"{strike:.2f}" if not pd.isna(strike) else "n/a"
+            
             # Format Cal Debit
             cal_debit = row.get("Cal Debit", float("nan"))
             cal_debit_str = f"{cal_debit:.2f}" if not pd.isna(cal_debit) else "n/a"
@@ -638,6 +682,7 @@ class ForwardFactorDashboard(tk.Tk):
                 row.get("Front Vol", ""),
                 row.get("Front OI", ""),
                 stock_price_str,
+                strike_str,
                 front_ba_str,
                 back_ba_str,
                 cal_debit_str,
@@ -710,10 +755,10 @@ class ForwardFactorDashboard(tk.Tk):
                     continue
 
                 # Get ATM option data for both expiries
-                iv1, vol1, oi1, bid1, ask1, mid1 = self._get_atm_option_data(
+                iv1, vol1, oi1, bid1, ask1, mid1, strike1 = self._get_atm_option_data(
                     call_exp_map, exp1_str, current_price
                 )
-                iv2, vol2, oi2, bid2, ask2, mid2 = self._get_atm_option_data(
+                iv2, vol2, oi2, bid2, ask2, mid2, strike2 = self._get_atm_option_data(
                     call_exp_map, exp2_str, current_price
                 )
 
@@ -780,6 +825,7 @@ class ForwardFactorDashboard(tk.Tk):
                     "Front Vol": vol1,
                     "Front OI": oi1,
                     "Stock Price": current_price,
+                    "Strike": strike1,  # ATM strike price used for the calendar
                     "Earnings": earnings_info,
                     "Front Bid": bid1,
                     "Front Ask": ask1,
@@ -801,7 +847,7 @@ class ForwardFactorDashboard(tk.Tk):
     def _get_atm_option_data(self, call_exp_map, exp_str, current_price):
         """
         Get ATM option data from Schwab option chain.
-        Returns: (iv, volume, open_interest, bid, ask, mid)
+        Returns: (iv, volume, open_interest, bid, ask, mid, strike)
         """
         strikes_map = call_exp_map.get(exp_str, {})
         
@@ -849,7 +895,7 @@ class ForwardFactorDashboard(tk.Tk):
         
         mid = (bid + ask) / 2.0 if bid > 0 and ask > 0 else 0.0
         
-        return float(iv), volume, oi, bid, ask, mid
+        return float(iv), volume, oi, bid, ask, mid, float(atm_strike)
 
     def _calculate_forward_vol_and_factor(self, dte1, iv1, dte2, iv2):
         """Calculates forward volatility and forward factor."""

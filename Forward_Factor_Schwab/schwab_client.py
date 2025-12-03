@@ -22,7 +22,7 @@ class SchwabClient:
     """
     
     def __init__(self, app_key, app_secret, callback_url="https://127.0.0.1", 
-                 tokens_file="tokens.json", timeout=10, verbose=False):
+                 tokens_file="tokens.json", timeout=8, verbose=False):
         """
         Initialize the Schwab API client.
         
@@ -95,49 +95,72 @@ class SchwabClient:
     
     def _authenticate(self):
         """Perform OAuth authentication flow."""
-        print("\n" + "="*60)
-        print("SCHWAB AUTHENTICATION REQUIRED")
-        print("="*60)
+        max_attempts = 3
         
-        # Build authorization URL
-        auth_params = {
-            'client_id': self._app_key,
-            'redirect_uri': self._callback_url,
-            'response_type': 'code'
-        }
-        auth_url = f"{self._auth_url}?{urllib.parse.urlencode(auth_params)}"
-        
-        print(f"\n1. Opening browser for Schwab login...")
-        print(f"   If browser doesn't open, go to:\n   {auth_url}\n")
-        
-        try:
-            webbrowser.open(auth_url)
-        except Exception:
-            pass
-        
-        print("2. Log in to your Schwab account")
-        print("3. After login, you'll be redirected to a page that may show an error")
-        print("4. Copy the ENTIRE URL from your browser's address bar")
-        print("   (It should start with https://127.0.0.1 and contain 'code=')\n")
-        
-        redirect_url = input("Paste the redirect URL here: ").strip()
-        
-        # Extract authorization code
-        try:
-            parsed = urllib.parse.urlparse(redirect_url)
-            query_params = urllib.parse.parse_qs(parsed.query)
-            auth_code = query_params.get('code', [None])[0]
+        for attempt in range(max_attempts):
+            print("\n" + "="*60)
+            print(f"SCHWAB AUTHENTICATION REQUIRED (Attempt {attempt + 1}/{max_attempts})")
+            print("="*60)
             
-            if not auth_code:
-                raise ValueError("No authorization code found in URL")
+            # Build authorization URL
+            auth_params = {
+                'client_id': self._app_key,
+                'redirect_uri': self._callback_url,
+                'response_type': 'code'
+            }
+            auth_url = f"{self._auth_url}?{urllib.parse.urlencode(auth_params)}"
+            
+            print(f"\n1. Opening browser for Schwab login...")
+            print(f"   If browser doesn't open, go to:\n   {auth_url}\n")
+            
+            try:
+                webbrowser.open(auth_url)
+            except Exception:
+                pass
+            
+            print("2. Log in to your Schwab account")
+            print("3. After login, you'll be redirected to a page that may show an error")
+            print("4. QUICKLY copy the ENTIRE URL from your browser's address bar")
+            print("   (It should start with https://127.0.0.1 and contain 'code=')")
+            print("\n   ⚠️  NOTE: The code expires in ~30 seconds! Be quick!\n")
+            
+            redirect_url = input("Paste the redirect URL here: ").strip()
+            
+            # Extract authorization code
+            try:
+                parsed = urllib.parse.urlparse(redirect_url)
+                query_params = urllib.parse.parse_qs(parsed.query)
+                auth_code = query_params.get('code', [None])[0]
                 
-        except Exception as e:
-            raise ValueError(f"Could not extract authorization code: {e}")
+                if not auth_code:
+                    raise ValueError("No authorization code found in URL")
+                
+                # URL decode the auth code (important for %40 -> @ etc.)
+                auth_code = urllib.parse.unquote(auth_code)
+                    
+            except Exception as e:
+                print(f"\n❌ Error: Could not extract authorization code: {e}")
+                if attempt < max_attempts - 1:
+                    print("Let's try again...\n")
+                    continue
+                raise ValueError(f"Could not extract authorization code after {max_attempts} attempts")
+            
+            # Exchange code for tokens
+            try:
+                self._exchange_code_for_tokens(auth_code)
+                print("\n✅ Authentication successful!")
+                print("="*60 + "\n")
+                return
+            except Exception as e:
+                error_msg = str(e).lower()
+                if "expired" in error_msg or "invalid" in error_msg:
+                    print(f"\n❌ Authorization code expired or invalid.")
+                    if attempt < max_attempts - 1:
+                        print("The code expires quickly. Let's try again - be faster this time!\n")
+                        continue
+                raise
         
-        # Exchange code for tokens
-        self._exchange_code_for_tokens(auth_code)
-        print("\nAuthentication successful!")
-        print("="*60 + "\n")
+        raise Exception("Authentication failed after maximum attempts")
     
     def _exchange_code_for_tokens(self, auth_code):
         """Exchange authorization code for access and refresh tokens."""
