@@ -842,6 +842,7 @@ class ForwardFactorDashboard(tk.Tk):
         if not results and debug_reasons:
             print(f"  {ticker_symbol} debug: {debug_reasons[:3]}")
         
+        time.sleep(0.1)  # Small delay between API calls to avoid rate limiting
         return results
 
     def _get_atm_option_data(self, call_exp_map, exp_str, current_price):

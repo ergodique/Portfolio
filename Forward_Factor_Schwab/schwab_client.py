@@ -386,6 +386,13 @@ class SchwabClient:
         
         if response and response.ok:
             return response.json()
+        
+        # Debug: Log what actually came back
+        if response is None:
+            print(f"DEBUG {symbol}: Response is None (timeout/exception)")
+        elif not response.ok:
+            print(f"DEBUG {symbol}: HTTP {response.status_code} - {response.text[:200]}")
+            
         return None
     
     def get_option_expiration_chain(self, symbol):
