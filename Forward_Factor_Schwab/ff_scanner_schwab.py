@@ -4,6 +4,7 @@ Real-time option data from Charles Schwab API.
 """
 
 import json
+import sys
 from io import StringIO
 from pathlib import Path
 
@@ -15,6 +16,30 @@ from tkinter import ttk, messagebox
 import threading
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
+
+
+class TeeLogger:
+    """Write output to both console and log file."""
+    def __init__(self, log_file_path):
+        self.terminal = sys.stdout
+        self.log_file = open(log_file_path, 'w', encoding='utf-8')
+    
+    def write(self, message):
+        self.terminal.write(message)
+        self.log_file.write(message)
+        self.log_file.flush()
+    
+    def flush(self):
+        self.terminal.flush()
+        self.log_file.flush()
+    
+    def close(self):
+        self.log_file.close()
+
+
+# Setup logging to both console and file
+LOG_FILE = Path(__file__).resolve().parent / "last_run.log"
+sys.stdout = TeeLogger(LOG_FILE)
 
 # Import Schwab client and config
 from schwab_client import SchwabClient
@@ -511,8 +536,8 @@ class ForwardFactorDashboard(tk.Tk):
             errors = []
             chunk_size = 200  # Process in chunks for UI updates
             
-            # 10 workers to stay within API rate limits
-            with ThreadPoolExecutor(max_workers=10) as executor:
+            # 6 workers to stay within API rate limits
+            with ThreadPoolExecutor(max_workers=6) as executor:
                 self.current_executor = executor
                 
                 for i in range(0, total, chunk_size):
@@ -553,8 +578,15 @@ class ForwardFactorDashboard(tk.Tk):
                                 except Exception as e:
                                     error_msg = str(e).lower()
                                     if "rate" in error_msg or "limit" in error_msg or "429" in error_msg:
-                                        print(f"⏳ {symbol}: Rate limit, will retry...")
+                                        print(f"\n⏳ {symbol}: Rate limit hit! Waiting 10 seconds...")
                                         retry_queue.append(symbol)
+                                        # Immediately wait 10 seconds on rate limit
+                                        def update_waiting():
+                                            self.status_label.config(text=f"Rate limit hit. Waiting 10s before retry...")
+                                            self.update_idletasks()
+                                        self.after(0, update_waiting)
+                                        time.sleep(10)
+                                        print(f"Resuming from {symbol}...")
                                     elif "timeout" in error_msg or "timed out" in error_msg or "read timeout" in error_msg:
                                         print(f"⏳ {symbol}: Timeout, will retry...")
                                         retry_queue.append(symbol)
@@ -583,7 +615,7 @@ class ForwardFactorDashboard(tk.Tk):
                             if retry_queue:
                                 retry_count += 1
                                 print(f"\n🔄 Retrying {len(retry_queue)} symbols (attempt {retry_count}/{max_retries})...")
-                                time.sleep(5)
+                                time.sleep(2)  # Short delay for timeout retries (rate limit already waited 60s)
                                 with self.progress_lock:
                                     self.processed_count -= len(retry_queue)
                                     

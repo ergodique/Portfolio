@@ -5,3 +5,5 @@ tokens.json
 # Ignore Python cache in this folder
 __pycache__/
 *.pyc
+
+last_run.log
