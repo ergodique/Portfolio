@@ -172,6 +172,7 @@ class ForwardFactorDashboard(tk.Tk):
                 "Front Bid/Ask",
                 "Back Bid/Ask",
                 "Cal Debit",
+                "Avg Sprd%",
                 "Earnings",
                 "FF",
                 "R/R",
@@ -197,6 +198,7 @@ class ForwardFactorDashboard(tk.Tk):
         self.tree.heading("Front Bid/Ask", text="Front Bid/Ask ($)")
         self.tree.heading("Back Bid/Ask", text="Back Bid/Ask ($)")
         self.tree.heading("Cal Debit", text="Cal Debit ($)")
+        self.tree.heading("Avg Sprd%", text="Avg Sprd%")
         self.tree.heading("Earnings", text="Earnings")
         self.tree.heading("FF", text="FF (%)")
         self.tree.heading("R/R", text="R/R")
@@ -216,6 +218,7 @@ class ForwardFactorDashboard(tk.Tk):
         self.tree.column("Front Bid/Ask", anchor="center", width=130)
         self.tree.column("Back Bid/Ask", anchor="center", width=130)
         self.tree.column("Cal Debit", anchor="center", width=90)
+        self.tree.column("Avg Sprd%", anchor="center", width=70)
         self.tree.column("Earnings", anchor="center", width=120)
         self.tree.column("FF", anchor="center", width=70)
         self.tree.column("R/R", anchor="center", width=60)
@@ -265,6 +268,11 @@ class ForwardFactorDashboard(tk.Tk):
         self.min_ff_var = tk.StringVar(value="5")
         ff_entry = ttk.Entry(filters_frame, width=15, textvariable=self.min_ff_var)
         ff_entry.grid(row=2, column=5, padx=(0, 20), sticky="w")
+
+        ttk.Label(filters_frame, text="Max Avg Sprd%:").grid(row=2, column=6, padx=(0, 5), sticky="w")
+        self.max_avg_spread_var = tk.StringVar(value="100")
+        avg_spread_entry = ttk.Entry(filters_frame, width=10, textvariable=self.max_avg_spread_var)
+        avg_spread_entry.grid(row=2, column=7, padx=(0, 20), sticky="w")
 
         # Row 3: R/R Filter
         ttk.Label(filters_frame, text="Min R/R:").grid(row=3, column=0, padx=(0, 5), sticky="w")
@@ -478,6 +486,7 @@ class ForwardFactorDashboard(tk.Tk):
             self.min_front_dte = int(self.min_front_dte_var.get() or "0")
             self.max_back_dte = int(self.max_back_dte_var.get() or "365")
             self.min_rr = float(self.min_rr_var.get() or "0")
+            self.max_avg_spread = float(self.max_avg_spread_var.get() or "100")
         except ValueError:
             messagebox.showerror(
                 "Invalid Input",
@@ -696,6 +705,10 @@ class ForwardFactorDashboard(tk.Tk):
             cal_debit = row.get("Cal Debit", float("nan"))
             cal_debit_str = f"{cal_debit:.2f}" if not pd.isna(cal_debit) else "n/a"
             
+            # Format Avg Spread %
+            avg_sprd = row.get("Avg Spread %", float("nan"))
+            avg_sprd_str = f"{avg_sprd:.1f}" if not pd.isna(avg_sprd) else "n/a"
+            
             # Format Earnings
             earnings_str = row.get("Earnings", "N/E")
             
@@ -718,6 +731,7 @@ class ForwardFactorDashboard(tk.Tk):
                 front_ba_str,
                 back_ba_str,
                 cal_debit_str,
+                avg_sprd_str,
                 earnings_str,
                 ff_str,
                 rr_str,
@@ -842,6 +856,18 @@ class ForwardFactorDashboard(tk.Tk):
                 if pd.isna(reward_risk) or reward_risk < self.min_rr:
                     continue
 
+                # Calculate average spread percentage for liquidity assessment
+                front_spread_pct = ((ask1 - bid1) / mid1 * 100) if mid1 > 0 else float('nan')
+                back_spread_pct = ((ask2 - bid2) / mid2 * 100) if mid2 > 0 else float('nan')
+                if not pd.isna(front_spread_pct) and not pd.isna(back_spread_pct):
+                    avg_spread_pct = (front_spread_pct + back_spread_pct) / 2
+                else:
+                    avg_spread_pct = float('nan')
+
+                # Apply average spread filter
+                if not pd.isna(avg_spread_pct) and avg_spread_pct > self.max_avg_spread:
+                    continue
+
                 # Earnings info (Schwab doesn't provide this directly, mark as N/E)
                 earnings_info = "N/E"
 
@@ -865,6 +891,7 @@ class ForwardFactorDashboard(tk.Tk):
                     "Back Ask": ask2,
                     "Cal Spread": cal_spread,
                     "Cal Debit": cal_debit if cal_debit != float("inf") else float("nan"),
+                    "Avg Spread %": avg_spread_pct,
                     "R/R": reward_risk,
                 })
             except Exception as e:

@@ -7,6 +7,8 @@ import sys
 import json
 import time
 import base64
+import platform
+import subprocess
 import requests
 import threading
 import webbrowser
@@ -108,12 +110,36 @@ class SchwabClient:
             auth_url = f"{self._auth_url}?{urllib.parse.urlencode(auth_params)}"
             
             print(f"\n1. Opening browser for Schwab login...")
-            print(f"   If browser doesn't open, go to:\n   {auth_url}\n")
             
+            # Copy URL to clipboard for convenience
+            clipboard_copied = False
             try:
-                webbrowser.open(auth_url)
+                if platform.system() == 'Darwin':
+                    subprocess.run(['pbcopy'], input=auth_url.encode(), check=True)
+                    clipboard_copied = True
+                elif platform.system() == 'Windows':
+                    subprocess.run(['clip'], input=auth_url.encode(), check=True, shell=True)
+                    clipboard_copied = True
             except Exception:
                 pass
+            
+            if clipboard_copied:
+                print(f"   URL copied to clipboard! Just open your browser and paste (Cmd+V)")
+            print(f"   URL: {auth_url}\n")
+            
+            # Try to open browser - use platform-specific method for reliability
+            try:
+                if platform.system() == 'Darwin':
+                    # macOS: use 'open' command which is more reliable than webbrowser
+                    subprocess.run(['open', auth_url], check=False)
+                elif platform.system() == 'Windows':
+                    # Windows: use os.startfile or webbrowser
+                    webbrowser.open(auth_url)
+                else:
+                    # Linux and others
+                    webbrowser.open(auth_url)
+            except Exception as e:
+                print(f"   Could not open browser automatically: {e}")
             
             print("2. Log in to your Schwab account")
             print("3. After login, you'll be redirected to a page that may show an error")
