@@ -124,7 +124,8 @@ def fetch_and_process_trades(
     wallet_address: str,
     days: int = 30,
     parallel: int = 1,
-    fetch_market_info: bool = False
+    fetch_market_info: bool = False,
+    use_market_approach: bool = False
 ) -> pd.DataFrame:
     """
     Fetch trades for a wallet and process into a DataFrame.
@@ -135,6 +136,7 @@ def fetch_and_process_trades(
         days: Number of days of history to fetch
         parallel: Number of parallel requests (1=sync, >1=async)
         fetch_market_info: Whether to fetch additional market info (slower)
+        use_market_approach: Whether to use market-by-market fetching to bypass offset limit
     
     Returns:
         DataFrame with processed trade data
@@ -156,7 +158,8 @@ def fetch_and_process_trades(
         start_date=start_date,
         end_date=end_date,
         parallel=parallel,
-        on_progress=on_trades_received
+        on_progress=on_trades_received,
+        use_market_approach=use_market_approach
     )
     
     _partial_trades = trades
@@ -254,6 +257,11 @@ def main():
         action="store_true",
         help="Fetch additional market info (resolved status, winning outcome) - slower"
     )
+    parser.add_argument(
+        "--market-approach",
+        action="store_true",
+        help="Use market-by-market fetching to bypass API offset limit (recommended for full history)"
+    )
     
     args = parser.parse_args()
     
@@ -295,6 +303,7 @@ def main():
     print(f"Output: {output_path}")
     print(f"Parallel: {args.parallel} {'(async)' if args.parallel > 1 else '(sync)'}")
     print(f"Fetch market info: {args.fetch_market_info}")
+    print(f"Market approach: {args.market_approach}")
     print(f"[Ctrl+C to stop and save partial data]")
     print(f"{'=' * 50}")
     
@@ -308,7 +317,8 @@ def main():
             wallet,
             days=days,
             parallel=args.parallel,
-            fetch_market_info=args.fetch_market_info
+            fetch_market_info=args.fetch_market_info,
+            use_market_approach=args.market_approach
         )
     except KeyboardInterrupt:
         handle_interrupt(None, None)

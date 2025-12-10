@@ -39,7 +39,8 @@ class PolymarketClient:
         end_date: Optional[datetime] = None,
         limit: int = 500,
         parallel: int = 1,
-        on_progress: callable = None
+        on_progress: callable = None,
+        use_market_approach: bool = False
     ) -> list:
         """
         Fetch all trades for a wallet address within a date range.
@@ -51,6 +52,7 @@ class PolymarketClient:
             limit: Number of records per page
             parallel: Number of parallel requests (1 = sync, >1 = async)
             on_progress: Callback function(trades) called periodically with current data
+            use_market_approach: If True, use market-by-market fetching to bypass offset limit
         
         Returns:
             List of trade records
@@ -63,6 +65,11 @@ class PolymarketClient:
         print(f"Fetching trades for {wallet_address[:10]}...")
         print(f"Date range: {start_date.date()} to {end_date.date()}")
         
+        # Use market-by-market approach to bypass offset limit
+        if use_market_approach:
+            print("Using market-by-market approach to bypass offset limit...")
+            return self._get_trades_by_market(wallet_address, start_date, end_date, on_progress)
+        
         if parallel > 1 and ASYNC_AVAILABLE:
             print(f"Using parallel mode with {parallel} concurrent requests")
             return self._get_trades_parallel(wallet_address, start_date, end_date, limit, parallel, on_progress)
@@ -70,6 +77,195 @@ class PolymarketClient:
             if parallel > 1 and not ASYNC_AVAILABLE:
                 print("Warning: aiohttp not installed, falling back to sync mode")
             return self._get_trades_sync(wallet_address, start_date, end_date, limit, on_progress)
+    
+    def _get_trades_by_market(
+        self,
+        wallet_address: str,
+        start_date: datetime,
+        end_date: datetime,
+        on_progress: callable = None
+    ) -> list:
+        """
+        HYBRID APPROACH: Combines standard offset-based fetching with market-by-market fetching.
+        
+        Strategy:
+        1. First, use standard method to get the most recent trades (up to offset limit)
+        2. Then, get all user positions to find all markets they've traded
+        3. For each market, fetch additional trades that might be beyond the offset limit
+        4. Merge and deduplicate all results
+        
+        This ensures we don't miss any trades while also getting trades beyond the offset limit.
+        """
+        all_trades = []
+        seen_trades = set()
+        
+        # Step 1: First get trades using standard method (up to offset limit)
+        print("Step 1: Fetching recent trades using standard method...")
+        standard_trades = self._get_trades_sync(wallet_address, start_date, end_date, 500, None)
+        
+        # Add standard trades to result
+        for trade in standard_trades:
+            tx_hash = trade.get("transactionHash", "")
+            condition_id = trade.get("conditionId", "")
+            trade_time = self._parse_timestamp(trade.get("timestamp") or trade.get("created_at"))
+            outcome = trade.get("outcome", "")
+            size = trade.get("size", 0)
+            price = trade.get("price", 0)
+            
+            trade_key = f"{tx_hash}_{condition_id}_{outcome}_{size}_{price}_{trade_time}"
+            
+            if trade_key not in seen_trades:
+                seen_trades.add(trade_key)
+                all_trades.append(trade)
+        
+        print(f"   Got {len(all_trades)} trades from standard method")
+        
+        if on_progress:
+            on_progress(all_trades)
+        
+        # Step 2: Get all user positions to find all markets they've traded
+        print("Step 2: Getting user positions to find all markets...")
+        positions = self._get_all_user_positions(wallet_address)
+        
+        if not positions:
+            print("No positions found. Returning standard method results only.")
+            return all_trades
+        
+        # Get unique condition IDs from positions
+        unique_markets = set()
+        for pos in positions:
+            condition_id = pos.get("conditionId")
+            if condition_id:
+                unique_markets.add(condition_id)
+        
+        print(f"   Found {len(unique_markets)} markets from positions")
+        
+        # ALSO get condition IDs from the trades we already fetched
+        # This helps us discover closed/resolved markets that aren't in positions
+        for trade in all_trades:
+            condition_id = trade.get("conditionId")
+            if condition_id and condition_id not in unique_markets:
+                unique_markets.add(condition_id)
+        
+        print(f"   Total unique markets after including trades: {len(unique_markets)}")
+        
+        # Step 3: Fetch trades for each market (to get trades beyond offset limit)
+        print("Step 3: Fetching additional trades from each market...")
+        trades_added = 0
+        for i, condition_id in enumerate(unique_markets, 1):
+            market_trades = self._get_trades_for_market(
+                wallet_address, condition_id, start_date, end_date
+            )
+            
+            # Deduplicate - only add trades not already seen
+            for trade in market_trades:
+                tx_hash = trade.get("transactionHash", "")
+                trade_time = self._parse_timestamp(trade.get("timestamp") or trade.get("created_at"))
+                outcome = trade.get("outcome", "")
+                size = trade.get("size", 0)
+                price = trade.get("price", 0)
+                
+                trade_key = f"{tx_hash}_{condition_id}_{outcome}_{size}_{price}_{trade_time}"
+                
+                if trade_key not in seen_trades:
+                    seen_trades.add(trade_key)
+                    all_trades.append(trade)
+                    trades_added += 1
+            
+            if i % 10 == 0 or i == len(unique_markets):
+                print(f"   Processed {i}/{len(unique_markets)} markets, {trades_added} additional trades found")
+            
+            if on_progress:
+                on_progress(all_trades)
+        
+        # Sort by timestamp (newest first)
+        all_trades.sort(
+            key=lambda x: self._parse_timestamp(x.get("timestamp") or x.get("created_at")) or datetime.min,
+            reverse=True
+        )
+        
+        print(f"Total unique trades fetched: {len(all_trades)} ({trades_added} from market-by-market)")
+        return all_trades
+    
+    def _get_all_user_positions(self, wallet_address: str) -> list:
+        """Get all user positions with pagination"""
+        all_positions = []
+        offset = 0
+        limit = 500
+        
+        while True:
+            url = f"{DATA_API_BASE}/positions"
+            params = {
+                "user": wallet_address.lower(),
+                "limit": limit,
+                "offset": offset,
+            }
+            
+            try:
+                response = self.session.get(url, params=params, timeout=30)
+                response.raise_for_status()
+                data = response.json()
+            except requests.exceptions.RequestException as e:
+                print(f"Error fetching positions: {e}")
+                break
+            
+            if not data:
+                break
+            
+            all_positions.extend(data)
+            
+            if len(data) < limit:
+                break
+            
+            offset += limit
+        
+        return all_positions
+    
+    def _get_trades_for_market(
+        self,
+        wallet_address: str,
+        condition_id: str,
+        start_date: datetime,
+        end_date: datetime
+    ) -> list:
+        """Fetch all trades for a specific market filtered by user and date range"""
+        filtered_trades = []
+        offset = 0
+        limit = 500
+        max_offset = 1000  # API limit still applies per market
+        
+        while offset <= max_offset:
+            url = f"{DATA_API_BASE}/trades"
+            params = {
+                "user": wallet_address.lower(),
+                "market": condition_id,
+                "limit": limit,
+                "offset": offset,
+            }
+            
+            try:
+                response = self.session.get(url, params=params, timeout=30)
+                response.raise_for_status()
+                data = response.json()
+            except requests.exceptions.RequestException as e:
+                print(f"Error fetching trades for market {condition_id[:10]}...: {e}")
+                break
+            
+            if not data:
+                break
+            
+            # Filter by date range
+            for trade in data:
+                trade_time = self._parse_timestamp(trade.get("timestamp") or trade.get("created_at"))
+                if trade_time and start_date <= trade_time <= end_date:
+                    filtered_trades.append(trade)
+            
+            if len(data) < limit:
+                break
+            
+            offset += limit
+        
+        return filtered_trades
     
     def _get_trades_sync(
         self,

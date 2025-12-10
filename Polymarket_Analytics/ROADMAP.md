@@ -99,33 +99,46 @@ Parquet dosyası şu kolonları içeriyor:
 **Sorun:** API verileri en yeni tarihten eskiye doğru geliyor, eski pencereler için offset=0'dan başlamak işe yaramıyor
 **Durum:** ❌ Çalışmıyor
 
-## Aşılamayan Sorun: API Offset Limiti
+## ✅ ÇÖZÜM: Hibrit Market-by-Market Yaklaşımı
 
-### Sorun Detayı
+### Sorun Detayı (Eski)
 - **API Endpoint:** `https://data-api.polymarket.com/trades`
 - **Offset Limiti:** 1000 (dokümantasyonda belirtilmiş)
-- **Etki:** Sadece en son ~1500-2000 trade çekilebiliyor
-- **Neden:** API performansı ve güvenilirliği için konulmuş bir limit
+- **Etki:** Sadece en son ~1500-2000 trade çekilebiliyordu
 
-### Test Sonuçları
+### Bulunan Çözüm: Hibrit Yaklaşım ✅
+Offset limitini aşmak için yeni bir hibrit strateji uygulandı:
+
+1. **Adım 1:** Standart offset-based yöntemle en yeni trade'leri çek (offset 0-1000)
+2. **Adım 2:** `/positions` endpoint'inden kullanıcının tüm market'lerini (pozisyonlarını) al
+3. **Adım 3:** Her market için ayrı ayrı trade'leri çek
+4. **Adım 4:** Tüm sonuçları birleştir ve deduplicate et
+
+### Neden Çalışıyor?
+- `/positions` endpoint'i offset limitine takılmıyor
+- Her market için ayrı `/trades` sorgusu offset limitini sıfırlıyor
+- Standart yöntem kapatılmış (0 pozisyonlu) market'leri yakalar
+- Market-by-market yöntem offset limiti aşan trade'leri yakalar
+
+### Kullanım
+```bash
+# Hibrit yaklaşım ile (önerilen)
+python wallet_analyzer.py <wallet_address> -d 7 --market-approach
+
+# Standart yaklaşım ile (offset limitine takılır)
+python wallet_analyzer.py <wallet_address> -d 7
 ```
-offset=0:     Farklı veriler ✅
-offset=500:   Farklı veriler ✅
-offset=1000:  Farklı veriler ✅
-offset=1500:  Aynı veriler (offset=1000 ile aynı) ❌
-offset=2000:  Aynı veriler (offset=1000 ile aynı) ❌
+
+### Test Sonuçları (Karşılaştırma)
 ```
-
-### Denenen Çözümler
-1. ✅ **Timestamp-based Pagination:** `before`, `after` parametreleri - Çalışmıyor
-2. ✅ **Zaman Penceresi Yaklaşımı:** 6 saatlik pencerelere bölme - Çalışmıyor (API her zaman en yeni verileri döndürüyor)
-3. ✅ **Daha Küçük Offset Artışları:** Limit 500'den 1000'e çıkarıldı - Limit hala 1000
-
-### Dokümantasyon Bilgileri
-- **Resmi Dokümantasyon:** https://docs.polymarket.com/developers
-- **Data API:** https://docs.polymarket.com/developers/misc-endpoints/data-api-get-positions
-- **Changelog:** https://docs.polymarket.com/changelog
-- **Offset Limiti:** `/trades` endpoint'i için maksimum offset 1000
+Standart yaklaşım (eski):
+  - 1498 trade
+  - Tarih aralığı: ~3 saat (10:52 - 13:35)
+  
+Hibrit yaklaşım (yeni):
+  - 1631 trade (+133 ek trade)
+  - Tarih aralığı: ~22 saat (16:05 - 14:15)
+```
 
 ## Mevcut Durum
 
@@ -136,18 +149,21 @@ offset=2000:  Aynı veriler (offset=1000 ile aynı) ❌
 - ✅ Parquet dosyasına kaydetme
 - ✅ Ctrl+C ile kesme ve partial data kaydetme
 - ✅ Progress göstergesi
+- ✅ **Hibrit market-by-market yaklaşım (--market-approach)**
 
 ### Sınırlamalar
-- ⚠️ **Maksimum Trade Sayısı:** ~1500-2000 trade (offset limiti nedeniyle)
-- ⚠️ **Tarih Aralığı:** Sadece en yeni trade'ler çekilebiliyor (1 günlük veri için yeterli olmayabilir)
+- ⚠️ Hibrit yaklaşım biraz daha yavaş (her market için ayrı istek)
+- ⚠️ Tamamen kapatılmış pozisyonlar `/positions`'da görünmeyebilir
 - ⚠️ **API Rate Limit:** Bilinmiyor, test edilmedi
 
-### Test Sonuçları
+### Güncel Test Sonuçları
 ```
 Wallet: 0x6031b6eed1c97e853c6e0f03ad3ce3529351f96d
-Period: 1 day
-Result: ~1500 trade (sadece ~3 saatlik veri: 10:46 - 13:25)
-Date Range: 2025-12-08 10:46:07 to 2025-12-08 13:25:09
+Period: 7 days
+Method: Hibrit (--market-approach)
+Result: 1631 trade
+Date Range: 2025-12-07 16:05:23 to 2025-12-08 14:15:49
+Unique Markets: 35
 ```
 
 ## Gelecek İçin Öneriler
