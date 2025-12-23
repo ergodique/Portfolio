@@ -6,4 +6,7 @@ tokens.json
 __pycache__/
 *.pyc
 
-last_run.log
+# Ignore logs
+**/logs/*
+!**/logs/.gitkeep
+logs/

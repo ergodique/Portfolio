@@ -38,8 +38,26 @@ class TeeLogger:
         self.log_file.close()
 
 
-# Setup logging to both console and file
-LOG_FILE = Path(__file__).resolve().parent / "last_run.log"
+# Setup logging to both console and file in a rotating manner
+LOGS_DIR = Path(__file__).resolve().parent / "logs"
+LOGS_DIR.mkdir(exist_ok=True)
+
+def rotate_logs(logs_dir, max_logs=5):
+    """Keep only the latest max_logs files in the directory."""
+    try:
+        log_files = sorted(list(logs_dir.glob("run_*.log")), key=lambda f: f.stat().st_mtime)
+        while len(log_files) >= max_logs:
+            old_log = log_files.pop(0)
+            try:
+                old_log.unlink()
+            except Exception as e:
+                print(f"Error deleting old log {old_log}: {e}")
+                break
+    except Exception as e:
+        print(f"Error during log rotation: {e}")
+
+rotate_logs(LOGS_DIR)
+LOG_FILE = LOGS_DIR / f"run_{datetime.now().strftime('%Y%M%d_%H%M%S')}.log"
 sys.stdout = TeeLogger(LOG_FILE)
 
 # Import Schwab client and config
