@@ -85,19 +85,20 @@ class ForwardFactorDashboard(tk.Tk):
         
         # Cache mechanism for ticker data
         self.ticker_cache: dict[str, dict] = {}
-        self.cache_lock = threading.Lock()
-        self.progress_lock = threading.Lock()
+        self.cache_lock = threading.RLock()
+        self.progress_lock = threading.RLock()
         self.processed_count = 0
         self.scan_start_time = None
 
         # Control flags
         self.shutting_down: bool = False
         self.current_executor: ThreadPoolExecutor | None = None
-        self.results_lock = threading.Lock()
+        self.results_lock = threading.RLock()
         self.filtered_results = []
         self._sort_reverse: dict[str, bool] = {}
         self.current_sort_col = "FF"
         self.current_sort_reverse = True
+        self.no_earnings_var = tk.BooleanVar(value=False)
         
         # Schwab client (initialized later)
         self.schwab_client: SchwabClient | None = None
@@ -294,6 +295,15 @@ class ForwardFactorDashboard(tk.Tk):
         self.min_rr_var = tk.StringVar(value="1.85")
         rr_entry = ttk.Entry(filters_frame, width=10, textvariable=self.min_rr_var)
         rr_entry.grid(row=3, column=1, padx=(0, 20), sticky="w")
+        
+        ttk.Label(filters_frame, text="No Earnings").grid(row=3, column=2, padx=(5, 2), sticky="w")
+        self.no_earnings_check = ttk.Checkbutton(
+            filters_frame, 
+            text="", 
+            variable=self.no_earnings_var,
+            command=self._update_display
+        )
+        self.no_earnings_check.grid(row=3, column=3, padx=(0, 20), sticky="w")
         
         # Row 3: Buttons
         filter_btn = ttk.Button(filters_frame, text="Filter (Current List)", command=self.apply_filters)
@@ -582,6 +592,8 @@ class ForwardFactorDashboard(tk.Tk):
         # Clear cache when starting new scan
         with self.cache_lock:
             self.ticker_cache.clear()
+        with self.results_lock:
+            self.filtered_results = []
         self.processed_count = 0
         self.scan_start_time = time.time()
         self.shutting_down = False
@@ -600,7 +612,10 @@ class ForwardFactorDashboard(tk.Tk):
                 self.current_executor.shutdown(wait=False, cancel_futures=True)
         except Exception:
             pass
-        self.status_label.config(text="Scan stopped by user.")
+        elapsed = int(time.time() - self.scan_start_time) if self.scan_start_time else 0
+        m, s = divmod(elapsed, 60)
+        timer_str = f"{m:02d}:{s:02d}"
+        self.status_label.config(text=f"Scan stopped by user ({timer_str}).")
 
     def run_single_ticker(self):
         """Run scan for a single ticker."""
@@ -741,9 +756,8 @@ class ForwardFactorDashboard(tk.Tk):
                     with self.results_lock:
                         self.filtered_results = list(all_results)
                         self._perform_sort()
-                        results_to_push = list(self.filtered_results)
                     
-                    self.after(0, self._populate_table, results_to_push)
+                    self._update_display()
                 
                 self.current_executor = None
             
@@ -751,14 +765,17 @@ class ForwardFactorDashboard(tk.Tk):
             with self.results_lock:
                 self.filtered_results = list(all_results)
                 self._perform_sort()
-                final_results = list(self.filtered_results)
+            
+            elapsed = int(time.time() - self.scan_start_time) if self.scan_start_time else 0
+            m, s = divmod(elapsed, 60)
+            timer_str = f"{m:02d}:{s:02d}"
             
             if errors:
-                error_summary = f"Scan complete | {total}/{total} (100.0%) | Passed: {len(all_results)} | Errors: {len(errors)}"
+                error_summary = f"Scan complete ({timer_str}) | {total}/{total} (100.0%) | Passed: {len(all_results)} | Errors: {len(errors)}"
             else:
-                error_summary = f"Scan complete | {total}/{total} (100.0%) | Passed: {len(all_results)} | Errors: 0"
+                error_summary = f"Scan complete ({timer_str}) | {total}/{total} (100.0%) | Passed: {len(all_results)} | Errors: 0"
             
-            self.after(0, self._populate_table, final_results)
+            self._update_display()
             self.after(0, lambda: self.status_label.config(text=error_summary))
             
         except Exception as e:
@@ -841,7 +858,30 @@ class ForwardFactorDashboard(tk.Tk):
             ), tags=(row.get("Row Tag", ""),))
         
         self.last_updated_label.config(text=f"Last Updated: {datetime.now().strftime('%H:%M:%S')}")
-        self.status_label.config(text=f"Scan complete. Found {len(data)} results. Sorted by FF (descending).")
+        
+        # Only set "Sorted by" status if we aren't displaying a scan summary
+        current_status = self.status_label.cget("text")
+        if "Scanning" in current_status or "Sorted by" in current_status or "Scan complete" in current_status:
+            order = "descending" if self.current_sort_reverse else "ascending"
+            new_status = f"{current_status.split(' | ')[0]} | Sorted by {self.current_sort_col} ({order})"
+            self.status_label.config(text=new_status)
+
+    def _update_display(self):
+        """Updates the Treeview based on filtered_results and current UI filters (like No Earnings)."""
+        with self.results_lock:
+            if not self.filtered_results:
+                self.after(0, self._populate_table, [])
+                return
+            
+            display_results = list(self.filtered_results)
+            
+            # Apply dynamic toggle filters
+            if self.no_earnings_var.get():
+                # Filter out ones that pass the earnings filter? 
+                # Row tag "earn_red" means it failed (Front Expiry > Earnings).
+                display_results = [r for r in display_results if r.get("Row Tag") != "earn_red"]
+            
+            self.after(0, self._populate_table, display_results)
 
     def _sort_column(self, col):
         """Sort the table by the given column."""
@@ -856,7 +896,7 @@ class ForwardFactorDashboard(tk.Tk):
             self.current_sort_reverse = reverse
             
             self._perform_sort()
-            self._populate_table(list(self.filtered_results))
+            self._update_display()
             
             order = "descending" if reverse else "ascending"
             self.status_label.config(text=f"Sorted by {col} ({order}).")
