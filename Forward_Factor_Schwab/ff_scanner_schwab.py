@@ -58,7 +58,7 @@ def rotate_logs(logs_dir, max_logs=5):
         print(f"Error during log rotation: {e}")
 
 rotate_logs(LOGS_DIR)
-LOG_FILE = LOGS_DIR / f"run_{datetime.now().strftime('%Y%M%d_%H%M%S')}.log"
+LOG_FILE = LOGS_DIR / f"run_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
 sys.stdout = TeeLogger(LOG_FILE)
 
 # Import Schwab client and config
@@ -88,6 +88,7 @@ class ForwardFactorDashboard(tk.Tk):
         # Paths / cache
         self.cache_dir = Path(__file__).resolve().parent / "cache"
         self.cache_file = self.cache_dir / "filtered_symbols.json"
+        self.daily_cache_path = Path(__file__).resolve().parent / "daily_ticker_cache.json"
         # Use parent folder's CBOE CSV if available
         self.cboe_csv_path = Path(__file__).resolve().parent / "optionable_tickers_cboe.csv"
 
@@ -108,6 +109,7 @@ class ForwardFactorDashboard(tk.Tk):
         self.cache_lock = threading.RLock()
         self.progress_lock = threading.RLock()
         self.processed_count = 0
+        self.is_scanning = False
         self.scan_start_time = None
 
         # Control flags
@@ -221,7 +223,7 @@ class ForwardFactorDashboard(tk.Tk):
         self.tree.heading("Front IV", text="Front IV (%)")
         self.tree.heading("Back IV", text="Back IV (%)")
         self.tree.heading("Fwd Vol", text="Fwd Vol (%)")
-        self.tree.heading("Front Vol", text="Front Vol")
+        self.tree.heading("Front Vol", text="Front Volume")
         self.tree.heading("Front OI", text="Front OI")
         self.tree.heading("Stock Price", text="Stock Price ($)")
         self.tree.heading("Strike", text="Strike ($)")
@@ -244,7 +246,7 @@ class ForwardFactorDashboard(tk.Tk):
         self.tree.column("Front IV", anchor="center", width=80)
         self.tree.column("Back IV", anchor="center", width=80)
         self.tree.column("Fwd Vol", anchor="center", width=80)
-        self.tree.column("Front Vol", anchor="center", width=80)
+        self.tree.column("Front Vol", anchor="center", width=100)
         self.tree.column("Front OI", anchor="center", width=80)
         self.tree.column("Stock Price", anchor="center", width=90)
         self.tree.column("Strike", anchor="center", width=80)
@@ -570,6 +572,18 @@ class ForwardFactorDashboard(tk.Tk):
 
     def apply_filters(self):
         """Apply filters and start scanning."""
+        if self.is_scanning:
+            # Force stop existing scan for a clean restart
+            if not self.shutting_down:
+                print("\n🛑 Restarting: Stopping current scan...")
+                self.stop_scan()
+            
+            # Instead of busy-waiting, schedule a retry of applying filters
+            self.after(200, self.apply_filters)
+            return
+
+        print("✅ Starting fresh scan...")
+
         if not self.client_initialized:
             messagebox.showwarning("Not Ready", "Schwab API is not initialized yet.")
             return
@@ -608,21 +622,40 @@ class ForwardFactorDashboard(tk.Tk):
         self.status_label.config(
             text=f"Scanning {len(self.all_symbols)} symbols with Schwab API..."
         )
+
+        # Apply Daily Ticker Cache logic - move cached tickers to the front
+        cached_tickers = self._load_daily_cache()
+        if cached_tickers:
+            # Reorder all_symbols: cached ones first, then the rest
+            all_syms = list(self.all_symbols)
+            # Remove cached tickers from their current positions
+            for t in cached_tickers:
+                if t in all_syms:
+                    all_syms.remove(t)
+            # Put cached tickers at the start
+            self.all_symbols = cached_tickers + all_syms
+            print(f"Daily Cache: Prioritized {len(cached_tickers)} tickers from today's previous scan.")
+
         thread = threading.Thread(target=self._scan_all_symbols, daemon=True)
         thread.start()
 
     def stop_scan(self):
         """Stop the current scan."""
+        if not self.is_scanning:
+            self.status_label.config(text="No active scan to stop.")
+            return
+
         self.shutting_down = True
         try:
             if self.current_executor is not None:
                 self.current_executor.shutdown(wait=False, cancel_futures=True)
         except Exception:
             pass
+        
         elapsed = int(time.time() - self.scan_start_time) if self.scan_start_time else 0
         m, s = divmod(elapsed, 60)
         timer_str = f"{m:02d}:{s:02d}"
-        self.status_label.config(text=f"Scan stopped by user ({timer_str}).")
+        self.status_label.config(text=f"Stopping scan... ({timer_str})")
 
     def run_single_ticker(self):
         """Run scan for one or more tickers."""
@@ -654,6 +687,8 @@ class ForwardFactorDashboard(tk.Tk):
 
     def _scan_all_symbols(self):
         """Scan all symbols using Schwab API."""
+        self.is_scanning = True
+        self.shutting_down = False # Reset flag for new scan
         try:
             if self.shutting_down:
                 return
@@ -722,7 +757,8 @@ class ForwardFactorDashboard(tk.Tk):
                                             self.status_label.config(text=status_text)
                                             self.update_idletasks()
                                         self.after(0, update_waiting)
-                                        time.sleep(10)
+                                        if self._interruptible_sleep(10):
+                                            break
                                         print(f"Resuming from {symbol}...")
                                     elif "timeout" in error_msg or "timed out" in error_msg or "read timeout" in error_msg:
                                         print(f"⏳ {symbol}: Timeout, will retry...")
@@ -760,7 +796,8 @@ class ForwardFactorDashboard(tk.Tk):
                             if retry_queue:
                                 retry_count += 1
                                 print(f"\n🔄 Retrying {len(retry_queue)} symbols (attempt {retry_count}/{max_retries})...")
-                                time.sleep(2)  # Short delay for timeout retries (rate limit already waited 60s)
+                                if self._interruptible_sleep(2):
+                                    break
                                 with self.progress_lock:
                                     self.processed_count -= len(retry_queue)
                                     
@@ -804,6 +841,11 @@ class ForwardFactorDashboard(tk.Tk):
             self._update_display()
             self.after(0, lambda: self.status_label.config(text=error_summary))
             print(f"\n✅ {error_summary}\n")
+
+            # Save successful tickers to daily cache
+            success_tickers = sorted(list(set([r["Ticker"] for r in all_results])))
+            if success_tickers:
+                self._save_daily_cache(success_tickers)
             
         except Exception as e:
             error_msg = f"Critical error: {str(e)}"
@@ -811,6 +853,55 @@ class ForwardFactorDashboard(tk.Tk):
             import traceback
             traceback.print_exc()
             self.after(0, self._show_error, error_msg)
+        finally:
+            self.is_scanning = False
+
+    def _load_daily_cache(self):
+        """Load tickers that passed filters today."""
+        if not self.daily_cache_path.exists():
+            return []
+        
+        try:
+            with open(self.daily_cache_path, 'r') as f:
+                core_data = json.load(f)
+                cache_date = core_data.get("date")
+                today_str = date.today().isoformat()
+                
+                if cache_date == today_str:
+                    return core_data.get("tickers", [])
+                else:
+                    # Stale cache, delete it
+                    print(f"Daily Cache: Invaliding stale cache from {cache_date}")
+                    try:
+                        self.daily_cache_path.unlink()
+                    except:
+                        pass
+                    return []
+        except Exception as e:
+            print(f"Daily Cache: Error loading: {e}")
+            return []
+
+    def _save_daily_cache(self, tickers):
+        """Save successful tickers to daily cache."""
+        try:
+            cache_data = {
+                "date": date.today().isoformat(),
+                "tickers": tickers
+            }
+            with open(self.daily_cache_path, 'w') as f:
+                json.dump(cache_data, f, indent=2)
+            print(f"Daily Cache: Saved {len(tickers)} successful tickers to {self.daily_cache_path.name}")
+        except Exception as e:
+            print(f"Daily Cache: Error saving: {e}")
+
+    def _interruptible_sleep(self, seconds):
+        """Sleep for a specified duration, but check for shutting_down flag frequently."""
+        steps = int(seconds * 10) # check every 0.1s
+        for _ in range(steps):
+            if self.shutting_down:
+                return True # interrupted
+            time.sleep(0.1)
+        return False
 
     def _populate_table(self, data):
         """Updates the Treeview with new data."""
@@ -1030,12 +1121,14 @@ class ForwardFactorDashboard(tk.Tk):
                 if dte1 < self.min_front_dte or dte1 > self.max_front_dte or dte2 > self.max_back_dte:
                     continue
 
-                # Get ATM option data for both expiries
+                # Get ATM option data for front expiry
                 iv1, vol1, oi1, bid1, ask1, mid1, strike1 = self._get_atm_option_data(
                     call_exp_map, exp1_str, current_price
                 )
+                
+                # Get SAME strike data for back expiry
                 iv2, vol2, oi2, bid2, ask2, mid2, strike2 = self._get_atm_option_data(
-                    call_exp_map, exp2_str, current_price
+                    call_exp_map, exp2_str, current_price, target_strike=strike1
                 )
 
                 # Validate IV
@@ -1151,7 +1244,7 @@ class ForwardFactorDashboard(tk.Tk):
         time.sleep(0.2)  # Small delay between API calls to avoid rate limiting
         return results
 
-    def _get_atm_option_data(self, call_exp_map, exp_str, current_price):
+    def _get_atm_option_data(self, call_exp_map, exp_str, current_price, target_strike=None):
         """
         Get ATM option data from Schwab option chain.
         Returns: (iv, volume, open_interest, bid, ask, mid, strike)
@@ -1162,8 +1255,12 @@ class ForwardFactorDashboard(tk.Tk):
             raise Exception(f"No strikes for {exp_str}")
         
         # Find ATM strike
-        strikes = sorted([float(s) for s in strikes_map.keys()])
-        atm_strike = min(strikes, key=lambda s: abs(s - current_price))
+        if target_strike is not None:
+            atm_strike = target_strike
+        else:
+            strikes = sorted([float(s) for s in strikes_map.keys()])
+            atm_strike = min(strikes, key=lambda s: abs(s - current_price))
+        
         atm_strike_str = str(atm_strike)
         
         # Handle different key formats

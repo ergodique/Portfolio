@@ -7,6 +7,7 @@ __pycache__/
 *.pyc
 
 # Ignore logs
-**/logs/*
-!**/logs/.gitkeep
 logs/
+
+# Daily Ticker Cache
+daily_ticker_cache.json
