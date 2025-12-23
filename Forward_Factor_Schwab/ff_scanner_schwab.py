@@ -5,6 +5,7 @@ Real-time option data from Charles Schwab API.
 
 import json
 import sys
+import argparse
 from io import StringIO
 from pathlib import Path
 
@@ -76,8 +77,9 @@ class ForwardFactorDashboard(tk.Tk):
     A dashboard to display the forward factor for stock options across all optionable stocks.
     Uses Charles Schwab API for real-time data.
     """
-    def __init__(self):
+    def __init__(self, workers=4):
         super().__init__()
+        self.num_workers = workers
         self.title("Forward Factor Scanner - Schwab (Real-Time)")
         self.geometry("1550x800")
         self.min_volume = 0
@@ -660,9 +662,11 @@ class ForwardFactorDashboard(tk.Tk):
             total = len(self.all_symbols)
             errors = []
             chunk_size = 200  # Process in chunks for UI updates
+            num_workers = self.num_workers
+            print(f"\n🚀 Starting scan with {num_workers} workers...\n")
             
-            # 6 workers to stay within API rate limits
-            with ThreadPoolExecutor(max_workers=6) as executor:
+            # 4 workers to stay slightly closer to API rate limits while maintaining efficiency
+            with ThreadPoolExecutor(max_workers=num_workers) as executor:
                 self.current_executor = executor
                 
                 for i in range(0, total, chunk_size):
@@ -771,7 +775,10 @@ class ForwardFactorDashboard(tk.Tk):
                         print(f"⚠ {len(retry_queue)} symbols failed after all retries")
                     
                     # Update table after each chunk
-                    print(f"\n📊 Processed {min(i + chunk_size, total)}/{total} symbols. Found {len(all_results)} results so far.\n")
+                    elapsed = int(time.time() - self.scan_start_time) if self.scan_start_time else 0
+                    m, s = divmod(elapsed, 60)
+                    timer_str = f"{m:02d}:{s:02d}"
+                    print(f"\n📊 [{timer_str}] Processed {min(i + chunk_size, total)}/{total} symbols. Found {len(all_results)} results so far.\n")
                     with self.results_lock:
                         self.filtered_results = list(all_results)
                         self._perform_sort()
@@ -790,12 +797,13 @@ class ForwardFactorDashboard(tk.Tk):
             timer_str = f"{m:02d}:{s:02d}"
             
             if errors:
-                error_summary = f"Scan complete ({timer_str}) | {total}/{total} (100.0%) | Passed: {len(all_results)} | Errors: {len(errors)}"
+                error_summary = f"Scan complete ({timer_str}) | Workers: {num_workers} | {total}/{total} (100.0%) | Passed: {len(all_results)} | Errors: {len(errors)}"
             else:
-                error_summary = f"Scan complete ({timer_str}) | {total}/{total} (100.0%) | Passed: {len(all_results)} | Errors: 0"
+                error_summary = f"Scan complete ({timer_str}) | Workers: {num_workers} | {total}/{total} (100.0%) | Passed: {len(all_results)} | Errors: 0"
             
             self._update_display()
             self.after(0, lambda: self.status_label.config(text=error_summary))
+            print(f"\n✅ {error_summary}\n")
             
         except Exception as e:
             error_msg = f"Critical error: {str(e)}"
@@ -1225,8 +1233,12 @@ class ForwardFactorDashboard(tk.Tk):
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Forward Factor Scanner")
+    parser.add_argument("-w", "--workers", type=int, default=4, help="Number of parallel workers (default: 4)")
+    args, unknown = parser.parse_known_args()
+
     try:
-        app = ForwardFactorDashboard()
+        app = ForwardFactorDashboard(workers=args.workers)
         app.mainloop()
     except Exception as e:
         print(f"Failed to start the application: {e}")
