@@ -326,6 +326,9 @@ class SchwabClient:
                     headers = {'Authorization': f'Bearer {self.access_token}'}
                     continue
                 
+                if response.status_code == 429:
+                    raise Exception(f"HTTP 429: Too Many Requests - {response.text[:100]}")
+                
                 return response
                 
             except requests.exceptions.Timeout:
@@ -343,15 +346,19 @@ class SchwabClient:
     
     # ========== Public API Methods ==========
     
-    def get_quote(self, symbol):
+    def get_quote(self, symbol, fields=None):
         """
         Get real-time quote for a single symbol.
         
         :param symbol: Ticker symbol (e.g., "AAPL")
+        :param fields: Comma-separated list of fields (e.g., "quote,fundamental")
         :return: Quote data dict or None
         """
         url = f"{self._base_api_url}/marketdata/v1/{urllib.parse.quote(symbol)}/quotes"
-        response = self._make_request('GET', url)
+        params = {}
+        if fields:
+            params['fields'] = fields
+        response = self._make_request('GET', url, params=params)
         
         if response and response.ok:
             data = response.json()

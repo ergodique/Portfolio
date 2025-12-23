@@ -10,7 +10,8 @@ from pathlib import Path
 
 import pandas as pd
 import numpy as np
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
+import yfinance as yf
 import tkinter as tk
 from tkinter import ttk, messagebox
 import threading
@@ -60,7 +61,7 @@ class ForwardFactorDashboard(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Forward Factor Scanner - Schwab (Real-Time)")
-        self.geometry("1400x700")
+        self.geometry("1550x800")
         self.min_volume = 0
         self.min_open_interest = 0
 
@@ -68,9 +69,7 @@ class ForwardFactorDashboard(tk.Tk):
         self.cache_dir = Path(__file__).resolve().parent / "cache"
         self.cache_file = self.cache_dir / "filtered_symbols.json"
         # Use parent folder's CBOE CSV if available
-        self.cboe_csv_path = Path(__file__).resolve().parent.parent / "Forward_Factor" / "optionable_tickers_cboe.csv"
-        if not self.cboe_csv_path.exists():
-            self.cboe_csv_path = Path(__file__).resolve().parent / "optionable_tickers_cboe.csv"
+        self.cboe_csv_path = Path(__file__).resolve().parent / "optionable_tickers_cboe.csv"
 
         # Master symbol universe (from CBOE CSV)
         self.master_symbols: list[str] = []
@@ -89,10 +88,16 @@ class ForwardFactorDashboard(tk.Tk):
         self.cache_lock = threading.Lock()
         self.progress_lock = threading.Lock()
         self.processed_count = 0
+        self.scan_start_time = None
 
         # Control flags
         self.shutting_down: bool = False
         self.current_executor: ThreadPoolExecutor | None = None
+        self.results_lock = threading.Lock()
+        self.filtered_results = []
+        self._sort_reverse: dict[str, bool] = {}
+        self.current_sort_col = "FF"
+        self.current_sort_reverse = True
         
         # Schwab client (initialized later)
         self.schwab_client: SchwabClient | None = None
@@ -104,6 +109,8 @@ class ForwardFactorDashboard(tk.Tk):
         
         # Initialize Schwab client in background
         threading.Thread(target=self._init_schwab_client, daemon=True).start()
+        
+        self.update_idletasks()
 
     def _init_schwab_client(self):
         """Initialize Schwab API client in background."""
@@ -183,6 +190,10 @@ class ForwardFactorDashboard(tk.Tk):
         main_frame.grid_rowconfigure(1, weight=1)
         main_frame.grid_columnconfigure(0, weight=1)
 
+        # --- Define Tags for Color Coding ---
+        self.tree.tag_configure("earn_red", background="#FFCCCC")   # Light Red (Expiry > Earnings)
+        self.tree.tag_configure("earn_green", background="#CCFFCC") # Light Green (Expiry <= Earnings)
+
         # --- Define Headings ---
         self.tree.heading("Ticker", text="Ticker")
         self.tree.heading("Expiry Pair", text="Expiry Pair")
@@ -203,9 +214,13 @@ class ForwardFactorDashboard(tk.Tk):
         self.tree.heading("FF", text="FF (%)")
         self.tree.heading("R/R", text="R/R")
 
+        # --- Make Columns Sortable ---
+        for col in self.tree['columns']:
+            self.tree.heading(col, command=lambda _col=col: self._sort_column(_col))
+
         # --- Define Column Styles ---
-        self.tree.column("Ticker", anchor="center", width=80)
-        self.tree.column("Expiry Pair", anchor="center", width=90)
+        self.tree.column("Ticker", anchor="center", width=70)
+        self.tree.column("Expiry Pair", anchor="center", width=85)
         self.tree.column("Front DTE", anchor="center", width=70)
         self.tree.column("Back DTE", anchor="center", width=70)
         self.tree.column("Front IV", anchor="center", width=80)
@@ -215,8 +230,8 @@ class ForwardFactorDashboard(tk.Tk):
         self.tree.column("Front OI", anchor="center", width=80)
         self.tree.column("Stock Price", anchor="center", width=90)
         self.tree.column("Strike", anchor="center", width=80)
-        self.tree.column("Front Bid/Ask", anchor="center", width=130)
-        self.tree.column("Back Bid/Ask", anchor="center", width=130)
+        self.tree.column("Front Bid/Ask", anchor="center", width=120)
+        self.tree.column("Back Bid/Ask", anchor="center", width=120)
         self.tree.column("Cal Debit", anchor="center", width=90)
         self.tree.column("Avg Sprd%", anchor="center", width=70)
         self.tree.column("Earnings", anchor="center", width=120)
@@ -244,12 +259,12 @@ class ForwardFactorDashboard(tk.Tk):
 
         # Row 1: IV and calendar debit filter
         ttk.Label(filters_frame, text="Min IV (%)").grid(row=1, column=0, padx=(0, 5), sticky="w")
-        self.min_iv_var = tk.StringVar(value="0")
+        self.min_iv_var = tk.StringVar(value="15")
         iv_entry = ttk.Entry(filters_frame, width=15, textvariable=self.min_iv_var)
         iv_entry.grid(row=1, column=1, padx=(0, 20), sticky="w")
 
         ttk.Label(filters_frame, text="Max Cal Debit ($)").grid(row=1, column=2, padx=(0, 5), sticky="w")
-        self.max_cal_debit_var = tk.StringVar(value="6")
+        self.max_cal_debit_var = tk.StringVar(value="2")
         cal_debit_entry = ttk.Entry(filters_frame, width=15, textvariable=self.max_cal_debit_var)
         cal_debit_entry.grid(row=1, column=3, padx=(0, 20), sticky="w")
 
@@ -265,18 +280,18 @@ class ForwardFactorDashboard(tk.Tk):
         max_back_entry.grid(row=2, column=3, padx=(0, 20), sticky="w")
 
         ttk.Label(filters_frame, text="Min Fwd Factor (%):").grid(row=2, column=4, padx=(0, 5), sticky="w")
-        self.min_ff_var = tk.StringVar(value="5")
+        self.min_ff_var = tk.StringVar(value="15")
         ff_entry = ttk.Entry(filters_frame, width=15, textvariable=self.min_ff_var)
         ff_entry.grid(row=2, column=5, padx=(0, 20), sticky="w")
 
         ttk.Label(filters_frame, text="Max Avg Sprd%:").grid(row=2, column=6, padx=(0, 5), sticky="w")
-        self.max_avg_spread_var = tk.StringVar(value="100")
+        self.max_avg_spread_var = tk.StringVar(value="15")
         avg_spread_entry = ttk.Entry(filters_frame, width=10, textvariable=self.max_avg_spread_var)
         avg_spread_entry.grid(row=2, column=7, padx=(0, 20), sticky="w")
 
         # Row 3: R/R Filter
         ttk.Label(filters_frame, text="Min R/R:").grid(row=3, column=0, padx=(0, 5), sticky="w")
-        self.min_rr_var = tk.StringVar(value="1.5")
+        self.min_rr_var = tk.StringVar(value="1.85")
         rr_entry = ttk.Entry(filters_frame, width=10, textvariable=self.min_rr_var)
         rr_entry.grid(row=3, column=1, padx=(0, 20), sticky="w")
         
@@ -320,13 +335,16 @@ class ForwardFactorDashboard(tk.Tk):
                         ticker_col = candidate
                         break
                 if ticker_col:
-                    tickers = df[ticker_col].astype(str).str.strip()
-                    self.master_symbols = [t for t in tickers if t and t.upper() != ticker_col.upper()]
+                    # Drop NA values and filter out the string 'nan' which pandas creates from empty rows
+                    tickers = df[ticker_col].dropna().astype(str).str.strip()
+                    self.master_symbols = [t for t in tickers if t and t.lower() != 'nan' and t.upper() != ticker_col.upper()]
                     self.master_symbols = sorted(set(self.master_symbols))
                     self.next_batch_start = 0
                     if self.master_symbols:
-                        self.status_label.config(
-                            text=f"Loaded {len(self.master_symbols)} CBOE symbols. Waiting for Schwab API..."
+                        # Auto-set all_symbols so user doesn't have to manually load
+                        self._set_symbol_list(
+                            self.master_symbols, 
+                            f"Auto-loaded {len(self.master_symbols)} symbols from CSV"
                         )
                         return
             except Exception as e:
@@ -458,7 +476,7 @@ class ForwardFactorDashboard(tk.Tk):
         if not expiry_dates:
             raise Exception(f"No expiry dates for {ticker_symbol} (empty callExpDateMap)")
         
-        # Cache the data
+        # Cache the data (earnings removed here, will be fetched lazily)
         ticker_data = {
             'current_price': float(current_price),
             'expiry_dates': expiry_dates,
@@ -470,6 +488,69 @@ class ForwardFactorDashboard(tk.Tk):
             self.ticker_cache[ticker_symbol] = ticker_data
         
         return ticker_data
+
+    def _get_last_earnings_date(self, ticker_symbol):
+        """
+        Fetch upcoming earnings date from Yahoo Finance (primary) or Schwab (backup).
+        Uses the existing ticker_cache to store the result.
+        """
+        with self.cache_lock:
+            if ticker_symbol in self.ticker_cache and 'earnings_val' in self.ticker_cache[ticker_symbol]:
+                return self.ticker_cache[ticker_symbol]['earnings_val']
+
+        earnings_val = None
+        today = date.today()
+        
+        try:
+            # --- Primary: Yahoo Finance ---
+            ticker = yf.Ticker(ticker_symbol)
+            
+            # Helper to extract first future date from a list or DF
+            def find_future_date(dt_list):
+                for dt in dt_list:
+                    # Handle both datetime and date objects
+                    target_dt = dt.date() if hasattr(dt, 'date') else dt
+                    if target_dt >= today:
+                        return target_dt
+                return None
+
+            # 1. Try Calendar first
+            calendar = ticker.calendar
+            if calendar is not None and 'Earnings Date' in calendar:
+                dates = calendar['Earnings Date']
+                target_dt = find_future_date(dates if isinstance(dates, (list, tuple)) else [dates])
+                if target_dt:
+                    earnings_val = {
+                        'date': target_dt,
+                        'display': f"{target_dt.strftime('%d-%m-%y')}({(target_dt - today).days})"
+                    }
+
+            # 2. Try earnings_dates if calendar failed or was in the past
+            if not earnings_val:
+                try:
+                    ed = ticker.earnings_dates
+                    if ed is not None and not ed.empty:
+                        # Index is timestamps, descending by default
+                        future_mask = ed.index.tz_localize(None).date >= today
+                        future_dates = ed.index[future_mask]
+                        if not future_dates.empty:
+                            target_dt = future_dates[0].date()
+                            earnings_val = {
+                                'date': target_dt,
+                                'display': f"{target_dt.strftime('%d-%m-%y')}({(target_dt - today).days})"
+                            }
+                except:
+                    pass
+
+        except Exception as e:
+            print(f"  [warn] Failed to fetch earnings for {ticker_symbol}: {e}")
+
+        # Store in cache
+        with self.cache_lock:
+            if ticker_symbol in self.ticker_cache:
+                self.ticker_cache[ticker_symbol]['earnings_val'] = earnings_val
+        
+        return earnings_val
 
     def apply_filters(self):
         """Apply filters and start scanning."""
@@ -502,6 +583,7 @@ class ForwardFactorDashboard(tk.Tk):
         with self.cache_lock:
             self.ticker_cache.clear()
         self.processed_count = 0
+        self.scan_start_time = time.time()
         self.shutting_down = False
         
         self.status_label.config(
@@ -590,8 +672,16 @@ class ForwardFactorDashboard(tk.Tk):
                                         print(f"\n⏳ {symbol}: Rate limit hit! Waiting 10 seconds...")
                                         retry_queue.append(symbol)
                                         # Immediately wait 10 seconds on rate limit
-                                        def update_waiting():
-                                            self.status_label.config(text=f"Rate limit hit. Waiting 10s before retry...")
+                                        def update_waiting(p=self.processed_count, t=total, c=len(all_results), e=len(errors)):
+                                            pct = (p / t * 100) if t > 0 else 0
+                                            elapsed = int(time.time() - self.scan_start_time) if self.scan_start_time else 0
+                                            m, s = divmod(elapsed, 60)
+                                            timer_str = f"{m:02d}:{s:02d}"
+                                            status_text = (
+                                                f"RATE LIMIT HIT! | {timer_str} | {p}/{t} ({pct:.1f}%) | "
+                                                f"Passed: {c} | Errors: {e} | Waiting 10s..."
+                                            )
+                                            self.status_label.config(text=status_text)
                                             self.update_idletasks()
                                         self.after(0, update_waiting)
                                         time.sleep(10)
@@ -613,13 +703,21 @@ class ForwardFactorDashboard(tk.Tk):
                                     self.processed_count += 1
                                     processed = self.processed_count
                                 
-                                # Update UI every 200 symbols
-                                if processed % 200 == 0 or processed == total:
-                                    def update_progress(p=processed, t=total, c=len(all_results), e=len(errors)):
-                                        self.status_label.config(
-                                            text=f"Scanning... {p}/{t} symbols. Found {c} results. Errors: {e}")
+                                # --- UI Performance Optimization: Update UI every ticker, but debounced/efficiently ---
+                                def update_progress(p=processed, t=total, c=len(all_results), e=len(errors), sym=symbol):
+                                    pct = (p / t * 100) if t > 0 else 0
+                                    elapsed = int(time.time() - self.scan_start_time) if self.scan_start_time else 0
+                                    m, s = divmod(elapsed, 60)
+                                    timer_str = f"{m:02d}:{s:02d}"
+                                    status_text = (
+                                        f"Time: {timer_str} | Scanning {sym}... | {p}/{t} ({pct:.1f}%) | "
+                                        f"Passed: {c} | Errors: {e}"
+                                    )
+                                    self.status_label.config(text=status_text)
+                                    # Update UI every 100 for heavy table refreshes, but labels are light
+                                    if p % 100 == 0 or p == t:
                                         self.update_idletasks()
-                                    self.after(0, update_progress)
+                                self.after(0, update_progress)
                             
                             if retry_queue:
                                 retry_count += 1
@@ -640,22 +738,27 @@ class ForwardFactorDashboard(tk.Tk):
                     
                     # Update table after each chunk
                     print(f"\n📊 Processed {min(i + chunk_size, total)}/{total} symbols. Found {len(all_results)} results so far.\n")
-                    all_results.sort(key=lambda x: x.get("Fwd Factor", -float('inf')), reverse=True)
-                    results_copy = list(all_results)
-                    self.after(0, self._populate_table, results_copy)
+                    with self.results_lock:
+                        self.filtered_results = list(all_results)
+                        self._perform_sort()
+                        results_to_push = list(self.filtered_results)
+                    
+                    self.after(0, self._populate_table, results_to_push)
                 
                 self.current_executor = None
             
             # Final update
-            all_results.sort(key=lambda x: x.get("Fwd Factor", -float('inf')), reverse=True)
+            with self.results_lock:
+                self.filtered_results = list(all_results)
+                self._perform_sort()
+                final_results = list(self.filtered_results)
             
             if errors:
-                error_summary = f"Completed. Found {len(all_results)} results. Errors: {len(errors)}"
+                error_summary = f"Scan complete | {total}/{total} (100.0%) | Passed: {len(all_results)} | Errors: {len(errors)}"
             else:
-                error_summary = f"Scan complete. Found {len(all_results)} results."
+                error_summary = f"Scan complete | {total}/{total} (100.0%) | Passed: {len(all_results)} | Errors: 0"
             
-            self.filtered_results = all_results
-            self.after(0, self._populate_table, all_results)
+            self.after(0, self._populate_table, final_results)
             self.after(0, lambda: self.status_label.config(text=error_summary))
             
         except Exception as e:
@@ -735,10 +838,72 @@ class ForwardFactorDashboard(tk.Tk):
                 earnings_str,
                 ff_str,
                 rr_str,
-            ))
+            ), tags=(row.get("Row Tag", ""),))
         
         self.last_updated_label.config(text=f"Last Updated: {datetime.now().strftime('%H:%M:%S')}")
         self.status_label.config(text=f"Scan complete. Found {len(data)} results. Sorted by FF (descending).")
+
+    def _sort_column(self, col):
+        """Sort the table by the given column."""
+        with self.results_lock:
+            if not self.filtered_results:
+                return
+
+            reverse = self._sort_reverse.get(col, False)
+            self._sort_reverse[col] = not reverse
+            
+            self.current_sort_col = col
+            self.current_sort_reverse = reverse
+            
+            self._perform_sort()
+            self._populate_table(list(self.filtered_results))
+            
+            order = "descending" if reverse else "ascending"
+            self.status_label.config(text=f"Sorted by {col} ({order}).")
+
+    def _perform_sort(self):
+        """Internal sort implementation using current state. Call within results_lock!"""
+        col = self.current_sort_col
+        reverse = self.current_sort_reverse
+        
+        # Key mapping
+        mapping = {
+            "Ticker": "Ticker",
+            "Expiry Pair": "Expiry Pair",
+            "Front DTE": "Front DTE",
+            "Back DTE": "Back DTE",
+            "Front IV": "Front IV",
+            "Back IV": "Back IV",
+            "Fwd Vol": "Fwd Vol",
+            "Front Vol": "Front Vol",
+            "Front OI": "Front OI",
+            "Stock Price": "Stock Price",
+            "Strike": "Strike",
+            "Front Bid/Ask": "Front Bid",
+            "Back Bid/Ask": "Back Bid",
+            "Cal Debit": "Cal Debit",
+            "Avg Sprd%": "Avg Spread %",
+            "Earnings": "Earnings Date",
+            "FF": "Fwd Factor",
+            "R/R": "R/R"
+        }
+        
+        dict_key = mapping.get(col)
+        if not dict_key:
+            return
+
+        def sort_key(x):
+            val = x.get(dict_key)
+            if val is None or (isinstance(val, float) and np.isnan(val)):
+                return -float('inf') if not reverse else float('inf')
+            if dict_key == "Earnings Date" and isinstance(val, str):
+                return ""
+            return val
+
+        try:
+            self.filtered_results.sort(key=sort_key, reverse=reverse)
+        except Exception as e:
+            print(f"Internal sorting error: {e}")
 
     def _show_error(self, error_message):
         """Displays an error in the status bar."""
@@ -868,8 +1033,24 @@ class ForwardFactorDashboard(tk.Tk):
                 if not pd.isna(avg_spread_pct) and avg_spread_pct > self.max_avg_spread:
                     continue
 
-                # Earnings info (Schwab doesn't provide this directly, mark as N/E)
+                # --- 🟢 OPTIMIZATION: Fetch earnings data ONLY after passing all filters ---
+                earn_data = self._get_last_earnings_date(ticker_symbol)
+                
                 earnings_info = "N/E"
+                earn_row_tag = ""
+
+                if earn_data:
+                    try:
+                        est_next_earn_dt = earn_data['date']
+                        earnings_info = earn_data['display']
+                        
+                        # Compare with front expiry (exp1_date)
+                        if exp1_date > est_next_earn_dt:
+                            earn_row_tag = "earn_red"  # Front expiry comes AFTER earnings
+                        else:
+                            earn_row_tag = "earn_green" # Front expiry comes BEFORE earnings
+                    except Exception:
+                        earnings_info = "Format Err"
 
                 results.append({
                     "Ticker": ticker_symbol,
@@ -885,6 +1066,7 @@ class ForwardFactorDashboard(tk.Tk):
                     "Stock Price": current_price,
                     "Strike": strike1,  # ATM strike price used for the calendar
                     "Earnings": earnings_info,
+                    "Earnings Date": earn_data['date'] if earn_data else date(2099, 12, 31), # Far future if no earnings
                     "Front Bid": bid1,
                     "Front Ask": ask1,
                     "Back Bid": bid2,
@@ -893,6 +1075,7 @@ class ForwardFactorDashboard(tk.Tk):
                     "Cal Debit": cal_debit if cal_debit != float("inf") else float("nan"),
                     "Avg Spread %": avg_spread_pct,
                     "R/R": reward_risk,
+                    "Row Tag": earn_row_tag,
                 })
             except Exception as e:
                 debug_reasons.append(f"{dte1_target}-{dte2_target}d: {str(e)[:50]}")
@@ -901,7 +1084,7 @@ class ForwardFactorDashboard(tk.Tk):
         if not results and debug_reasons:
             print(f"  {ticker_symbol} debug: {debug_reasons[:3]}")
         
-        time.sleep(0.1)  # Small delay between API calls to avoid rate limiting
+        time.sleep(0.2)  # Small delay between API calls to avoid rate limiting
         return results
 
     def _get_atm_option_data(self, call_exp_map, exp_str, current_price):
