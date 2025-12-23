@@ -167,7 +167,6 @@ class ForwardFactorDashboard(tk.Tk):
             main_frame,
             columns=(
                 "Ticker",
-                "Expiry Pair",
                 "Front DTE",
                 "Back DTE",
                 "Front IV",
@@ -197,7 +196,6 @@ class ForwardFactorDashboard(tk.Tk):
 
         # --- Define Headings ---
         self.tree.heading("Ticker", text="Ticker")
-        self.tree.heading("Expiry Pair", text="Expiry Pair")
         self.tree.heading("Front DTE", text="Front DTE")
         self.tree.heading("Back DTE", text="Back DTE")
         self.tree.heading("Front IV", text="Front IV (%)")
@@ -221,9 +219,8 @@ class ForwardFactorDashboard(tk.Tk):
 
         # --- Define Column Styles ---
         self.tree.column("Ticker", anchor="center", width=70)
-        self.tree.column("Expiry Pair", anchor="center", width=85)
-        self.tree.column("Front DTE", anchor="center", width=70)
-        self.tree.column("Back DTE", anchor="center", width=70)
+        self.tree.column("Front DTE", anchor="center", width=75)
+        self.tree.column("Back DTE", anchor="center", width=75)
         self.tree.column("Front IV", anchor="center", width=80)
         self.tree.column("Back IV", anchor="center", width=80)
         self.tree.column("Fwd Vol", anchor="center", width=80)
@@ -248,85 +245,74 @@ class ForwardFactorDashboard(tk.Tk):
         filters_frame = ttk.LabelFrame(main_frame, text="Filters", padding=10)
         filters_frame.grid(row=2, column=0, columnspan=2, sticky="ew", pady=(10, 0))
 
+        # Row 0: Volume & OI
         ttk.Label(filters_frame, text="Min Volume:").grid(row=0, column=0, padx=(0, 5), sticky="w")
         self.volume_var = tk.StringVar(value="0")
-        volume_entry = ttk.Entry(filters_frame, width=15, textvariable=self.volume_var)
-        volume_entry.grid(row=0, column=1, padx=(0, 20), sticky="w")
+        ttk.Entry(filters_frame, width=12, textvariable=self.volume_var).grid(row=0, column=1, padx=(0, 20), sticky="w")
 
         ttk.Label(filters_frame, text="Min Open Interest:").grid(row=0, column=2, padx=(0, 5), sticky="w")
-        self.oi_var = tk.StringVar(value="0")
-        oi_entry = ttk.Entry(filters_frame, width=15, textvariable=self.oi_var)
-        oi_entry.grid(row=0, column=3, padx=(0, 20), sticky="w")
+        self.oi_var = tk.StringVar(value="1")
+        ttk.Entry(filters_frame, width=12, textvariable=self.oi_var).grid(row=0, column=3, padx=(0, 20), sticky="w")
 
-        # Row 1: IV and calendar debit filter
-        ttk.Label(filters_frame, text="Min IV (%)").grid(row=1, column=0, padx=(0, 5), sticky="w")
+        # Row 1: IV & Cal Debit
+        ttk.Label(filters_frame, text="Min IV (%):").grid(row=1, column=0, padx=(0, 5), sticky="w")
         self.min_iv_var = tk.StringVar(value="15")
-        iv_entry = ttk.Entry(filters_frame, width=15, textvariable=self.min_iv_var)
-        iv_entry.grid(row=1, column=1, padx=(0, 20), sticky="w")
+        ttk.Entry(filters_frame, width=12, textvariable=self.min_iv_var).grid(row=1, column=1, padx=(0, 20), sticky="w")
 
-        ttk.Label(filters_frame, text="Max Cal Debit ($)").grid(row=1, column=2, padx=(0, 5), sticky="w")
+        ttk.Label(filters_frame, text="Max Cal Debit ($):").grid(row=1, column=2, padx=(0, 5), sticky="w")
         self.max_cal_debit_var = tk.StringVar(value="2")
-        cal_debit_entry = ttk.Entry(filters_frame, width=15, textvariable=self.max_cal_debit_var)
-        cal_debit_entry.grid(row=1, column=3, padx=(0, 20), sticky="w")
+        ttk.Entry(filters_frame, width=12, textvariable=self.max_cal_debit_var).grid(row=1, column=3, padx=(0, 20), sticky="w")
 
-        # Row 2: DTE limits and Forward Factor Filter
-        ttk.Label(filters_frame, text="Min Front DTE").grid(row=2, column=0, padx=(0, 5), sticky="w")
+        # Row 2: Front DTE Limits
+        ttk.Label(filters_frame, text="Min Front DTE:").grid(row=2, column=0, padx=(0, 5), sticky="w")
         self.min_front_dte_var = tk.StringVar(value="25")
-        min_front_entry = ttk.Entry(filters_frame, width=10, textvariable=self.min_front_dte_var)
-        min_front_entry.grid(row=2, column=1, padx=(0, 20), sticky="w")
+        ttk.Entry(filters_frame, width=12, textvariable=self.min_front_dte_var).grid(row=2, column=1, padx=(0, 20), sticky="w")
 
-        ttk.Label(filters_frame, text="Max Back DTE").grid(row=2, column=2, padx=(0, 5), sticky="w")
+        ttk.Label(filters_frame, text="Max Front DTE:").grid(row=2, column=2, padx=(0, 5), sticky="w")
+        self.max_front_dte_var = tk.StringVar(value="45")
+        ttk.Entry(filters_frame, width=12, textvariable=self.max_front_dte_var).grid(row=2, column=3, padx=(0, 20), sticky="w")
+
+        # Row 3: Back DTE & R/R
+        ttk.Label(filters_frame, text="Max Back DTE:").grid(row=3, column=0, padx=(0, 5), sticky="w")
         self.max_back_dte_var = tk.StringVar(value="95")
-        max_back_entry = ttk.Entry(filters_frame, width=10, textvariable=self.max_back_dte_var)
-        max_back_entry.grid(row=2, column=3, padx=(0, 20), sticky="w")
+        ttk.Entry(filters_frame, width=12, textvariable=self.max_back_dte_var).grid(row=3, column=1, padx=(0, 20), sticky="w")
 
-        ttk.Label(filters_frame, text="Min Fwd Factor (%):").grid(row=2, column=4, padx=(0, 5), sticky="w")
-        self.min_ff_var = tk.StringVar(value="15")
-        ff_entry = ttk.Entry(filters_frame, width=15, textvariable=self.min_ff_var)
-        ff_entry.grid(row=2, column=5, padx=(0, 20), sticky="w")
-
-        ttk.Label(filters_frame, text="Max Avg Sprd%:").grid(row=2, column=6, padx=(0, 5), sticky="w")
-        self.max_avg_spread_var = tk.StringVar(value="15")
-        avg_spread_entry = ttk.Entry(filters_frame, width=10, textvariable=self.max_avg_spread_var)
-        avg_spread_entry.grid(row=2, column=7, padx=(0, 20), sticky="w")
-
-        # Row 3: R/R Filter
-        ttk.Label(filters_frame, text="Min R/R:").grid(row=3, column=0, padx=(0, 5), sticky="w")
+        ttk.Label(filters_frame, text="Min R/R:").grid(row=3, column=2, padx=(0, 5), sticky="w")
         self.min_rr_var = tk.StringVar(value="1.85")
-        rr_entry = ttk.Entry(filters_frame, width=10, textvariable=self.min_rr_var)
-        rr_entry.grid(row=3, column=1, padx=(0, 20), sticky="w")
-        
-        ttk.Label(filters_frame, text="No Earnings").grid(row=3, column=2, padx=(5, 2), sticky="w")
+        ttk.Entry(filters_frame, width=12, textvariable=self.min_rr_var).grid(row=3, column=3, padx=(0, 20), sticky="w")
+
+        # Row 4: Fwd Factor & Avg Spread
+        ttk.Label(filters_frame, text="Min FF (%):").grid(row=4, column=0, padx=(0, 5), sticky="w")
+        self.min_ff_var = tk.StringVar(value="15")
+        ttk.Entry(filters_frame, width=12, textvariable=self.min_ff_var).grid(row=4, column=1, padx=(0, 20), sticky="w")
+
+        ttk.Label(filters_frame, text="Max Avg Sprd (%):").grid(row=4, column=2, padx=(0, 5), sticky="w")
+        self.max_avg_spread_var = tk.StringVar(value="15")
+        ttk.Entry(filters_frame, width=12, textvariable=self.max_avg_spread_var).grid(row=4, column=3, padx=(0, 20), sticky="w")
+
+        # Row 5: No Earnings
+        ttk.Label(filters_frame, text="No Earnings:").grid(row=5, column=0, padx=(0, 5), sticky="w")
         self.no_earnings_check = ttk.Checkbutton(
             filters_frame, 
             text="", 
             variable=self.no_earnings_var,
             command=self._update_display
         )
-        self.no_earnings_check.grid(row=3, column=3, padx=(0, 20), sticky="w")
-        
-        # Row 3: Buttons
-        filter_btn = ttk.Button(filters_frame, text="Filter (Current List)", command=self.apply_filters)
-        filter_btn.grid(row=3, column=4, padx=(10, 0))
-        
-        load_all_btn = ttk.Button(filters_frame, text="Load All Symbols (CBOE)", command=self._load_all_symbols)
-        load_all_btn.grid(row=3, column=5, padx=(10, 0))
+        self.no_earnings_check.grid(row=5, column=1, padx=(0, 20), sticky="w")
 
-        refresh_btn = ttk.Button(filters_frame, text="Refresh Batch", command=self.refresh_batch)
-        refresh_btn.grid(row=3, column=6, padx=(10, 0))
-
-        # Row 4: Single ticker run + STOP
-        ttk.Label(filters_frame, text="Single Ticker:").grid(row=4, column=0, padx=(0, 5), sticky="w")
+        # Row 6: Ticker(s)
+        ttk.Label(filters_frame, text="Ticker(s):").grid(row=6, column=0, padx=(0, 5), sticky="w")
         self.single_ticker_var = tk.StringVar()
-        single_entry = ttk.Entry(filters_frame, width=15, textvariable=self.single_ticker_var)
-        single_entry.grid(row=4, column=1, padx=(0, 20), sticky="w")
+        ttk.Entry(filters_frame, width=12, textvariable=self.single_ticker_var).grid(row=6, column=1, padx=(0, 20), sticky="w")
+        ttk.Button(filters_frame, text="RUN", command=self.run_single_ticker).grid(row=6, column=2, padx=(0, 20), sticky="w")
 
-        single_btn = ttk.Button(filters_frame, text="Run Single", command=self.run_single_ticker)
-        single_btn.grid(row=4, column=2, padx=(10, 0), sticky="w")
+        # Vertical Button Stack on the right
+        btn_stack = ttk.Frame(filters_frame)
+        btn_stack.grid(row=0, column=10, rowspan=7, padx=(40, 0), sticky="ns")
 
-        # Stop scan button
-        stop_btn = ttk.Button(filters_frame, text="STOP", command=self.stop_scan)
-        stop_btn.grid(row=4, column=3, padx=(10, 0), sticky="w")
+        ttk.Button(btn_stack, text="Load Symbols", command=self._load_all_symbols).pack(fill="x", pady=2)
+        ttk.Button(btn_stack, text="START", command=self.apply_filters).pack(fill="x", pady=2)
+        ttk.Button(btn_stack, text="STOP", command=self.stop_scan).pack(fill="x", pady=2)
 
         # --- Status Bar ---
         self.status_label = ttk.Label(main_frame, text="Initializing...", anchor="w", relief=tk.SUNKEN)
@@ -575,6 +561,7 @@ class ForwardFactorDashboard(tk.Tk):
             self.min_ff = float(self.min_ff_var.get() or "5")
             self.max_cal_debit = float(self.max_cal_debit_var.get() or "9999")
             self.min_front_dte = int(self.min_front_dte_var.get() or "0")
+            self.max_front_dte = int(self.max_front_dte_var.get() or "365")
             self.max_back_dte = int(self.max_back_dte_var.get() or "365")
             self.min_rr = float(self.min_rr_var.get() or "0")
             self.max_avg_spread = float(self.max_avg_spread_var.get() or "100")
@@ -618,18 +605,32 @@ class ForwardFactorDashboard(tk.Tk):
         self.status_label.config(text=f"Scan stopped by user ({timer_str}).")
 
     def run_single_ticker(self):
-        """Run scan for a single ticker."""
+        """Run scan for one or more tickers."""
         if not self.client_initialized:
             messagebox.showwarning("Not Ready", "Schwab API is not initialized yet.")
             return
             
-        ticker = (self.single_ticker_var.get() or "").strip().upper()
-        if not ticker:
-            messagebox.showerror("Invalid Ticker", "Please enter a ticker symbol.")
+        raw_input = (self.single_ticker_var.get() or "").strip()
+        if not raw_input:
+            messagebox.showerror("Invalid Input", "Please enter one or more tickers separated by commas.")
             return
 
-        self._set_symbol_list([ticker], f"Single ticker: {ticker}")
+        # Validate separator (strict check for commas)
+        if " " in raw_input or ";" in raw_input or "|" in raw_input:
+            messagebox.showerror("Invalid Input", "Seperate tickers with commas.")
+            return
+
+        # Split by comma and clean up
+        tickers = [t.strip().upper() for t in raw_input.split(',')]
+        tickers = [t for t in tickers if t] # Filter out empty strings
+        
+        if not tickers:
+            messagebox.showerror("Invalid Input", "Please enter valid ticker symbols.")
+            return
+
+        self._set_symbol_list(tickers, f"Scanner: {', '.join(tickers)}")
         self.apply_filters()
+        
 
     def _scan_all_symbols(self):
         """Scan all symbols using Schwab API."""
@@ -838,7 +839,6 @@ class ForwardFactorDashboard(tk.Tk):
             
             self.tree.insert("", "end", values=(
                 row["Ticker"],
-                row["Expiry Pair"],
                 row["Front DTE"],
                 row["Back DTE"],
                 f"{row['Front IV']:.2f}",
@@ -909,7 +909,6 @@ class ForwardFactorDashboard(tk.Tk):
         # Key mapping
         mapping = {
             "Ticker": "Ticker",
-            "Expiry Pair": "Expiry Pair",
             "Front DTE": "Front DTE",
             "Back DTE": "Back DTE",
             "Front IV": "Front IV",
@@ -1002,7 +1001,7 @@ class ForwardFactorDashboard(tk.Tk):
                     continue
 
                 # Apply DTE filters
-                if dte1 < self.min_front_dte or dte2 > self.max_back_dte:
+                if dte1 < self.min_front_dte or dte1 > self.max_front_dte or dte2 > self.max_back_dte:
                     continue
 
                 # Get ATM option data for both expiries
@@ -1094,7 +1093,6 @@ class ForwardFactorDashboard(tk.Tk):
 
                 results.append({
                     "Ticker": ticker_symbol,
-                    "Expiry Pair": f"{dte1_target}-{dte2_target}d",
                     "Front DTE": dte1,
                     "Back DTE": dte2,
                     "Front IV": iv1 * 100,
