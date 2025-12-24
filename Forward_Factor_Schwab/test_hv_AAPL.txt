@@ -1,0 +1,59 @@
+
+============================================================
+Testing HV for symbol: AAPL
+============================================================
+
+1. Getting quote with fundamental fields...
+   ✓ Response received.
+
+2. All Fundamental data fields:
+   avg10DaysVolume: 50904349.0
+   avg1YearVolume: 54397725.0
+   declarationDate: 2025-10-31T00:00:00Z
+   divAmount: 1.04
+   divExDate: 2025-11-10T00:00:00Z
+   divFreq: 4
+   divPayAmount: 0.26
+   divPayDate: 2025-11-13T00:00:00Z
+   divYield: 0.38381
+   eps: 7.46
+   fundLeverageFactor: 0.0
+   lastEarningsDate: 2025-10-30T00:00:00Z
+   nextDivExDate: 2026-02-10T00:00:00Z
+   nextDivPayDate: 2026-02-13T00:00:00Z
+   peRatio: 36.50938
+   sharesOutstanding: 14776353000
+
+3. All Quote data fields:
+   52WeekHigh: 288.62
+   52WeekLow: 169.2101
+   askMICId: EDGX
+   askPrice: 272.05
+   askSize: 100
+   askTime: 1766568496941
+   bidMICId: XNAS
+   bidPrice: 271.93
+   bidSize: 100
+   bidTime: 1766568496941
+   closePrice: 272.36
+   highPrice: 0.0
+   lastMICId: EDGX
+   lastPrice: 272.0
+   lastSize: 1
+   lowPrice: 0.0
+   mark: 272.05
+   markChange: -0.31
+   markPercentChange: -0.11381994
+   netChange: -0.36
+   netPercentChange: -0.132178
+   openPrice: 0.0
+   postMarketChange: -0.36
+   postMarketPercentChange: -0.132178
+   quoteTime: 1766568496941
+   securityStatus: Normal
+   totalVolume: 5810
+   tradeTime: 1766568707414
+
+4. Getting price history...
+   ✓ Received 5 candles.
+   Sample candle: {'open': 270.9, 'high': 280.38, 'low': 270.9, 'close': 278.85, 'volume': 166067059, 'datetime': 1763964000000}

@@ -121,6 +121,7 @@ class ForwardFactorDashboard(tk.Tk):
         self.current_sort_col = "FF"
         self.current_sort_reverse = True
         self.no_earnings_var = tk.BooleanVar(value=False)
+        self.min_iv_hv_var = tk.StringVar(value="0")
         
         # Schwab client (initialized later)
         self.schwab_client: SchwabClient | None = None
@@ -191,6 +192,7 @@ class ForwardFactorDashboard(tk.Tk):
                 "Ticker",
                 "Front DTE",
                 "Back DTE",
+                "HV(30d)",
                 "Front IV",
                 "Back IV",
                 "Fwd Vol",
@@ -203,6 +205,7 @@ class ForwardFactorDashboard(tk.Tk):
                 "Cal Debit",
                 "Avg Sprd%",
                 "Earnings",
+                "IV/HV",
                 "FF",
                 "R/R",
             ),
@@ -220,6 +223,7 @@ class ForwardFactorDashboard(tk.Tk):
         self.tree.heading("Ticker", text="Ticker")
         self.tree.heading("Front DTE", text="Front DTE")
         self.tree.heading("Back DTE", text="Back DTE")
+        self.tree.heading("HV(30d)", text="HV(30d) (%)")
         self.tree.heading("Front IV", text="Front IV (%)")
         self.tree.heading("Back IV", text="Back IV (%)")
         self.tree.heading("Fwd Vol", text="Fwd Vol (%)")
@@ -232,6 +236,7 @@ class ForwardFactorDashboard(tk.Tk):
         self.tree.heading("Cal Debit", text="Cal Debit ($)")
         self.tree.heading("Avg Sprd%", text="Avg Sprd%")
         self.tree.heading("Earnings", text="Earnings")
+        self.tree.heading("IV/HV", text="IV/HV")
         self.tree.heading("FF", text="FF (%)")
         self.tree.heading("R/R", text="R/R")
 
@@ -243,6 +248,7 @@ class ForwardFactorDashboard(tk.Tk):
         self.tree.column("Ticker", anchor="center", width=70)
         self.tree.column("Front DTE", anchor="center", width=75)
         self.tree.column("Back DTE", anchor="center", width=75)
+        self.tree.column("HV(30d)", anchor="center", width=80)
         self.tree.column("Front IV", anchor="center", width=80)
         self.tree.column("Back IV", anchor="center", width=80)
         self.tree.column("Fwd Vol", anchor="center", width=80)
@@ -255,6 +261,7 @@ class ForwardFactorDashboard(tk.Tk):
         self.tree.column("Cal Debit", anchor="center", width=90)
         self.tree.column("Avg Sprd%", anchor="center", width=70)
         self.tree.column("Earnings", anchor="center", width=120)
+        self.tree.column("IV/HV", anchor="center", width=70)
         self.tree.column("FF", anchor="center", width=70)
         self.tree.column("R/R", anchor="center", width=60)
 
@@ -322,6 +329,9 @@ class ForwardFactorDashboard(tk.Tk):
         )
         self.no_earnings_check.grid(row=5, column=1, padx=(0, 20), sticky="w")
 
+        ttk.Label(filters_frame, text="Min IV/HV:").grid(row=5, column=2, padx=(0, 5), sticky="w")
+        ttk.Entry(filters_frame, width=12, textvariable=self.min_iv_hv_var).grid(row=5, column=3, padx=(0, 20), sticky="w")
+
         # Row 6: Ticker(s)
         ttk.Label(filters_frame, text="Ticker(s):").grid(row=6, column=0, padx=(0, 5), sticky="w")
         self.single_ticker_var = tk.StringVar()
@@ -332,7 +342,6 @@ class ForwardFactorDashboard(tk.Tk):
         btn_stack = ttk.Frame(filters_frame)
         btn_stack.grid(row=0, column=10, rowspan=7, padx=(40, 0), sticky="ns")
 
-        ttk.Button(btn_stack, text="Load Symbols", command=self._load_all_symbols).pack(fill="x", pady=2)
         ttk.Button(btn_stack, text="START", command=self.apply_filters).pack(fill="x", pady=2)
         ttk.Button(btn_stack, text="STOP", command=self.stop_scan).pack(fill="x", pady=2)
 
@@ -422,16 +431,6 @@ class ForwardFactorDashboard(tk.Tk):
         self.next_batch_start = end_idx
         self.apply_filters()
 
-    def _load_all_symbols(self):
-        """Load all symbols from the CBOE list."""
-        if not self.master_symbols:
-            messagebox.showwarning("No Symbols", "CBOE master list not loaded.")
-            return
-            
-        self._set_symbol_list(
-            self.master_symbols,
-            f"Loaded full CBOE optionable universe ({len(self.master_symbols)} symbols)"
-        )
 
     def _get_ticker_data(self, ticker_symbol):
         """
@@ -570,6 +569,40 @@ class ForwardFactorDashboard(tk.Tk):
         
         return earnings_val
 
+    def _get_historical_volatility(self, ticker_symbol):
+        """
+        Fetch price history from Yahoo Finance and calculate 30-day HV.
+        """
+        with self.cache_lock:
+            if ticker_symbol in self.ticker_cache and 'hv' in self.ticker_cache[ticker_symbol]:
+                return self.ticker_cache[ticker_symbol]['hv']
+
+        hv = 0.0
+        try:
+            # Fetch 3 months of data to ensure we have enough for 30-day HV
+            df = yf.download(ticker_symbol, period="3mo", interval="1d", progress=False, threads=False)
+            if not df.empty and len(df) > 5:
+                # Ensure we have a single column Series for Close
+                if isinstance(df['Close'], pd.DataFrame):
+                    closes = df['Close'][ticker_symbol].tail(31)
+                else:
+                    closes = df['Close'].tail(31)
+                
+                if len(closes) > 5:
+                    log_returns = np.log(closes / closes.shift(1)).dropna()
+                    daily_std = log_returns.std()
+                    annualized_hv = daily_std * np.sqrt(252) * 100.0
+                    hv = float(annualized_hv)
+        except Exception as e:
+            print(f"  [warn] Failed to fetch HV for {ticker_symbol}: {e}")
+
+        # Store in cache
+        with self.cache_lock:
+            if ticker_symbol in self.ticker_cache:
+                self.ticker_cache[ticker_symbol]['hv'] = hv
+        
+        return hv
+
     def apply_filters(self):
         """Apply filters and start scanning."""
         if self.is_scanning:
@@ -588,6 +621,21 @@ class ForwardFactorDashboard(tk.Tk):
             messagebox.showwarning("Not Ready", "Schwab API is not initialized yet.")
             return
             
+        # Smart Symbol Reload: If ticker box is empty, use the full master list.
+        # This allows users to reset from a "Single Ticker" scan back to 
+        # a full scan just by clearing the box and hitting START.
+        raw_input = (self.single_ticker_var.get() or "").strip()
+        if not raw_input:
+            if self.master_symbols:
+                self.all_symbols = self.master_symbols
+                source_desc = f"Full Universe ({len(self.master_symbols)} symbols)"
+            else:
+                self.all_symbols = self.test_symbols.copy()
+                source_desc = f"Default test list ({len(self.test_symbols)} symbols)"
+            
+            # Update status bar to reflect we've reset the list
+            self._set_symbol_list(self.all_symbols, source_desc)
+
         try:
             self.min_volume = int(self.volume_var.get() or "0")
             self.min_open_interest = int(self.oi_var.get() or "0")
@@ -598,6 +646,8 @@ class ForwardFactorDashboard(tk.Tk):
             self.max_front_dte = int(self.max_front_dte_var.get() or "365")
             self.max_back_dte = int(self.max_back_dte_var.get() or "365")
             self.min_rr = float(self.min_rr_var.get() or "0")
+            self.min_iv_hv = float(self.min_iv_hv_var.get() or "0")
+            self.max_avg_spread = float(self.max_avg_spread_var.get() or "100")
             self.max_avg_spread = float(self.max_avg_spread_var.get() or "100")
         except ValueError:
             messagebox.showerror(
@@ -950,14 +1000,18 @@ class ForwardFactorDashboard(tk.Tk):
             # Format Earnings
             earnings_str = row.get("Earnings", "N/E")
             
-            # Format FF
             ff = row.get("Fwd Factor", float("nan"))
             ff_str = f"{ff:.2f}" if not pd.isna(ff) else "n/a"
+            
+            # Format IV/HV
+            iv_hv = row.get("IV/HV", 0.0)
+            iv_hv_str = f"{iv_hv:.2f}" if not pd.isna(iv_hv) else "n/a"
             
             self.tree.insert("", "end", values=(
                 row["Ticker"],
                 row["Front DTE"],
                 row["Back DTE"],
+                f"{row.get('HV', 0.0):.2f}",
                 f"{row['Front IV']:.2f}",
                 f"{row['Back IV']:.2f}",
                 f"{row['Fwd Vol']:.2f}",
@@ -970,6 +1024,7 @@ class ForwardFactorDashboard(tk.Tk):
                 cal_debit_str,
                 avg_sprd_str,
                 earnings_str,
+                iv_hv_str,
                 ff_str,
                 rr_str,
             ), tags=(row.get("Row Tag", ""),))
@@ -1028,6 +1083,7 @@ class ForwardFactorDashboard(tk.Tk):
             "Ticker": "Ticker",
             "Front DTE": "Front DTE",
             "Back DTE": "Back DTE",
+            "HV(30d)": "HV",
             "Front IV": "Front IV",
             "Back IV": "Back IV",
             "Fwd Vol": "Fwd Vol",
@@ -1040,6 +1096,7 @@ class ForwardFactorDashboard(tk.Tk):
             "Cal Debit": "Cal Debit",
             "Avg Sprd%": "Avg Spread %",
             "Earnings": "Earnings Date",
+            "IV/HV": "IV/HV",
             "FF": "Fwd Factor",
             "R/R": "R/R"
         }
@@ -1191,7 +1248,15 @@ class ForwardFactorDashboard(tk.Tk):
                 if not pd.isna(avg_spread_pct) and avg_spread_pct > self.max_avg_spread:
                     continue
 
-                # --- 🟢 OPTIMIZATION: Fetch earnings data ONLY after passing all filters ---
+                # --- 🟢 OPTIMIZATION: Fetch data ONLY after passing all filters ---
+                # Fetch HV and calculate IV/HV Ratio
+                hv = self._get_historical_volatility(ticker_symbol)
+                iv_hv_ratio = (iv1 * 100.0) / hv if hv > 0 else 0
+                
+                # Apply IV/HV Ratio filter
+                if iv_hv_ratio < self.min_iv_hv:
+                    continue
+
                 earn_data = self._get_last_earnings_date(ticker_symbol)
                 
                 earnings_info = "N/E"
@@ -1214,6 +1279,7 @@ class ForwardFactorDashboard(tk.Tk):
                     "Ticker": ticker_symbol,
                     "Front DTE": dte1,
                     "Back DTE": dte2,
+                    "HV": hv,
                     "Front IV": iv1 * 100,
                     "Back IV": iv2 * 100,
                     "Fwd Vol": fwd_sigma * 100,
@@ -1221,18 +1287,18 @@ class ForwardFactorDashboard(tk.Tk):
                     "Front Vol": vol1,
                     "Front OI": oi1,
                     "Stock Price": current_price,
-                    "Strike": strike1,  # ATM strike price used for the calendar
+                    "Strike": strike1,
                     "Earnings": earnings_info,
-                    "Earnings Date": earn_data['date'] if earn_data else date(2099, 12, 31), # Far future if no earnings
+                    "Earnings Date": earn_data['date'] if earn_data else date(2099, 12, 31),
                     "Front Bid": bid1,
                     "Front Ask": ask1,
                     "Back Bid": bid2,
                     "Back Ask": ask2,
-                    "Cal Spread": cal_spread,
-                    "Cal Debit": cal_debit if cal_debit != float("inf") else float("nan"),
+                    "Cal Debit": cal_debit,
                     "Avg Spread %": avg_spread_pct,
+                    "IV/HV": iv_hv_ratio,
                     "R/R": reward_risk,
-                    "Row Tag": earn_row_tag,
+                    "Row Tag": earn_row_tag
                 })
             except Exception as e:
                 debug_reasons.append(f"{dte1_target}-{dte2_target}d: {str(e)[:50]}")

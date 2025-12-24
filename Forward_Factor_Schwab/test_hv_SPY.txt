@@ -1,0 +1,59 @@
+
+============================================================
+Testing HV for symbol: SPY
+============================================================
+
+1. Getting quote with fundamental fields...
+   ✓ Response received.
+
+2. All Fundamental data fields:
+   avg10DaysVolume: 94858860.0
+   avg1YearVolume: 72398768.0
+   declarationDate: 2025-01-09T00:00:00Z
+   divAmount: 7.97347
+   divExDate: 2025-12-19T00:00:00Z
+   divFreq: 4
+   divPayAmount: 1.99337
+   divPayDate: 2026-01-30T00:00:00Z
+   divYield: 1.1643
+   eps: 99.72564
+   fundLeverageFactor: 0.0
+   lastEarningsDate: 2025-11-25T00:00:00Z
+   nextDivExDate: 2026-03-19T00:00:00Z
+   nextDivPayDate: 2026-04-30T00:00:00Z
+   peRatio: 6.89853
+   sharesOutstanding: 1031982116
+
+3. All Quote data fields:
+   52WeekHigh: 689.7
+   52WeekLow: 481.8
+   askMICId: ARCX
+   askPrice: 687.76
+   askSize: 80
+   askTime: 1766568731365
+   bidMICId: XNAS
+   bidPrice: 687.73
+   bidSize: 120
+   bidTime: 1766568727287
+   closePrice: 687.96
+   highPrice: 0.0
+   lastMICId: ARCX
+   lastPrice: 687.75
+   lastSize: 1
+   lowPrice: 0.0
+   mark: 687.76
+   markChange: -0.2
+   markPercentChange: -0.02907146
+   netChange: -0.21
+   netPercentChange: -0.03052503
+   openPrice: 0.0
+   postMarketChange: -0.21
+   postMarketPercentChange: -0.03052503
+   quoteTime: 1766568731365
+   securityStatus: Normal
+   totalVolume: 34767
+   tradeTime: 1766568725175
+
+4. Getting price history...
+   ✓ Received 5 candles.
+   Sample candle: {'open': 662.69, 'high': 683.665, 'low': 661.59, 'close': 683.39, 'volume': 282606655, 'datetime': 1763964000000}
